@@ -23,7 +23,7 @@ install_project:
 test: test-unit test-int
 
 test-unit:
-	python -m pytest --cov=mysdk test/unit
+	python -m pytest --cov=ibm_continuous_delivery test/unit
 
 test-int:
 	python -m pytest test/integration
