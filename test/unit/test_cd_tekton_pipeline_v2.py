@@ -35,7 +35,7 @@ _service = CdTektonPipelineV2(
     authenticator=NoAuthAuthenticator()
 )
 
-_base_url = 'https://devops-api.us-south.devops.cloud.ibm.com/v2'
+_base_url = 'https://api.us-south.devops.cloud.ibm.com/v2'
 _service.set_service_url(_base_url)
 
 
@@ -70,15 +70,15 @@ def test_get_service_url_for_region():
     get_service_url_for_region()
     """
     assert CdTektonPipelineV2.get_service_url_for_region('INVALID_REGION') is None
-    assert CdTektonPipelineV2.get_service_url_for_region('us-south') == 'https://devops-api.us-south.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('us-east') == 'https://devops-api.us-east.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('eu-de') == 'https://devops-api.eu-de.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('eu-gb') == 'https://devops-api.eu-gb.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('jp-osa') == 'https://devops-api.jp-osa.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('jp-tok') == 'https://devops-api.jp-tok.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('au-syd') == 'https://devops-api.au-syd.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('ca-tor') == 'https://devops-api.ca-tor.devops.cloud.ibm.com/v2'
-    assert CdTektonPipelineV2.get_service_url_for_region('br-sao') == 'https://devops-api.br-sao.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('us-south') == 'https://api.us-south.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('us-east') == 'https://api.us-east.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('eu-de') == 'https://api.eu-de.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('eu-gb') == 'https://api.eu-gb.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('jp-osa') == 'https://api.jp-osa.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('jp-tok') == 'https://api.jp-tok.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('au-syd') == 'https://api.au-syd.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('ca-tor') == 'https://api.ca-tor.devops.cloud.ibm.com/v2'
+    assert CdTektonPipelineV2.get_service_url_for_region('br-sao') == 'https://api.br-sao.devops.cloud.ibm.com/v2'
 
 
 ##############################################################################
