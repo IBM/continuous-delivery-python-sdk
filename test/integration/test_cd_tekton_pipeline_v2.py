@@ -20,7 +20,7 @@ Integration Tests for CdTektonPipelineV2
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from github.com/IBM/continuous-delivery-pipeline-python-sdk.cd_tekton_pipeline_v2 import *
+from github.com/IBM/continuous-delivery-python-sdk.cd_tekton_pipeline_v2 import *
 
 # Config file name
 config_file = 'cd_tekton_pipeline_v2.env'

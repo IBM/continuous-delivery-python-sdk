@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from github.com/IBM/continuous-delivery-pipeline-python-sdk.cd_tekton_pipeline_v2 import *
+from github.com/IBM/continuous-delivery-python-sdk.cd_tekton_pipeline_v2 import *
 
 
 _service = CdTektonPipelineV2(
@@ -262,7 +262,6 @@ class TestGetTektonPipeline():
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline(**req_copy)
 
-
     def test_get_tekton_pipeline_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_value_error.
         _service.enable_retries()
@@ -384,7 +383,6 @@ class TestUpdateTektonPipeline():
             with pytest.raises(ValueError):
                 _service.update_tekton_pipeline(**req_copy)
 
-
     def test_update_tekton_pipeline_value_error_with_retries(self):
         # Enable retries and run test_update_tekton_pipeline_value_error.
         _service.enable_retries()
@@ -454,7 +452,6 @@ class TestDeleteTektonPipeline():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline(**req_copy)
-
 
     def test_delete_tekton_pipeline_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_value_error.
@@ -620,7 +617,6 @@ class TestListTektonPipelineRuns():
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_runs(**req_copy)
 
-
     def test_list_tekton_pipeline_runs_value_error_with_retries(self):
         # Enable retries and run test_list_tekton_pipeline_runs_value_error.
         _service.enable_retries()
@@ -629,6 +625,73 @@ class TestListTektonPipelineRuns():
         # Disable retries and run test_list_tekton_pipeline_runs_value_error.
         _service.disable_retries()
         self.test_list_tekton_pipeline_runs_value_error()
+
+    @responses.activate
+    def test_list_tekton_pipeline_runs_with_pager_get_next(self):
+        """
+        test_list_tekton_pipeline_runs_with_pager_get_next()
+        """
+        # Set up a two-page mock response
+        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent":"agent","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"source_trigger_id":"source_trigger_id","name":"start-deploy"},"event_params_blob":"event_params_blob","event_header_params_blob":"event_header_params_blob","properties":[{"name":"name","value":"value","enum":["enum"],"default":"default","type":"SECURE","path":"path"}],"created":"2019-01-01T12:00:00.000Z","updated":"2019-01-01T12:00:00.000Z","html_url":"html_url","href":"href"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent":"agent","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"source_trigger_id":"source_trigger_id","name":"start-deploy"},"event_params_blob":"event_params_blob","event_header_params_blob":"event_header_params_blob","properties":[{"name":"name","value":"value","enum":["enum"],"default":"default","type":"SECURE","path":"path"}],"created":"2019-01-01T12:00:00.000Z","updated":"2019-01-01T12:00:00.000Z","html_url":"html_url","href":"href"}]}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response1,
+                      content_type='application/json',
+                      status=200)
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response2,
+                      content_type='application/json',
+                      status=200)
+
+        # Exercise the pager class for this operation
+        all_results = []
+        pager = TektonPipelineRunsPager(
+            client=_service,
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            limit=10,
+            status='succeeded',
+            trigger_name='manual-trigger',
+        )
+        while pager.has_next():
+            next_page = pager.get_next()
+            assert next_page is not None
+            all_results.extend(next_page)
+        assert len(all_results) == 2
+
+    @responses.activate
+    def test_list_tekton_pipeline_runs_with_pager_get_all(self):
+        """
+        test_list_tekton_pipeline_runs_with_pager_get_all()
+        """
+        # Set up a two-page mock response
+        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?offset=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent":"agent","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"source_trigger_id":"source_trigger_id","name":"start-deploy"},"event_params_blob":"event_params_blob","event_header_params_blob":"event_header_params_blob","properties":[{"name":"name","value":"value","enum":["enum"],"default":"default","type":"SECURE","path":"path"}],"created":"2019-01-01T12:00:00.000Z","updated":"2019-01-01T12:00:00.000Z","html_url":"html_url","href":"href"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent":"agent","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"source_trigger_id":"source_trigger_id","name":"start-deploy"},"event_params_blob":"event_params_blob","event_header_params_blob":"event_header_params_blob","properties":[{"name":"name","value":"value","enum":["enum"],"default":"default","type":"SECURE","path":"path"}],"created":"2019-01-01T12:00:00.000Z","updated":"2019-01-01T12:00:00.000Z","html_url":"html_url","href":"href"}]}'
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response1,
+                      content_type='application/json',
+                      status=200)
+        responses.add(responses.GET,
+                      url,
+                      body=mock_response2,
+                      content_type='application/json',
+                      status=200)
+
+        # Exercise the pager class for this operation
+        pager = TektonPipelineRunsPager(
+            client=_service,
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            limit=10,
+            status='succeeded',
+            trigger_name='manual-trigger',
+        )
+        all_results = pager.get_all()
+        assert all_results is not None
+        assert len(all_results) == 2
 
 class TestCreateTektonPipelineRun():
     """
@@ -749,7 +812,6 @@ class TestCreateTektonPipelineRun():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_run(**req_copy)
-
 
     def test_create_tekton_pipeline_run_value_error_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_run_value_error.
@@ -875,7 +937,6 @@ class TestGetTektonPipelineRun():
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run(**req_copy)
 
-
     def test_get_tekton_pipeline_run_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_run_value_error.
         _service.enable_retries()
@@ -949,7 +1010,6 @@ class TestDeleteTektonPipelineRun():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_run(**req_copy)
-
 
     def test_delete_tekton_pipeline_run_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_run_value_error.
@@ -1074,7 +1134,6 @@ class TestCancelTektonPipelineRun():
             with pytest.raises(ValueError):
                 _service.cancel_tekton_pipeline_run(**req_copy)
 
-
     def test_cancel_tekton_pipeline_run_value_error_with_retries(self):
         # Enable retries and run test_cancel_tekton_pipeline_run_value_error.
         _service.enable_retries()
@@ -1155,7 +1214,6 @@ class TestRerunTektonPipelineRun():
             with pytest.raises(ValueError):
                 _service.rerun_tekton_pipeline_run(**req_copy)
 
-
     def test_rerun_tekton_pipeline_run_value_error_with_retries(self):
         # Enable retries and run test_rerun_tekton_pipeline_run_value_error.
         _service.enable_retries()
@@ -1235,7 +1293,6 @@ class TestGetTektonPipelineRunLogs():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run_logs(**req_copy)
-
 
     def test_get_tekton_pipeline_run_logs_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_run_logs_value_error.
@@ -1320,7 +1377,6 @@ class TestGetTektonPipelineRunLogContent():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run_log_content(**req_copy)
-
 
     def test_get_tekton_pipeline_run_log_content_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_run_log_content_value_error.
@@ -1434,7 +1490,6 @@ class TestListTektonPipelineDefinitions():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_definitions(**req_copy)
-
 
     def test_list_tekton_pipeline_definitions_value_error_with_retries(self):
         # Enable retries and run test_list_tekton_pipeline_definitions_value_error.
@@ -1560,7 +1615,6 @@ class TestCreateTektonPipelineDefinition():
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_definition(**req_copy)
 
-
     def test_create_tekton_pipeline_definition_value_error_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_definition_value_error.
         _service.enable_retries()
@@ -1640,7 +1694,6 @@ class TestGetTektonPipelineDefinition():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_definition(**req_copy)
-
 
     def test_get_tekton_pipeline_definition_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_definition_value_error.
@@ -1778,7 +1831,6 @@ class TestReplaceTektonPipelineDefinition():
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_definition(**req_copy)
 
-
     def test_replace_tekton_pipeline_definition_value_error_with_retries(self):
         # Enable retries and run test_replace_tekton_pipeline_definition_value_error.
         _service.enable_retries()
@@ -1852,7 +1904,6 @@ class TestDeleteTektonPipelineDefinition():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_definition(**req_copy)
-
 
     def test_delete_tekton_pipeline_definition_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_definition_value_error.
@@ -2015,7 +2066,6 @@ class TestListTektonPipelineProperties():
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_properties(**req_copy)
 
-
     def test_list_tekton_pipeline_properties_value_error_with_retries(self):
         # Enable retries and run test_list_tekton_pipeline_properties_value_error.
         _service.enable_retries()
@@ -2148,7 +2198,6 @@ class TestCreateTektonPipelineProperties():
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_properties(**req_copy)
 
-
     def test_create_tekton_pipeline_properties_value_error_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_properties_value_error.
         _service.enable_retries()
@@ -2228,7 +2277,6 @@ class TestGetTektonPipelineProperty():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_property(**req_copy)
-
 
     def test_get_tekton_pipeline_property_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_property_value_error.
@@ -2368,7 +2416,6 @@ class TestReplaceTektonPipelineProperty():
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_property(**req_copy)
 
-
     def test_replace_tekton_pipeline_property_value_error_with_retries(self):
         # Enable retries and run test_replace_tekton_pipeline_property_value_error.
         _service.enable_retries()
@@ -2442,7 +2489,6 @@ class TestDeleteTektonPipelineProperty():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_property(**req_copy)
-
 
     def test_delete_tekton_pipeline_property_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_property_value_error.
@@ -2617,7 +2663,6 @@ class TestListTektonPipelineTriggers():
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_triggers(**req_copy)
 
-
     def test_list_tekton_pipeline_triggers_value_error_with_retries(self):
         # Enable retries and run test_list_tekton_pipeline_triggers_value_error.
         _service.enable_retries()
@@ -2740,7 +2785,6 @@ class TestCreateTektonPipelineTrigger():
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_trigger(**req_copy)
 
-
     def test_create_tekton_pipeline_trigger_value_error_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_trigger_value_error.
         _service.enable_retries()
@@ -2820,7 +2864,6 @@ class TestGetTektonPipelineTrigger():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_trigger(**req_copy)
-
 
     def test_get_tekton_pipeline_trigger_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_trigger_value_error.
@@ -3010,7 +3053,6 @@ class TestUpdateTektonPipelineTrigger():
             with pytest.raises(ValueError):
                 _service.update_tekton_pipeline_trigger(**req_copy)
 
-
     def test_update_tekton_pipeline_trigger_value_error_with_retries(self):
         # Enable retries and run test_update_tekton_pipeline_trigger_value_error.
         _service.enable_retries()
@@ -3084,7 +3126,6 @@ class TestDeleteTektonPipelineTrigger():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_trigger(**req_copy)
-
 
     def test_delete_tekton_pipeline_trigger_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_trigger_value_error.
@@ -3220,7 +3261,6 @@ class TestListTektonPipelineTriggerProperties():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_trigger_properties(**req_copy)
-
 
     def test_list_tekton_pipeline_trigger_properties_value_error_with_retries(self):
         # Enable retries and run test_list_tekton_pipeline_trigger_properties_value_error.
@@ -3360,7 +3400,6 @@ class TestCreateTektonPipelineTriggerProperties():
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_trigger_properties(**req_copy)
 
-
     def test_create_tekton_pipeline_trigger_properties_value_error_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_trigger_properties_value_error.
         _service.enable_retries()
@@ -3444,7 +3483,6 @@ class TestGetTektonPipelineTriggerProperty():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_trigger_property(**req_copy)
-
 
     def test_get_tekton_pipeline_trigger_property_value_error_with_retries(self):
         # Enable retries and run test_get_tekton_pipeline_trigger_property_value_error.
@@ -3590,7 +3628,6 @@ class TestReplaceTektonPipelineTriggerProperty():
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_trigger_property(**req_copy)
 
-
     def test_replace_tekton_pipeline_trigger_property_value_error_with_retries(self):
         # Enable retries and run test_replace_tekton_pipeline_trigger_property_value_error.
         _service.enable_retries()
@@ -3668,7 +3705,6 @@ class TestDeleteTektonPipelineTriggerProperty():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_trigger_property(**req_copy)
-
 
     def test_delete_tekton_pipeline_trigger_property_value_error_with_retries(self):
         # Enable retries and run test_delete_tekton_pipeline_trigger_property_value_error.
