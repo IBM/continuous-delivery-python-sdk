@@ -68,15 +68,6 @@ class TestCdTektonPipelineV2():
         tekton_pipeline = create_tekton_pipeline_response.get_result()
         assert tekton_pipeline is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline(self):
 
@@ -87,14 +78,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_response.get_status_code() == 200
         tekton_pipeline = get_tekton_pipeline_response.get_result()
         assert tekton_pipeline is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_update_tekton_pipeline(self):
@@ -113,14 +96,6 @@ class TestCdTektonPipelineV2():
         tekton_pipeline = update_tekton_pipeline_response.get_result()
         assert tekton_pipeline is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_list_tekton_pipeline_runs(self):
 
@@ -136,13 +111,36 @@ class TestCdTektonPipelineV2():
         pipeline_runs = list_tekton_pipeline_runs_response.get_result()
         assert pipeline_runs is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
+    @needscredentials
+    def test_list_tekton_pipeline_runs_with_pager(self):
+        all_results = []
+
+        # Test get_next().
+        pager = TektonPipelineRunsPager(
+            client=self.cd_tekton_pipeline_service,
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            limit=10,
+            status='succeeded',
+            trigger_name='manual-trigger',
+        )
+        while pager.has_next():
+            next_page = pager.get_next()
+            assert next_page is not None
+            all_results.extend(next_page)
+
+        # Test get_all().
+        pager = TektonPipelineRunsPager(
+            client=self.ansiform_mock_service,
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            limit=10,
+            status='succeeded',
+            trigger_name='manual-trigger',
+        )
+        all_items = pager.get_all()
+        assert all_items is not None
+
+        assert len(all_results) == len(all_items)
+        print(f'\nlist_tekton_pipeline_runs() returned a total of {len(all_results)} items(s) using TektonPipelineRunsPager.')
 
     @needscredentials
     def test_create_tekton_pipeline_run(self):
@@ -160,15 +158,6 @@ class TestCdTektonPipelineV2():
         pipeline_run = create_tekton_pipeline_run_response.get_result()
         assert pipeline_run is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_run(self):
 
@@ -181,14 +170,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_run_response.get_status_code() == 200
         pipeline_run = get_tekton_pipeline_run_response.get_result()
         assert pipeline_run is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_cancel_tekton_pipeline_run(self):
@@ -203,15 +184,6 @@ class TestCdTektonPipelineV2():
         pipeline_run = cancel_tekton_pipeline_run_response.get_result()
         assert pipeline_run is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_rerun_tekton_pipeline_run(self):
 
@@ -224,14 +196,6 @@ class TestCdTektonPipelineV2():
         pipeline_run = rerun_tekton_pipeline_run_response.get_result()
         assert pipeline_run is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_run_logs(self):
 
@@ -243,14 +207,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_run_logs_response.get_status_code() == 200
         pipeline_run_logs = get_tekton_pipeline_run_logs_response.get_result()
         assert pipeline_run_logs is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_get_tekton_pipeline_run_log_content(self):
@@ -265,14 +221,6 @@ class TestCdTektonPipelineV2():
         step_log = get_tekton_pipeline_run_log_content_response.get_result()
         assert step_log is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_list_tekton_pipeline_definitions(self):
 
@@ -283,14 +231,6 @@ class TestCdTektonPipelineV2():
         assert list_tekton_pipeline_definitions_response.get_status_code() == 200
         definitions = list_tekton_pipeline_definitions_response.get_result()
         assert definitions is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_create_tekton_pipeline_definition(self):
@@ -312,15 +252,6 @@ class TestCdTektonPipelineV2():
         definition = create_tekton_pipeline_definition_response.get_result()
         assert definition is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_definition(self):
 
@@ -332,14 +263,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_definition_response.get_status_code() == 200
         definition = get_tekton_pipeline_definition_response.get_result()
         assert definition is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_replace_tekton_pipeline_definition(self):
@@ -364,15 +287,6 @@ class TestCdTektonPipelineV2():
         definition = replace_tekton_pipeline_definition_response.get_result()
         assert definition is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_list_tekton_pipeline_properties(self):
 
@@ -386,14 +300,6 @@ class TestCdTektonPipelineV2():
         assert list_tekton_pipeline_properties_response.get_status_code() == 200
         env_properties = list_tekton_pipeline_properties_response.get_result()
         assert env_properties is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_create_tekton_pipeline_properties(self):
@@ -412,15 +318,6 @@ class TestCdTektonPipelineV2():
         property = create_tekton_pipeline_properties_response.get_result()
         assert property is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_property(self):
 
@@ -432,14 +329,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_property_response.get_status_code() == 200
         property = get_tekton_pipeline_property_response.get_result()
         assert property is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_replace_tekton_pipeline_property(self):
@@ -459,15 +348,6 @@ class TestCdTektonPipelineV2():
         property = replace_tekton_pipeline_property_response.get_result()
         assert property is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_list_tekton_pipeline_triggers(self):
 
@@ -485,14 +365,6 @@ class TestCdTektonPipelineV2():
         assert list_tekton_pipeline_triggers_response.get_status_code() == 200
         triggers = list_tekton_pipeline_triggers_response.get_result()
         assert triggers is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_create_tekton_pipeline_trigger(self):
@@ -512,15 +384,6 @@ class TestCdTektonPipelineV2():
         trigger = create_tekton_pipeline_trigger_response.get_result()
         assert trigger is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_trigger(self):
 
@@ -532,14 +395,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_trigger_response.get_status_code() == 200
         trigger = get_tekton_pipeline_trigger_response.get_result()
         assert trigger is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_update_tekton_pipeline_trigger(self):
@@ -602,15 +457,6 @@ class TestCdTektonPipelineV2():
         trigger = update_tekton_pipeline_trigger_response.get_result()
         assert trigger is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_list_tekton_pipeline_trigger_properties(self):
 
@@ -625,14 +471,6 @@ class TestCdTektonPipelineV2():
         assert list_tekton_pipeline_trigger_properties_response.get_status_code() == 200
         trigger_properties = list_tekton_pipeline_trigger_properties_response.get_result()
         assert trigger_properties is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_create_tekton_pipeline_trigger_properties(self):
@@ -652,15 +490,6 @@ class TestCdTektonPipelineV2():
         trigger_property = create_tekton_pipeline_trigger_properties_response.get_result()
         assert trigger_property is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_get_tekton_pipeline_trigger_property(self):
 
@@ -673,14 +502,6 @@ class TestCdTektonPipelineV2():
         assert get_tekton_pipeline_trigger_property_response.get_status_code() == 200
         trigger_property = get_tekton_pipeline_trigger_property_response.get_result()
         assert trigger_property is not None
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_replace_tekton_pipeline_trigger_property(self):
@@ -701,15 +522,6 @@ class TestCdTektonPipelineV2():
         trigger_property = replace_tekton_pipeline_trigger_property_response.get_result()
         assert trigger_property is not None
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 400
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_delete_tekton_pipeline_trigger_property(self):
 
@@ -721,14 +533,6 @@ class TestCdTektonPipelineV2():
 
         assert delete_tekton_pipeline_trigger_property_response.get_status_code() == 204
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_delete_tekton_pipeline_trigger(self):
 
@@ -738,14 +542,6 @@ class TestCdTektonPipelineV2():
         )
 
         assert delete_tekton_pipeline_trigger_response.get_status_code() == 204
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_delete_tekton_pipeline_run(self):
@@ -757,14 +553,6 @@ class TestCdTektonPipelineV2():
 
         assert delete_tekton_pipeline_run_response.get_status_code() == 204
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_delete_tekton_pipeline_property(self):
 
@@ -774,14 +562,6 @@ class TestCdTektonPipelineV2():
         )
 
         assert delete_tekton_pipeline_property_response.get_status_code() == 204
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
 
     @needscredentials
     def test_delete_tekton_pipeline_definition(self):
@@ -793,14 +573,6 @@ class TestCdTektonPipelineV2():
 
         assert delete_tekton_pipeline_definition_response.get_status_code() == 204
 
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
     @needscredentials
     def test_delete_tekton_pipeline(self):
 
@@ -809,12 +581,3 @@ class TestCdTektonPipelineV2():
         )
 
         assert delete_tekton_pipeline_response.get_status_code() == 204
-
-        #
-        # The following status codes aren't covered by tests.
-        # Please provide integration tests for these too.
-        #
-        # 401
-        # 404
-        #
-
