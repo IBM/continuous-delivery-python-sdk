@@ -20,7 +20,7 @@ Examples for CdTektonPipelineV2
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from github.com/IBM/continuous-delivery-pipeline-python-sdk.cd_tekton_pipeline_v2 import *
+from ibm_continuous_delivery.cd_tekton_pipeline_v2 import *
 
 #
 # This file provides an example of how to use the CD Tekton Pipeline service.
@@ -154,16 +154,22 @@ class TestCdTektonPipelineV2Examples():
             print('\nlist_tekton_pipeline_runs() result:')
             # begin-list_tekton_pipeline_runs
 
-            pipeline_runs = cd_tekton_pipeline_service.list_tekton_pipeline_runs(
+            all_results = []
+            pager = TektonPipelineRunsPager(
+                client=cd_tekton_pipeline_service,
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+                limit=10,
                 status='succeeded',
-                trigger_name='manual-trigger'
-            ).get_result()
+                trigger_name='manual-trigger',
+            )
+            while pager.has_next():
+                next_page = pager.get_next()
+                assert next_page is not None
+                all_results.extend(next_page)
 
-            print(json.dumps(pipeline_runs, indent=2))
+            print(json.dumps(all_results, indent=2))
 
             # end-list_tekton_pipeline_runs
-
         except ApiException as e:
             pytest.fail(str(e))
 

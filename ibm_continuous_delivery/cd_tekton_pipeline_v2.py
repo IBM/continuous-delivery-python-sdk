@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.50.0-af9e48c4-20220523-163800
+# IBM OpenAPI SDK Code Generator Version: 3.53.0-9710cac3-20220713-193508
  
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
@@ -31,7 +31,7 @@ from enum import Enum
 from typing import Dict, List
 import json
 
-from ibm_cloud_sdk_core import BaseService, DetailedResponse
+from ibm_cloud_sdk_core import BaseService, DetailedResponse, get_query_param
 from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator
 from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment
 from ibm_cloud_sdk_core.utils import convert_list, convert_model, datetime_to_string, string_to_datetime
@@ -148,6 +148,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         url = '/tekton_pipelines'
@@ -185,6 +186,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['id']
@@ -238,6 +240,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['id']
@@ -279,6 +282,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['id']
         path_param_values = self.encode_path_vars(id)
@@ -341,6 +345,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -410,6 +415,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -464,6 +470,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'id']
@@ -508,6 +515,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['pipeline_id', 'id']
         path_param_values = self.encode_path_vars(pipeline_id, id)
@@ -561,6 +569,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'id']
@@ -606,6 +615,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'id']
@@ -649,6 +659,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'id']
@@ -697,6 +708,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'pipeline_run_id', 'id']
@@ -742,6 +754,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -794,6 +807,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -839,6 +853,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'definition_id']
@@ -902,6 +917,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'definition_id']
@@ -946,6 +962,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['pipeline_id', 'definition_id']
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
@@ -1006,6 +1023,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -1072,6 +1090,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -1116,6 +1135,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'property_name']
@@ -1187,6 +1207,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'property_name']
@@ -1231,6 +1252,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['pipeline_id', 'property_name']
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
@@ -1305,6 +1327,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -1353,6 +1376,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id']
@@ -1397,6 +1421,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id']
@@ -1500,6 +1525,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id']
@@ -1544,6 +1570,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['pipeline_id', 'trigger_id']
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
@@ -1610,6 +1637,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id']
@@ -1680,6 +1708,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id']
@@ -1728,6 +1757,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
@@ -1802,6 +1832,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
         headers['Accept'] = 'application/json'
 
         path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
@@ -1850,6 +1881,7 @@ class CdTektonPipelineV2(BaseService):
 
         if 'headers' in kwargs:
             headers.update(kwargs.get('headers'))
+            del kwargs['headers']
 
         path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
@@ -1979,20 +2011,21 @@ class Definition():
 
     :attr DefinitionScmSource scm_source: Scm source for tekton pipeline defintion.
     :attr str service_instance_id: UUID.
-    :attr str id: UUID.
+    :attr str id: (optional) UUID.
     """
 
     def __init__(self,
                  scm_source: 'DefinitionScmSource',
                  service_instance_id: str,
-                 id: str) -> None:
+                 *,
+                 id: str = None) -> None:
         """
         Initialize a Definition object.
 
         :param DefinitionScmSource scm_source: Scm source for tekton pipeline
                defintion.
         :param str service_instance_id: UUID.
-        :param str id: UUID.
+        :param str id: (optional) UUID.
         """
         self.scm_source = scm_source
         self.service_instance_id = service_instance_id
@@ -2012,8 +2045,6 @@ class Definition():
             raise ValueError('Required property \'service_instance_id\' not present in Definition JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
-        else:
-            raise ValueError('Required property \'id\' not present in Definition JSON')
         return cls(**args)
 
     @classmethod
@@ -2198,15 +2229,15 @@ class DefinitionsDefinitionsItem():
 
     :attr DefinitionScmSource scm_source: Scm source for tekton pipeline defintion.
     :attr str service_instance_id: UUID.
-    :attr str id: UUID.
+    :attr str id: (optional) UUID.
     :attr str href: (optional) General href URL.
     """
 
     def __init__(self,
                  scm_source: 'DefinitionScmSource',
                  service_instance_id: str,
-                 id: str,
                  *,
+                 id: str = None,
                  href: str = None) -> None:
         """
         Initialize a DefinitionsDefinitionsItem object.
@@ -2214,7 +2245,7 @@ class DefinitionsDefinitionsItem():
         :param DefinitionScmSource scm_source: Scm source for tekton pipeline
                defintion.
         :param str service_instance_id: UUID.
-        :param str id: UUID.
+        :param str id: (optional) UUID.
         :param str href: (optional) General href URL.
         """
         self.scm_source = scm_source
@@ -2236,8 +2267,6 @@ class DefinitionsDefinitionsItem():
             raise ValueError('Required property \'service_instance_id\' not present in DefinitionsDefinitionsItem JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
-        else:
-            raise ValueError('Required property \'id\' not present in DefinitionsDefinitionsItem JSON')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
         return cls(**args)
@@ -4465,8 +4494,7 @@ class TriggerScmSource():
     """
     Scm source for git type tekton pipeline trigger.
 
-    :attr str url: (optional) Needed only for git trigger type. Repo URL that
-          listening to.
+    :attr str url: Needed only for git trigger type. Repo URL that listening to.
     :attr str branch: (optional) Needed only for git trigger type. Branch name of
           the repo. Branch field doesn't coexist with pattern field.
     :attr str pattern: (optional) Needed only for git trigger type. Git branch or
@@ -4478,8 +4506,8 @@ class TriggerScmSource():
     """
 
     def __init__(self,
+                 url: str,
                  *,
-                 url: str = None,
                  branch: str = None,
                  pattern: str = None,
                  blind_connection: bool = None,
@@ -4487,8 +4515,8 @@ class TriggerScmSource():
         """
         Initialize a TriggerScmSource object.
 
-        :param str url: (optional) Needed only for git trigger type. Repo URL that
-               listening to.
+        :param str url: Needed only for git trigger type. Repo URL that listening
+               to.
         :param str branch: (optional) Needed only for git trigger type. Branch name
                of the repo. Branch field doesn't coexist with pattern field.
         :param str pattern: (optional) Needed only for git trigger type. Git branch
@@ -4510,6 +4538,8 @@ class TriggerScmSource():
         args = {}
         if 'url' in _dict:
             args['url'] = _dict.get('url')
+        else:
+            raise ValueError('Required property \'url\' not present in TriggerScmSource JSON')
         if 'branch' in _dict:
             args['branch'] = _dict.get('branch')
         if 'pattern' in _dict:
@@ -5425,7 +5455,7 @@ class Worker():
 
     :attr str name: (optional) worker name.
     :attr str type: (optional) worker type.
-    :attr str id:
+    :attr str id: Id.
     """
 
     def __init__(self,
@@ -5436,7 +5466,7 @@ class Worker():
         """
         Initialize a Worker object.
 
-        :param str id:
+        :param str id: Id.
         :param str name: (optional) worker name.
         :param str type: (optional) worker type.
         """
@@ -5631,7 +5661,7 @@ class TriggerGenericTrigger(Trigger):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggerGenericTriggerPropertiesItem] properties: (optional) Trigger
           properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -5663,7 +5693,7 @@ class TriggerGenericTrigger(Trigger):
         :param str name: Trigger name.
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggerGenericTriggerPropertiesItem] properties: (optional)
                Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -5775,7 +5805,7 @@ class TriggerManualTrigger(Trigger):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggerManualTriggerPropertiesItem] properties: (optional) Trigger
           properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -5804,7 +5834,7 @@ class TriggerManualTrigger(Trigger):
         :param str name: Trigger name.
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggerManualTriggerPropertiesItem] properties: (optional)
                Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -5910,7 +5940,7 @@ class TriggerScmTrigger(Trigger):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggerScmTriggerPropertiesItem] properties: (optional) Trigger
           properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -5947,7 +5977,7 @@ class TriggerScmTrigger(Trigger):
         :param str name: Trigger name.
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggerScmTriggerPropertiesItem] properties: (optional) Trigger
                properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6072,7 +6102,7 @@ class TriggerTimerTrigger(Trigger):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggerTimerTriggerPropertiesItem] properties: (optional) Trigger
           properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -6107,7 +6137,7 @@ class TriggerTimerTrigger(Trigger):
         :param str name: Trigger name.
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggerTimerTriggerPropertiesItem] properties: (optional)
                Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6304,7 +6334,7 @@ class TriggersTriggersItemTriggerGenericTrigger(TriggersTriggersItem):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggersTriggersItemTriggerGenericTriggerPropertiesItem] properties:
           (optional) Trigger properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -6338,7 +6368,7 @@ class TriggersTriggersItemTriggerGenericTrigger(TriggersTriggersItem):
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
         :param str href: (optional) General href URL.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggersTriggersItemTriggerGenericTriggerPropertiesItem]
                properties: (optional) Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6456,7 +6486,7 @@ class TriggersTriggersItemTriggerManualTrigger(TriggersTriggersItem):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggersTriggersItemTriggerManualTriggerPropertiesItem] properties:
           (optional) Trigger properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -6487,7 +6517,7 @@ class TriggersTriggersItemTriggerManualTrigger(TriggersTriggersItem):
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
         :param str href: (optional) General href URL.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggersTriggersItemTriggerManualTriggerPropertiesItem]
                properties: (optional) Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6599,7 +6629,7 @@ class TriggersTriggersItemTriggerScmTrigger(TriggersTriggersItem):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggersTriggersItemTriggerScmTriggerPropertiesItem] properties:
           (optional) Trigger properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -6638,7 +6668,7 @@ class TriggersTriggersItemTriggerScmTrigger(TriggersTriggersItem):
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
         :param str href: (optional) General href URL.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggersTriggersItemTriggerScmTriggerPropertiesItem]
                properties: (optional) Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6769,7 +6799,7 @@ class TriggersTriggersItemTriggerTimerTrigger(TriggersTriggersItem):
     :attr str type: Trigger type.
     :attr str name: Trigger name.
     :attr str event_listener: Event listener name.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) Id.
     :attr List[TriggersTriggersItemTriggerTimerTriggerPropertiesItem] properties:
           (optional) Trigger properties.
     :attr List[str] tags: (optional) Trigger tags array.
@@ -6806,7 +6836,7 @@ class TriggersTriggersItemTriggerTimerTrigger(TriggersTriggersItem):
         :param str event_listener: Event listener name.
         :param bool disabled: flag whether the trigger is disabled.
         :param str href: (optional) General href URL.
-        :param str id: (optional) UUID.
+        :param str id: (optional) Id.
         :param List[TriggersTriggersItemTriggerTimerTriggerPropertiesItem]
                properties: (optional) Trigger properties.
         :param List[str] tags: (optional) Trigger tags array.
@@ -6922,3 +6952,84 @@ class TriggersTriggersItemTriggerTimerTrigger(TriggersTriggersItem):
     def __ne__(self, other: 'TriggersTriggersItemTriggerTimerTrigger') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+##############################################################################
+# Pagers
+##############################################################################
+
+class TektonPipelineRunsPager():
+    """
+    TektonPipelineRunsPager can be used to simplify the use of the "list_tekton_pipeline_runs" method.
+    """
+
+    def __init__(self,
+                 *,
+                 client: CdTektonPipelineV2,
+                 pipeline_id: str,
+                 limit: int = None,
+                 status: str = None,
+                 trigger_name: str = None,
+    ) -> None:
+        """
+        Initialize a TektonPipelineRunsPager object.
+        :param str pipeline_id: The tekton pipeline ID.
+        :param int limit: (optional) The number of pipeline runs to return, sorted
+               by creation time, most recent first.
+        :param str status: (optional) Filters the collection to resources with the
+               specified status.
+        :param str trigger_name: (optional) Filters the collection to resources
+               with the specified trigger name.
+        """
+        self._has_next = True
+        self._client = client
+        self._page_context = { 'next': None }
+        self._pipeline_id = pipeline_id
+        self._limit = limit
+        self._status = status
+        self._trigger_name = trigger_name
+
+    def has_next(self) -> bool:
+        """
+        Returns true if there are potentially more results to be retrieved.
+        """
+        return self._has_next
+
+    def get_next(self) -> List[dict]:
+        """
+        Returns the next page of results.
+        :return: A List[dict], where each element is a dict that represents an instance of PipelineRunsPipelineRunsItem.
+        :rtype: List[dict]
+        """
+        if not self.has_next():
+            raise StopIteration(message='No more results available')
+
+        result = self._client.list_tekton_pipeline_runs(
+            pipeline_id=self._pipeline_id,
+            limit=self._limit,
+            status=self._status,
+            trigger_name=self._trigger_name,
+            offset=self._page_context.get('next'),
+        ).get_result()
+
+        next = None
+        next_page_link = result.get('next')
+        if next_page_link is not None:
+            next = get_query_param(next_page_link.get('href'), 'offset')
+        self._page_context['next'] = next
+        if next is None:
+            self._has_next = False
+
+        return result.get('pipeline_runs')
+
+    def get_all(self) -> List[dict]:
+        """
+        Returns all results by invoking get_next() repeatedly
+        until all pages of results have been retrieved.
+        :return: A List[dict], where each element is a dict that represents an instance of PipelineRunsPipelineRunsItem.
+        :rtype: List[dict]
+        """
+        results = []
+        while self.has_next():
+            next_page = self.get_next()
+            results.extend(next_page)
+        return results

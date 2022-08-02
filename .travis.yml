@@ -19,33 +19,24 @@ install:
 - sudo apt-get install pandoc
 - pip install pypandoc
 - echo -e "machine github.ibm.com\n  login $GITHUB_OAUTH_TOKEN" > ~/.netrc
+- pip install setuptools=="60.8.2"
 
 script:
 - make ci
 
+before_deploy:
+  - nvm install 14
+  - npm install npm@latest -g
+  - npm install @semantic-release/changelog
+  - npm install @semantic-release/exec
+  - npm install @semantic-release/git
+  - npm install @semantic-release/github
+  - pip install bump2version
 
-# To enable semantic-release, uncomment these sections.
-# before_deploy:
-# - nvm install 14
-# - npm install npm@latest -g
-# - npm install @semantic-release/changelog
-# - npm install @semantic-release/exec
-# - npm install @semantic-release/git
-# - npm install @semantic-release/github
-# - pip install bump2version
-#
-# deploy:
-# - provider: script
-#   script: npx semantic-release
-#   skip_cleanup: true
-#   on:
-#     python: '3.7'
-#     branch: main
-# - provider: pypi
-#   user: __token__
-#   password: $PYPI_TOKEN
-#   repository: https://upload.pypi.org/legacy
-#   skip_cleanup: true
-#   on:
-#     python: '3.7'
-#     tags: true
+deploy:
+  - provider: script
+    script: npx semantic-release
+    skip_cleanup: true
+    on:
+      python: '3.7'
+      branch: main
