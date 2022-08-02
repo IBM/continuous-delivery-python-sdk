@@ -20,7 +20,7 @@ Examples for CdTektonPipelineV2
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from github.com/IBM/continuous-delivery-python-sdk.cd_tekton_pipeline_v2 import *
+from ibm_continuous_delivery.cd_tekton_pipeline_v2 import *
 
 #
 # This file provides an example of how to use the CD Tekton Pipeline service.

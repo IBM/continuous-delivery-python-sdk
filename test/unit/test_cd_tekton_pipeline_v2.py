@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from github.com/IBM/continuous-delivery-python-sdk.cd_tekton_pipeline_v2 import *
+from ibm_continuous_delivery.cd_tekton_pipeline_v2 import *
 
 
 _service = CdTektonPipelineV2(
