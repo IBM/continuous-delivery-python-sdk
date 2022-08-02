@@ -18,7 +18,6 @@ install:
 - sudo apt-get update
 - sudo apt-get install pandoc
 - pip install pypandoc
-- pip3 install setuptools=="60.8.2"
 - echo -e "machine github.ibm.com\n  login $GITHUB_OAUTH_TOKEN" > ~/.netrc
 - pip install setuptools=="60.8.2"
 
