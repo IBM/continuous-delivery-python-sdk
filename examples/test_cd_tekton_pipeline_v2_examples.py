@@ -133,9 +133,13 @@ class TestCdTektonPipelineV2Examples():
                 'id': 'public',
             }
 
+            tekton_pipeline_patch_model = {
+                'worker': worker_with_id_model,
+            }
+
             tekton_pipeline = cd_tekton_pipeline_service.update_tekton_pipeline(
                 id='94619026-912b-4d92-8f51-6c74f0692d90',
-                worker=worker_with_id_model
+                tekton_pipeline_patch=tekton_pipeline_patch_model
             ).get_result()
 
             print(json.dumps(tekton_pipeline, indent=2))
@@ -159,6 +163,7 @@ class TestCdTektonPipelineV2Examples():
                 client=cd_tekton_pipeline_service,
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 limit=10,
+                offset=38,
                 status='succeeded',
                 trigger_name='manual-trigger',
             )
@@ -272,12 +277,12 @@ class TestCdTektonPipelineV2Examples():
             print('\nget_tekton_pipeline_run_logs() result:')
             # begin-get_tekton_pipeline_run_logs
 
-            pipeline_run_logs = cd_tekton_pipeline_service.get_tekton_pipeline_run_logs(
+            logs_collection = cd_tekton_pipeline_service.get_tekton_pipeline_run_logs(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 id='94619026-912b-4d92-8f51-6c74f0692d90'
             ).get_result()
 
-            print(json.dumps(pipeline_run_logs, indent=2))
+            print(json.dumps(logs_collection, indent=2))
 
             # end-get_tekton_pipeline_run_logs
 
@@ -293,13 +298,13 @@ class TestCdTektonPipelineV2Examples():
             print('\nget_tekton_pipeline_run_log_content() result:')
             # begin-get_tekton_pipeline_run_log_content
 
-            step_log = cd_tekton_pipeline_service.get_tekton_pipeline_run_log_content(
+            log = cd_tekton_pipeline_service.get_tekton_pipeline_run_log_content(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 pipeline_run_id='bf4b3abd-0c93-416b-911e-9cf42f1a1085',
                 id='94619026-912b-4d92-8f51-6c74f0692d90'
             ).get_result()
 
-            print(json.dumps(step_log, indent=2))
+            print(json.dumps(log, indent=2))
 
             # end-get_tekton_pipeline_run_log_content
 
@@ -315,11 +320,11 @@ class TestCdTektonPipelineV2Examples():
             print('\nlist_tekton_pipeline_definitions() result:')
             # begin-list_tekton_pipeline_definitions
 
-            definitions = cd_tekton_pipeline_service.list_tekton_pipeline_definitions(
+            definitions_collection = cd_tekton_pipeline_service.list_tekton_pipeline_definitions(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90'
             ).get_result()
 
-            print(json.dumps(definitions, indent=2))
+            print(json.dumps(definitions_collection, indent=2))
 
             # end-list_tekton_pipeline_definitions
 
@@ -387,13 +392,13 @@ class TestCdTektonPipelineV2Examples():
                 'url': 'https://github.com/IBM/tekton-tutorial.git',
                 'branch': 'master',
                 'path': '.tekton',
+                'service_instance_id': '071d8049-d984-4feb-a2ed-2a1e938918ba',
             }
 
             definition = cd_tekton_pipeline_service.replace_tekton_pipeline_definition(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada',
                 scm_source=definition_scm_source_model,
-                service_instance_id='071d8049-d984-4feb-a2ed-2a1e938918ba',
                 id='22f92ab1-e0ac-4c65-84e7-8a4cb32dba0f'
             ).get_result()
 
@@ -413,14 +418,14 @@ class TestCdTektonPipelineV2Examples():
             print('\nlist_tekton_pipeline_properties() result:')
             # begin-list_tekton_pipeline_properties
 
-            env_properties = cd_tekton_pipeline_service.list_tekton_pipeline_properties(
+            properties_collection = cd_tekton_pipeline_service.list_tekton_pipeline_properties(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 name='prod',
-                type=['SECURE', 'TEXT'],
+                type=['secure', 'text'],
                 sort='name'
             ).get_result()
 
-            print(json.dumps(env_properties, indent=2))
+            print(json.dumps(properties_collection, indent=2))
 
             # end-list_tekton_pipeline_properties
 
@@ -439,7 +444,7 @@ class TestCdTektonPipelineV2Examples():
             property = cd_tekton_pipeline_service.create_tekton_pipeline_properties(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 name='key1',
-                type='TEXT',
+                type='text',
                 value='https://github.com/IBM/tekton-tutorial.git'
             ).get_result()
 
@@ -484,7 +489,7 @@ class TestCdTektonPipelineV2Examples():
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 property_name='debug-pipeline',
                 name='key1',
-                type='TEXT',
+                type='text',
                 value='https://github.com/IBM/tekton-tutorial.git'
             ).get_result()
 
@@ -504,14 +509,14 @@ class TestCdTektonPipelineV2Examples():
             print('\nlist_tekton_pipeline_triggers() result:')
             # begin-list_tekton_pipeline_triggers
 
-            triggers = cd_tekton_pipeline_service.list_tekton_pipeline_triggers(
+            triggers_collection = cd_tekton_pipeline_service.list_tekton_pipeline_triggers(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 type='manual,scm',
                 disabled='true',
                 tags='tag1,tag2'
             ).get_result()
 
-            print(json.dumps(triggers, indent=2))
+            print(json.dumps(triggers_collection, indent=2))
 
             # end-list_tekton_pipeline_triggers
 
@@ -527,14 +532,18 @@ class TestCdTektonPipelineV2Examples():
             print('\ncreate_tekton_pipeline_trigger() result:')
             # begin-create_tekton_pipeline_trigger
 
-            trigger_model = {
-                'source_trigger_id': 'b3a8228f-1c82-409b-b249-7639166a0300',
-                'name': 'Generic Trigger- duplicated',
+            worker_model = {
+                'id': 'public',
             }
 
             trigger = cd_tekton_pipeline_service.create_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger=trigger_model
+                type='manual',
+                name='Manual Trigger',
+                event_listener='pr-listener',
+                disabled=False,
+                worker=worker_model,
+                max_concurrent_runs=3
             ).get_result()
 
             print(json.dumps(trigger, indent=2))
@@ -574,16 +583,41 @@ class TestCdTektonPipelineV2Examples():
             print('\nupdate_tekton_pipeline_trigger() result:')
             # begin-update_tekton_pipeline_trigger
 
+            trigger_patch_model = {
+                'name': 'start-deploy',
+            }
+
             trigger = cd_tekton_pipeline_service.update_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                name='start-deploy',
-                disabled=True
+                trigger_patch=trigger_patch_model
             ).get_result()
 
             print(json.dumps(trigger, indent=2))
 
             # end-update_tekton_pipeline_trigger
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_duplicate_tekton_pipeline_trigger_example(self):
+        """
+        duplicate_tekton_pipeline_trigger request example
+        """
+        try:
+            print('\nduplicate_tekton_pipeline_trigger() result:')
+            # begin-duplicate_tekton_pipeline_trigger
+
+            trigger = cd_tekton_pipeline_service.duplicate_tekton_pipeline_trigger(
+                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+                source_trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
+                name='triggerName'
+            ).get_result()
+
+            print(json.dumps(trigger, indent=2))
+
+            # end-duplicate_tekton_pipeline_trigger
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -597,15 +631,15 @@ class TestCdTektonPipelineV2Examples():
             print('\nlist_tekton_pipeline_trigger_properties() result:')
             # begin-list_tekton_pipeline_trigger_properties
 
-            trigger_properties = cd_tekton_pipeline_service.list_tekton_pipeline_trigger_properties(
+            trigger_properties_collection = cd_tekton_pipeline_service.list_tekton_pipeline_trigger_properties(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
                 name='prod',
-                type='SECURE,TEXT',
+                type='secure,text',
                 sort='name'
             ).get_result()
 
-            print(json.dumps(trigger_properties, indent=2))
+            print(json.dumps(trigger_properties_collection, indent=2))
 
             # end-list_tekton_pipeline_trigger_properties
 
@@ -625,7 +659,7 @@ class TestCdTektonPipelineV2Examples():
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
                 name='key1',
-                type='TEXT',
+                type='text',
                 value='https://github.com/IBM/tekton-tutorial.git'
             ).get_result()
 
@@ -672,7 +706,7 @@ class TestCdTektonPipelineV2Examples():
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
                 property_name='debug-pipeline',
                 name='key1',
-                type='TEXT',
+                type='text',
                 value='https://github.com/IBM/tekton-tutorial.git'
             ).get_result()
 
