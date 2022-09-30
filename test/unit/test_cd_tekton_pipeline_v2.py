@@ -680,6 +680,7 @@ class TestListTektonPipelineRuns():
             client=_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
+            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
@@ -714,6 +715,7 @@ class TestListTektonPipelineRuns():
             client=_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
+            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
@@ -800,6 +802,7 @@ class TestCreateTektonPipelineRun():
         self.test_create_tekton_pipeline_run_all_params()
 
     @responses.activate
+>>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
     def test_create_tekton_pipeline_run_value_error(self):
         """
         test_create_tekton_pipeline_run_value_error()
@@ -1629,6 +1632,23 @@ class TestCreateTektonPipelineDefinition():
         definition_source_model['type'] = 'git'
         definition_source_model['properties'] = definition_source_properties_model
 
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {}
+        definition_source_properties_model['url'] = 'https://github.com/open-toolchain/hello-tekton.git'
+        definition_source_properties_model['branch'] = 'master'
+        definition_source_properties_model['tag'] = 'testString'
+        definition_source_properties_model['path'] = '.tekton'
+        definition_source_properties_model['tool'] = tool_model
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {}
+        definition_source_model['type'] = 'git'
+        definition_source_model['properties'] = definition_source_properties_model
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         source = definition_source_model
@@ -1810,6 +1830,23 @@ class TestReplaceTektonPipelineDefinition():
                       body=mock_response,
                       content_type='application/json',
                       status=200)
+
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {}
+        definition_source_properties_model['url'] = 'testString'
+        definition_source_properties_model['branch'] = 'testString'
+        definition_source_properties_model['tag'] = 'testString'
+        definition_source_properties_model['path'] = 'testString'
+        definition_source_properties_model['tool'] = tool_model
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {}
+        definition_source_model['type'] = 'testString'
+        definition_source_model['properties'] = definition_source_properties_model
 
         # Construct a dict representation of a Tool model
         tool_model = {}
@@ -2147,6 +2184,7 @@ class TestCreateTektonPipelineProperties():
         self.test_create_tekton_pipeline_properties_all_params()
 
     @responses.activate
+>>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
     def test_create_tekton_pipeline_properties_value_error(self):
         """
         test_create_tekton_pipeline_properties_value_error()
@@ -2329,6 +2367,7 @@ class TestReplaceTektonPipelineProperty():
         self.test_replace_tekton_pipeline_property_all_params()
 
     @responses.activate
+>>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
     def test_replace_tekton_pipeline_property_value_error(self):
         """
         test_replace_tekton_pipeline_property_value_error()
@@ -2734,6 +2773,29 @@ class TestCreateTektonPipelineTrigger():
                       body=mock_response,
                       content_type='application/json',
                       status=201)
+
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {}
+        worker_identity_model['id'] = 'public'
+
+        # Construct a dict representation of a GenericSecret model
+        generic_secret_model = {}
+        generic_secret_model['type'] = 'token_matches'
+        generic_secret_model['value'] = 'testString'
+        generic_secret_model['source'] = 'header'
+        generic_secret_model['key_name'] = 'testString'
+        generic_secret_model['algorithm'] = 'md4'
+
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {}
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
+
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {}
+        trigger_source_prototype_model['type'] = 'testString'
+        trigger_source_prototype_model['properties'] = trigger_source_properties_prototype_model
 
         # Construct a dict representation of a WorkerIdentity model
         worker_identity_model = {}
@@ -3424,6 +3486,7 @@ class TestCreateTektonPipelineTriggerProperties():
         self.test_create_tekton_pipeline_trigger_properties_all_params()
 
     @responses.activate
+>>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
     def test_create_tekton_pipeline_trigger_properties_value_error(self):
         """
         test_create_tekton_pipeline_trigger_properties_value_error()
@@ -3614,6 +3677,7 @@ class TestReplaceTektonPipelineTriggerProperty():
         self.test_replace_tekton_pipeline_trigger_property_all_params()
 
     @responses.activate
+>>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
     def test_replace_tekton_pipeline_trigger_property_value_error(self):
         """
         test_replace_tekton_pipeline_trigger_property_value_error()
@@ -3796,10 +3860,10 @@ class TestModel_Definition():
 
 class TestModel_DefinitionSource():
     """
-    Test Class for DefinitionSource
+    Test Class for DefinitionSourceCollection
     """
 
-    def test_definition_source_serialization(self):
+    def test_definition_source_collection_serialization(self):
         """
         Test serialization/deserialization for DefinitionSource
         """
@@ -3816,25 +3880,25 @@ class TestModel_DefinitionSource():
         definition_source_properties_model['path'] = 'testString'
         definition_source_properties_model['tool'] = tool_model
 
-        # Construct a json representation of a DefinitionSource model
-        definition_source_model_json = {}
-        definition_source_model_json['type'] = 'testString'
-        definition_source_model_json['properties'] = definition_source_properties_model
+        # Construct a json representation of a DefinitionSourceCollection model
+        definition_source_collection_model_json = {}
+        definition_source_collection_model_json['type'] = 'testString'
+        definition_source_model_json['properties'] = collection_definition_source_properties_model
 
-        # Construct a model instance of DefinitionSource by calling from_dict on the json representation
-        definition_source_model = DefinitionSource.from_dict(definition_source_model_json)
-        assert definition_source_model != False
+        # Construct a model instance of DefinitionSourceCollection by calling from_dict on the json representation
+        definition_source_collection_model = DefinitionSourceCollection.from_dict(definition_source_collection_model_json)
+        assert definition_source_collection_model != False
 
-        # Construct a model instance of DefinitionSource by calling from_dict on the json representation
-        definition_source_model_dict = DefinitionSource.from_dict(definition_source_model_json).__dict__
-        definition_source_model2 = DefinitionSource(**definition_source_model_dict)
+        # Construct a model instance of DefinitionSourceCollection by calling from_dict on the json representation
+        definition_source_collection_model_dict = DefinitionSourceCollection.from_dict(definition_source_collection_model_json).__dict__
+        definition_source_collection_model2 = DefinitionSourceCollection(**definition_source_collection_model_dict)
 
         # Verify the model instances are equivalent
-        assert definition_source_model == definition_source_model2
+        assert definition_source_collection_model == definition_source_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        definition_source_model_json2 = definition_source_model.to_dict()
-        assert definition_source_model_json2 == definition_source_model_json
+        definition_source_collection_model_json2 = definition_source_collection_model.to_dict()
+        assert definition_source_collection_model_json2 == definition_source_collection_model_json
 
 class TestModel_DefinitionSourceProperties():
     """
@@ -4789,12 +4853,12 @@ class TestModel_ToolchainReference():
 
 class TestModel_TriggerPatch():
     """
-    Test Class for TriggerPatch
+    Test Class for TriggerPatchCollection
     """
 
-    def test_trigger_patch_serialization(self):
+    def test_trigger_patch_collection_serialization(self):
         """
-        Test serialization/deserialization for TriggerPatch
+        Test serialization/deserialization for TriggerPatchCollection
         """
 
         # Construct dict forms of any model objects needed in order to build this model.
@@ -4842,20 +4906,20 @@ class TestModel_TriggerPatch():
         trigger_patch_model2 = TriggerPatch(**trigger_patch_model_dict)
 
         # Verify the model instances are equivalent
-        assert trigger_patch_model == trigger_patch_model2
+        assert trigger_patch_collection_model == trigger_patch_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        trigger_patch_model_json2 = trigger_patch_model.to_dict()
-        assert trigger_patch_model_json2 == trigger_patch_model_json
+        trigger_patch_collection_model_json2 = trigger_patch_collection_model.to_dict()
+        assert trigger_patch_collection_model_json2 == trigger_patch_collection_model_json
 
-class TestModel_TriggerPropertiesCollection():
+class TestModel_TriggerPropertiesCollectionCollection():
     """
-    Test Class for TriggerPropertiesCollection
+    Test Class for TriggerPropertiesCollectionCollection
     """
 
-    def test_trigger_properties_collection_serialization(self):
+    def test_trigger_properties_collection_collection_serialization(self):
         """
-        Test serialization/deserialization for TriggerPropertiesCollection
+        Test serialization/deserialization for TriggerPropertiesCollectionCollection
         """
 
         # Construct dict forms of any model objects needed in order to build this model.
@@ -4870,18 +4934,18 @@ class TestModel_TriggerPropertiesCollection():
 
         # Construct a json representation of a TriggerPropertiesCollection model
         trigger_properties_collection_model_json = {}
-        trigger_properties_collection_model_json['properties'] = [trigger_property_model]
+        trigger_propertiesCollection_collection_model_json['properties'] = [trigger_property_model]
 
         # Construct a model instance of TriggerPropertiesCollection by calling from_dict on the json representation
-        trigger_properties_collection_model = TriggerPropertiesCollection.from_dict(trigger_properties_collection_model_json)
-        assert trigger_properties_collection_model != False
+        trigger_properties_collection_collection_model = TriggerPropertiesCollection.from_dict(trigger_properties_collection_model_json)
+        assert trigger_propertiesCollection_collection_model != False
 
         # Construct a model instance of TriggerPropertiesCollection by calling from_dict on the json representation
-        trigger_properties_collection_model_dict = TriggerPropertiesCollection.from_dict(trigger_properties_collection_model_json).__dict__
-        trigger_properties_collection_model2 = TriggerPropertiesCollection(**trigger_properties_collection_model_dict)
+        trigger_properties_collection_collection_model_dict = TriggerPropertiesCollection.from_dict(trigger_properties_collection_model_json).__dict__
+        trigger_properties_collection_collection_model2 = TriggerPropertiesCollectionCollection(**trigger_properties_collection_collection_model_dict)
 
         # Verify the model instances are equivalent
-        assert trigger_properties_collection_model == trigger_properties_collection_model2
+        assert trigger_properties_collection_collection_model == trigger_properties_collection_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
         trigger_properties_collection_model_json2 = trigger_properties_collection_model.to_dict()
@@ -4932,6 +4996,7 @@ class TestModel_TriggerSource():
         """
 
         # Construct dict forms of any model objects needed in order to build this model.
+        trigger_scm_source_model_json['service_instance_id'] = 'testString'
 
         tool_model = {} # Tool
         tool_model['id'] = 'testString'
@@ -4964,12 +5029,12 @@ class TestModel_TriggerSource():
         trigger_source_model_json2 = trigger_source_model.to_dict()
         assert trigger_source_model_json2 == trigger_source_model_json
 
-class TestModel_TriggerSourceProperties():
+class TestModel_TriggerSourcePropertiesCollection():
     """
-    Test Class for TriggerSourceProperties
+    Test Class for TriggerSourcePropertiesCollection
     """
 
-    def test_trigger_source_properties_serialization(self):
+    def test_trigger_source_properties_collection_serialization(self):
         """
         Test serialization/deserialization for TriggerSourceProperties
         """
