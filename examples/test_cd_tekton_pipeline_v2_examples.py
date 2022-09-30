@@ -166,6 +166,7 @@ class TestCdTektonPipelineV2Examples():
                 client=cd_tekton_pipeline_service,
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 limit=10,
+                offset=38,
                 status='succeeded',
                 trigger_name='manual-trigger',
             )
@@ -321,7 +322,7 @@ class TestCdTektonPipelineV2Examples():
             )
             step_log = response.get_result()
 
-            print(json.dumps(step_log, indent=2))
+            print(json.dumps(log, indent=2))
 
             # end-get_tekton_pipeline_run_log_content
 
