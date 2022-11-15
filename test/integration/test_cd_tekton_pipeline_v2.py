@@ -54,16 +54,16 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_create_tekton_pipeline(self):
 
-        # Construct a dict representation of a WorkerWithId model
-        worker_with_id_model = {
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {
             'id': 'public',
         }
 
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline(
             id='94619026-912b-4d92-8f51-6c74f0692d90',
-            enable_slack_notifications=False,
+            enable_notifications=False,
             enable_partial_cloning=False,
-            worker=worker_with_id_model
+            worker=worker_identity_model
         )
 
         assert response.get_status_code() == 201
@@ -84,16 +84,16 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_update_tekton_pipeline(self):
 
-        # Construct a dict representation of a WorkerWithId model
-        worker_with_id_model = {
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {
             'id': 'public',
         }
 
         # Construct a dict representation of a TektonPipelinePatch model
         tekton_pipeline_patch_model = {
-            'enable_slack_notifications': False,
+            'enable_notifications': False,
             'enable_partial_cloning': False,
-            'worker': worker_with_id_model,
+            'worker': worker_identity_model,
         }
 
         response = self.cd_tekton_pipeline_service.update_tekton_pipeline(
@@ -141,7 +141,7 @@ class TestCdTektonPipelineV2():
 
         # Test get_all().
         pager = TektonPipelineRunsPager(
-            client=self.ansiform_mock_service,
+            client=self.cd_tekton_pipeline_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
             offset=38,
@@ -157,12 +157,21 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_create_tekton_pipeline_run(self):
 
+        # Construct a dict representation of a Property model
+        property_model = {
+            'name': 'testString',
+            'value': 'testString',
+            'enum': ['testString'],
+            'type': 'secure',
+            'path': 'testString',
+        }
+
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_run(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             trigger_name='Generic Webhook Trigger - 0',
-            trigger_properties={'pipeline-debug':'false'},
-            secure_trigger_properties={'secure-property-key':'secure value'},
-            trigger_header={'source':'api'},
+            trigger_properties=[property_model],
+            secure_trigger_properties=[property_model],
+            trigger_headers={'source':'api'},
             trigger_body={'message':'hello world','enable':'true','detail':{'name':'example'}}
         )
 
@@ -230,8 +239,8 @@ class TestCdTektonPipelineV2():
         )
 
         assert response.get_status_code() == 200
-        log = response.get_result()
-        assert log is not None
+        step_log = response.get_result()
+        assert step_log is not None
 
     @needscredentials
     def test_list_tekton_pipeline_definitions(self):
@@ -247,19 +256,29 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_create_tekton_pipeline_definition(self):
 
-        # Construct a dict representation of a DefinitionScmSource model
-        definition_scm_source_model = {
-            'url': 'https://github.com/IBM/tekton-tutorial.git',
+        # Construct a dict representation of a DefinitionSourcePropertiesTool model
+        definition_source_properties_tool_model = {
+            'id': 'testString',
+        }
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {
+            'url': 'https://github.com/open-toolchain/hello-tekton.git',
             'branch': 'master',
             'tag': 'testString',
             'path': '.tekton',
-            'service_instance_id': 'testString',
+            'tool': definition_source_properties_tool_model,
+        }
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {
+            'type': 'git',
+            'properties': definition_source_properties_model,
         }
 
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_definition(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            scm_source=definition_scm_source_model,
-            id='testString'
+            source=definition_source_model
         )
 
         assert response.get_status_code() == 201
@@ -281,20 +300,30 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_replace_tekton_pipeline_definition(self):
 
-        # Construct a dict representation of a DefinitionScmSource model
-        definition_scm_source_model = {
-            'url': 'https://github.com/IBM/tekton-tutorial.git',
-            'branch': 'master',
+        # Construct a dict representation of a DefinitionSourcePropertiesTool model
+        definition_source_properties_tool_model = {
+            'id': 'testString',
+        }
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {
+            'url': 'testString',
+            'branch': 'testString',
             'tag': 'testString',
-            'path': '.tekton',
-            'service_instance_id': '071d8049-d984-4feb-a2ed-2a1e938918ba',
+            'path': 'testString',
+            'tool': definition_source_properties_tool_model,
+        }
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {
+            'type': 'testString',
+            'properties': definition_source_properties_model,
         }
 
         response = self.cd_tekton_pipeline_service.replace_tekton_pipeline_definition(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada',
-            scm_source=definition_scm_source_model,
-            id='22f92ab1-e0ac-4c65-84e7-8a4cb32dba0f'
+            source=definition_source_model
         )
 
         assert response.get_status_code() == 200
@@ -320,9 +349,9 @@ class TestCdTektonPipelineV2():
 
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_properties(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            name='key1',
+            name='prop1',
             type='text',
-            value='https://github.com/IBM/tekton-tutorial.git',
+            value='https://github.com/open-toolchain/hello-tekton.git',
             enum=['testString'],
             path='testString'
         )
@@ -349,9 +378,9 @@ class TestCdTektonPipelineV2():
         response = self.cd_tekton_pipeline_service.replace_tekton_pipeline_property(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             property_name='debug-pipeline',
-            name='key1',
+            name='prop1',
             type='text',
-            value='https://github.com/IBM/tekton-tutorial.git',
+            value='https://github.com/open-toolchain/hello-tekton.git',
             enum=['testString'],
             path='testString'
         )
@@ -397,21 +426,25 @@ class TestCdTektonPipelineV2():
             'algorithm': 'md4',
         }
 
-        # Construct a dict representation of a TriggerScmSource model
-        trigger_scm_source_model = {
+        # Construct a dict representation of a TriggerSourcePropertiesTool model
+        trigger_source_properties_tool_model = {
+            'id': 'testString',
+        }
+
+        # Construct a dict representation of a TriggerSourceProperties model
+        trigger_source_properties_model = {
             'url': 'testString',
             'branch': 'testString',
             'pattern': 'testString',
             'blind_connection': True,
             'hook_id': 'testString',
-            'service_instance_id': 'testString',
+            'tool': trigger_source_properties_tool_model,
         }
 
-        # Construct a dict representation of a Events model
-        events_model = {
-            'push': True,
-            'pull_request_closed': True,
-            'pull_request': True,
+        # Construct a dict representation of a TriggerSource model
+        trigger_source_model = {
+            'type': 'testString',
+            'properties': trigger_source_properties_model,
         }
 
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_trigger(
@@ -419,15 +452,15 @@ class TestCdTektonPipelineV2():
             type='manual',
             name='Manual Trigger',
             event_listener='pr-listener',
-            disabled=False,
+            enabled=True,
             tags=['testString'],
             worker=worker_model,
             max_concurrent_runs=3,
             secret=generic_secret_model,
             cron='testString',
             timezone='testString',
-            scm_source=trigger_scm_source_model,
-            events=events_model
+            source=trigger_source_model,
+            events=['push']
         )
 
         assert response.get_status_code() == 201
@@ -465,21 +498,25 @@ class TestCdTektonPipelineV2():
             'algorithm': 'md4',
         }
 
-        # Construct a dict representation of a TriggerScmSource model
-        trigger_scm_source_model = {
+        # Construct a dict representation of a TriggerSourcePropertiesTool model
+        trigger_source_properties_tool_model = {
+            'id': 'testString',
+        }
+
+        # Construct a dict representation of a TriggerSourceProperties model
+        trigger_source_properties_model = {
             'url': 'testString',
             'branch': 'testString',
             'pattern': 'testString',
             'blind_connection': True,
             'hook_id': 'testString',
-            'service_instance_id': 'testString',
+            'tool': trigger_source_properties_tool_model,
         }
 
-        # Construct a dict representation of a Events model
-        events_model = {
-            'push': True,
-            'pull_request_closed': True,
-            'pull_request': True,
+        # Construct a dict representation of a TriggerSource model
+        trigger_source_model = {
+            'type': 'testString',
+            'properties': trigger_source_properties_model,
         }
 
         # Construct a dict representation of a TriggerPatch model
@@ -490,12 +527,12 @@ class TestCdTektonPipelineV2():
             'tags': ['testString'],
             'worker': worker_model,
             'max_concurrent_runs': 4,
-            'disabled': True,
+            'enabled': True,
             'secret': generic_secret_model,
             'cron': 'testString',
             'timezone': 'America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC',
-            'scm_source': trigger_scm_source_model,
-            'events': events_model,
+            'source': trigger_source_model,
+            'events': ['push', 'pull_request'],
         }
 
         response = self.cd_tekton_pipeline_service.update_tekton_pipeline_trigger(
@@ -542,9 +579,9 @@ class TestCdTektonPipelineV2():
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_trigger_properties(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-            name='key1',
+            name='prop1',
             type='text',
-            value='https://github.com/IBM/tekton-tutorial.git',
+            value='https://github.com/open-toolchain/hello-tekton.git',
             enum=['testString'],
             path='testString'
         )
@@ -573,9 +610,9 @@ class TestCdTektonPipelineV2():
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
             property_name='debug-pipeline',
-            name='key1',
+            name='prop1',
             type='text',
-            value='https://github.com/IBM/tekton-tutorial.git',
+            value='https://github.com/open-toolchain/hello-tekton.git',
             enum=['testString'],
             path='testString'
         )

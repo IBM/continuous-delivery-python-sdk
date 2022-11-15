@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.54.2-6c0e29d4-20220824-204545
- 
+# IBM OpenAPI SDK Code Generator Version: 3.58.0-ac124633-20221004-152309
+
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
 is 512 KB <br><br> All calls require an <strong>Authorization</strong> HTTP header.
@@ -112,29 +112,32 @@ class CdTektonPipelineV2(BaseService):
     def create_tekton_pipeline(self,
         *,
         id: str = None,
-        enable_slack_notifications: bool = None,
+        enable_notifications: bool = None,
         enable_partial_cloning: bool = None,
-        worker: 'WorkerWithId' = None,
+        worker: 'WorkerIdentity' = None,
         **kwargs
     ) -> DetailedResponse:
         """
         Create Tekton pipeline.
 
-        This request creates a Tekton pipeline for a Tekton pipeline toolchain
-        integration. User must use the toolchain endpoint to create the Tekton pipeline
-        toolchain integration first, and then use the generated UUID to create the Tekton
-        pipeline.
+        This request creates a Tekton pipeline. Requires a pipeline tool already created
+        in the toolchain using the toolchain API
+        https://cloud.ibm.com/apidocs/toolchain#create-tool, and use the tool ID to create
+        the Tekton pipeline.
 
-        :param str id: (optional) UUID.
-        :param bool enable_slack_notifications: (optional) Flag whether to enable
-               slack notifications for this pipeline. When enabled, pipeline run events
-               will be published on all slack integration specified channels in the
-               enclosing toolchain.
+        :param str id: (optional) The ID for the associated pipeline tool, which
+               was already created in the target toolchain. To get the pipeline ID call
+               the toolchain API https://cloud.ibm.com/apidocs/toolchain#list-tools and
+               find the pipeline tool.
+        :param bool enable_notifications: (optional) Flag whether to enable
+               notifications for this pipeline. When enabled, pipeline run events are
+               published on all slack integration specified channels in the parent
+               toolchain.
         :param bool enable_partial_cloning: (optional) Flag whether to enable
                partial cloning for this pipeline. When partial clone is enabled, only the
-               files contained within the paths specified in definition repositories will
-               be read and cloned. This means symbolic links may not work.
-        :param WorkerWithId worker: (optional) Worker object containing worker ID
+               files contained within the paths specified in definition repositories are
+               read and cloned, this means that symbolic links might not work.
+        :param WorkerIdentity worker: (optional) Worker object containing worker ID
                only. If omitted the IBM Managed shared workers are used by default.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
@@ -151,7 +154,7 @@ class CdTektonPipelineV2(BaseService):
 
         data = {
             'id': id,
-            'enable_slack_notifications': enable_slack_notifications,
+            'enable_notifications': enable_notifications,
             'enable_partial_cloning': enable_partial_cloning,
             'worker': worker
         }
@@ -190,7 +193,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `TektonPipeline` object
         """
 
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -235,7 +238,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `TektonPipeline` object
         """
 
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         if  tekton_pipeline_patch is not None and isinstance(tekton_pipeline_patch, TektonPipelinePatch):
             tekton_pipeline_patch = convert_model(tekton_pipeline_patch)
@@ -282,7 +285,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -343,7 +346,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `PipelineRunsCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -381,9 +384,9 @@ class CdTektonPipelineV2(BaseService):
         pipeline_id: str,
         *,
         trigger_name: str = None,
-        trigger_properties: dict = None,
-        secure_trigger_properties: dict = None,
-        trigger_header: dict = None,
+        trigger_properties: List['Property'] = None,
+        secure_trigger_properties: List['Property'] = None,
+        trigger_headers: dict = None,
         trigger_body: dict = None,
         **kwargs
     ) -> DetailedResponse:
@@ -395,24 +398,33 @@ class CdTektonPipelineV2(BaseService):
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str trigger_name: (optional) Trigger name.
-        :param dict trigger_properties: (optional) An object containing string
-               values only that provides additional `text` properties, or overrides
-               existing pipeline/trigger properties.
-        :param dict secure_trigger_properties: (optional) An object containing
-               string values only that provides additional `secure` properties, or
-               overrides existing `secure` pipeline/trigger properties.
-        :param dict trigger_header: (optional) An object containing string values
-               only that provides the trigger header. Use `$(header.header_key_name)` to
-               access it in triggerBinding.
-        :param dict trigger_body: (optional) An object that provides the trigger
-               body. Use `$(body.body_key_name)` to access it in triggerBinding.
+        :param List[Property] trigger_properties: (optional) An object containing
+               string values only that provides additional `text` properties, or overrides
+               existing pipeline/trigger properties, to use for the created run.
+        :param List[Property] secure_trigger_properties: (optional) An object
+               containing string values only that provides additional `secure` properties,
+               or overrides existing `secure` pipeline/trigger properties, to use for the
+               created run.
+        :param dict trigger_headers: (optional) An object containing string values
+               only that provides the request headers. Use `$(header.header_key_name)` to
+               access it in a TriggerBinding. Most commonly used as part of a Generic
+               Webhook to provide a verification token or signature in the request
+               headers.
+        :param dict trigger_body: (optional) An object that provides the request
+               body. Use `$(body.body_key_name)` to access it in a TriggerBinding. Most
+               commonly used to pass in additional properties or override properties for
+               the pipeline run that is created.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `PipelineRun` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
+        if trigger_properties is not None:
+            trigger_properties = [convert_model(x) for x in trigger_properties]
+        if secure_trigger_properties is not None:
+            secure_trigger_properties = [convert_model(x) for x in secure_trigger_properties]
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V2',
@@ -423,7 +435,7 @@ class CdTektonPipelineV2(BaseService):
             'trigger_name': trigger_name,
             'trigger_properties': trigger_properties,
             'secure_trigger_properties': secure_trigger_properties,
-            'trigger_header': trigger_header,
+            'trigger_headers': trigger_headers,
             'trigger_body': trigger_body
         }
         data = {k: v for (k, v) in data.items() if v is not None}
@@ -458,9 +470,7 @@ class CdTektonPipelineV2(BaseService):
         """
         Get a pipeline run record.
 
-        This request retrieves details of the pipeline run identified by `{id}`. To get
-        the Kubernetes resource list of this pipeline run use the endpoint
-        `/tekton_pipelines/{pipeline_id}/tekton_pipelinerun_resource_list/{id}`.
+        This request retrieves details of the pipeline run identified by `{id}`.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str id: ID of current instance.
@@ -471,9 +481,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `PipelineRun` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -520,9 +530,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -567,9 +577,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `PipelineRun` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -620,9 +630,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `PipelineRun` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -665,9 +675,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `LogsCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -710,14 +720,14 @@ class CdTektonPipelineV2(BaseService):
         :param str id: ID of current instance.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
-        :rtype: DetailedResponse with `dict` result representing a `Log` object
+        :rtype: DetailedResponse with `dict` result representing a `StepLog` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if pipeline_run_id is None:
+        if not pipeline_run_id:
             raise ValueError('pipeline_run_id must be provided')
-        if id is None:
+        if not id:
             raise ValueError('id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -754,8 +764,12 @@ class CdTektonPipelineV2(BaseService):
         List pipeline definitions.
 
         This request fetches pipeline definitions, which is a collection of individual
-        definition entries. Each entry consists of a repository url, a repository branch
-        and a repository path.
+        definition entries. Each entry consists of a repository url, a repository path and
+        a branch or tag. The referenced repository URL must match the URL of a repository
+        tool integration in the parent toolchain. Obtain the list of integrations from the
+        toolchain API https://cloud.ibm.com/apidocs/toolchain#list-tools. The branch or
+        tag of the definition must match against a corresponding branch or tag in the
+        chosen repository, and the path must match a subfolder in the repository.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param dict headers: A `dict` containing the request headers
@@ -763,7 +777,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `DefinitionsCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -791,28 +805,32 @@ class CdTektonPipelineV2(BaseService):
     def create_tekton_pipeline_definition(self,
         pipeline_id: str,
         *,
-        scm_source: 'DefinitionScmSource' = None,
-        id: str = None,
+        source: 'DefinitionSource' = None,
         **kwargs
     ) -> DetailedResponse:
         """
         Create a single definition.
 
-        This request adds a single definition.
+        This request adds a single definition. The source properties should consist of a
+        repository url, a repository path and a branch or tag. The referenced repository
+        URL must match the URL of a repository tool integration in the parent toolchain.
+        Obtain the list of integrations from the toolchain API
+        https://cloud.ibm.com/apidocs/toolchain#list-tools. The branch or tag of the
+        definition must match against a corresponding branch or tag in the chosen
+        repository, and the path must match a subfolder in the repository.
 
         :param str pipeline_id: The Tekton pipeline ID.
-        :param DefinitionScmSource scm_source: (optional) SCM source for Tekton
-               pipeline definition.
-        :param str id: (optional) UUID.
+        :param DefinitionSource source: (optional) Source repository containing the
+               Tekton pipeline definition.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Definition` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if scm_source is not None:
-            scm_source = convert_model(scm_source)
+        if source is not None:
+            source = convert_model(source)
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V2',
@@ -820,8 +838,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'scm_source': scm_source,
-            'id': id
+            'source': source
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -863,9 +880,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `Definition` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if definition_id is None:
+        if not definition_id:
             raise ValueError('definition_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -894,32 +911,29 @@ class CdTektonPipelineV2(BaseService):
         pipeline_id: str,
         definition_id: str,
         *,
-        scm_source: 'DefinitionScmSource' = None,
-        id: str = None,
+        source: 'DefinitionSource' = None,
         **kwargs
     ) -> DetailedResponse:
         """
         Edit a single definition entry.
 
-        This request updates a definition entry identified by `{definition_id}`. The
-        service_instance_id property is immutable.
+        This request updates a definition entry identified by `{definition_id}`.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str definition_id: The definition ID.
-        :param DefinitionScmSource scm_source: (optional) SCM source for Tekton
-               pipeline definition.
-        :param str id: (optional) UUID.
+        :param DefinitionSource source: (optional) Source repository containing the
+               Tekton pipeline definition.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Definition` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if definition_id is None:
+        if not definition_id:
             raise ValueError('definition_id must be provided')
-        if scm_source is not None:
-            scm_source = convert_model(scm_source)
+        if source is not None:
+            source = convert_model(source)
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V2',
@@ -927,8 +941,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'scm_source': scm_source,
-            'id': id
+            'source': source
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -969,9 +982,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if definition_id is None:
+        if not definition_id:
             raise ValueError('definition_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1025,7 +1038,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `PropertiesCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1075,17 +1088,18 @@ class CdTektonPipelineV2(BaseService):
         :param str pipeline_id: The Tekton pipeline ID.
         :param str name: (optional) Property name.
         :param str type: (optional) Property type.
-        :param str value: (optional) Property value.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration.
+               properties only, to select a value from the tool integration. If left blank
+               the full tool integration data will be used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Property` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1140,9 +1154,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `Property` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1188,19 +1202,20 @@ class CdTektonPipelineV2(BaseService):
         :param str property_name: The property name.
         :param str name: (optional) Property name.
         :param str type: (optional) Property type.
-        :param str value: (optional) Property value.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration.
+               properties only, to select a value from the tool integration. If left blank
+               the full tool integration data will be used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Property` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1254,9 +1269,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1303,20 +1318,20 @@ class CdTektonPipelineV2(BaseService):
         `{pipeline_id}`.
 
         :param str pipeline_id: The Tekton pipeline ID.
-        :param str type: (optional) Filter the triggers by "type", accepts a comma
+        :param str type: (optional) Optional filter by "type", accepts a comma
                separated list of types. Valid types are "manual", "scm", "generic", and
                "timer".
-        :param str name: (optional) Filter the triggers by "name", accepts a single
+        :param str name: (optional) Optional filter by "name", accepts a single
                string value.
-        :param str event_listener: (optional) Filter the triggers by
-               "event_listener", accepts a single string value.
-        :param str worker_id: (optional) Filter the triggers by "worker.id",
+        :param str event_listener: (optional) Optional filter by "event_listener",
                accepts a single string value.
-        :param str worker_name: (optional) Filter the triggers by "worker.name",
+        :param str worker_id: (optional) Optional filter by "worker.id", accepts a
+               single string value.
+        :param str worker_name: (optional) Optional filter by "worker.name",
                accepts a single string value.
-        :param str disabled: (optional) Filter the triggers by "disabled" flag,
+        :param str disabled: (optional) Optional filter by "disabled" state,
                possible values are "true" or "false".
-        :param str tags: (optional) Filter the triggers by "tags", accepts a comma
+        :param str tags: (optional) Optional filter by "tags", accepts a comma
                separated list of tags. The response lists triggers having at least one
                matching tag.
         :param dict headers: A `dict` containing the request headers
@@ -1324,7 +1339,7 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `TriggersCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1366,15 +1381,15 @@ class CdTektonPipelineV2(BaseService):
         type: str = None,
         name: str = None,
         event_listener: str = None,
-        disabled: bool = None,
+        enabled: bool = None,
         tags: List[str] = None,
         worker: 'Worker' = None,
         max_concurrent_runs: int = None,
         secret: 'GenericSecret' = None,
         cron: str = None,
         timezone: str = None,
-        scm_source: 'TriggerScmSource' = None,
-        events: 'Events' = None,
+        source: 'TriggerSource' = None,
+        events: List[str] = None,
         **kwargs
     ) -> DetailedResponse:
         """
@@ -1388,39 +1403,48 @@ class CdTektonPipelineV2(BaseService):
         :param str event_listener: (optional) Event listener name. The name of the
                event listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
-        :param bool disabled: (optional) Flag whether the trigger is disabled. If
+        :param bool enabled: (optional) Flag whether the trigger is enabled. If
                omitted the trigger is enabled by default.
         :param List[str] tags: (optional) Trigger tags array.
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
         :param str cron: (optional) Only needed for timer triggers. Cron expression
-               for timer trigger.
-        :param str timezone: (optional) Only needed for timer triggers. Timezone
-               for timer trigger.
-        :param TriggerScmSource scm_source: (optional) SCM source repository for a
-               Git trigger. Only needed for Git triggers.
-        :param Events events: (optional) Only needed for Git triggers. Events
-               object defines the events to which this Git trigger listens.
+               that indicates when this trigger will activate. Maximum frequency is every
+               5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
+               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+        :param str timezone: (optional) Only used for timer triggers. Specify the
+               timezone used for this timer trigger, which will ensure the cron activates
+               this trigger relative to the specified timezone. If no timezone is
+               specified, the default timezone used is UTC. Valid timezones are those
+               listed in the IANA timezone database, https://www.iana.org/time-zones.
+        :param TriggerSource source: (optional) Source repository for a Git
+               trigger. Only required for Git triggers. The referenced repository URL must
+               match the URL of a repository tool integration in the parent toolchain.
+               Obtain the list of integrations from the toolchain API
+               https://cloud.ibm.com/apidocs/toolchain#list-tools.
+        :param List[str] events: (optional) Only needed for Git triggers. List of
+               events to which a Git trigger listens. Choose one or more from: 'push',
+               'pull_request' and 'pull_request_closed'. For SCM repositories that use
+               'merge request' events, such events map to the equivalent 'pull request'
+               events.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         if worker is not None:
             worker = convert_model(worker)
         if secret is not None:
             secret = convert_model(secret)
-        if scm_source is not None:
-            scm_source = convert_model(scm_source)
-        if events is not None:
-            events = convert_model(events)
+        if source is not None:
+            source = convert_model(source)
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V2',
@@ -1431,14 +1455,14 @@ class CdTektonPipelineV2(BaseService):
             'type': type,
             'name': name,
             'event_listener': event_listener,
-            'disabled': disabled,
+            'enabled': enabled,
             'tags': tags,
             'worker': worker,
             'max_concurrent_runs': max_concurrent_runs,
             'secret': secret,
             'cron': cron,
             'timezone': timezone,
-            'scm_source': scm_source,
+            'source': source,
             'events': events
         }
         data = {k: v for (k, v) in data.items() if v is not None}
@@ -1480,9 +1504,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1529,9 +1553,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
         if  trigger_patch is not None and isinstance(trigger_patch, TriggerPatch):
             trigger_patch = convert_model(trigger_patch)
@@ -1579,9 +1603,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1626,9 +1650,9 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if source_trigger_id is None:
+        if not source_trigger_id:
             raise ValueError('source_trigger_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1668,9 +1692,10 @@ class CdTektonPipelineV2(BaseService):
     def list_tekton_pipeline_trigger_properties(self,
         pipeline_id: str,
         trigger_id: str,
-        name: str,
-        type: str,
-        sort: str,
+        *,
+        name: str = None,
+        type: str = None,
+        sort: str = None,
         **kwargs
     ) -> DetailedResponse:
         """
@@ -1681,26 +1706,20 @@ class CdTektonPipelineV2(BaseService):
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str trigger_id: The trigger ID.
-        :param str name: Filter properties by `name`.
-        :param str type: Filter properties by `type`. Valid types are `secure`,
-               `text`, `integration`, `single_select`, `appconfig`.
-        :param str sort: Sort properties by name. They can be sorted in ascending
-               order using `name` or in descending order using `-name`.
+        :param str name: (optional) Filter properties by `name`.
+        :param str type: (optional) Filter properties by `type`. Valid types are
+               `secure`, `text`, `integration`, `single_select`, `appconfig`.
+        :param str sort: (optional) Sort properties by name. They can be sorted in
+               ascending order using `name` or in descending order using `-name`.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TriggerPropertiesCollection` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
-        if name is None:
-            raise ValueError('name must be provided')
-        if type is None:
-            raise ValueError('type must be provided')
-        if sort is None:
-            raise ValueError('sort must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
                                       service_version='V2',
@@ -1751,20 +1770,20 @@ class CdTektonPipelineV2(BaseService):
         :param str trigger_id: The trigger ID.
         :param str name: (optional) Property name.
         :param str type: (optional) Property type.
-        :param str value: (optional) Property value.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, to select a value from the tool integration. If left blank
+               the full tool integration data will be used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TriggerProperty` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1820,11 +1839,11 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse with `dict` result representing a `TriggerProperty` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1871,22 +1890,22 @@ class CdTektonPipelineV2(BaseService):
         :param str property_name: The property name.
         :param str name: (optional) Property name.
         :param str type: (optional) Property type.
-        :param str value: (optional) Property value.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, to select a value from the tool integration. If left blank
+               the full tool integration data will be used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TriggerProperty` object
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -1942,11 +1961,11 @@ class CdTektonPipelineV2(BaseService):
         :rtype: DetailedResponse
         """
 
-        if pipeline_id is None:
+        if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_id is None:
+        if not trigger_id:
             raise ValueError('trigger_id must be provided')
-        if property_name is None:
+        if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
@@ -2025,34 +2044,40 @@ class ListTektonPipelinePropertiesEnums:
 
 class Definition():
     """
-    Tekton pipeline definition entry object.
+    Tekton pipeline definition entry object, consisting of a repository url, a repository
+    path and a branch or tag. The referenced repository URL must match the URL of a
+    repository tool integration in the parent toolchain. Obtain the list of integrations
+    from the toolchain API https://cloud.ibm.com/apidocs/toolchain#list-tools. The branch
+    or tag of the definition must match against a corresponding branch or tag in the
+    chosen repository, and the path must match a subfolder in the repository.
 
-    :attr DefinitionScmSource scm_source: SCM source for Tekton pipeline definition.
+    :attr DefinitionSource source: Source repository containing the Tekton pipeline
+          definition.
     :attr str id: (optional) UUID.
     """
 
     def __init__(self,
-                 scm_source: 'DefinitionScmSource',
+                 source: 'DefinitionSource',
                  *,
                  id: str = None) -> None:
         """
         Initialize a Definition object.
 
-        :param DefinitionScmSource scm_source: SCM source for Tekton pipeline
-               definition.
+        :param DefinitionSource source: Source repository containing the Tekton
+               pipeline definition.
         :param str id: (optional) UUID.
         """
-        self.scm_source = scm_source
+        self.source = source
         self.id = id
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'Definition':
         """Initialize a Definition object from a json dictionary."""
         args = {}
-        if 'scm_source' in _dict:
-            args['scm_source'] = DefinitionScmSource.from_dict(_dict.get('scm_source'))
+        if 'source' in _dict:
+            args['source'] = DefinitionSource.from_dict(_dict.get('source'))
         else:
-            raise ValueError('Required property \'scm_source\' not present in Definition JSON')
+            raise ValueError('Required property \'source\' not present in Definition JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         return cls(**args)
@@ -2065,8 +2090,8 @@ class Definition():
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'scm_source') and self.scm_source is not None:
-            _dict['scm_source'] = self.scm_source.to_dict()
+        if hasattr(self, 'source') and self.source is not None:
+            _dict['source'] = self.source.to_dict()
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
         return _dict
@@ -2089,18 +2114,88 @@ class Definition():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class DefinitionScmSource():
+class DefinitionSource():
     """
-    SCM source for Tekton pipeline definition.
+    Source repository containing the Tekton pipeline definition.
+
+    :attr str type: The only supported source type is "git", indicating that the
+          source is a git repository.
+    :attr DefinitionSourceProperties properties: Properties of the source, which
+          define the URL of the repository and a branch or tag.
+    """
+
+    def __init__(self,
+                 type: str,
+                 properties: 'DefinitionSourceProperties') -> None:
+        """
+        Initialize a DefinitionSource object.
+
+        :param str type: The only supported source type is "git", indicating that
+               the source is a git repository.
+        :param DefinitionSourceProperties properties: Properties of the source,
+               which define the URL of the repository and a branch or tag.
+        """
+        self.type = type
+        self.properties = properties
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'DefinitionSource':
+        """Initialize a DefinitionSource object from a json dictionary."""
+        args = {}
+        if 'type' in _dict:
+            args['type'] = _dict.get('type')
+        else:
+            raise ValueError('Required property \'type\' not present in DefinitionSource JSON')
+        if 'properties' in _dict:
+            args['properties'] = DefinitionSourceProperties.from_dict(_dict.get('properties'))
+        else:
+            raise ValueError('Required property \'properties\' not present in DefinitionSource JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a DefinitionSource object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'type') and self.type is not None:
+            _dict['type'] = self.type
+        if hasattr(self, 'properties') and self.properties is not None:
+            _dict['properties'] = self.properties.to_dict()
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this DefinitionSource object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'DefinitionSource') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'DefinitionSource') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+class DefinitionSourceProperties():
+    """
+    Properties of the source, which define the URL of the repository and a branch or tag.
 
     :attr str url: URL of the definition repository.
-    :attr str branch: (optional) A branch from the repo. One of branch or tag must
-          be specified, but only one or the other.
-    :attr str tag: (optional) A tag from the repo. One of branch or tag must be
-          specified, but only one or the other.
-    :attr str path: The path to the definition's yaml files.
-    :attr str service_instance_id: (optional) ID of the SCM repository service
-          instance.
+    :attr str branch: (optional) A branch from the repo, specify one of branch or
+          tag only.
+    :attr str tag: (optional) A tag from the repo, specify one of branch or tag
+          only.
+    :attr str path: The path to the definition's YAML files.
+    :attr DefinitionSourcePropertiesTool tool: (optional) Reference to the
+          repository tool, in the parent toolchain, that contains the pipeline definition.
     """
 
     def __init__(self,
@@ -2109,33 +2204,34 @@ class DefinitionScmSource():
                  *,
                  branch: str = None,
                  tag: str = None,
-                 service_instance_id: str = None) -> None:
+                 tool: 'DefinitionSourcePropertiesTool' = None) -> None:
         """
-        Initialize a DefinitionScmSource object.
+        Initialize a DefinitionSourceProperties object.
 
         :param str url: URL of the definition repository.
-        :param str path: The path to the definition's yaml files.
-        :param str branch: (optional) A branch from the repo. One of branch or tag
-               must be specified, but only one or the other.
-        :param str tag: (optional) A tag from the repo. One of branch or tag must
-               be specified, but only one or the other.
-        :param str service_instance_id: (optional) ID of the SCM repository service
-               instance.
+        :param str path: The path to the definition's YAML files.
+        :param str branch: (optional) A branch from the repo, specify one of branch
+               or tag only.
+        :param str tag: (optional) A tag from the repo, specify one of branch or
+               tag only.
+        :param DefinitionSourcePropertiesTool tool: (optional) Reference to the
+               repository tool, in the parent toolchain, that contains the pipeline
+               definition.
         """
         self.url = url
         self.branch = branch
         self.tag = tag
         self.path = path
-        self.service_instance_id = service_instance_id
+        self.tool = tool
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'DefinitionScmSource':
-        """Initialize a DefinitionScmSource object from a json dictionary."""
+    def from_dict(cls, _dict: Dict) -> 'DefinitionSourceProperties':
+        """Initialize a DefinitionSourceProperties object from a json dictionary."""
         args = {}
         if 'url' in _dict:
             args['url'] = _dict.get('url')
         else:
-            raise ValueError('Required property \'url\' not present in DefinitionScmSource JSON')
+            raise ValueError('Required property \'url\' not present in DefinitionSourceProperties JSON')
         if 'branch' in _dict:
             args['branch'] = _dict.get('branch')
         if 'tag' in _dict:
@@ -2143,14 +2239,14 @@ class DefinitionScmSource():
         if 'path' in _dict:
             args['path'] = _dict.get('path')
         else:
-            raise ValueError('Required property \'path\' not present in DefinitionScmSource JSON')
-        if 'service_instance_id' in _dict:
-            args['service_instance_id'] = _dict.get('service_instance_id')
+            raise ValueError('Required property \'path\' not present in DefinitionSourceProperties JSON')
+        if 'tool' in _dict:
+            args['tool'] = DefinitionSourcePropertiesTool.from_dict(_dict.get('tool'))
         return cls(**args)
 
     @classmethod
     def _from_dict(cls, _dict):
-        """Initialize a DefinitionScmSource object from a json dictionary."""
+        """Initialize a DefinitionSourceProperties object from a json dictionary."""
         return cls.from_dict(_dict)
 
     def to_dict(self) -> Dict:
@@ -2164,8 +2260,8 @@ class DefinitionScmSource():
             _dict['tag'] = self.tag
         if hasattr(self, 'path') and self.path is not None:
             _dict['path'] = self.path
-        if hasattr(self, 'service_instance_id') and self.service_instance_id is not None:
-            _dict['service_instance_id'] = self.service_instance_id
+        if hasattr(self, 'tool') and self.tool is not None:
+            _dict['tool'] = self.tool.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -2173,16 +2269,74 @@ class DefinitionScmSource():
         return self.to_dict()
 
     def __str__(self) -> str:
-        """Return a `str` version of this DefinitionScmSource object."""
+        """Return a `str` version of this DefinitionSourceProperties object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'DefinitionScmSource') -> bool:
+    def __eq__(self, other: 'DefinitionSourceProperties') -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'DefinitionScmSource') -> bool:
+    def __ne__(self, other: 'DefinitionSourceProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+class DefinitionSourcePropertiesTool():
+    """
+    Reference to the repository tool, in the parent toolchain, that contains the pipeline
+    definition.
+
+    :attr str id: (optional) ID of the repository tool instance in the parent
+          toolchain.
+    """
+
+    def __init__(self,
+                 *,
+                 id: str = None) -> None:
+        """
+        Initialize a DefinitionSourcePropertiesTool object.
+
+        :param str id: (optional) ID of the repository tool instance in the parent
+               toolchain.
+        """
+        self.id = id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'DefinitionSourcePropertiesTool':
+        """Initialize a DefinitionSourcePropertiesTool object from a json dictionary."""
+        args = {}
+        if 'id' in _dict:
+            args['id'] = _dict.get('id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a DefinitionSourcePropertiesTool object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'id') and self.id is not None:
+            _dict['id'] = self.id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this DefinitionSourcePropertiesTool object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'DefinitionSourcePropertiesTool') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'DefinitionSourcePropertiesTool') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2191,7 +2345,8 @@ class DefinitionsCollection():
     Pipeline definitions is a collection of individual definition entries, each entry
     consists of a repository URL, branch/tag and path.
 
-    :attr List[DefinitionsCollectionDefinitionsItem] definitions: Definition list.
+    :attr List[DefinitionsCollectionDefinitionsItem] definitions: The list of all
+          definitions in the pipeline.
     """
 
     def __init__(self,
@@ -2199,8 +2354,8 @@ class DefinitionsCollection():
         """
         Initialize a DefinitionsCollection object.
 
-        :param List[DefinitionsCollectionDefinitionsItem] definitions: Definition
-               list.
+        :param List[DefinitionsCollectionDefinitionsItem] definitions: The list of
+               all definitions in the pipeline.
         """
         self.definitions = definitions
 
@@ -2246,27 +2401,33 @@ class DefinitionsCollection():
 
 class DefinitionsCollectionDefinitionsItem():
     """
-    Tekton pipeline definition entry object.
+    Tekton pipeline definition entry object, consisting of a repository url, a repository
+    path and a branch or tag. The referenced repository URL must match the URL of a
+    repository tool integration in the parent toolchain. Obtain the list of integrations
+    from the toolchain API https://cloud.ibm.com/apidocs/toolchain#list-tools. The branch
+    or tag of the definition must match against a corresponding branch or tag in the
+    chosen repository, and the path must match a subfolder in the repository.
 
-    :attr DefinitionScmSource scm_source: SCM source for Tekton pipeline definition.
+    :attr DefinitionSource source: Source repository containing the Tekton pipeline
+          definition.
     :attr str id: (optional) UUID.
     :attr str href: (optional) URL of the definition repository.
     """
 
     def __init__(self,
-                 scm_source: 'DefinitionScmSource',
+                 source: 'DefinitionSource',
                  *,
                  id: str = None,
                  href: str = None) -> None:
         """
         Initialize a DefinitionsCollectionDefinitionsItem object.
 
-        :param DefinitionScmSource scm_source: SCM source for Tekton pipeline
-               definition.
+        :param DefinitionSource source: Source repository containing the Tekton
+               pipeline definition.
         :param str id: (optional) UUID.
         :param str href: (optional) URL of the definition repository.
         """
-        self.scm_source = scm_source
+        self.source = source
         self.id = id
         self.href = href
 
@@ -2274,10 +2435,10 @@ class DefinitionsCollectionDefinitionsItem():
     def from_dict(cls, _dict: Dict) -> 'DefinitionsCollectionDefinitionsItem':
         """Initialize a DefinitionsCollectionDefinitionsItem object from a json dictionary."""
         args = {}
-        if 'scm_source' in _dict:
-            args['scm_source'] = DefinitionScmSource.from_dict(_dict.get('scm_source'))
+        if 'source' in _dict:
+            args['source'] = DefinitionSource.from_dict(_dict.get('source'))
         else:
-            raise ValueError('Required property \'scm_source\' not present in DefinitionsCollectionDefinitionsItem JSON')
+            raise ValueError('Required property \'source\' not present in DefinitionsCollectionDefinitionsItem JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         if 'href' in _dict:
@@ -2292,8 +2453,8 @@ class DefinitionsCollectionDefinitionsItem():
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'scm_source') and self.scm_source is not None:
-            _dict['scm_source'] = self.scm_source.to_dict()
+        if hasattr(self, 'source') and self.source is not None:
+            _dict['source'] = self.source.to_dict()
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
         if hasattr(self, 'href') and self.href is not None:
@@ -2315,84 +2476,6 @@ class DefinitionsCollectionDefinitionsItem():
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'DefinitionsCollectionDefinitionsItem') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-class Events():
-    """
-    Only needed for Git triggers. Events object defines the events to which this Git
-    trigger listens.
-
-    :attr bool push: (optional) If true, the trigger listens for 'push' Git webhook
-          events.
-    :attr bool pull_request_closed: (optional) If true, the trigger listens for
-          'close pull request' Git webhook events.
-    :attr bool pull_request: (optional) If true, the trigger listens for 'open pull
-          request' or 'update pull request' Git webhook events.
-    """
-
-    def __init__(self,
-                 *,
-                 push: bool = None,
-                 pull_request_closed: bool = None,
-                 pull_request: bool = None) -> None:
-        """
-        Initialize a Events object.
-
-        :param bool push: (optional) If true, the trigger listens for 'push' Git
-               webhook events.
-        :param bool pull_request_closed: (optional) If true, the trigger listens
-               for 'close pull request' Git webhook events.
-        :param bool pull_request: (optional) If true, the trigger listens for 'open
-               pull request' or 'update pull request' Git webhook events.
-        """
-        self.push = push
-        self.pull_request_closed = pull_request_closed
-        self.pull_request = pull_request
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Events':
-        """Initialize a Events object from a json dictionary."""
-        args = {}
-        if 'push' in _dict:
-            args['push'] = _dict.get('push')
-        if 'pull_request_closed' in _dict:
-            args['pull_request_closed'] = _dict.get('pull_request_closed')
-        if 'pull_request' in _dict:
-            args['pull_request'] = _dict.get('pull_request')
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a Events object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'push') and self.push is not None:
-            _dict['push'] = self.push
-        if hasattr(self, 'pull_request_closed') and self.pull_request_closed is not None:
-            _dict['pull_request_closed'] = self.pull_request_closed
-        if hasattr(self, 'pull_request') and self.pull_request is not None:
-            _dict['pull_request'] = self.pull_request
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this Events object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'Events') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'Events') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2528,29 +2611,24 @@ class GenericSecret():
 
 class Log():
     """
-    Log object for Tekton pipeline run step.
+    Log data for Tekton pipeline run steps.
 
-    :attr str data: (optional) The raw log content of step.
-    :attr str href: (optional) API for getting log content.
+    :attr str href: API for getting log content.
     :attr str id: Step log ID.
-    :attr str name: (optional) <podName>/<containerName> of this log.
+    :attr str name: <podName>/<containerName> of this log.
     """
 
     def __init__(self,
+                 href: str,
                  id: str,
-                 *,
-                 data: str = None,
-                 href: str = None,
-                 name: str = None) -> None:
+                 name: str) -> None:
         """
         Initialize a Log object.
 
+        :param str href: API for getting log content.
         :param str id: Step log ID.
-        :param str data: (optional) The raw log content of step.
-        :param str href: (optional) API for getting log content.
-        :param str name: (optional) <podName>/<containerName> of this log.
+        :param str name: <podName>/<containerName> of this log.
         """
-        self.data = data
         self.href = href
         self.id = id
         self.name = name
@@ -2559,16 +2637,18 @@ class Log():
     def from_dict(cls, _dict: Dict) -> 'Log':
         """Initialize a Log object from a json dictionary."""
         args = {}
-        if 'data' in _dict:
-            args['data'] = _dict.get('data')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in Log JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         else:
             raise ValueError('Required property \'id\' not present in Log JSON')
         if 'name' in _dict:
             args['name'] = _dict.get('name')
+        else:
+            raise ValueError('Required property \'name\' not present in Log JSON')
         return cls(**args)
 
     @classmethod
@@ -2579,8 +2659,6 @@ class Log():
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'data') and self.data is not None:
-            _dict['data'] = self.data
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'id') and self.id is not None:
@@ -2611,16 +2689,15 @@ class LogsCollection():
     """
     List of pipeline run log objects.
 
-    :attr List[Log] logs: (optional) The list of pipeline run log objects.
+    :attr List[Log] logs: The list of pipeline run log objects.
     """
 
     def __init__(self,
-                 *,
-                 logs: List['Log'] = None) -> None:
+                 logs: List['Log']) -> None:
         """
         Initialize a LogsCollection object.
 
-        :param List[Log] logs: (optional) The list of pipeline run log objects.
+        :param List[Log] logs: The list of pipeline run log objects.
         """
         self.logs = logs
 
@@ -2630,6 +2707,8 @@ class LogsCollection():
         args = {}
         if 'logs' in _dict:
             args['logs'] = [Log.from_dict(x) for x in _dict.get('logs')]
+        else:
+            raise ValueError('Required property \'logs\' not present in LogsCollection JSON')
         return cls(**args)
 
     @classmethod
@@ -2667,7 +2746,8 @@ class PipelineRun():
     Single Tekton pipeline run object.
 
     :attr str id: UUID.
-    :attr UserInfo user_info: (optional) User information.
+    :attr UserInfo user_info: (optional) Information about the user that triggered a
+          pipeline run. Only included for pipeline runs that were manually triggered.
     :attr str status: Status of the pipeline run.
     :attr str definition_id: The aggregated definition ID used for this pipeline
           run.
@@ -2675,15 +2755,18 @@ class PipelineRun():
     :attr str pipeline_id: UUID.
     :attr str listener_name: Listener name used to start the run.
     :attr Trigger trigger: Tekton pipeline trigger.
-    :attr str event_params_blob: Event parameters object passed to this pipeline run
-          in String format, the contents depends on the type of trigger, for example, for
-          Git trigger it includes the Git event payload.
-    :attr str event_header_params_blob: (optional) Headers passed to this pipeline
-          run in String format.
+    :attr str event_params_blob: Event parameters object in String format that was
+          passed in upon creation of this pipeline run, the contents depends on the type
+          of trigger. For example, the Git event payload is included for Git triggers, or
+          in the case of a manual trigger the override and added properties are included.
+    :attr str trigger_headers: (optional) Trigger headers object in String format
+          that was passed in upon creation of this pipeline run. Omitted if no
+          trigger_headers object was provided when creating the pipeline run.
     :attr List[Property] properties: (optional) Properties used in this Tekton
-          pipeline run.
-    :attr datetime created_at: (optional) Standard RFC 3339 Date Time String.
-    :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String.
+          pipeline run. Not included when fetching the list of pipeline runs.
+    :attr datetime created_at: Standard RFC 3339 Date Time String.
+    :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String. Only
+          included if the run has been updated since it was created.
     :attr str run_url: URL for the details page of this pipeline run.
     """
 
@@ -2696,12 +2779,12 @@ class PipelineRun():
                  listener_name: str,
                  trigger: 'Trigger',
                  event_params_blob: str,
+                 created_at: datetime,
                  run_url: str,
                  *,
                  user_info: 'UserInfo' = None,
-                 event_header_params_blob: str = None,
+                 trigger_headers: str = None,
                  properties: List['Property'] = None,
-                 created_at: datetime = None,
                  updated_at: datetime = None) -> None:
         """
         Initialize a PipelineRun object.
@@ -2714,17 +2797,23 @@ class PipelineRun():
         :param str pipeline_id: UUID.
         :param str listener_name: Listener name used to start the run.
         :param Trigger trigger: Tekton pipeline trigger.
-        :param str event_params_blob: Event parameters object passed to this
-               pipeline run in String format, the contents depends on the type of trigger,
-               for example, for Git trigger it includes the Git event payload.
+        :param str event_params_blob: Event parameters object in String format that
+               was passed in upon creation of this pipeline run, the contents depends on
+               the type of trigger. For example, the Git event payload is included for Git
+               triggers, or in the case of a manual trigger the override and added
+               properties are included.
+        :param datetime created_at: Standard RFC 3339 Date Time String.
         :param str run_url: URL for the details page of this pipeline run.
-        :param UserInfo user_info: (optional) User information.
-        :param str event_header_params_blob: (optional) Headers passed to this
-               pipeline run in String format.
+        :param UserInfo user_info: (optional) Information about the user that
+               triggered a pipeline run. Only included for pipeline runs that were
+               manually triggered.
+        :param str trigger_headers: (optional) Trigger headers object in String
+               format that was passed in upon creation of this pipeline run. Omitted if no
+               trigger_headers object was provided when creating the pipeline run.
         :param List[Property] properties: (optional) Properties used in this Tekton
-               pipeline run.
-        :param datetime created_at: (optional) Standard RFC 3339 Date Time String.
+               pipeline run. Not included when fetching the list of pipeline runs.
         :param datetime updated_at: (optional) Standard RFC 3339 Date Time String.
+               Only included if the run has been updated since it was created.
         """
         self.id = id
         self.user_info = user_info
@@ -2735,7 +2824,7 @@ class PipelineRun():
         self.listener_name = listener_name
         self.trigger = trigger
         self.event_params_blob = event_params_blob
-        self.event_header_params_blob = event_header_params_blob
+        self.trigger_headers = trigger_headers
         self.properties = properties
         self.created_at = created_at
         self.updated_at = updated_at
@@ -2779,12 +2868,14 @@ class PipelineRun():
             args['event_params_blob'] = _dict.get('event_params_blob')
         else:
             raise ValueError('Required property \'event_params_blob\' not present in PipelineRun JSON')
-        if 'event_header_params_blob' in _dict:
-            args['event_header_params_blob'] = _dict.get('event_header_params_blob')
+        if 'trigger_headers' in _dict:
+            args['trigger_headers'] = _dict.get('trigger_headers')
         if 'properties' in _dict:
             args['properties'] = [Property.from_dict(x) for x in _dict.get('properties')]
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
+        else:
+            raise ValueError('Required property \'created_at\' not present in PipelineRun JSON')
         if 'updated_at' in _dict:
             args['updated_at'] = string_to_datetime(_dict.get('updated_at'))
         if 'run_url' in _dict:
@@ -2822,8 +2913,8 @@ class PipelineRun():
                 _dict['trigger'] = self.trigger.to_dict()
         if hasattr(self, 'event_params_blob') and self.event_params_blob is not None:
             _dict['event_params_blob'] = self.event_params_blob
-        if hasattr(self, 'event_header_params_blob') and self.event_header_params_blob is not None:
-            _dict['event_header_params_blob'] = self.event_header_params_blob
+        if hasattr(self, 'trigger_headers') and self.trigger_headers is not None:
+            _dict['trigger_headers'] = self.trigger_headers
         if hasattr(self, 'properties') and self.properties is not None:
             _dict['properties'] = [x.to_dict() for x in self.properties]
         if hasattr(self, 'created_at') and self.created_at is not None:
@@ -2872,7 +2963,7 @@ class PipelineRunWorker():
     worker details used in this pipeline run.
 
     :attr str name: (optional) Name of the worker. Computed based on the worker ID.
-    :attr str agent: (optional) The agent ID of the corresponding private worker
+    :attr str agent_id: (optional) The agent ID of the corresponding private worker
           integration used for this pipeline run.
     :attr str service_id: (optional) The Service ID of the corresponding private
           worker integration used for this pipeline run.
@@ -2883,7 +2974,7 @@ class PipelineRunWorker():
                  id: str,
                  *,
                  name: str = None,
-                 agent: str = None,
+                 agent_id: str = None,
                  service_id: str = None) -> None:
         """
         Initialize a PipelineRunWorker object.
@@ -2891,13 +2982,13 @@ class PipelineRunWorker():
         :param str id: UUID.
         :param str name: (optional) Name of the worker. Computed based on the
                worker ID.
-        :param str agent: (optional) The agent ID of the corresponding private
+        :param str agent_id: (optional) The agent ID of the corresponding private
                worker integration used for this pipeline run.
         :param str service_id: (optional) The Service ID of the corresponding
                private worker integration used for this pipeline run.
         """
         self.name = name
-        self.agent = agent
+        self.agent_id = agent_id
         self.service_id = service_id
         self.id = id
 
@@ -2907,8 +2998,8 @@ class PipelineRunWorker():
         args = {}
         if 'name' in _dict:
             args['name'] = _dict.get('name')
-        if 'agent' in _dict:
-            args['agent'] = _dict.get('agent')
+        if 'agent_id' in _dict:
+            args['agent_id'] = _dict.get('agent_id')
         if 'service_id' in _dict:
             args['service_id'] = _dict.get('service_id')
         if 'id' in _dict:
@@ -2927,8 +3018,8 @@ class PipelineRunWorker():
         _dict = {}
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
-        if hasattr(self, 'agent') and self.agent is not None:
-            _dict['agent'] = self.agent
+        if hasattr(self, 'agent_id') and self.agent_id is not None:
+            _dict['agent_id'] = self.agent_id
         if hasattr(self, 'service_id') and self.service_id is not None:
             _dict['service_id'] = self.service_id
         if hasattr(self, 'id') and self.id is not None:
@@ -2966,11 +3057,11 @@ class PipelineRunsCollection():
     :attr PipelineRunsCollectionNext next: (optional) Next page of pipeline runs
           relative to the `start` and `limit` params, or relative to the `offset` and
           `limit` params, depending on which of `start` or `offset` were used in the
-          request.
+          request. Only included when there are more pages available.
     :attr PipelineRunsCollectionLast last: (optional) Last page of pipeline runs
           relative to the `start` and `limit` params, or relative to the `offset` and
           `limit` params, depending on which of `start` or `offset` were used in the
-          request.
+          request. Only included when the last page has been reached.
     """
 
     def __init__(self,
@@ -2993,11 +3084,11 @@ class PipelineRunsCollection():
         :param PipelineRunsCollectionNext next: (optional) Next page of pipeline
                runs relative to the `start` and `limit` params, or relative to the
                `offset` and `limit` params, depending on which of `start` or `offset` were
-               used in the request.
+               used in the request. Only included when there are more pages available.
         :param PipelineRunsCollectionLast last: (optional) Last page of pipeline
                runs relative to the `start` and `limit` params, or relative to the
                `offset` and `limit` params, depending on which of `start` or `offset` were
-               used in the request.
+               used in the request. Only included when the last page has been reached.
         """
         self.pipeline_runs = pipeline_runs
         self.offset = offset
@@ -3132,7 +3223,7 @@ class PipelineRunsCollectionLast():
     """
     Last page of pipeline runs relative to the `start` and `limit` params, or relative to
     the `offset` and `limit` params, depending on which of `start` or `offset` were used
-    in the request.
+    in the request. Only included when the last page has been reached.
 
     :attr str href: General href URL.
     """
@@ -3190,7 +3281,7 @@ class PipelineRunsCollectionNext():
     """
     Next page of pipeline runs relative to the `start` and `limit` params, or relative to
     the `offset` and `limit` params, depending on which of `start` or `offset` were used
-    in the request.
+    in the request. Only included when there are more pages available.
 
     :attr str href: General href URL.
     """
@@ -3249,7 +3340,8 @@ class PipelineRunsCollectionPipelineRunsItem():
     Single Tekton pipeline run object.
 
     :attr str id: UUID.
-    :attr UserInfo user_info: (optional) User information.
+    :attr UserInfo user_info: (optional) Information about the user that triggered a
+          pipeline run. Only included for pipeline runs that were manually triggered.
     :attr str status: Status of the pipeline run.
     :attr str definition_id: The aggregated definition ID used for this pipeline
           run.
@@ -3257,15 +3349,18 @@ class PipelineRunsCollectionPipelineRunsItem():
     :attr str pipeline_id: UUID.
     :attr str listener_name: Listener name used to start the run.
     :attr Trigger trigger: Tekton pipeline trigger.
-    :attr str event_params_blob: Event parameters object passed to this pipeline run
-          in String format, the contents depends on the type of trigger, for example, for
-          Git trigger it includes the Git event payload.
-    :attr str event_header_params_blob: (optional) Headers passed to this pipeline
-          run in String format.
+    :attr str event_params_blob: Event parameters object in String format that was
+          passed in upon creation of this pipeline run, the contents depends on the type
+          of trigger. For example, the Git event payload is included for Git triggers, or
+          in the case of a manual trigger the override and added properties are included.
+    :attr str trigger_headers: (optional) Trigger headers object in String format
+          that was passed in upon creation of this pipeline run. Omitted if no
+          trigger_headers object was provided when creating the pipeline run.
     :attr List[Property] properties: (optional) Properties used in this Tekton
-          pipeline run.
-    :attr datetime created_at: (optional) Standard RFC 3339 Date Time String.
-    :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String.
+          pipeline run. Not included when fetching the list of pipeline runs.
+    :attr datetime created_at: Standard RFC 3339 Date Time String.
+    :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String. Only
+          included if the run has been updated since it was created.
     :attr str run_url: URL for the details page of this pipeline run.
     :attr str href: (optional) API URL for interacting with the pipeline run.
     """
@@ -3279,12 +3374,12 @@ class PipelineRunsCollectionPipelineRunsItem():
                  listener_name: str,
                  trigger: 'Trigger',
                  event_params_blob: str,
+                 created_at: datetime,
                  run_url: str,
                  *,
                  user_info: 'UserInfo' = None,
-                 event_header_params_blob: str = None,
+                 trigger_headers: str = None,
                  properties: List['Property'] = None,
-                 created_at: datetime = None,
                  updated_at: datetime = None,
                  href: str = None) -> None:
         """
@@ -3298,17 +3393,23 @@ class PipelineRunsCollectionPipelineRunsItem():
         :param str pipeline_id: UUID.
         :param str listener_name: Listener name used to start the run.
         :param Trigger trigger: Tekton pipeline trigger.
-        :param str event_params_blob: Event parameters object passed to this
-               pipeline run in String format, the contents depends on the type of trigger,
-               for example, for Git trigger it includes the Git event payload.
+        :param str event_params_blob: Event parameters object in String format that
+               was passed in upon creation of this pipeline run, the contents depends on
+               the type of trigger. For example, the Git event payload is included for Git
+               triggers, or in the case of a manual trigger the override and added
+               properties are included.
+        :param datetime created_at: Standard RFC 3339 Date Time String.
         :param str run_url: URL for the details page of this pipeline run.
-        :param UserInfo user_info: (optional) User information.
-        :param str event_header_params_blob: (optional) Headers passed to this
-               pipeline run in String format.
+        :param UserInfo user_info: (optional) Information about the user that
+               triggered a pipeline run. Only included for pipeline runs that were
+               manually triggered.
+        :param str trigger_headers: (optional) Trigger headers object in String
+               format that was passed in upon creation of this pipeline run. Omitted if no
+               trigger_headers object was provided when creating the pipeline run.
         :param List[Property] properties: (optional) Properties used in this Tekton
-               pipeline run.
-        :param datetime created_at: (optional) Standard RFC 3339 Date Time String.
+               pipeline run. Not included when fetching the list of pipeline runs.
         :param datetime updated_at: (optional) Standard RFC 3339 Date Time String.
+               Only included if the run has been updated since it was created.
         :param str href: (optional) API URL for interacting with the pipeline run.
         """
         self.id = id
@@ -3320,7 +3421,7 @@ class PipelineRunsCollectionPipelineRunsItem():
         self.listener_name = listener_name
         self.trigger = trigger
         self.event_params_blob = event_params_blob
-        self.event_header_params_blob = event_header_params_blob
+        self.trigger_headers = trigger_headers
         self.properties = properties
         self.created_at = created_at
         self.updated_at = updated_at
@@ -3365,12 +3466,14 @@ class PipelineRunsCollectionPipelineRunsItem():
             args['event_params_blob'] = _dict.get('event_params_blob')
         else:
             raise ValueError('Required property \'event_params_blob\' not present in PipelineRunsCollectionPipelineRunsItem JSON')
-        if 'event_header_params_blob' in _dict:
-            args['event_header_params_blob'] = _dict.get('event_header_params_blob')
+        if 'trigger_headers' in _dict:
+            args['trigger_headers'] = _dict.get('trigger_headers')
         if 'properties' in _dict:
             args['properties'] = [Property.from_dict(x) for x in _dict.get('properties')]
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
+        else:
+            raise ValueError('Required property \'created_at\' not present in PipelineRunsCollectionPipelineRunsItem JSON')
         if 'updated_at' in _dict:
             args['updated_at'] = string_to_datetime(_dict.get('updated_at'))
         if 'run_url' in _dict:
@@ -3410,8 +3513,8 @@ class PipelineRunsCollectionPipelineRunsItem():
                 _dict['trigger'] = self.trigger.to_dict()
         if hasattr(self, 'event_params_blob') and self.event_params_blob is not None:
             _dict['event_params_blob'] = self.event_params_blob
-        if hasattr(self, 'event_header_params_blob') and self.event_header_params_blob is not None:
-            _dict['event_header_params_blob'] = self.event_header_params_blob
+        if hasattr(self, 'trigger_headers') and self.trigger_headers is not None:
+            _dict['trigger_headers'] = self.trigger_headers
         if hasattr(self, 'properties') and self.properties is not None:
             _dict['properties'] = [x.to_dict() for x in self.properties]
         if hasattr(self, 'created_at') and self.created_at is not None:
@@ -3518,12 +3621,13 @@ class Property():
     Property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed when using `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     """
 
     def __init__(self,
@@ -3538,11 +3642,12 @@ class Property():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         """
         self.name = name
         self.value = value
@@ -3619,103 +3724,169 @@ class Property():
         APPCONFIG = 'appconfig'
 
 
+class StepLog():
+    """
+    Logs for a Tekton pipeline run step.
+
+    :attr str data: The raw log content of the step. Only included when fetching an
+          individual log object.
+    :attr str id: Step log ID.
+    """
+
+    def __init__(self,
+                 data: str,
+                 id: str) -> None:
+        """
+        Initialize a StepLog object.
+
+        :param str data: The raw log content of the step. Only included when
+               fetching an individual log object.
+        :param str id: Step log ID.
+        """
+        self.data = data
+        self.id = id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'StepLog':
+        """Initialize a StepLog object from a json dictionary."""
+        args = {}
+        if 'data' in _dict:
+            args['data'] = _dict.get('data')
+        else:
+            raise ValueError('Required property \'data\' not present in StepLog JSON')
+        if 'id' in _dict:
+            args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in StepLog JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a StepLog object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'data') and self.data is not None:
+            _dict['data'] = self.data
+        if hasattr(self, 'id') and self.id is not None:
+            _dict['id'] = self.id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this StepLog object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'StepLog') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'StepLog') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
 class TektonPipeline():
     """
     Tekton pipeline object.
 
     :attr str name: String.
     :attr str status: Pipeline status.
-    :attr str resource_group_id: ID.
-    :attr Toolchain toolchain: Toolchain object.
+    :attr TektonPipelineResourceGroup resource_group: The ID of the resource group
+          in which the pipeline was created.
+    :attr ToolchainReference toolchain: Toolchain object containing references to
+          the parent toolchain.
     :attr str id: UUID.
     :attr List[Definition] definitions: Definition list.
     :attr List[Property] properties: Tekton pipeline's environment properties.
-    :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String.
-    :attr datetime created_at: (optional) Standard RFC 3339 Date Time String.
-    :attr TektonPipelinePipelineDefinition pipeline_definition: (optional) Tekton
-          pipeline definition object. If this property is absent or empty, the pipeline
-          has no definitions added.
+    :attr datetime updated_at: Standard RFC 3339 Date Time String.
+    :attr datetime created_at: Standard RFC 3339 Date Time String.
     :attr List[Trigger] triggers: Tekton pipeline triggers list.
     :attr Worker worker: Default pipeline worker used to run the pipeline.
     :attr str runs_url: URL for this pipeline showing the list of pipeline runs.
-    :attr int build_number: (optional) The latest pipeline run build number. If this
-          property is absent, the pipeline hasn't had any pipeline runs.
-    :attr bool enable_slack_notifications: (optional) Flag whether to enable slack
-          notifications for this pipeline. When enabled, pipeline run events will be
-          published on all slack integration specified channels in the enclosing
-          toolchain.
+    :attr int build_number: The latest pipeline run build number. If this property
+          is absent, the pipeline hasn't had any pipeline runs.
+    :attr bool enable_notifications: (optional) Flag whether to enable notifications
+          for this pipeline. When enabled, pipeline run events will be published on all
+          slack integration specified channels in the parent toolchain. If omitted, this
+          feature is disabled by default.
     :attr bool enable_partial_cloning: (optional) Flag whether to enable partial
           cloning for this pipeline. When partial clone is enabled, only the files
-          contained within the paths specified in definition repositories will be read and
-          cloned. This means symbolic links may not work.
+          contained within the paths specified in definition repositories are read and
+          cloned, this means that symbolic links might not work. If omitted, this feature
+          is disabled by default.
     :attr bool enabled: Flag whether this pipeline is enabled.
     """
 
     def __init__(self,
                  name: str,
                  status: str,
-                 resource_group_id: str,
-                 toolchain: 'Toolchain',
+                 resource_group: 'TektonPipelineResourceGroup',
+                 toolchain: 'ToolchainReference',
                  id: str,
                  definitions: List['Definition'],
                  properties: List['Property'],
+                 updated_at: datetime,
+                 created_at: datetime,
                  triggers: List['Trigger'],
                  worker: 'Worker',
                  runs_url: str,
+                 build_number: int,
                  enabled: bool,
                  *,
-                 updated_at: datetime = None,
-                 created_at: datetime = None,
-                 pipeline_definition: 'TektonPipelinePipelineDefinition' = None,
-                 build_number: int = None,
-                 enable_slack_notifications: bool = None,
+                 enable_notifications: bool = None,
                  enable_partial_cloning: bool = None) -> None:
         """
         Initialize a TektonPipeline object.
 
         :param str name: String.
         :param str status: Pipeline status.
-        :param str resource_group_id: ID.
-        :param Toolchain toolchain: Toolchain object.
+        :param TektonPipelineResourceGroup resource_group: The ID of the resource
+               group in which the pipeline was created.
+        :param ToolchainReference toolchain: Toolchain object containing references
+               to the parent toolchain.
         :param str id: UUID.
         :param List[Definition] definitions: Definition list.
         :param List[Property] properties: Tekton pipeline's environment properties.
+        :param datetime updated_at: Standard RFC 3339 Date Time String.
+        :param datetime created_at: Standard RFC 3339 Date Time String.
         :param List[Trigger] triggers: Tekton pipeline triggers list.
         :param Worker worker: Default pipeline worker used to run the pipeline.
         :param str runs_url: URL for this pipeline showing the list of pipeline
                runs.
+        :param int build_number: The latest pipeline run build number. If this
+               property is absent, the pipeline hasn't had any pipeline runs.
         :param bool enabled: Flag whether this pipeline is enabled.
-        :param datetime updated_at: (optional) Standard RFC 3339 Date Time String.
-        :param datetime created_at: (optional) Standard RFC 3339 Date Time String.
-        :param TektonPipelinePipelineDefinition pipeline_definition: (optional)
-               Tekton pipeline definition object. If this property is absent or empty, the
-               pipeline has no definitions added.
-        :param int build_number: (optional) The latest pipeline run build number.
-               If this property is absent, the pipeline hasn't had any pipeline runs.
-        :param bool enable_slack_notifications: (optional) Flag whether to enable
-               slack notifications for this pipeline. When enabled, pipeline run events
-               will be published on all slack integration specified channels in the
-               enclosing toolchain.
+        :param bool enable_notifications: (optional) Flag whether to enable
+               notifications for this pipeline. When enabled, pipeline run events will be
+               published on all slack integration specified channels in the parent
+               toolchain. If omitted, this feature is disabled by default.
         :param bool enable_partial_cloning: (optional) Flag whether to enable
                partial cloning for this pipeline. When partial clone is enabled, only the
-               files contained within the paths specified in definition repositories will
-               be read and cloned. This means symbolic links may not work.
+               files contained within the paths specified in definition repositories are
+               read and cloned, this means that symbolic links might not work. If omitted,
+               this feature is disabled by default.
         """
         self.name = name
         self.status = status
-        self.resource_group_id = resource_group_id
+        self.resource_group = resource_group
         self.toolchain = toolchain
         self.id = id
         self.definitions = definitions
         self.properties = properties
         self.updated_at = updated_at
         self.created_at = created_at
-        self.pipeline_definition = pipeline_definition
         self.triggers = triggers
         self.worker = worker
         self.runs_url = runs_url
         self.build_number = build_number
-        self.enable_slack_notifications = enable_slack_notifications
+        self.enable_notifications = enable_notifications
         self.enable_partial_cloning = enable_partial_cloning
         self.enabled = enabled
 
@@ -3731,12 +3902,12 @@ class TektonPipeline():
             args['status'] = _dict.get('status')
         else:
             raise ValueError('Required property \'status\' not present in TektonPipeline JSON')
-        if 'resource_group_id' in _dict:
-            args['resource_group_id'] = _dict.get('resource_group_id')
+        if 'resource_group' in _dict:
+            args['resource_group'] = TektonPipelineResourceGroup.from_dict(_dict.get('resource_group'))
         else:
-            raise ValueError('Required property \'resource_group_id\' not present in TektonPipeline JSON')
+            raise ValueError('Required property \'resource_group\' not present in TektonPipeline JSON')
         if 'toolchain' in _dict:
-            args['toolchain'] = Toolchain.from_dict(_dict.get('toolchain'))
+            args['toolchain'] = ToolchainReference.from_dict(_dict.get('toolchain'))
         else:
             raise ValueError('Required property \'toolchain\' not present in TektonPipeline JSON')
         if 'id' in _dict:
@@ -3753,10 +3924,12 @@ class TektonPipeline():
             raise ValueError('Required property \'properties\' not present in TektonPipeline JSON')
         if 'updated_at' in _dict:
             args['updated_at'] = string_to_datetime(_dict.get('updated_at'))
+        else:
+            raise ValueError('Required property \'updated_at\' not present in TektonPipeline JSON')
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
-        if 'pipeline_definition' in _dict:
-            args['pipeline_definition'] = TektonPipelinePipelineDefinition.from_dict(_dict.get('pipeline_definition'))
+        else:
+            raise ValueError('Required property \'created_at\' not present in TektonPipeline JSON')
         if 'triggers' in _dict:
             args['triggers'] = _dict.get('triggers')
         else:
@@ -3771,8 +3944,10 @@ class TektonPipeline():
             raise ValueError('Required property \'runs_url\' not present in TektonPipeline JSON')
         if 'build_number' in _dict:
             args['build_number'] = _dict.get('build_number')
-        if 'enable_slack_notifications' in _dict:
-            args['enable_slack_notifications'] = _dict.get('enable_slack_notifications')
+        else:
+            raise ValueError('Required property \'build_number\' not present in TektonPipeline JSON')
+        if 'enable_notifications' in _dict:
+            args['enable_notifications'] = _dict.get('enable_notifications')
         if 'enable_partial_cloning' in _dict:
             args['enable_partial_cloning'] = _dict.get('enable_partial_cloning')
         if 'enabled' in _dict:
@@ -3793,8 +3968,8 @@ class TektonPipeline():
             _dict['name'] = self.name
         if hasattr(self, 'status') and self.status is not None:
             _dict['status'] = self.status
-        if hasattr(self, 'resource_group_id') and self.resource_group_id is not None:
-            _dict['resource_group_id'] = self.resource_group_id
+        if hasattr(self, 'resource_group') and self.resource_group is not None:
+            _dict['resource_group'] = self.resource_group.to_dict()
         if hasattr(self, 'toolchain') and self.toolchain is not None:
             _dict['toolchain'] = self.toolchain.to_dict()
         if hasattr(self, 'id') and self.id is not None:
@@ -3807,8 +3982,6 @@ class TektonPipeline():
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'created_at') and self.created_at is not None:
             _dict['created_at'] = datetime_to_string(self.created_at)
-        if hasattr(self, 'pipeline_definition') and self.pipeline_definition is not None:
-            _dict['pipeline_definition'] = self.pipeline_definition.to_dict()
         if hasattr(self, 'triggers') and self.triggers is not None:
             triggers_list = []
             for x in self.triggers:
@@ -3823,8 +3996,8 @@ class TektonPipeline():
             _dict['runs_url'] = self.runs_url
         if hasattr(self, 'build_number') and self.build_number is not None:
             _dict['build_number'] = self.build_number
-        if hasattr(self, 'enable_slack_notifications') and self.enable_slack_notifications is not None:
-            _dict['enable_slack_notifications'] = self.enable_slack_notifications
+        if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
+            _dict['enable_notifications'] = self.enable_notifications
         if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
             _dict['enable_partial_cloning'] = self.enable_partial_cloning
         if hasattr(self, 'enabled') and self.enabled is not None:
@@ -3861,38 +4034,37 @@ class TektonPipelinePatch():
     """
     Request body used to update this pipeline.
 
-    :attr bool enable_slack_notifications: (optional) Flag whether to enable slack
-          notifications for this pipeline. When enabled, pipeline run events will be
-          published on all slack integration specified channels in the enclosing
-          toolchain.
+    :attr bool enable_notifications: (optional) Flag whether to enable notifications
+          for this pipeline. When enabled, pipeline run events are published on all slack
+          integration specified channels in the parent toolchain.
     :attr bool enable_partial_cloning: (optional) Flag whether to enable partial
           cloning for this pipeline. When partial clone is enabled, only the files
-          contained within the paths specified in definition repositories will be read and
-          cloned. This means symbolic links may not work.
-    :attr WorkerWithId worker: (optional) Worker object containing worker ID only.
+          contained within the paths specified in definition repositories are read and
+          cloned, this means that symbolic links might not work.
+    :attr WorkerIdentity worker: (optional) Worker object containing worker ID only.
           If omitted the IBM Managed shared workers are used by default.
     """
 
     def __init__(self,
                  *,
-                 enable_slack_notifications: bool = None,
+                 enable_notifications: bool = None,
                  enable_partial_cloning: bool = None,
-                 worker: 'WorkerWithId' = None) -> None:
+                 worker: 'WorkerIdentity' = None) -> None:
         """
         Initialize a TektonPipelinePatch object.
 
-        :param bool enable_slack_notifications: (optional) Flag whether to enable
-               slack notifications for this pipeline. When enabled, pipeline run events
-               will be published on all slack integration specified channels in the
-               enclosing toolchain.
+        :param bool enable_notifications: (optional) Flag whether to enable
+               notifications for this pipeline. When enabled, pipeline run events are
+               published on all slack integration specified channels in the parent
+               toolchain.
         :param bool enable_partial_cloning: (optional) Flag whether to enable
                partial cloning for this pipeline. When partial clone is enabled, only the
-               files contained within the paths specified in definition repositories will
-               be read and cloned. This means symbolic links may not work.
-        :param WorkerWithId worker: (optional) Worker object containing worker ID
+               files contained within the paths specified in definition repositories are
+               read and cloned, this means that symbolic links might not work.
+        :param WorkerIdentity worker: (optional) Worker object containing worker ID
                only. If omitted the IBM Managed shared workers are used by default.
         """
-        self.enable_slack_notifications = enable_slack_notifications
+        self.enable_notifications = enable_notifications
         self.enable_partial_cloning = enable_partial_cloning
         self.worker = worker
 
@@ -3900,12 +4072,12 @@ class TektonPipelinePatch():
     def from_dict(cls, _dict: Dict) -> 'TektonPipelinePatch':
         """Initialize a TektonPipelinePatch object from a json dictionary."""
         args = {}
-        if 'enable_slack_notifications' in _dict:
-            args['enable_slack_notifications'] = _dict.get('enable_slack_notifications')
+        if 'enable_notifications' in _dict:
+            args['enable_notifications'] = _dict.get('enable_notifications')
         if 'enable_partial_cloning' in _dict:
             args['enable_partial_cloning'] = _dict.get('enable_partial_cloning')
         if 'worker' in _dict:
-            args['worker'] = WorkerWithId.from_dict(_dict.get('worker'))
+            args['worker'] = WorkerIdentity.from_dict(_dict.get('worker'))
         return cls(**args)
 
     @classmethod
@@ -3916,8 +4088,8 @@ class TektonPipelinePatch():
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'enable_slack_notifications') and self.enable_slack_notifications is not None:
-            _dict['enable_slack_notifications'] = self.enable_slack_notifications
+        if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
+            _dict['enable_notifications'] = self.enable_notifications
         if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
             _dict['enable_partial_cloning'] = self.enable_partial_cloning
         if hasattr(self, 'worker') and self.worker is not None:
@@ -3942,48 +4114,39 @@ class TektonPipelinePatch():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TektonPipelinePipelineDefinition():
+class TektonPipelineResourceGroup():
     """
-    Tekton pipeline definition object. If this property is absent or empty, the pipeline
-    has no definitions added.
+    The ID of the resource group in which the pipeline was created.
 
-    :attr str status: (optional) The pipeline definition status.
-    :attr str id: (optional) UUID.
+    :attr str id: (optional) ID.
     """
 
     def __init__(self,
                  *,
-                 status: str = None,
                  id: str = None) -> None:
         """
-        Initialize a TektonPipelinePipelineDefinition object.
+        Initialize a TektonPipelineResourceGroup object.
 
-        :param str status: (optional) The pipeline definition status.
-        :param str id: (optional) UUID.
+        :param str id: (optional) ID.
         """
-        self.status = status
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TektonPipelinePipelineDefinition':
-        """Initialize a TektonPipelinePipelineDefinition object from a json dictionary."""
+    def from_dict(cls, _dict: Dict) -> 'TektonPipelineResourceGroup':
+        """Initialize a TektonPipelineResourceGroup object from a json dictionary."""
         args = {}
-        if 'status' in _dict:
-            args['status'] = _dict.get('status')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         return cls(**args)
 
     @classmethod
     def _from_dict(cls, _dict):
-        """Initialize a TektonPipelinePipelineDefinition object from a json dictionary."""
+        """Initialize a TektonPipelineResourceGroup object from a json dictionary."""
         return cls.from_dict(_dict)
 
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'status') and self.status is not None:
-            _dict['status'] = self.status
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
         return _dict
@@ -3993,32 +4156,22 @@ class TektonPipelinePipelineDefinition():
         return self.to_dict()
 
     def __str__(self) -> str:
-        """Return a `str` version of this TektonPipelinePipelineDefinition object."""
+        """Return a `str` version of this TektonPipelineResourceGroup object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TektonPipelinePipelineDefinition') -> bool:
+    def __eq__(self, other: 'TektonPipelineResourceGroup') -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TektonPipelinePipelineDefinition') -> bool:
+    def __ne__(self, other: 'TektonPipelineResourceGroup') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-    class StatusEnum(str, Enum):
-        """
-        The pipeline definition status.
-        """
-        UPDATED = 'updated'
-        OUTDATED = 'outdated'
-        UPDATING = 'updating'
-        FAILED = 'failed'
-
-
-class Toolchain():
+class ToolchainReference():
     """
-    Toolchain object.
+    Toolchain object containing references to the parent toolchain.
 
     :attr str id: UUID.
     :attr str crn: The CRN for the toolchain that contains the Tekton pipeline.
@@ -4028,7 +4181,7 @@ class Toolchain():
                  id: str,
                  crn: str) -> None:
         """
-        Initialize a Toolchain object.
+        Initialize a ToolchainReference object.
 
         :param str id: UUID.
         :param str crn: The CRN for the toolchain that contains the Tekton
@@ -4038,22 +4191,22 @@ class Toolchain():
         self.crn = crn
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Toolchain':
-        """Initialize a Toolchain object from a json dictionary."""
+    def from_dict(cls, _dict: Dict) -> 'ToolchainReference':
+        """Initialize a ToolchainReference object from a json dictionary."""
         args = {}
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         else:
-            raise ValueError('Required property \'id\' not present in Toolchain JSON')
+            raise ValueError('Required property \'id\' not present in ToolchainReference JSON')
         if 'crn' in _dict:
             args['crn'] = _dict.get('crn')
         else:
-            raise ValueError('Required property \'crn\' not present in Toolchain JSON')
+            raise ValueError('Required property \'crn\' not present in ToolchainReference JSON')
         return cls(**args)
 
     @classmethod
     def _from_dict(cls, _dict):
-        """Initialize a Toolchain object from a json dictionary."""
+        """Initialize a ToolchainReference object from a json dictionary."""
         return cls.from_dict(_dict)
 
     def to_dict(self) -> Dict:
@@ -4070,16 +4223,16 @@ class Toolchain():
         return self.to_dict()
 
     def __str__(self) -> str:
-        """Return a `str` version of this Toolchain object."""
+        """Return a `str` version of this ToolchainReference object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Toolchain') -> bool:
+    def __eq__(self, other: 'ToolchainReference') -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Toolchain') -> bool:
+    def __ne__(self, other: 'ToolchainReference') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4103,14 +4256,13 @@ class TriggerGenericTriggerPropertiesItem():
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     :attr str href: (optional) API URL for interacting with the trigger property.
     """
 
@@ -4127,13 +4279,12 @@ class TriggerGenericTriggerPropertiesItem():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         :param str href: (optional) API URL for interacting with the trigger
                property.
         """
@@ -4222,14 +4373,13 @@ class TriggerManualTriggerPropertiesItem():
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     :attr str href: (optional) API URL for interacting with the trigger property.
     """
 
@@ -4246,13 +4396,12 @@ class TriggerManualTriggerPropertiesItem():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         :param str href: (optional) API URL for interacting with the trigger
                property.
         """
@@ -4350,19 +4499,30 @@ class TriggerPatch():
     :attr Worker worker: (optional) Worker used to run the trigger. If not specified
           the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. Omit this property to disable the concurrency
-          limit.
-    :attr bool disabled: (optional) Defines if this trigger is disabled.
+          concurrent runs for this trigger. If omitted then the concurrency limit is
+          disabled for this trigger.
+    :attr bool enabled: (optional) Defines if this trigger is enabled. If omitted
+          the trigger is enabled by default.
     :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
           type. Secret used to start generic webhook trigger.
-    :attr str cron: (optional) Only needed for timer triggers. Cron expression for
-          timer trigger.
-    :attr str timezone: (optional) Only needed for timer triggers. Timezone for
-          timer trigger.
-    :attr TriggerScmSource scm_source: (optional) SCM source repository for a Git
-          trigger. Only needed for Git triggers.
-    :attr Events events: (optional) Only needed for Git triggers. Events object
-          defines the events to which this Git trigger listens.
+    :attr str cron: (optional) Only needed for timer triggers. Cron expression that
+          indicates when this trigger will activate. Maximum frequency is every 5 minutes.
+          The string is based on UNIX crontab syntax: minute, hour, day of month, month,
+          day of week. Example: 0 */2 * * * - every 2 hours.
+    :attr str timezone: (optional) Only used for timer triggers. Specify the
+          timezone used for this timer trigger, which will ensure the cron activates this
+          trigger relative to the specified timezone. If no timezone is specified, the
+          default timezone used is UTC. Valid timezones are those listed in the IANA
+          timezone database, https://www.iana.org/time-zones.
+    :attr TriggerSource source: (optional) Source repository for a Git trigger. Only
+          required for Git triggers. The referenced repository URL must match the URL of a
+          repository tool integration in the parent toolchain. Obtain the list of
+          integrations from the toolchain API
+          https://cloud.ibm.com/apidocs/toolchain#list-tools.
+    :attr List[str] events: (optional) Only needed for Git triggers. List of events
+          to which a Git trigger listens. Choose one or more from: 'push', 'pull_request'
+          and 'pull_request_closed'. For SCM repositories that use 'merge request' events,
+          such events map to the equivalent 'pull request' events.
     """
 
     def __init__(self,
@@ -4373,12 +4533,12 @@ class TriggerPatch():
                  tags: List[str] = None,
                  worker: 'Worker' = None,
                  max_concurrent_runs: int = None,
-                 disabled: bool = None,
+                 enabled: bool = None,
                  secret: 'GenericSecret' = None,
                  cron: str = None,
                  timezone: str = None,
-                 scm_source: 'TriggerScmSource' = None,
-                 events: 'Events' = None) -> None:
+                 source: 'TriggerSource' = None,
+                 events: List[str] = None) -> None:
         """
         Initialize a TriggerPatch object.
 
@@ -4392,19 +4552,31 @@ class TriggerPatch():
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
-        :param bool disabled: (optional) Defines if this trigger is disabled.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
+        :param bool enabled: (optional) Defines if this trigger is enabled. If
+               omitted the trigger is enabled by default.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
         :param str cron: (optional) Only needed for timer triggers. Cron expression
-               for timer trigger.
-        :param str timezone: (optional) Only needed for timer triggers. Timezone
-               for timer trigger.
-        :param TriggerScmSource scm_source: (optional) SCM source repository for a
-               Git trigger. Only needed for Git triggers.
-        :param Events events: (optional) Only needed for Git triggers. Events
-               object defines the events to which this Git trigger listens.
+               that indicates when this trigger will activate. Maximum frequency is every
+               5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
+               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+        :param str timezone: (optional) Only used for timer triggers. Specify the
+               timezone used for this timer trigger, which will ensure the cron activates
+               this trigger relative to the specified timezone. If no timezone is
+               specified, the default timezone used is UTC. Valid timezones are those
+               listed in the IANA timezone database, https://www.iana.org/time-zones.
+        :param TriggerSource source: (optional) Source repository for a Git
+               trigger. Only required for Git triggers. The referenced repository URL must
+               match the URL of a repository tool integration in the parent toolchain.
+               Obtain the list of integrations from the toolchain API
+               https://cloud.ibm.com/apidocs/toolchain#list-tools.
+        :param List[str] events: (optional) Only needed for Git triggers. List of
+               events to which a Git trigger listens. Choose one or more from: 'push',
+               'pull_request' and 'pull_request_closed'. For SCM repositories that use
+               'merge request' events, such events map to the equivalent 'pull request'
+               events.
         """
         self.type = type
         self.name = name
@@ -4412,11 +4584,11 @@ class TriggerPatch():
         self.tags = tags
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
-        self.disabled = disabled
+        self.enabled = enabled
         self.secret = secret
         self.cron = cron
         self.timezone = timezone
-        self.scm_source = scm_source
+        self.source = source
         self.events = events
 
     @classmethod
@@ -4435,18 +4607,18 @@ class TriggerPatch():
             args['worker'] = Worker.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'disabled' in _dict:
-            args['disabled'] = _dict.get('disabled')
+        if 'enabled' in _dict:
+            args['enabled'] = _dict.get('enabled')
         if 'secret' in _dict:
             args['secret'] = GenericSecret.from_dict(_dict.get('secret'))
         if 'cron' in _dict:
             args['cron'] = _dict.get('cron')
         if 'timezone' in _dict:
             args['timezone'] = _dict.get('timezone')
-        if 'scm_source' in _dict:
-            args['scm_source'] = TriggerScmSource.from_dict(_dict.get('scm_source'))
+        if 'source' in _dict:
+            args['source'] = TriggerSource.from_dict(_dict.get('source'))
         if 'events' in _dict:
-            args['events'] = Events.from_dict(_dict.get('events'))
+            args['events'] = _dict.get('events')
         return cls(**args)
 
     @classmethod
@@ -4469,18 +4641,18 @@ class TriggerPatch():
             _dict['worker'] = self.worker.to_dict()
         if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'disabled') and self.disabled is not None:
-            _dict['disabled'] = self.disabled
+        if hasattr(self, 'enabled') and self.enabled is not None:
+            _dict['enabled'] = self.enabled
         if hasattr(self, 'secret') and self.secret is not None:
             _dict['secret'] = self.secret.to_dict()
         if hasattr(self, 'cron') and self.cron is not None:
             _dict['cron'] = self.cron
         if hasattr(self, 'timezone') and self.timezone is not None:
             _dict['timezone'] = self.timezone
-        if hasattr(self, 'scm_source') and self.scm_source is not None:
-            _dict['scm_source'] = self.scm_source.to_dict()
+        if hasattr(self, 'source') and self.source is not None:
+            _dict['source'] = self.source.to_dict()
         if hasattr(self, 'events') and self.events is not None:
-            _dict['events'] = self.events.to_dict()
+            _dict['events'] = self.events
         return _dict
 
     def _to_dict(self):
@@ -4509,6 +4681,17 @@ class TriggerPatch():
         SCM = 'scm'
         TIMER = 'timer'
         GENERIC = 'generic'
+
+
+    class EventsEnum(str, Enum):
+        """
+        List of events. Supported options are 'push' Git webhook events,
+        'pull_request_closed' Git webhook events and 'pull_request' for 'open pull
+        request' or 'update pull request' Git webhook events.
+        """
+        PUSH = 'push'
+        PULL_REQUEST = 'pull_request'
+        PULL_REQUEST_CLOSED = 'pull_request_closed'
 
 
 class TriggerPropertiesCollection():
@@ -4574,14 +4757,13 @@ class TriggerPropertiesCollectionPropertiesItem():
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     :attr str href: (optional) API URL for interacting with the trigger property.
     """
 
@@ -4598,13 +4780,12 @@ class TriggerPropertiesCollectionPropertiesItem():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         :param str href: (optional) API URL for interacting with the trigger
                property.
         """
@@ -4693,14 +4874,13 @@ class TriggerProperty():
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     """
 
     def __init__(self,
@@ -4715,13 +4895,12 @@ class TriggerProperty():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         """
         self.name = name
         self.value = value
@@ -4798,128 +4977,18 @@ class TriggerProperty():
         APPCONFIG = 'appconfig'
 
 
-class TriggerScmSource():
-    """
-    SCM source repository for a Git trigger. Only needed for Git triggers.
-
-    :attr str url: URL of the repository to which the trigger is listening.
-    :attr str branch: (optional) Name of a branch from the repo. One of branch or
-          tag must be specified, but only one or the other.
-    :attr str pattern: (optional) Git branch or tag pattern to listen to. Please
-          refer to https://github.com/micromatch/micromatch for pattern syntax.
-    :attr bool blind_connection: (optional) True if the repository server is not
-          addressable on the public internet. IBM Cloud will not be able to validate the
-          connection details you provide.
-    :attr str hook_id: (optional) ID of the webhook from the repo. Computed upon
-          creation of the trigger.
-    :attr str service_instance_id: (optional) ID of the repository service instance.
-    """
-
-    def __init__(self,
-                 url: str,
-                 *,
-                 branch: str = None,
-                 pattern: str = None,
-                 blind_connection: bool = None,
-                 hook_id: str = None,
-                 service_instance_id: str = None) -> None:
-        """
-        Initialize a TriggerScmSource object.
-
-        :param str url: URL of the repository to which the trigger is listening.
-        :param str branch: (optional) Name of a branch from the repo. One of branch
-               or tag must be specified, but only one or the other.
-        :param str pattern: (optional) Git branch or tag pattern to listen to.
-               Please refer to https://github.com/micromatch/micromatch for pattern
-               syntax.
-        :param bool blind_connection: (optional) True if the repository server is
-               not addressable on the public internet. IBM Cloud will not be able to
-               validate the connection details you provide.
-        :param str hook_id: (optional) ID of the webhook from the repo. Computed
-               upon creation of the trigger.
-        :param str service_instance_id: (optional) ID of the repository service
-               instance.
-        """
-        self.url = url
-        self.branch = branch
-        self.pattern = pattern
-        self.blind_connection = blind_connection
-        self.hook_id = hook_id
-        self.service_instance_id = service_instance_id
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerScmSource':
-        """Initialize a TriggerScmSource object from a json dictionary."""
-        args = {}
-        if 'url' in _dict:
-            args['url'] = _dict.get('url')
-        else:
-            raise ValueError('Required property \'url\' not present in TriggerScmSource JSON')
-        if 'branch' in _dict:
-            args['branch'] = _dict.get('branch')
-        if 'pattern' in _dict:
-            args['pattern'] = _dict.get('pattern')
-        if 'blind_connection' in _dict:
-            args['blind_connection'] = _dict.get('blind_connection')
-        if 'hook_id' in _dict:
-            args['hook_id'] = _dict.get('hook_id')
-        if 'service_instance_id' in _dict:
-            args['service_instance_id'] = _dict.get('service_instance_id')
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a TriggerScmSource object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'url') and self.url is not None:
-            _dict['url'] = self.url
-        if hasattr(self, 'branch') and self.branch is not None:
-            _dict['branch'] = self.branch
-        if hasattr(self, 'pattern') and self.pattern is not None:
-            _dict['pattern'] = self.pattern
-        if hasattr(self, 'blind_connection') and self.blind_connection is not None:
-            _dict['blind_connection'] = self.blind_connection
-        if hasattr(self, 'hook_id') and self.hook_id is not None:
-            _dict['hook_id'] = self.hook_id
-        if hasattr(self, 'service_instance_id') and self.service_instance_id is not None:
-            _dict['service_instance_id'] = self.service_instance_id
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this TriggerScmSource object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'TriggerScmSource') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'TriggerScmSource') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
 class TriggerScmTriggerPropertiesItem():
     """
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     :attr str href: (optional) API URL for interacting with the trigger property.
     """
 
@@ -4936,13 +5005,12 @@ class TriggerScmTriggerPropertiesItem():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         :param str href: (optional) API URL for interacting with the trigger
                property.
         """
@@ -5026,19 +5094,262 @@ class TriggerScmTriggerPropertiesItem():
         APPCONFIG = 'appconfig'
 
 
+class TriggerSource():
+    """
+    Source repository for a Git trigger. Only required for Git triggers. The referenced
+    repository URL must match the URL of a repository tool integration in the parent
+    toolchain. Obtain the list of integrations from the toolchain API
+    https://cloud.ibm.com/apidocs/toolchain#list-tools.
+
+    :attr str type: The only supported source type is "git", indicating that the
+          source is a git repository.
+    :attr TriggerSourceProperties properties: Properties of the source, which define
+          the URL of the repository and a branch or pattern.
+    """
+
+    def __init__(self,
+                 type: str,
+                 properties: 'TriggerSourceProperties') -> None:
+        """
+        Initialize a TriggerSource object.
+
+        :param str type: The only supported source type is "git", indicating that
+               the source is a git repository.
+        :param TriggerSourceProperties properties: Properties of the source, which
+               define the URL of the repository and a branch or pattern.
+        """
+        self.type = type
+        self.properties = properties
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'TriggerSource':
+        """Initialize a TriggerSource object from a json dictionary."""
+        args = {}
+        if 'type' in _dict:
+            args['type'] = _dict.get('type')
+        else:
+            raise ValueError('Required property \'type\' not present in TriggerSource JSON')
+        if 'properties' in _dict:
+            args['properties'] = TriggerSourceProperties.from_dict(_dict.get('properties'))
+        else:
+            raise ValueError('Required property \'properties\' not present in TriggerSource JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a TriggerSource object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'type') and self.type is not None:
+            _dict['type'] = self.type
+        if hasattr(self, 'properties') and self.properties is not None:
+            _dict['properties'] = self.properties.to_dict()
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this TriggerSource object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'TriggerSource') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'TriggerSource') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+class TriggerSourceProperties():
+    """
+    Properties of the source, which define the URL of the repository and a branch or
+    pattern.
+
+    :attr str url: URL of the repository to which the trigger is listening.
+    :attr str branch: (optional) Name of a branch from the repo. One of branch or
+          pattern must be specified, but only one or the other.
+    :attr str pattern: (optional) Git branch or tag pattern to listen to, specify
+          one of branch or pattern only. When specifying a tag to listen to, you can also
+          specify a simple glob pattern such as '!test' or '*master' to match against
+          multiple tags/branches in the repository.
+    :attr bool blind_connection: (optional) True if the repository server is not
+          addressable on the public internet. IBM Cloud will not be able to validate the
+          connection details you provide.
+    :attr str hook_id: (optional) ID of the webhook from the repo. Computed upon
+          creation of the trigger.
+    :attr TriggerSourcePropertiesTool tool: (optional) Reference to the repository
+          tool in the parent toolchain.
+    """
+
+    def __init__(self,
+                 url: str,
+                 *,
+                 branch: str = None,
+                 pattern: str = None,
+                 blind_connection: bool = None,
+                 hook_id: str = None,
+                 tool: 'TriggerSourcePropertiesTool' = None) -> None:
+        """
+        Initialize a TriggerSourceProperties object.
+
+        :param str url: URL of the repository to which the trigger is listening.
+        :param str branch: (optional) Name of a branch from the repo. One of branch
+               or pattern must be specified, but only one or the other.
+        :param str pattern: (optional) Git branch or tag pattern to listen to,
+               specify one of branch or pattern only. When specifying a tag to listen to,
+               you can also specify a simple glob pattern such as '!test' or '*master' to
+               match against multiple tags/branches in the repository.
+        :param bool blind_connection: (optional) True if the repository server is
+               not addressable on the public internet. IBM Cloud will not be able to
+               validate the connection details you provide.
+        :param str hook_id: (optional) ID of the webhook from the repo. Computed
+               upon creation of the trigger.
+        :param TriggerSourcePropertiesTool tool: (optional) Reference to the
+               repository tool in the parent toolchain.
+        """
+        self.url = url
+        self.branch = branch
+        self.pattern = pattern
+        self.blind_connection = blind_connection
+        self.hook_id = hook_id
+        self.tool = tool
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'TriggerSourceProperties':
+        """Initialize a TriggerSourceProperties object from a json dictionary."""
+        args = {}
+        if 'url' in _dict:
+            args['url'] = _dict.get('url')
+        else:
+            raise ValueError('Required property \'url\' not present in TriggerSourceProperties JSON')
+        if 'branch' in _dict:
+            args['branch'] = _dict.get('branch')
+        if 'pattern' in _dict:
+            args['pattern'] = _dict.get('pattern')
+        if 'blind_connection' in _dict:
+            args['blind_connection'] = _dict.get('blind_connection')
+        if 'hook_id' in _dict:
+            args['hook_id'] = _dict.get('hook_id')
+        if 'tool' in _dict:
+            args['tool'] = TriggerSourcePropertiesTool.from_dict(_dict.get('tool'))
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a TriggerSourceProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'url') and self.url is not None:
+            _dict['url'] = self.url
+        if hasattr(self, 'branch') and self.branch is not None:
+            _dict['branch'] = self.branch
+        if hasattr(self, 'pattern') and self.pattern is not None:
+            _dict['pattern'] = self.pattern
+        if hasattr(self, 'blind_connection') and self.blind_connection is not None:
+            _dict['blind_connection'] = self.blind_connection
+        if hasattr(self, 'hook_id') and self.hook_id is not None:
+            _dict['hook_id'] = self.hook_id
+        if hasattr(self, 'tool') and self.tool is not None:
+            _dict['tool'] = self.tool.to_dict()
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this TriggerSourceProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'TriggerSourceProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'TriggerSourceProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+class TriggerSourcePropertiesTool():
+    """
+    Reference to the repository tool in the parent toolchain.
+
+    :attr str id: (optional) ID of the repository tool instance in the parent
+          toolchain.
+    """
+
+    def __init__(self,
+                 *,
+                 id: str = None) -> None:
+        """
+        Initialize a TriggerSourcePropertiesTool object.
+
+        :param str id: (optional) ID of the repository tool instance in the parent
+               toolchain.
+        """
+        self.id = id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'TriggerSourcePropertiesTool':
+        """Initialize a TriggerSourcePropertiesTool object from a json dictionary."""
+        args = {}
+        if 'id' in _dict:
+            args['id'] = _dict.get('id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a TriggerSourcePropertiesTool object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'id') and self.id is not None:
+            _dict['id'] = self.id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this TriggerSourcePropertiesTool object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'TriggerSourcePropertiesTool') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'TriggerSourcePropertiesTool') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
 class TriggerTimerTriggerPropertiesItem():
     """
     Trigger property object.
 
     :attr str name: Property name.
-    :attr str value: (optional) Property value. Can be empty and should be omitted
-          for `single_select` property type.
+    :attr str value: (optional) Property value. Any string value is valid.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
     :attr str path: (optional) A dot notation path for `integration` type properties
-          to select a value from the tool integration. If left blank the full tool
-          integration data will be used.
+          only, that selects a value from the tool integration. If left blank the full
+          tool integration data will be used.
     :attr str href: (optional) API URL for interacting with the trigger property.
     """
 
@@ -5055,13 +5366,12 @@ class TriggerTimerTriggerPropertiesItem():
 
         :param str name: Property name.
         :param str type: Property type.
-        :param str value: (optional) Property value. Can be empty and should be
-               omitted for `single_select` property type.
+        :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
-               properties to select a value from the tool integration. If left blank the
-               full tool integration data will be used.
+               properties only, that selects a value from the tool integration. If left
+               blank the full tool integration data will be used.
         :param str href: (optional) API URL for interacting with the trigger
                property.
         """
@@ -5209,7 +5519,8 @@ class TriggersCollection():
 
 class UserInfo():
     """
-    User information.
+    Information about the user that triggered a pipeline run. Only included for pipeline
+    runs that were manually triggered.
 
     :attr str iam_id: IBM Cloud IAM ID.
     :attr str sub: User email address.
@@ -5348,7 +5659,7 @@ class Worker():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class WorkerWithId():
+class WorkerIdentity():
     """
     Worker object containing worker ID only. If omitted the IBM Managed shared workers are
     used by default.
@@ -5359,25 +5670,25 @@ class WorkerWithId():
     def __init__(self,
                  id: str) -> None:
         """
-        Initialize a WorkerWithId object.
+        Initialize a WorkerIdentity object.
 
         :param str id: ID of the worker.
         """
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'WorkerWithId':
-        """Initialize a WorkerWithId object from a json dictionary."""
+    def from_dict(cls, _dict: Dict) -> 'WorkerIdentity':
+        """Initialize a WorkerIdentity object from a json dictionary."""
         args = {}
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         else:
-            raise ValueError('Required property \'id\' not present in WorkerWithId JSON')
+            raise ValueError('Required property \'id\' not present in WorkerIdentity JSON')
         return cls(**args)
 
     @classmethod
     def _from_dict(cls, _dict):
-        """Initialize a WorkerWithId object from a json dictionary."""
+        """Initialize a WorkerIdentity object from a json dictionary."""
         return cls.from_dict(_dict)
 
     def to_dict(self) -> Dict:
@@ -5392,16 +5703,16 @@ class WorkerWithId():
         return self.to_dict()
 
     def __str__(self) -> str:
-        """Return a `str` version of this WorkerWithId object."""
+        """Return a `str` version of this WorkerIdentity object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'WorkerWithId') -> bool:
+    def __eq__(self, other: 'WorkerIdentity') -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'WorkerWithId') -> bool:
+    def __ne__(self, other: 'WorkerIdentity') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5412,21 +5723,22 @@ class TriggerGenericTrigger(Trigger):
 
     :attr str type: Trigger type.
     :attr str name: Trigger name.
-    :attr str href: (optional) API URL for interacting with the trigger.
+    :attr str href: (optional) API URL for interacting with the trigger. Only
+          included when fetching the list of pipeline triggers.
     :attr str event_listener: Event listener name. The name of the event listener to
           which the trigger is associated. The event listeners are defined in the
           definition repositories of the Tekton pipeline.
-    :attr str id: (optional) ID.
-    :attr List[TriggerGenericTriggerPropertiesItem] properties: (optional) Trigger
-          properties.
-    :attr List[str] tags: (optional) Trigger tags array.
+    :attr str id: ID.
+    :attr List[TriggerGenericTriggerPropertiesItem] properties: (optional) Optional
+          trigger properties used to override or supplement the pipeline properties when
+          triggering a pipeline run.
+    :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Worker used to run the trigger. If not specified
           the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. Omit this property to disable the concurrency
-          limit.
-    :attr bool disabled: Flag whether the trigger is disabled. If omitted the
-          trigger is enabled by default.
+          concurrent runs for this trigger. If omitted then the concurrency limit is
+          disabled for this trigger.
+    :attr bool enabled: Flag whether the trigger is enabled.
     :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
           type. Secret used to start generic webhook trigger.
     :attr str webhook_url: (optional) Webhook URL that can be used to trigger
@@ -5437,10 +5749,10 @@ class TriggerGenericTrigger(Trigger):
                  type: str,
                  name: str,
                  event_listener: str,
-                 disabled: bool,
+                 id: str,
+                 enabled: bool,
                  *,
                  href: str = None,
-                 id: str = None,
                  properties: List['TriggerGenericTriggerPropertiesItem'] = None,
                  tags: List[str] = None,
                  worker: 'Worker' = None,
@@ -5455,18 +5767,19 @@ class TriggerGenericTrigger(Trigger):
         :param str event_listener: Event listener name. The name of the event
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
-        :param bool disabled: Flag whether the trigger is disabled. If omitted the
-               trigger is enabled by default.
-        :param str href: (optional) API URL for interacting with the trigger.
-        :param str id: (optional) ID.
+        :param str id: ID.
+        :param bool enabled: Flag whether the trigger is enabled.
+        :param str href: (optional) API URL for interacting with the trigger. Only
+               included when fetching the list of pipeline triggers.
         :param List[TriggerGenericTriggerPropertiesItem] properties: (optional)
-               Trigger properties.
-        :param List[str] tags: (optional) Trigger tags array.
+               Optional trigger properties used to override or supplement the pipeline
+               properties when triggering a pipeline run.
+        :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
         :param str webhook_url: (optional) Webhook URL that can be used to trigger
@@ -5482,7 +5795,7 @@ class TriggerGenericTrigger(Trigger):
         self.tags = tags
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
-        self.disabled = disabled
+        self.enabled = enabled
         self.secret = secret
         self.webhook_url = webhook_url
 
@@ -5506,6 +5819,8 @@ class TriggerGenericTrigger(Trigger):
             raise ValueError('Required property \'event_listener\' not present in TriggerGenericTrigger JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in TriggerGenericTrigger JSON')
         if 'properties' in _dict:
             args['properties'] = [TriggerGenericTriggerPropertiesItem.from_dict(x) for x in _dict.get('properties')]
         if 'tags' in _dict:
@@ -5514,10 +5829,10 @@ class TriggerGenericTrigger(Trigger):
             args['worker'] = Worker.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'disabled' in _dict:
-            args['disabled'] = _dict.get('disabled')
+        if 'enabled' in _dict:
+            args['enabled'] = _dict.get('enabled')
         else:
-            raise ValueError('Required property \'disabled\' not present in TriggerGenericTrigger JSON')
+            raise ValueError('Required property \'enabled\' not present in TriggerGenericTrigger JSON')
         if 'secret' in _dict:
             args['secret'] = GenericSecret.from_dict(_dict.get('secret'))
         if 'webhook_url' in _dict:
@@ -5550,8 +5865,8 @@ class TriggerGenericTrigger(Trigger):
             _dict['worker'] = self.worker.to_dict()
         if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'disabled') and self.disabled is not None:
-            _dict['disabled'] = self.disabled
+        if hasattr(self, 'enabled') and self.enabled is not None:
+            _dict['enabled'] = self.enabled
         if hasattr(self, 'secret') and self.secret is not None:
             _dict['secret'] = self.secret.to_dict()
         if hasattr(self, 'webhook_url') and self.webhook_url is not None:
@@ -5582,31 +5897,32 @@ class TriggerManualTrigger(Trigger):
 
     :attr str type: Trigger type.
     :attr str name: Trigger name.
-    :attr str href: (optional) API URL for interacting with the trigger.
+    :attr str href: (optional) API URL for interacting with the trigger. Only
+          included when fetching the list of pipeline triggers.
     :attr str event_listener: Event listener name. The name of the event listener to
           which the trigger is associated. The event listeners are defined in the
           definition repositories of the Tekton pipeline.
-    :attr str id: (optional) ID.
-    :attr List[TriggerManualTriggerPropertiesItem] properties: (optional) Trigger
-          properties.
-    :attr List[str] tags: (optional) Trigger tags array.
+    :attr str id: ID.
+    :attr List[TriggerManualTriggerPropertiesItem] properties: (optional) Optional
+          trigger properties used to override or supplement the pipeline properties when
+          triggering a pipeline run.
+    :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Worker used to run the trigger. If not specified
           the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. Omit this property to disable the concurrency
-          limit.
-    :attr bool disabled: Flag whether the trigger is disabled. If omitted the
-          trigger is enabled by default.
+          concurrent runs for this trigger. If omitted then the concurrency limit is
+          disabled for this trigger.
+    :attr bool enabled: Flag whether the trigger is enabled.
     """
 
     def __init__(self,
                  type: str,
                  name: str,
                  event_listener: str,
-                 disabled: bool,
+                 id: str,
+                 enabled: bool,
                  *,
                  href: str = None,
-                 id: str = None,
                  properties: List['TriggerManualTriggerPropertiesItem'] = None,
                  tags: List[str] = None,
                  worker: 'Worker' = None,
@@ -5619,18 +5935,19 @@ class TriggerManualTrigger(Trigger):
         :param str event_listener: Event listener name. The name of the event
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
-        :param bool disabled: Flag whether the trigger is disabled. If omitted the
-               trigger is enabled by default.
-        :param str href: (optional) API URL for interacting with the trigger.
-        :param str id: (optional) ID.
+        :param str id: ID.
+        :param bool enabled: Flag whether the trigger is enabled.
+        :param str href: (optional) API URL for interacting with the trigger. Only
+               included when fetching the list of pipeline triggers.
         :param List[TriggerManualTriggerPropertiesItem] properties: (optional)
-               Trigger properties.
-        :param List[str] tags: (optional) Trigger tags array.
+               Optional trigger properties used to override or supplement the pipeline
+               properties when triggering a pipeline run.
+        :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -5642,7 +5959,7 @@ class TriggerManualTrigger(Trigger):
         self.tags = tags
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
-        self.disabled = disabled
+        self.enabled = enabled
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerManualTrigger':
@@ -5664,6 +5981,8 @@ class TriggerManualTrigger(Trigger):
             raise ValueError('Required property \'event_listener\' not present in TriggerManualTrigger JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in TriggerManualTrigger JSON')
         if 'properties' in _dict:
             args['properties'] = [TriggerManualTriggerPropertiesItem.from_dict(x) for x in _dict.get('properties')]
         if 'tags' in _dict:
@@ -5672,10 +5991,10 @@ class TriggerManualTrigger(Trigger):
             args['worker'] = Worker.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'disabled' in _dict:
-            args['disabled'] = _dict.get('disabled')
+        if 'enabled' in _dict:
+            args['enabled'] = _dict.get('enabled')
         else:
-            raise ValueError('Required property \'disabled\' not present in TriggerManualTrigger JSON')
+            raise ValueError('Required property \'enabled\' not present in TriggerManualTrigger JSON')
         return cls(**args)
 
     @classmethod
@@ -5704,8 +6023,8 @@ class TriggerManualTrigger(Trigger):
             _dict['worker'] = self.worker.to_dict()
         if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'disabled') and self.disabled is not None:
-            _dict['disabled'] = self.disabled
+        if hasattr(self, 'enabled') and self.enabled is not None:
+            _dict['enabled'] = self.enabled
         return _dict
 
     def _to_dict(self):
@@ -5733,41 +6052,47 @@ class TriggerScmTrigger(Trigger):
 
     :attr str type: Trigger type.
     :attr str name: Trigger name.
-    :attr str href: (optional) API URL for interacting with the trigger.
+    :attr str href: (optional) API URL for interacting with the trigger. Only
+          included when fetching the list of pipeline triggers.
     :attr str event_listener: Event listener name. The name of the event listener to
           which the trigger is associated. The event listeners are defined in the
           definition repositories of the Tekton pipeline.
-    :attr str id: (optional) ID.
-    :attr List[TriggerScmTriggerPropertiesItem] properties: (optional) Trigger
-          properties.
-    :attr List[str] tags: (optional) Trigger tags array.
+    :attr str id: ID.
+    :attr List[TriggerScmTriggerPropertiesItem] properties: (optional) Optional
+          trigger properties used to override or supplement the pipeline properties when
+          triggering a pipeline run.
+    :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Worker used to run the trigger. If not specified
           the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. Omit this property to disable the concurrency
-          limit.
-    :attr bool disabled: Flag whether the trigger is disabled. If omitted the
-          trigger is enabled by default.
-    :attr TriggerScmSource scm_source: (optional) SCM source repository for a Git
-          trigger. Only needed for Git triggers.
-    :attr Events events: (optional) Only needed for Git triggers. Events object
-          defines the events to which this Git trigger listens.
+          concurrent runs for this trigger. If omitted then the concurrency limit is
+          disabled for this trigger.
+    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr TriggerSource source: (optional) Source repository for a Git trigger. Only
+          required for Git triggers. The referenced repository URL must match the URL of a
+          repository tool integration in the parent toolchain. Obtain the list of
+          integrations from the toolchain API
+          https://cloud.ibm.com/apidocs/toolchain#list-tools.
+    :attr List[str] events: (optional) Only needed for Git triggers. List of events
+          to which a Git trigger listens. Choose one or more from: 'push', 'pull_request'
+          and 'pull_request_closed'. For SCM repositories that use 'merge request' events,
+          such events map to the equivalent 'pull request' events.
     """
 
     def __init__(self,
                  type: str,
                  name: str,
                  event_listener: str,
-                 disabled: bool,
+                 id: str,
+                 enabled: bool,
                  *,
                  href: str = None,
-                 id: str = None,
                  properties: List['TriggerScmTriggerPropertiesItem'] = None,
                  tags: List[str] = None,
                  worker: 'Worker' = None,
                  max_concurrent_runs: int = None,
-                 scm_source: 'TriggerScmSource' = None,
-                 events: 'Events' = None) -> None:
+                 source: 'TriggerSource' = None,
+                 events: List[str] = None) -> None:
         """
         Initialize a TriggerScmTrigger object.
 
@@ -5776,22 +6101,29 @@ class TriggerScmTrigger(Trigger):
         :param str event_listener: Event listener name. The name of the event
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
-        :param bool disabled: Flag whether the trigger is disabled. If omitted the
-               trigger is enabled by default.
-        :param str href: (optional) API URL for interacting with the trigger.
-        :param str id: (optional) ID.
-        :param List[TriggerScmTriggerPropertiesItem] properties: (optional) Trigger
-               properties.
-        :param List[str] tags: (optional) Trigger tags array.
+        :param str id: ID.
+        :param bool enabled: Flag whether the trigger is enabled.
+        :param str href: (optional) API URL for interacting with the trigger. Only
+               included when fetching the list of pipeline triggers.
+        :param List[TriggerScmTriggerPropertiesItem] properties: (optional)
+               Optional trigger properties used to override or supplement the pipeline
+               properties when triggering a pipeline run.
+        :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
-        :param TriggerScmSource scm_source: (optional) SCM source repository for a
-               Git trigger. Only needed for Git triggers.
-        :param Events events: (optional) Only needed for Git triggers. Events
-               object defines the events to which this Git trigger listens.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
+        :param TriggerSource source: (optional) Source repository for a Git
+               trigger. Only required for Git triggers. The referenced repository URL must
+               match the URL of a repository tool integration in the parent toolchain.
+               Obtain the list of integrations from the toolchain API
+               https://cloud.ibm.com/apidocs/toolchain#list-tools.
+        :param List[str] events: (optional) Only needed for Git triggers. List of
+               events to which a Git trigger listens. Choose one or more from: 'push',
+               'pull_request' and 'pull_request_closed'. For SCM repositories that use
+               'merge request' events, such events map to the equivalent 'pull request'
+               events.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -5803,8 +6135,8 @@ class TriggerScmTrigger(Trigger):
         self.tags = tags
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
-        self.disabled = disabled
-        self.scm_source = scm_source
+        self.enabled = enabled
+        self.source = source
         self.events = events
 
     @classmethod
@@ -5827,6 +6159,8 @@ class TriggerScmTrigger(Trigger):
             raise ValueError('Required property \'event_listener\' not present in TriggerScmTrigger JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in TriggerScmTrigger JSON')
         if 'properties' in _dict:
             args['properties'] = [TriggerScmTriggerPropertiesItem.from_dict(x) for x in _dict.get('properties')]
         if 'tags' in _dict:
@@ -5835,14 +6169,14 @@ class TriggerScmTrigger(Trigger):
             args['worker'] = Worker.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'disabled' in _dict:
-            args['disabled'] = _dict.get('disabled')
+        if 'enabled' in _dict:
+            args['enabled'] = _dict.get('enabled')
         else:
-            raise ValueError('Required property \'disabled\' not present in TriggerScmTrigger JSON')
-        if 'scm_source' in _dict:
-            args['scm_source'] = TriggerScmSource.from_dict(_dict.get('scm_source'))
+            raise ValueError('Required property \'enabled\' not present in TriggerScmTrigger JSON')
+        if 'source' in _dict:
+            args['source'] = TriggerSource.from_dict(_dict.get('source'))
         if 'events' in _dict:
-            args['events'] = Events.from_dict(_dict.get('events'))
+            args['events'] = _dict.get('events')
         return cls(**args)
 
     @classmethod
@@ -5871,12 +6205,12 @@ class TriggerScmTrigger(Trigger):
             _dict['worker'] = self.worker.to_dict()
         if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'disabled') and self.disabled is not None:
-            _dict['disabled'] = self.disabled
-        if hasattr(self, 'scm_source') and self.scm_source is not None:
-            _dict['scm_source'] = self.scm_source.to_dict()
+        if hasattr(self, 'enabled') and self.enabled is not None:
+            _dict['enabled'] = self.enabled
+        if hasattr(self, 'source') and self.source is not None:
+            _dict['source'] = self.source.to_dict()
         if hasattr(self, 'events') and self.events is not None:
-            _dict['events'] = self.events.to_dict()
+            _dict['events'] = self.events
         return _dict
 
     def _to_dict(self):
@@ -5897,41 +6231,59 @@ class TriggerScmTrigger(Trigger):
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+    class EventsEnum(str, Enum):
+        """
+        List of events. Supported options are 'push' Git webhook events,
+        'pull_request_closed' Git webhook events and 'pull_request' for 'open pull
+        request' or 'update pull request' Git webhook events.
+        """
+        PUSH = 'push'
+        PULL_REQUEST = 'pull_request'
+        PULL_REQUEST_CLOSED = 'pull_request_closed'
+
+
 class TriggerTimerTrigger(Trigger):
     """
-    Timer trigger, which triggers pipeline run according to the cron value and time zone.
+    Timer trigger, which triggers pipeline runs according to the provided cron value and
+    timezone.
 
     :attr str type: Trigger type.
     :attr str name: Trigger name.
-    :attr str href: (optional) API URL for interacting with the trigger.
+    :attr str href: (optional) API URL for interacting with the trigger. Only
+          included when fetching the list of pipeline triggers.
     :attr str event_listener: Event listener name. The name of the event listener to
           which the trigger is associated. The event listeners are defined in the
           definition repositories of the Tekton pipeline.
-    :attr str id: (optional) ID.
-    :attr List[TriggerTimerTriggerPropertiesItem] properties: (optional) Trigger
-          properties.
-    :attr List[str] tags: (optional) Trigger tags array.
+    :attr str id: ID.
+    :attr List[TriggerTimerTriggerPropertiesItem] properties: (optional) Optional
+          trigger properties used to override or supplement the pipeline properties when
+          triggering a pipeline run.
+    :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Worker used to run the trigger. If not specified
           the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. Omit this property to disable the concurrency
-          limit.
-    :attr bool disabled: Flag whether the trigger is disabled. If omitted the
-          trigger is enabled by default.
-    :attr str cron: (optional) Only needed for timer triggers. Cron expression for
-          timer trigger. Maximum frequency is every 5 minutes.
-    :attr str timezone: (optional) Only needed for timer triggers. Timezone for
-          timer trigger.
+          concurrent runs for this trigger. If omitted then the concurrency limit is
+          disabled for this trigger.
+    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr str cron: (optional) Only needed for timer triggers. Cron expression that
+          indicates when this trigger will activate. Maximum frequency is every 5 minutes.
+          The string is based on UNIX crontab syntax: minute, hour, day of month, month,
+          day of week. Example: 0 */2 * * * - every 2 hours.
+    :attr str timezone: (optional) Only used for timer triggers. Specify the
+          timezone used for this timer trigger, which will ensure the cron activates this
+          trigger relative to the specified timezone. If no timezone is specified, the
+          default timezone used is UTC. Valid timezones are those listed in the IANA
+          timezone database, https://www.iana.org/time-zones.
     """
 
     def __init__(self,
                  type: str,
                  name: str,
                  event_listener: str,
-                 disabled: bool,
+                 id: str,
+                 enabled: bool,
                  *,
                  href: str = None,
-                 id: str = None,
                  properties: List['TriggerTimerTriggerPropertiesItem'] = None,
                  tags: List[str] = None,
                  worker: 'Worker' = None,
@@ -5946,22 +6298,28 @@ class TriggerTimerTrigger(Trigger):
         :param str event_listener: Event listener name. The name of the event
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
-        :param bool disabled: Flag whether the trigger is disabled. If omitted the
-               trigger is enabled by default.
-        :param str href: (optional) API URL for interacting with the trigger.
-        :param str id: (optional) ID.
+        :param str id: ID.
+        :param bool enabled: Flag whether the trigger is enabled.
+        :param str href: (optional) API URL for interacting with the trigger. Only
+               included when fetching the list of pipeline triggers.
         :param List[TriggerTimerTriggerPropertiesItem] properties: (optional)
-               Trigger properties.
-        :param List[str] tags: (optional) Trigger tags array.
+               Optional trigger properties used to override or supplement the pipeline
+               properties when triggering a pipeline run.
+        :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Worker used to run the trigger. If not
                specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. Omit this property to disable the
-               concurrency limit.
+               concurrent runs for this trigger. If omitted then the concurrency limit is
+               disabled for this trigger.
         :param str cron: (optional) Only needed for timer triggers. Cron expression
-               for timer trigger. Maximum frequency is every 5 minutes.
-        :param str timezone: (optional) Only needed for timer triggers. Timezone
-               for timer trigger.
+               that indicates when this trigger will activate. Maximum frequency is every
+               5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
+               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+        :param str timezone: (optional) Only used for timer triggers. Specify the
+               timezone used for this timer trigger, which will ensure the cron activates
+               this trigger relative to the specified timezone. If no timezone is
+               specified, the default timezone used is UTC. Valid timezones are those
+               listed in the IANA timezone database, https://www.iana.org/time-zones.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -5973,7 +6331,7 @@ class TriggerTimerTrigger(Trigger):
         self.tags = tags
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
-        self.disabled = disabled
+        self.enabled = enabled
         self.cron = cron
         self.timezone = timezone
 
@@ -5997,6 +6355,8 @@ class TriggerTimerTrigger(Trigger):
             raise ValueError('Required property \'event_listener\' not present in TriggerTimerTrigger JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
+        else:
+            raise ValueError('Required property \'id\' not present in TriggerTimerTrigger JSON')
         if 'properties' in _dict:
             args['properties'] = [TriggerTimerTriggerPropertiesItem.from_dict(x) for x in _dict.get('properties')]
         if 'tags' in _dict:
@@ -6005,10 +6365,10 @@ class TriggerTimerTrigger(Trigger):
             args['worker'] = Worker.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'disabled' in _dict:
-            args['disabled'] = _dict.get('disabled')
+        if 'enabled' in _dict:
+            args['enabled'] = _dict.get('enabled')
         else:
-            raise ValueError('Required property \'disabled\' not present in TriggerTimerTrigger JSON')
+            raise ValueError('Required property \'enabled\' not present in TriggerTimerTrigger JSON')
         if 'cron' in _dict:
             args['cron'] = _dict.get('cron')
         if 'timezone' in _dict:
@@ -6041,8 +6401,8 @@ class TriggerTimerTrigger(Trigger):
             _dict['worker'] = self.worker.to_dict()
         if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'disabled') and self.disabled is not None:
-            _dict['disabled'] = self.disabled
+        if hasattr(self, 'enabled') and self.enabled is not None:
+            _dict['enabled'] = self.enabled
         if hasattr(self, 'cron') and self.cron is not None:
             _dict['cron'] = self.cron
         if hasattr(self, 'timezone') and self.timezone is not None:
