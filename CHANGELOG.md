@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.1.0...v0.2.0) (2022-11-18)
+
+
+### Features
+
+* **tekton:** update to match V2 API GA ([40f14cb](https://github.com/IBM/continuous-delivery-python-sdk/commit/40f14cb0a5c3bc6f4a62a20a5c4be1a8f67be91d))
+
 # [0.1.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.0.2...v0.1.0) (2022-09-30)
 
 
