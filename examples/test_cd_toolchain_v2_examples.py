@@ -29,7 +29,6 @@ from ibm_continuous_delivery.cd_toolchain_v2 import *
 # CD_TOOLCHAIN_URL=<service base url>
 # CD_TOOLCHAIN_AUTH_TYPE=iam
 # CD_TOOLCHAIN_APIKEY=<IAM apikey>
-# CD_TOOLCHAIN_AUTH_URL=<IAM token service base URL - omit this if using the production environment>
 #
 # These configuration properties can be exported as environment variables, or stored
 # in a configuration file and then:
