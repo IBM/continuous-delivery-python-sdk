@@ -890,7 +890,6 @@ class Toolchain():
     :attr datetime created_at: Toolchain creation timestamp.
     :attr datetime updated_at: Latest toolchain update timestamp.
     :attr str created_by: Identity that created the toolchain.
-    :attr List[str] tags: Tags associated with the toolchain.
     """
 
     def __init__(self,
@@ -905,8 +904,7 @@ class Toolchain():
                  ui_href: str,
                  created_at: datetime,
                  updated_at: datetime,
-                 created_by: str,
-                 tags: List[str]) -> None:
+                 created_by: str) -> None:
         """
         Initialize a Toolchain object.
 
@@ -923,7 +921,6 @@ class Toolchain():
         :param datetime created_at: Toolchain creation timestamp.
         :param datetime updated_at: Latest toolchain update timestamp.
         :param str created_by: Identity that created the toolchain.
-        :param List[str] tags: Tags associated with the toolchain.
         """
         self.id = id
         self.name = name
@@ -937,7 +934,6 @@ class Toolchain():
         self.created_at = created_at
         self.updated_at = updated_at
         self.created_by = created_by
-        self.tags = tags
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'Toolchain':
@@ -991,10 +987,6 @@ class Toolchain():
             args['created_by'] = _dict.get('created_by')
         else:
             raise ValueError('Required property \'created_by\' not present in Toolchain JSON')
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        else:
-            raise ValueError('Required property \'tags\' not present in Toolchain JSON')
         return cls(**args)
 
     @classmethod
@@ -1029,8 +1021,6 @@ class Toolchain():
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'created_by') and self.created_by is not None:
             _dict['created_by'] = self.created_by
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
         return _dict
 
     def _to_dict(self):
@@ -1450,7 +1440,6 @@ class ToolchainModel():
     :attr datetime created_at: Toolchain creation timestamp.
     :attr datetime updated_at: Latest toolchain update timestamp.
     :attr str created_by: Identity that created the toolchain.
-    :attr List[str] tags: Tags associated with the toolchain.
     """
 
     def __init__(self,
@@ -1465,8 +1454,7 @@ class ToolchainModel():
                  ui_href: str,
                  created_at: datetime,
                  updated_at: datetime,
-                 created_by: str,
-                 tags: List[str]) -> None:
+                 created_by: str) -> None:
         """
         Initialize a ToolchainModel object.
 
@@ -1483,7 +1471,6 @@ class ToolchainModel():
         :param datetime created_at: Toolchain creation timestamp.
         :param datetime updated_at: Latest toolchain update timestamp.
         :param str created_by: Identity that created the toolchain.
-        :param List[str] tags: Tags associated with the toolchain.
         """
         self.id = id
         self.name = name
@@ -1497,7 +1484,6 @@ class ToolchainModel():
         self.created_at = created_at
         self.updated_at = updated_at
         self.created_by = created_by
-        self.tags = tags
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ToolchainModel':
@@ -1551,10 +1537,6 @@ class ToolchainModel():
             args['created_by'] = _dict.get('created_by')
         else:
             raise ValueError('Required property \'created_by\' not present in ToolchainModel JSON')
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        else:
-            raise ValueError('Required property \'tags\' not present in ToolchainModel JSON')
         return cls(**args)
 
     @classmethod
@@ -1589,8 +1571,6 @@ class ToolchainModel():
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'created_by') and self.created_by is not None:
             _dict['created_by'] = self.created_by
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
         return _dict
 
     def _to_dict(self):
@@ -1627,7 +1607,6 @@ class ToolchainPatch():
     :attr datetime created_at: Toolchain creation timestamp.
     :attr datetime updated_at: Latest toolchain update timestamp.
     :attr str created_by: Identity that created the toolchain.
-    :attr List[str] tags: Tags associated with the toolchain.
     """
 
     def __init__(self,
@@ -1642,8 +1621,7 @@ class ToolchainPatch():
                  ui_href: str,
                  created_at: datetime,
                  updated_at: datetime,
-                 created_by: str,
-                 tags: List[str]) -> None:
+                 created_by: str) -> None:
         """
         Initialize a ToolchainPatch object.
 
@@ -1660,7 +1638,6 @@ class ToolchainPatch():
         :param datetime created_at: Toolchain creation timestamp.
         :param datetime updated_at: Latest toolchain update timestamp.
         :param str created_by: Identity that created the toolchain.
-        :param List[str] tags: Tags associated with the toolchain.
         """
         self.id = id
         self.name = name
@@ -1674,7 +1651,6 @@ class ToolchainPatch():
         self.created_at = created_at
         self.updated_at = updated_at
         self.created_by = created_by
-        self.tags = tags
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ToolchainPatch':
@@ -1728,10 +1704,6 @@ class ToolchainPatch():
             args['created_by'] = _dict.get('created_by')
         else:
             raise ValueError('Required property \'created_by\' not present in ToolchainPatch JSON')
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        else:
-            raise ValueError('Required property \'tags\' not present in ToolchainPatch JSON')
         return cls(**args)
 
     @classmethod
@@ -1766,8 +1738,6 @@ class ToolchainPatch():
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'created_by') and self.created_by is not None:
             _dict['created_by'] = self.created_by
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
         return _dict
 
     def _to_dict(self):
@@ -1804,7 +1774,6 @@ class ToolchainPost():
     :attr datetime created_at: Toolchain creation timestamp.
     :attr datetime updated_at: Latest toolchain update timestamp.
     :attr str created_by: Identity that created the toolchain.
-    :attr List[str] tags: Tags associated with the toolchain.
     """
 
     def __init__(self,
@@ -1819,8 +1788,7 @@ class ToolchainPost():
                  ui_href: str,
                  created_at: datetime,
                  updated_at: datetime,
-                 created_by: str,
-                 tags: List[str]) -> None:
+                 created_by: str) -> None:
         """
         Initialize a ToolchainPost object.
 
@@ -1837,7 +1805,6 @@ class ToolchainPost():
         :param datetime created_at: Toolchain creation timestamp.
         :param datetime updated_at: Latest toolchain update timestamp.
         :param str created_by: Identity that created the toolchain.
-        :param List[str] tags: Tags associated with the toolchain.
         """
         self.id = id
         self.name = name
@@ -1851,7 +1818,6 @@ class ToolchainPost():
         self.created_at = created_at
         self.updated_at = updated_at
         self.created_by = created_by
-        self.tags = tags
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ToolchainPost':
@@ -1905,10 +1871,6 @@ class ToolchainPost():
             args['created_by'] = _dict.get('created_by')
         else:
             raise ValueError('Required property \'created_by\' not present in ToolchainPost JSON')
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        else:
-            raise ValueError('Required property \'tags\' not present in ToolchainPost JSON')
         return cls(**args)
 
     @classmethod
@@ -1943,8 +1905,6 @@ class ToolchainPost():
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'created_by') and self.created_by is not None:
             _dict['created_by'] = self.created_by
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
         return _dict
 
     def _to_dict(self):
