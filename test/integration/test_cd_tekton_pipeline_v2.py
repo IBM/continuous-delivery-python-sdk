@@ -91,8 +91,8 @@ class TestCdTektonPipelineV2():
 
         # Construct a dict representation of a TektonPipelinePatch model
         tekton_pipeline_patch_model = {
-            'enable_notifications': False,
-            'enable_partial_cloning': False,
+            'enable_notifications': True,
+            'enable_partial_cloning': True,
             'worker': worker_identity_model,
         }
 
@@ -112,7 +112,6 @@ class TestCdTektonPipelineV2():
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             start='testString',
             limit=1,
-            offset=38,
             status='succeeded',
             trigger_name='manual-trigger'
         )
@@ -130,7 +129,6 @@ class TestCdTektonPipelineV2():
             client=self.cd_tekton_pipeline_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
-            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
@@ -144,7 +142,6 @@ class TestCdTektonPipelineV2():
             client=self.cd_tekton_pipeline_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
-            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
