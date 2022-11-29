@@ -302,8 +302,8 @@ class TestUpdateTektonPipeline():
 
         # Construct a dict representation of a TektonPipelinePatch model
         tekton_pipeline_patch_model = {}
-        tekton_pipeline_patch_model['enable_notifications'] = False
-        tekton_pipeline_patch_model['enable_partial_cloning'] = False
+        tekton_pipeline_patch_model['enable_notifications'] = True
+        tekton_pipeline_patch_model['enable_partial_cloning'] = True
         tekton_pipeline_patch_model['worker'] = worker_identity_model
 
         # Set up parameter values
@@ -523,7 +523,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "offset": 20, "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -534,7 +534,6 @@ class TestListTektonPipelineRuns():
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         start = 'testString'
         limit = 1
-        offset = 38
         status = 'succeeded'
         trigger_name = 'manual-trigger'
 
@@ -543,7 +542,6 @@ class TestListTektonPipelineRuns():
             pipeline_id,
             start=start,
             limit=limit,
-            offset=offset,
             status=status,
             trigger_name=trigger_name,
             headers={}
@@ -557,7 +555,6 @@ class TestListTektonPipelineRuns():
         query_string = urllib.parse.unquote_plus(query_string)
         assert 'start={}'.format(start) in query_string
         assert 'limit={}'.format(limit) in query_string
-        assert 'offset={}'.format(offset) in query_string
         assert 'status={}'.format(status) in query_string
         assert 'trigger.name={}'.format(trigger_name) in query_string
 
@@ -577,7 +574,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "offset": 20, "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -613,7 +610,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "offset": 20, "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -667,7 +664,6 @@ class TestListTektonPipelineRuns():
             client=_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
-            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
@@ -702,7 +698,6 @@ class TestListTektonPipelineRuns():
             client=_service,
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             limit=10,
-            offset=38,
             status='succeeded',
             trigger_name='manual-trigger',
         )
@@ -4502,7 +4497,6 @@ class TestModel_PipelineRunsCollection():
         # Construct a json representation of a PipelineRunsCollection model
         pipeline_runs_collection_model_json = {}
         pipeline_runs_collection_model_json['pipeline_runs'] = [pipeline_runs_collection_pipeline_runs_item_model]
-        pipeline_runs_collection_model_json['offset'] = 20
         pipeline_runs_collection_model_json['limit'] = 20
         pipeline_runs_collection_model_json['first'] = pipeline_runs_collection_first_model
         pipeline_runs_collection_model_json['next'] = pipeline_runs_collection_next_model
@@ -4918,8 +4912,8 @@ class TestModel_TektonPipelinePatch():
 
         # Construct a json representation of a TektonPipelinePatch model
         tekton_pipeline_patch_model_json = {}
-        tekton_pipeline_patch_model_json['enable_notifications'] = False
-        tekton_pipeline_patch_model_json['enable_partial_cloning'] = False
+        tekton_pipeline_patch_model_json['enable_notifications'] = True
+        tekton_pipeline_patch_model_json['enable_partial_cloning'] = True
         tekton_pipeline_patch_model_json['worker'] = worker_identity_model
 
         # Construct a model instance of TektonPipelinePatch by calling from_dict on the json representation

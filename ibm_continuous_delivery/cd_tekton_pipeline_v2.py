@@ -318,7 +318,6 @@ class CdTektonPipelineV2(BaseService):
         *,
         start: str = None,
         limit: int = None,
-        offset: int = None,
         status: str = None,
         trigger_name: str = None,
         **kwargs
@@ -331,12 +330,10 @@ class CdTektonPipelineV2(BaseService):
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str start: (optional) A page token that identifies the start point
-               of the list of pipeline runs. This value is computed and included in the
-               response body. Cannot be used in combination with `offset`.
+               of the list of pipeline runs. This value is included in the response body
+               of each request to fetch pipeline runs.
         :param int limit: (optional) The number of pipeline runs to return, sorted
                by creation time, most recent first.
-        :param int offset: (optional) Skip the specified number of pipeline runs.
-               Cannot be used in combination with `start`.
         :param str status: (optional) Filters the collection to resources with the
                specified status.
         :param str trigger_name: (optional) Filters the collection to resources
@@ -357,7 +354,6 @@ class CdTektonPipelineV2(BaseService):
         params = {
             'start': start,
             'limit': limit,
-            'offset': offset,
             'status': status,
             'trigger.name': trigger_name
         }
@@ -3050,23 +3046,19 @@ class PipelineRunsCollection():
 
     :attr List[PipelineRunsCollectionPipelineRunsItem] pipeline_runs: Tekton
           pipeline runs list.
-    :attr int offset: Skip a specified number of pipeline runs.
     :attr int limit: The number of pipeline runs to return, sorted by creation time,
           most recent first.
     :attr PipelineRunsCollectionFirst first: First page of pipeline runs.
     :attr PipelineRunsCollectionNext next: (optional) Next page of pipeline runs
-          relative to the `start` and `limit` params, or relative to the `offset` and
-          `limit` params, depending on which of `start` or `offset` were used in the
-          request. Only included when there are more pages available.
+          relative to the `start` and `limit` params. Only included when there are more
+          pages available.
     :attr PipelineRunsCollectionLast last: (optional) Last page of pipeline runs
-          relative to the `start` and `limit` params, or relative to the `offset` and
-          `limit` params, depending on which of `start` or `offset` were used in the
-          request. Only included when the last page has been reached.
+          relative to the `start` and `limit` params. Only included when the last page has
+          been reached.
     """
 
     def __init__(self,
                  pipeline_runs: List['PipelineRunsCollectionPipelineRunsItem'],
-                 offset: int,
                  limit: int,
                  first: 'PipelineRunsCollectionFirst',
                  *,
@@ -3077,21 +3069,17 @@ class PipelineRunsCollection():
 
         :param List[PipelineRunsCollectionPipelineRunsItem] pipeline_runs: Tekton
                pipeline runs list.
-        :param int offset: Skip a specified number of pipeline runs.
         :param int limit: The number of pipeline runs to return, sorted by creation
                time, most recent first.
         :param PipelineRunsCollectionFirst first: First page of pipeline runs.
         :param PipelineRunsCollectionNext next: (optional) Next page of pipeline
-               runs relative to the `start` and `limit` params, or relative to the
-               `offset` and `limit` params, depending on which of `start` or `offset` were
-               used in the request. Only included when there are more pages available.
+               runs relative to the `start` and `limit` params. Only included when there
+               are more pages available.
         :param PipelineRunsCollectionLast last: (optional) Last page of pipeline
-               runs relative to the `start` and `limit` params, or relative to the
-               `offset` and `limit` params, depending on which of `start` or `offset` were
-               used in the request. Only included when the last page has been reached.
+               runs relative to the `start` and `limit` params. Only included when the
+               last page has been reached.
         """
         self.pipeline_runs = pipeline_runs
-        self.offset = offset
         self.limit = limit
         self.first = first
         self.next = next
@@ -3105,10 +3093,6 @@ class PipelineRunsCollection():
             args['pipeline_runs'] = [PipelineRunsCollectionPipelineRunsItem.from_dict(x) for x in _dict.get('pipeline_runs')]
         else:
             raise ValueError('Required property \'pipeline_runs\' not present in PipelineRunsCollection JSON')
-        if 'offset' in _dict:
-            args['offset'] = _dict.get('offset')
-        else:
-            raise ValueError('Required property \'offset\' not present in PipelineRunsCollection JSON')
         if 'limit' in _dict:
             args['limit'] = _dict.get('limit')
         else:
@@ -3133,8 +3117,6 @@ class PipelineRunsCollection():
         _dict = {}
         if hasattr(self, 'pipeline_runs') and self.pipeline_runs is not None:
             _dict['pipeline_runs'] = [x.to_dict() for x in self.pipeline_runs]
-        if hasattr(self, 'offset') and self.offset is not None:
-            _dict['offset'] = self.offset
         if hasattr(self, 'limit') and self.limit is not None:
             _dict['limit'] = self.limit
         if hasattr(self, 'first') and self.first is not None:
@@ -3221,9 +3203,8 @@ class PipelineRunsCollectionFirst():
 
 class PipelineRunsCollectionLast():
     """
-    Last page of pipeline runs relative to the `start` and `limit` params, or relative to
-    the `offset` and `limit` params, depending on which of `start` or `offset` were used
-    in the request. Only included when the last page has been reached.
+    Last page of pipeline runs relative to the `start` and `limit` params. Only included
+    when the last page has been reached.
 
     :attr str href: General href URL.
     """
@@ -3279,9 +3260,8 @@ class PipelineRunsCollectionLast():
 
 class PipelineRunsCollectionNext():
     """
-    Next page of pipeline runs relative to the `start` and `limit` params, or relative to
-    the `offset` and `limit` params, depending on which of `start` or `offset` were used
-    in the request. Only included when there are more pages available.
+    Next page of pipeline runs relative to the `start` and `limit` params. Only included
+    when there are more pages available.
 
     :attr str href: General href URL.
     """
@@ -4501,8 +4481,7 @@ class TriggerPatch():
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
-    :attr bool enabled: (optional) Defines if this trigger is enabled. If omitted
-          the trigger is enabled by default.
+    :attr bool enabled: (optional) Defines if this trigger is enabled.
     :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
           type. Secret used to start generic webhook trigger.
     :attr str cron: (optional) Only needed for timer triggers. Cron expression that
@@ -4554,8 +4533,7 @@ class TriggerPatch():
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
-        :param bool enabled: (optional) Defines if this trigger is enabled. If
-               omitted the trigger is enabled by default.
+        :param bool enabled: (optional) Defines if this trigger is enabled.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
         :param str cron: (optional) Only needed for timer triggers. Cron expression
@@ -6441,7 +6419,6 @@ class TektonPipelineRunsPager():
                  client: CdTektonPipelineV2,
                  pipeline_id: str,
                  limit: int = None,
-                 offset: int = None,
                  status: str = None,
                  trigger_name: str = None,
     ) -> None:
@@ -6450,8 +6427,6 @@ class TektonPipelineRunsPager():
         :param str pipeline_id: The Tekton pipeline ID.
         :param int limit: (optional) The number of pipeline runs to return, sorted
                by creation time, most recent first.
-        :param int offset: (optional) Skip the specified number of pipeline runs.
-               Cannot be used in combination with `start`.
         :param str status: (optional) Filters the collection to resources with the
                specified status.
         :param str trigger_name: (optional) Filters the collection to resources
@@ -6462,7 +6437,6 @@ class TektonPipelineRunsPager():
         self._page_context = { 'next': None }
         self._pipeline_id = pipeline_id
         self._limit = limit
-        self._offset = offset
         self._status = status
         self._trigger_name = trigger_name
 
@@ -6484,7 +6458,6 @@ class TektonPipelineRunsPager():
         result = self._client.list_tekton_pipeline_runs(
             pipeline_id=self._pipeline_id,
             limit=self._limit,
-            offset=self._offset,
             status=self._status,
             trigger_name=self._trigger_name,
             start=self._page_context.get('next'),
