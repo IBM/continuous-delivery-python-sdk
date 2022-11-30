@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.0...v0.3.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* **tekton:** remove offset and patch defaults ([d14b33b](https://github.com/IBM/continuous-delivery-python-sdk/commit/d14b33b1b4e81d4b043b7635b9472e90aaf3b2b5))
+
 # [0.3.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.2.0...v0.3.0) (2022-11-23)
 
 
