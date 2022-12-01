@@ -20,4 +20,4 @@ from ibm_cloud_sdk_core import IAMTokenManager, DetailedResponse, BaseService, A
 from .common import get_sdk_headers
 from .version import __version__
 from .cd_tekton_pipeline_v2 import CdTektonPipelineV2
-# from .example_service_v1 import ExampleServiceV1
+from .cd_toolchain_v2 import CdToolchainV2
