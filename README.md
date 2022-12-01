@@ -25,15 +25,18 @@ The current minimum Python version supported is 3.7.
 
 <!-- toc -->
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Using the SDK](#using-the-sdk)
-- [Questions](#questions)
-- [Issues](#issues)
-- [Open source @ IBM](#open-source--ibm)
-- [Contributing](#contributing)
-- [License](#license)
+- [IBM Cloud Continuous Delivery Python SDK v0.3.0](#ibm-cloud-continuous-delivery-python-sdk-v030)
+- [Python Version](#python-version)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Using the SDK](#using-the-sdk)
+  - [Questions](#questions)
+  - [Issues](#issues)
+  - [Open source @ IBM](#open-source--ibm)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 <!-- tocstop -->
 
@@ -44,7 +47,8 @@ IBM Cloud services:
 
 Service Name | Module Name | Imported Class Name
 --- | --- | ---
-<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | example_service_v1 | ExampleServiceV1 -->
+[Toolchain API](https://cloud.ibm.com/apidocs/toolchain?code=go) | CdToolchainV2
+[Tekton Pipeline API](https://cloud.ibm.com/apidocs/tekton-pipeline?code=go) | CdTektonPipelineV2
 
 ## Prerequisites
 
