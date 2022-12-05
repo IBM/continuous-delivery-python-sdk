@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.2...v0.3.3) (2022-12-05)
+
+
+### Bug Fixes
+
+* **toolchain:** add missing toolchain import ([2a29268](https://github.com/IBM/continuous-delivery-python-sdk/commit/2a292683fb1f64fbcca18249e6e03b75855c88d4))
+
 ## [0.3.2](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.1...v0.3.2) (2022-12-02)
 
 
