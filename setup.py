@@ -19,7 +19,7 @@ import os
 import sys
 import pkg_resources
 
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 PACKAGE_NAME = 'ibm_continuous_delivery'
 PACKAGE_DESC = 'IBM Cloud Continuous Delivery Python SDK'
 
