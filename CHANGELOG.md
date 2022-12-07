@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.3...v0.3.4) (2022-12-07)
+
+
+### Bug Fixes
+
+* remove unused SDK files ([c1910d4](https://github.com/IBM/continuous-delivery-python-sdk/commit/c1910d4e9ba04754681dea0d2bef4fc2dd4c8916))
+
 ## [0.3.3](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.2...v0.3.3) (2022-12-05)
 
 
