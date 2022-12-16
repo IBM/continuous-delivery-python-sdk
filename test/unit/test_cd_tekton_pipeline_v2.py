@@ -125,7 +125,7 @@ class TestCreateTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -144,7 +144,7 @@ class TestCreateTektonPipeline():
 
         # Invoke method
         response = _service.create_tekton_pipeline(
-            id=id,
+            id,
             enable_notifications=enable_notifications,
             enable_partial_cloning=enable_partial_cloning,
             worker=worker,
@@ -171,35 +171,46 @@ class TestCreateTektonPipeline():
         self.test_create_tekton_pipeline_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_required_params(self):
+    def test_create_tekton_pipeline_value_error(self):
         """
-        test_create_tekton_pipeline_required_params()
+        test_create_tekton_pipeline_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
                       content_type='application/json',
                       status=201)
 
-        # Invoke method
-        response = _service.create_tekton_pipeline()
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {}
+        worker_identity_model['id'] = 'public'
 
+        # Set up parameter values
+        id = '94619026-912b-4d92-8f51-6c74f0692d90'
+        enable_notifications = False
+        enable_partial_cloning = False
+        worker = worker_identity_model
 
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "id": id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.create_tekton_pipeline(**req_copy)
 
-    def test_create_tekton_pipeline_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_required_params.
+    def test_create_tekton_pipeline_value_error_with_retries(self):
+        # Enable retries and run test_create_tekton_pipeline_value_error.
         _service.enable_retries()
-        self.test_create_tekton_pipeline_required_params()
+        self.test_create_tekton_pipeline_value_error()
 
-        # Disable retries and run test_create_tekton_pipeline_required_params.
+        # Disable retries and run test_create_tekton_pipeline_value_error.
         _service.disable_retries()
-        self.test_create_tekton_pipeline_required_params()
+        self.test_create_tekton_pipeline_value_error()
 
 class TestGetTektonPipeline():
     """
@@ -213,7 +224,7 @@ class TestGetTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -249,7 +260,7 @@ class TestGetTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -289,7 +300,7 @@ class TestUpdateTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -340,7 +351,7 @@ class TestUpdateTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -376,7 +387,7 @@ class TestUpdateTektonPipeline():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}], "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
+        mock_response = '{"name": "name", "status": "configured", "resource_group": {"id": "id"}, "toolchain": {"id": "id", "crn": "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"}, "id": "id", "definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}], "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "updated_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}], "worker": {"name": "name", "type": "type", "id": "id"}, "runs_url": "runs_url", "href": "href", "build_number": 1, "enable_notifications": true, "enable_partial_cloning": true, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -523,7 +534,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -574,7 +585,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -610,7 +621,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -645,8 +656,8 @@ class TestListTektonPipelineRuns():
         """
         # Set up a two-page mock response
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path","href":"href"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path","href":"href"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response1,
@@ -680,8 +691,8 @@ class TestListTektonPipelineRuns():
         """
         # Set up a two-page mock response
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path","href":"href"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path","href":"href"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response1,
@@ -717,7 +728,7 @@ class TestCreateTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -728,6 +739,7 @@ class TestCreateTektonPipelineRun():
         property_model = {}
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -743,7 +755,7 @@ class TestCreateTektonPipelineRun():
         # Invoke method
         response = _service.create_tekton_pipeline_run(
             pipeline_id,
-            trigger_name=trigger_name,
+            trigger_name,
             trigger_properties=trigger_properties,
             secure_trigger_properties=secure_trigger_properties,
             trigger_headers=trigger_headers,
@@ -772,61 +784,40 @@ class TestCreateTektonPipelineRun():
         self.test_create_tekton_pipeline_run_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_run_required_params(self):
-        """
-        test_create_tekton_pipeline_run_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-
-        # Invoke method
-        response = _service.create_tekton_pipeline_run(
-            pipeline_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_create_tekton_pipeline_run_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_run_required_params.
-        _service.enable_retries()
-        self.test_create_tekton_pipeline_run_required_params()
-
-        # Disable retries and run test_create_tekton_pipeline_run_required_params.
-        _service.disable_retries()
-        self.test_create_tekton_pipeline_run_required_params()
-
-    @responses.activate
     def test_create_tekton_pipeline_run_value_error(self):
         """
         test_create_tekton_pipeline_run_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
                       content_type='application/json',
                       status=201)
 
+        # Construct a dict representation of a Property model
+        property_model = {}
+        property_model['name'] = 'testString'
+        property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
+        property_model['enum'] = ['testString']
+        property_model['type'] = 'secure'
+        property_model['path'] = 'testString'
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
+        trigger_name = 'Generic Webhook Trigger - 0'
+        trigger_properties = [property_model]
+        secure_trigger_properties = [property_model]
+        trigger_headers = {'foo': 'bar'}
+        trigger_body = {'foo': 'bar'}
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
+            "trigger_name": trigger_name,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -854,7 +845,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -898,7 +889,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -936,7 +927,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1052,7 +1043,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1095,7 +1086,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1133,7 +1124,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1175,7 +1166,7 @@ class TestRerunTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/rerun')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1213,7 +1204,7 @@ class TestRerunTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/rerun')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1456,7 +1447,7 @@ class TestListTektonPipelineDefinitions():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions')
-        mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id", "href": "href"}]}'
+        mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1492,7 +1483,7 @@ class TestListTektonPipelineDefinitions():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions')
-        mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id", "href": "href"}]}'
+        mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1532,7 +1523,7 @@ class TestCreateTektonPipelineDefinition():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1563,7 +1554,7 @@ class TestCreateTektonPipelineDefinition():
         # Invoke method
         response = _service.create_tekton_pipeline_definition(
             pipeline_id,
-            source=source,
+            source,
             headers={}
         )
 
@@ -1584,61 +1575,44 @@ class TestCreateTektonPipelineDefinition():
         self.test_create_tekton_pipeline_definition_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_definition_required_params(self):
-        """
-        test_create_tekton_pipeline_definition_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-
-        # Invoke method
-        response = _service.create_tekton_pipeline_definition(
-            pipeline_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_create_tekton_pipeline_definition_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_definition_required_params.
-        _service.enable_retries()
-        self.test_create_tekton_pipeline_definition_required_params()
-
-        # Disable retries and run test_create_tekton_pipeline_definition_required_params.
-        _service.disable_retries()
-        self.test_create_tekton_pipeline_definition_required_params()
-
-    @responses.activate
     def test_create_tekton_pipeline_definition_value_error(self):
         """
         test_create_tekton_pipeline_definition_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
                       content_type='application/json',
                       status=201)
 
+        # Construct a dict representation of a DefinitionSourcePropertiesTool model
+        definition_source_properties_tool_model = {}
+        definition_source_properties_tool_model['id'] = 'testString'
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {}
+        definition_source_properties_model['url'] = 'https://github.com/open-toolchain/hello-tekton.git'
+        definition_source_properties_model['branch'] = 'master'
+        definition_source_properties_model['tag'] = 'testString'
+        definition_source_properties_model['path'] = '.tekton'
+        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {}
+        definition_source_model['type'] = 'git'
+        definition_source_model['properties'] = definition_source_properties_model
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
+        source = definition_source_model
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
+            "source": source,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -1666,7 +1640,7 @@ class TestGetTektonPipelineDefinition():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions/94299034-d45f-4e9a-8ed5-6bd5c7bb7ada')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1704,7 +1678,7 @@ class TestGetTektonPipelineDefinition():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions/94299034-d45f-4e9a-8ed5-6bd5c7bb7ada')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1746,7 +1720,7 @@ class TestReplaceTektonPipelineDefinition():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions/94299034-d45f-4e9a-8ed5-6bd5c7bb7ada')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -1779,7 +1753,7 @@ class TestReplaceTektonPipelineDefinition():
         response = _service.replace_tekton_pipeline_definition(
             pipeline_id,
             definition_id,
-            source=source,
+            source,
             headers={}
         )
 
@@ -1800,65 +1774,46 @@ class TestReplaceTektonPipelineDefinition():
         self.test_replace_tekton_pipeline_definition_all_params()
 
     @responses.activate
-    def test_replace_tekton_pipeline_definition_required_params(self):
-        """
-        test_replace_tekton_pipeline_definition_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions/94299034-d45f-4e9a-8ed5-6bd5c7bb7ada')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
-        responses.add(responses.PUT,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=200)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        definition_id = '94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
-
-        # Invoke method
-        response = _service.replace_tekton_pipeline_definition(
-            pipeline_id,
-            definition_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 200
-
-    def test_replace_tekton_pipeline_definition_required_params_with_retries(self):
-        # Enable retries and run test_replace_tekton_pipeline_definition_required_params.
-        _service.enable_retries()
-        self.test_replace_tekton_pipeline_definition_required_params()
-
-        # Disable retries and run test_replace_tekton_pipeline_definition_required_params.
-        _service.disable_retries()
-        self.test_replace_tekton_pipeline_definition_required_params()
-
-    @responses.activate
     def test_replace_tekton_pipeline_definition_value_error(self):
         """
         test_replace_tekton_pipeline_definition_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions/94299034-d45f-4e9a-8ed5-6bd5c7bb7ada')
-        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "id": "id"}'
+        mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
                       content_type='application/json',
                       status=200)
 
+        # Construct a dict representation of a DefinitionSourcePropertiesTool model
+        definition_source_properties_tool_model = {}
+        definition_source_properties_tool_model['id'] = 'testString'
+
+        # Construct a dict representation of a DefinitionSourceProperties model
+        definition_source_properties_model = {}
+        definition_source_properties_model['url'] = 'testString'
+        definition_source_properties_model['branch'] = 'testString'
+        definition_source_properties_model['tag'] = 'testString'
+        definition_source_properties_model['path'] = 'testString'
+        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+
+        # Construct a dict representation of a DefinitionSource model
+        definition_source_model = {}
+        definition_source_model['type'] = 'testString'
+        definition_source_model['properties'] = definition_source_properties_model
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         definition_id = '94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
+        source = definition_source_model
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
             "definition_id": definition_id,
+            "source": source,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -1997,7 +1952,7 @@ class TestListTektonPipelineProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2045,7 +2000,7 @@ class TestListTektonPipelineProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2081,7 +2036,7 @@ class TestListTektonPipelineProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2121,7 +2076,7 @@ class TestCreateTektonPipelineProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -2139,8 +2094,8 @@ class TestCreateTektonPipelineProperties():
         # Invoke method
         response = _service.create_tekton_pipeline_properties(
             pipeline_id,
-            name=name,
-            type=type,
+            name,
+            type,
             value=value,
             enum=enum,
             path=path,
@@ -2168,49 +2123,13 @@ class TestCreateTektonPipelineProperties():
         self.test_create_tekton_pipeline_properties_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_properties_required_params(self):
-        """
-        test_create_tekton_pipeline_properties_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-
-        # Invoke method
-        response = _service.create_tekton_pipeline_properties(
-            pipeline_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_create_tekton_pipeline_properties_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_properties_required_params.
-        _service.enable_retries()
-        self.test_create_tekton_pipeline_properties_required_params()
-
-        # Disable retries and run test_create_tekton_pipeline_properties_required_params.
-        _service.disable_retries()
-        self.test_create_tekton_pipeline_properties_required_params()
-
-    @responses.activate
     def test_create_tekton_pipeline_properties_value_error(self):
         """
         test_create_tekton_pipeline_properties_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -2219,10 +2138,17 @@ class TestCreateTektonPipelineProperties():
 
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
+        name = 'prop1'
+        type = 'text'
+        value = 'https://github.com/open-toolchain/hello-tekton.git'
+        enum = ['testString']
+        path = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
+            "name": name,
+            "type": type,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -2250,7 +2176,7 @@ class TestGetTektonPipelineProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2288,7 +2214,7 @@ class TestGetTektonPipelineProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2330,7 +2256,7 @@ class TestReplaceTektonPipelineProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -2350,8 +2276,8 @@ class TestReplaceTektonPipelineProperty():
         response = _service.replace_tekton_pipeline_property(
             pipeline_id,
             property_name,
-            name=name,
-            type=type,
+            name,
+            type,
             value=value,
             enum=enum,
             path=path,
@@ -2379,51 +2305,13 @@ class TestReplaceTektonPipelineProperty():
         self.test_replace_tekton_pipeline_property_all_params()
 
     @responses.activate
-    def test_replace_tekton_pipeline_property_required_params(self):
-        """
-        test_replace_tekton_pipeline_property_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
-        responses.add(responses.PUT,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=200)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        property_name = 'debug-pipeline'
-
-        # Invoke method
-        response = _service.replace_tekton_pipeline_property(
-            pipeline_id,
-            property_name,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 200
-
-    def test_replace_tekton_pipeline_property_required_params_with_retries(self):
-        # Enable retries and run test_replace_tekton_pipeline_property_required_params.
-        _service.enable_retries()
-        self.test_replace_tekton_pipeline_property_required_params()
-
-        # Disable retries and run test_replace_tekton_pipeline_property_required_params.
-        _service.disable_retries()
-        self.test_replace_tekton_pipeline_property_required_params()
-
-    @responses.activate
     def test_replace_tekton_pipeline_property_value_error(self):
         """
         test_replace_tekton_pipeline_property_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -2433,11 +2321,18 @@ class TestReplaceTektonPipelineProperty():
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         property_name = 'debug-pipeline'
+        name = 'prop1'
+        type = 'text'
+        value = 'https://github.com/open-toolchain/hello-tekton.git'
+        enum = ['testString']
+        path = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
             "property_name": property_name,
+            "name": name,
+            "type": type,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -2576,7 +2471,7 @@ class TestListTektonPipelineTriggers():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
+        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2636,7 +2531,7 @@ class TestListTektonPipelineTriggers():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
+        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2672,7 +2567,7 @@ class TestListTektonPipelineTriggers():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
+        mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2712,7 +2607,7 @@ class TestCreateTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -2733,49 +2628,42 @@ class TestCreateTektonPipelineTrigger():
         generic_secret_model['key_name'] = 'testString'
         generic_secret_model['algorithm'] = 'md4'
 
-        # Construct a dict representation of a TriggerSourcePropertiesTool model
-        trigger_source_properties_tool_model = {}
-        trigger_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {}
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
 
-        # Construct a dict representation of a TriggerSourceProperties model
-        trigger_source_properties_model = {}
-        trigger_source_properties_model['url'] = 'testString'
-        trigger_source_properties_model['branch'] = 'testString'
-        trigger_source_properties_model['pattern'] = 'testString'
-        trigger_source_properties_model['blind_connection'] = True
-        trigger_source_properties_model['hook_id'] = 'testString'
-        trigger_source_properties_model['tool'] = trigger_source_properties_tool_model
-
-        # Construct a dict representation of a TriggerSource model
-        trigger_source_model = {}
-        trigger_source_model['type'] = 'testString'
-        trigger_source_model['properties'] = trigger_source_properties_model
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {}
+        trigger_source_prototype_model['type'] = 'testString'
+        trigger_source_prototype_model['properties'] = trigger_source_properties_prototype_model
 
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         type = 'manual'
         name = 'Manual Trigger'
         event_listener = 'pr-listener'
-        enabled = True
         tags = ['testString']
         worker = worker_model
         max_concurrent_runs = 3
+        enabled = True
         secret = generic_secret_model
         cron = 'testString'
         timezone = 'testString'
-        source = trigger_source_model
+        source = trigger_source_prototype_model
         events = ['push']
 
         # Invoke method
         response = _service.create_tekton_pipeline_trigger(
             pipeline_id,
-            type=type,
-            name=name,
-            event_listener=event_listener,
-            enabled=enabled,
+            type,
+            name,
+            event_listener,
             tags=tags,
             worker=worker,
             max_concurrent_runs=max_concurrent_runs,
+            enabled=enabled,
             secret=secret,
             cron=cron,
             timezone=timezone,
@@ -2792,14 +2680,14 @@ class TestCreateTektonPipelineTrigger():
         assert req_body['type'] == 'manual'
         assert req_body['name'] == 'Manual Trigger'
         assert req_body['event_listener'] == 'pr-listener'
-        assert req_body['enabled'] == True
         assert req_body['tags'] == ['testString']
         assert req_body['worker'] == worker_model
         assert req_body['max_concurrent_runs'] == 3
+        assert req_body['enabled'] == True
         assert req_body['secret'] == generic_secret_model
         assert req_body['cron'] == 'testString'
         assert req_body['timezone'] == 'testString'
-        assert req_body['source'] == trigger_source_model
+        assert req_body['source'] == trigger_source_prototype_model
         assert req_body['events'] == ['push']
 
     def test_create_tekton_pipeline_trigger_all_params_with_retries(self):
@@ -2812,61 +2700,65 @@ class TestCreateTektonPipelineTrigger():
         self.test_create_tekton_pipeline_trigger_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_trigger_required_params(self):
-        """
-        test_create_tekton_pipeline_trigger_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-
-        # Invoke method
-        response = _service.create_tekton_pipeline_trigger(
-            pipeline_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_create_tekton_pipeline_trigger_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_trigger_required_params.
-        _service.enable_retries()
-        self.test_create_tekton_pipeline_trigger_required_params()
-
-        # Disable retries and run test_create_tekton_pipeline_trigger_required_params.
-        _service.disable_retries()
-        self.test_create_tekton_pipeline_trigger_required_params()
-
-    @responses.activate
     def test_create_tekton_pipeline_trigger_value_error(self):
         """
         test_create_tekton_pipeline_trigger_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
                       content_type='application/json',
                       status=201)
 
+        # Construct a dict representation of a Worker model
+        worker_model = {}
+        worker_model['name'] = 'testString'
+        worker_model['type'] = 'testString'
+        worker_model['id'] = 'public'
+
+        # Construct a dict representation of a GenericSecret model
+        generic_secret_model = {}
+        generic_secret_model['type'] = 'token_matches'
+        generic_secret_model['value'] = 'testString'
+        generic_secret_model['source'] = 'header'
+        generic_secret_model['key_name'] = 'testString'
+        generic_secret_model['algorithm'] = 'md4'
+
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {}
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
+
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {}
+        trigger_source_prototype_model['type'] = 'testString'
+        trigger_source_prototype_model['properties'] = trigger_source_properties_prototype_model
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
+        type = 'manual'
+        name = 'Manual Trigger'
+        event_listener = 'pr-listener'
+        tags = ['testString']
+        worker = worker_model
+        max_concurrent_runs = 3
+        enabled = True
+        secret = generic_secret_model
+        cron = 'testString'
+        timezone = 'testString'
+        source = trigger_source_prototype_model
+        events = ['push']
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
+            "type": type,
+            "name": name,
+            "event_listener": event_listener,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -2894,7 +2786,7 @@ class TestGetTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2932,7 +2824,7 @@ class TestGetTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -2974,7 +2866,7 @@ class TestUpdateTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -2995,23 +2887,16 @@ class TestUpdateTektonPipelineTrigger():
         generic_secret_model['key_name'] = 'testString'
         generic_secret_model['algorithm'] = 'md4'
 
-        # Construct a dict representation of a TriggerSourcePropertiesTool model
-        trigger_source_properties_tool_model = {}
-        trigger_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {}
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
 
-        # Construct a dict representation of a TriggerSourceProperties model
-        trigger_source_properties_model = {}
-        trigger_source_properties_model['url'] = 'testString'
-        trigger_source_properties_model['branch'] = 'testString'
-        trigger_source_properties_model['pattern'] = 'testString'
-        trigger_source_properties_model['blind_connection'] = True
-        trigger_source_properties_model['hook_id'] = 'testString'
-        trigger_source_properties_model['tool'] = trigger_source_properties_tool_model
-
-        # Construct a dict representation of a TriggerSource model
-        trigger_source_model = {}
-        trigger_source_model['type'] = 'testString'
-        trigger_source_model['properties'] = trigger_source_properties_model
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {}
+        trigger_source_prototype_model['type'] = 'testString'
+        trigger_source_prototype_model['properties'] = trigger_source_properties_prototype_model
 
         # Construct a dict representation of a TriggerPatch model
         trigger_patch_model = {}
@@ -3025,7 +2910,7 @@ class TestUpdateTektonPipelineTrigger():
         trigger_patch_model['secret'] = generic_secret_model
         trigger_patch_model['cron'] = 'testString'
         trigger_patch_model['timezone'] = 'America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC'
-        trigger_patch_model['source'] = trigger_source_model
+        trigger_patch_model['source'] = trigger_source_prototype_model
         trigger_patch_model['events'] = ['push', 'pull_request']
 
         # Set up parameter values
@@ -3064,7 +2949,7 @@ class TestUpdateTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -3102,7 +2987,7 @@ class TestUpdateTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.PATCH,
                       url,
                       body=mock_response,
@@ -3218,7 +3103,7 @@ class TestDuplicateTektonPipelineTrigger():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/duplicate')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -3234,7 +3119,7 @@ class TestDuplicateTektonPipelineTrigger():
         response = _service.duplicate_tekton_pipeline_trigger(
             pipeline_id,
             source_trigger_id,
-            name=name,
+            name,
             headers={}
         )
 
@@ -3255,51 +3140,13 @@ class TestDuplicateTektonPipelineTrigger():
         self.test_duplicate_tekton_pipeline_trigger_all_params()
 
     @responses.activate
-    def test_duplicate_tekton_pipeline_trigger_required_params(self):
-        """
-        test_duplicate_tekton_pipeline_trigger_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/duplicate')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        source_trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
-
-        # Invoke method
-        response = _service.duplicate_tekton_pipeline_trigger(
-            pipeline_id,
-            source_trigger_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_duplicate_tekton_pipeline_trigger_required_params_with_retries(self):
-        # Enable retries and run test_duplicate_tekton_pipeline_trigger_required_params.
-        _service.enable_retries()
-        self.test_duplicate_tekton_pipeline_trigger_required_params()
-
-        # Disable retries and run test_duplicate_tekton_pipeline_trigger_required_params.
-        _service.disable_retries()
-        self.test_duplicate_tekton_pipeline_trigger_required_params()
-
-    @responses.activate
     def test_duplicate_tekton_pipeline_trigger_value_error(self):
         """
         test_duplicate_tekton_pipeline_trigger_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/duplicate')
-        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
+        mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -3309,11 +3156,13 @@ class TestDuplicateTektonPipelineTrigger():
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         source_trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
+        name = 'triggerName'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
             "source_trigger_id": source_trigger_id,
+            "name": name,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -3378,7 +3227,7 @@ class TestListTektonPipelineTriggerProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -3428,7 +3277,7 @@ class TestListTektonPipelineTriggerProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -3466,7 +3315,7 @@ class TestListTektonPipelineTriggerProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"properties": [{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path", "href": "href"}]}'
+        mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -3508,7 +3357,7 @@ class TestCreateTektonPipelineTriggerProperties():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -3528,8 +3377,8 @@ class TestCreateTektonPipelineTriggerProperties():
         response = _service.create_tekton_pipeline_trigger_properties(
             pipeline_id,
             trigger_id,
-            name=name,
-            type=type,
+            name,
+            type,
             value=value,
             enum=enum,
             path=path,
@@ -3557,51 +3406,13 @@ class TestCreateTektonPipelineTriggerProperties():
         self.test_create_tekton_pipeline_trigger_properties_all_params()
 
     @responses.activate
-    def test_create_tekton_pipeline_trigger_properties_required_params(self):
-        """
-        test_create_tekton_pipeline_trigger_properties_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
-        responses.add(responses.POST,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=201)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
-
-        # Invoke method
-        response = _service.create_tekton_pipeline_trigger_properties(
-            pipeline_id,
-            trigger_id,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 201
-
-    def test_create_tekton_pipeline_trigger_properties_required_params_with_retries(self):
-        # Enable retries and run test_create_tekton_pipeline_trigger_properties_required_params.
-        _service.enable_retries()
-        self.test_create_tekton_pipeline_trigger_properties_required_params()
-
-        # Disable retries and run test_create_tekton_pipeline_trigger_properties_required_params.
-        _service.disable_retries()
-        self.test_create_tekton_pipeline_trigger_properties_required_params()
-
-    @responses.activate
     def test_create_tekton_pipeline_trigger_properties_value_error(self):
         """
         test_create_tekton_pipeline_trigger_properties_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -3611,11 +3422,18 @@ class TestCreateTektonPipelineTriggerProperties():
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
+        name = 'prop1'
+        type = 'text'
+        value = 'https://github.com/open-toolchain/hello-tekton.git'
+        enum = ['testString']
+        path = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
             "trigger_id": trigger_id,
+            "name": name,
+            "type": type,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -3643,7 +3461,7 @@ class TestGetTektonPipelineTriggerProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -3683,7 +3501,7 @@ class TestGetTektonPipelineTriggerProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -3727,7 +3545,7 @@ class TestReplaceTektonPipelineTriggerProperty():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -3749,8 +3567,8 @@ class TestReplaceTektonPipelineTriggerProperty():
             pipeline_id,
             trigger_id,
             property_name,
-            name=name,
-            type=type,
+            name,
+            type,
             value=value,
             enum=enum,
             path=path,
@@ -3778,53 +3596,13 @@ class TestReplaceTektonPipelineTriggerProperty():
         self.test_replace_tekton_pipeline_trigger_property_all_params()
 
     @responses.activate
-    def test_replace_tekton_pipeline_trigger_property_required_params(self):
-        """
-        test_replace_tekton_pipeline_trigger_property_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
-        responses.add(responses.PUT,
-                      url,
-                      body=mock_response,
-                      content_type='application/json',
-                      status=200)
-
-        # Set up parameter values
-        pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
-        property_name = 'debug-pipeline'
-
-        # Invoke method
-        response = _service.replace_tekton_pipeline_trigger_property(
-            pipeline_id,
-            trigger_id,
-            property_name,
-            headers={}
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 200
-
-    def test_replace_tekton_pipeline_trigger_property_required_params_with_retries(self):
-        # Enable retries and run test_replace_tekton_pipeline_trigger_property_required_params.
-        _service.enable_retries()
-        self.test_replace_tekton_pipeline_trigger_property_required_params()
-
-        # Disable retries and run test_replace_tekton_pipeline_trigger_property_required_params.
-        _service.disable_retries()
-        self.test_replace_tekton_pipeline_trigger_property_required_params()
-
-    @responses.activate
     def test_replace_tekton_pipeline_trigger_property_value_error(self):
         """
         test_replace_tekton_pipeline_trigger_property_value_error()
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers/1bb892a1-2e04-4768-a369-b1159eace147/properties/debug-pipeline')
-        mock_response = '{"name": "name", "value": "value", "enum": ["enum"], "type": "secure", "path": "path"}'
+        mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}'
         responses.add(responses.PUT,
                       url,
                       body=mock_response,
@@ -3835,12 +3613,19 @@ class TestReplaceTektonPipelineTriggerProperty():
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         trigger_id = '1bb892a1-2e04-4768-a369-b1159eace147'
         property_name = 'debug-pipeline'
+        name = 'prop1'
+        type = 'text'
+        value = 'https://github.com/open-toolchain/hello-tekton.git'
+        enum = ['testString']
+        path = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
             "trigger_id": trigger_id,
             "property_name": property_name,
+            "name": name,
+            "type": type,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -3973,6 +3758,7 @@ class TestModel_Definition():
         # Construct a json representation of a Definition model
         definition_model_json = {}
         definition_model_json['source'] = definition_source_model
+        definition_model_json['href'] = 'testString'
         definition_model_json['id'] = 'testString'
 
         # Construct a model instance of Definition by calling from_dict on the json representation
@@ -4127,8 +3913,8 @@ class TestModel_DefinitionsCollection():
 
         definitions_collection_definitions_item_model = {} # DefinitionsCollectionDefinitionsItem
         definitions_collection_definitions_item_model['source'] = definition_source_model
-        definitions_collection_definitions_item_model['id'] = 'testString'
         definitions_collection_definitions_item_model['href'] = 'testString'
+        definitions_collection_definitions_item_model['id'] = 'testString'
 
         # Construct a json representation of a DefinitionsCollection model
         definitions_collection_model_json = {}
@@ -4178,8 +3964,8 @@ class TestModel_DefinitionsCollectionDefinitionsItem():
         # Construct a json representation of a DefinitionsCollectionDefinitionsItem model
         definitions_collection_definitions_item_model_json = {}
         definitions_collection_definitions_item_model_json['source'] = definition_source_model
-        definitions_collection_definitions_item_model_json['id'] = 'testString'
         definitions_collection_definitions_item_model_json['href'] = 'testString'
+        definitions_collection_definitions_item_model_json['id'] = 'testString'
 
         # Construct a model instance of DefinitionsCollectionDefinitionsItem by calling from_dict on the json representation
         definitions_collection_definitions_item_model = DefinitionsCollectionDefinitionsItem.from_dict(definitions_collection_definitions_item_model_json)
@@ -4312,19 +4098,25 @@ class TestModel_PipelineRun():
         user_info_model['iam_id'] = 'testString'
         user_info_model['sub'] = 'testString'
 
+        pipeline_run_definition_model = {} # PipelineRunDefinition
+        pipeline_run_definition_model['id'] = 'testString'
+
         pipeline_run_worker_model = {} # PipelineRunWorker
         pipeline_run_worker_model['name'] = 'testString'
         pipeline_run_worker_model['agent_id'] = 'testString'
         pipeline_run_worker_model['service_id'] = 'testString'
         pipeline_run_worker_model['id'] = 'testString'
 
+        pipeline_run_pipeline_model = {} # PipelineRunPipeline
+        pipeline_run_pipeline_model['id'] = 'testString'
+
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4346,6 +4138,7 @@ class TestModel_PipelineRun():
         property_model = {} # Property
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -4356,8 +4149,10 @@ class TestModel_PipelineRun():
         pipeline_run_model_json['user_info'] = user_info_model
         pipeline_run_model_json['status'] = 'pending'
         pipeline_run_model_json['definition_id'] = 'testString'
+        pipeline_run_model_json['definition'] = pipeline_run_definition_model
         pipeline_run_model_json['worker'] = pipeline_run_worker_model
         pipeline_run_model_json['pipeline_id'] = 'testString'
+        pipeline_run_model_json['pipeline'] = pipeline_run_pipeline_model
         pipeline_run_model_json['listener_name'] = 'testString'
         pipeline_run_model_json['trigger'] = trigger_model
         pipeline_run_model_json['event_params_blob'] = 'testString'
@@ -4381,6 +4176,64 @@ class TestModel_PipelineRun():
         # Convert model instance back to dict and verify no loss of data
         pipeline_run_model_json2 = pipeline_run_model.to_dict()
         assert pipeline_run_model_json2 == pipeline_run_model_json
+
+class TestModel_PipelineRunDefinition():
+    """
+    Test Class for PipelineRunDefinition
+    """
+
+    def test_pipeline_run_definition_serialization(self):
+        """
+        Test serialization/deserialization for PipelineRunDefinition
+        """
+
+        # Construct a json representation of a PipelineRunDefinition model
+        pipeline_run_definition_model_json = {}
+        pipeline_run_definition_model_json['id'] = 'testString'
+
+        # Construct a model instance of PipelineRunDefinition by calling from_dict on the json representation
+        pipeline_run_definition_model = PipelineRunDefinition.from_dict(pipeline_run_definition_model_json)
+        assert pipeline_run_definition_model != False
+
+        # Construct a model instance of PipelineRunDefinition by calling from_dict on the json representation
+        pipeline_run_definition_model_dict = PipelineRunDefinition.from_dict(pipeline_run_definition_model_json).__dict__
+        pipeline_run_definition_model2 = PipelineRunDefinition(**pipeline_run_definition_model_dict)
+
+        # Verify the model instances are equivalent
+        assert pipeline_run_definition_model == pipeline_run_definition_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        pipeline_run_definition_model_json2 = pipeline_run_definition_model.to_dict()
+        assert pipeline_run_definition_model_json2 == pipeline_run_definition_model_json
+
+class TestModel_PipelineRunPipeline():
+    """
+    Test Class for PipelineRunPipeline
+    """
+
+    def test_pipeline_run_pipeline_serialization(self):
+        """
+        Test serialization/deserialization for PipelineRunPipeline
+        """
+
+        # Construct a json representation of a PipelineRunPipeline model
+        pipeline_run_pipeline_model_json = {}
+        pipeline_run_pipeline_model_json['id'] = 'testString'
+
+        # Construct a model instance of PipelineRunPipeline by calling from_dict on the json representation
+        pipeline_run_pipeline_model = PipelineRunPipeline.from_dict(pipeline_run_pipeline_model_json)
+        assert pipeline_run_pipeline_model != False
+
+        # Construct a model instance of PipelineRunPipeline by calling from_dict on the json representation
+        pipeline_run_pipeline_model_dict = PipelineRunPipeline.from_dict(pipeline_run_pipeline_model_json).__dict__
+        pipeline_run_pipeline_model2 = PipelineRunPipeline(**pipeline_run_pipeline_model_dict)
+
+        # Verify the model instances are equivalent
+        assert pipeline_run_pipeline_model == pipeline_run_pipeline_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        pipeline_run_pipeline_model_json2 = pipeline_run_pipeline_model.to_dict()
+        assert pipeline_run_pipeline_model_json2 == pipeline_run_pipeline_model_json
 
 class TestModel_PipelineRunWorker():
     """
@@ -4430,19 +4283,25 @@ class TestModel_PipelineRunsCollection():
         user_info_model['iam_id'] = 'testString'
         user_info_model['sub'] = 'testString'
 
+        pipeline_run_definition_model = {} # PipelineRunDefinition
+        pipeline_run_definition_model['id'] = 'testString'
+
         pipeline_run_worker_model = {} # PipelineRunWorker
         pipeline_run_worker_model['name'] = 'testString'
         pipeline_run_worker_model['agent_id'] = 'testString'
         pipeline_run_worker_model['service_id'] = 'testString'
         pipeline_run_worker_model['id'] = 'testString'
 
+        pipeline_run_pipeline_model = {} # PipelineRunPipeline
+        pipeline_run_pipeline_model['id'] = 'testString'
+
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4464,6 +4323,7 @@ class TestModel_PipelineRunsCollection():
         property_model = {} # Property
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -4473,8 +4333,10 @@ class TestModel_PipelineRunsCollection():
         pipeline_runs_collection_pipeline_runs_item_model['user_info'] = user_info_model
         pipeline_runs_collection_pipeline_runs_item_model['status'] = 'pending'
         pipeline_runs_collection_pipeline_runs_item_model['definition_id'] = 'testString'
+        pipeline_runs_collection_pipeline_runs_item_model['definition'] = pipeline_run_definition_model
         pipeline_runs_collection_pipeline_runs_item_model['worker'] = pipeline_run_worker_model
         pipeline_runs_collection_pipeline_runs_item_model['pipeline_id'] = 'testString'
+        pipeline_runs_collection_pipeline_runs_item_model['pipeline'] = pipeline_run_pipeline_model
         pipeline_runs_collection_pipeline_runs_item_model['listener_name'] = 'testString'
         pipeline_runs_collection_pipeline_runs_item_model['trigger'] = trigger_model
         pipeline_runs_collection_pipeline_runs_item_model['event_params_blob'] = 'testString'
@@ -4620,19 +4482,25 @@ class TestModel_PipelineRunsCollectionPipelineRunsItem():
         user_info_model['iam_id'] = 'testString'
         user_info_model['sub'] = 'testString'
 
+        pipeline_run_definition_model = {} # PipelineRunDefinition
+        pipeline_run_definition_model['id'] = 'testString'
+
         pipeline_run_worker_model = {} # PipelineRunWorker
         pipeline_run_worker_model['name'] = 'testString'
         pipeline_run_worker_model['agent_id'] = 'testString'
         pipeline_run_worker_model['service_id'] = 'testString'
         pipeline_run_worker_model['id'] = 'testString'
 
+        pipeline_run_pipeline_model = {} # PipelineRunPipeline
+        pipeline_run_pipeline_model['id'] = 'testString'
+
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4654,6 +4522,7 @@ class TestModel_PipelineRunsCollectionPipelineRunsItem():
         property_model = {} # Property
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -4664,8 +4533,10 @@ class TestModel_PipelineRunsCollectionPipelineRunsItem():
         pipeline_runs_collection_pipeline_runs_item_model_json['user_info'] = user_info_model
         pipeline_runs_collection_pipeline_runs_item_model_json['status'] = 'pending'
         pipeline_runs_collection_pipeline_runs_item_model_json['definition_id'] = 'testString'
+        pipeline_runs_collection_pipeline_runs_item_model_json['definition'] = pipeline_run_definition_model
         pipeline_runs_collection_pipeline_runs_item_model_json['worker'] = pipeline_run_worker_model
         pipeline_runs_collection_pipeline_runs_item_model_json['pipeline_id'] = 'testString'
+        pipeline_runs_collection_pipeline_runs_item_model_json['pipeline'] = pipeline_run_pipeline_model
         pipeline_runs_collection_pipeline_runs_item_model_json['listener_name'] = 'testString'
         pipeline_runs_collection_pipeline_runs_item_model_json['trigger'] = trigger_model
         pipeline_runs_collection_pipeline_runs_item_model_json['event_params_blob'] = 'testString'
@@ -4706,6 +4577,7 @@ class TestModel_PropertiesCollection():
         property_model = {} # Property
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -4743,6 +4615,7 @@ class TestModel_Property():
         property_model_json = {}
         property_model_json['name'] = 'testString'
         property_model_json['value'] = 'testString'
+        property_model_json['href'] = 'testString'
         property_model_json['enum'] = ['testString']
         property_model_json['type'] = 'secure'
         property_model_json['path'] = 'testString'
@@ -4827,11 +4700,13 @@ class TestModel_TektonPipeline():
 
         definition_model = {} # Definition
         definition_model['source'] = definition_source_model
+        definition_model['href'] = 'testString'
         definition_model['id'] = 'testString'
 
         property_model = {} # Property
         property_model['name'] = 'testString'
         property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
         property_model['enum'] = ['testString']
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
@@ -4839,10 +4714,10 @@ class TestModel_TektonPipeline():
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4875,6 +4750,7 @@ class TestModel_TektonPipeline():
         tekton_pipeline_model_json['triggers'] = [trigger_model]
         tekton_pipeline_model_json['worker'] = worker_model
         tekton_pipeline_model_json['runs_url'] = 'testString'
+        tekton_pipeline_model_json['href'] = 'testString'
         tekton_pipeline_model_json['build_number'] = 1
         tekton_pipeline_model_json['enable_notifications'] = True
         tekton_pipeline_model_json['enable_partial_cloning'] = True
@@ -5004,10 +4880,10 @@ class TestModel_TriggerGenericTriggerPropertiesItem():
         trigger_generic_trigger_properties_item_model_json = {}
         trigger_generic_trigger_properties_item_model_json['name'] = 'testString'
         trigger_generic_trigger_properties_item_model_json['value'] = 'testString'
+        trigger_generic_trigger_properties_item_model_json['href'] = 'testString'
         trigger_generic_trigger_properties_item_model_json['enum'] = ['testString']
         trigger_generic_trigger_properties_item_model_json['type'] = 'secure'
         trigger_generic_trigger_properties_item_model_json['path'] = 'testString'
-        trigger_generic_trigger_properties_item_model_json['href'] = 'testString'
 
         # Construct a model instance of TriggerGenericTriggerPropertiesItem by calling from_dict on the json representation
         trigger_generic_trigger_properties_item_model = TriggerGenericTriggerPropertiesItem.from_dict(trigger_generic_trigger_properties_item_model_json)
@@ -5038,10 +4914,10 @@ class TestModel_TriggerManualTriggerPropertiesItem():
         trigger_manual_trigger_properties_item_model_json = {}
         trigger_manual_trigger_properties_item_model_json['name'] = 'testString'
         trigger_manual_trigger_properties_item_model_json['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model_json['href'] = 'testString'
         trigger_manual_trigger_properties_item_model_json['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model_json['type'] = 'secure'
         trigger_manual_trigger_properties_item_model_json['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model_json['href'] = 'testString'
 
         # Construct a model instance of TriggerManualTriggerPropertiesItem by calling from_dict on the json representation
         trigger_manual_trigger_properties_item_model = TriggerManualTriggerPropertiesItem.from_dict(trigger_manual_trigger_properties_item_model_json)
@@ -5082,20 +4958,14 @@ class TestModel_TriggerPatch():
         generic_secret_model['key_name'] = 'testString'
         generic_secret_model['algorithm'] = 'md4'
 
-        trigger_source_properties_tool_model = {} # TriggerSourcePropertiesTool
-        trigger_source_properties_tool_model['id'] = 'testString'
+        trigger_source_properties_prototype_model = {} # TriggerSourcePropertiesPrototype
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
 
-        trigger_source_properties_model = {} # TriggerSourceProperties
-        trigger_source_properties_model['url'] = 'testString'
-        trigger_source_properties_model['branch'] = 'testString'
-        trigger_source_properties_model['pattern'] = 'testString'
-        trigger_source_properties_model['blind_connection'] = True
-        trigger_source_properties_model['hook_id'] = 'testString'
-        trigger_source_properties_model['tool'] = trigger_source_properties_tool_model
-
-        trigger_source_model = {} # TriggerSource
-        trigger_source_model['type'] = 'testString'
-        trigger_source_model['properties'] = trigger_source_properties_model
+        trigger_source_prototype_model = {} # TriggerSourcePrototype
+        trigger_source_prototype_model['type'] = 'testString'
+        trigger_source_prototype_model['properties'] = trigger_source_properties_prototype_model
 
         # Construct a json representation of a TriggerPatch model
         trigger_patch_model_json = {}
@@ -5109,7 +4979,7 @@ class TestModel_TriggerPatch():
         trigger_patch_model_json['secret'] = generic_secret_model
         trigger_patch_model_json['cron'] = 'testString'
         trigger_patch_model_json['timezone'] = 'America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC'
-        trigger_patch_model_json['source'] = trigger_source_model
+        trigger_patch_model_json['source'] = trigger_source_prototype_model
         trigger_patch_model_json['events'] = ['push', 'pull_request']
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
@@ -5142,10 +5012,10 @@ class TestModel_TriggerPropertiesCollection():
         trigger_properties_collection_properties_item_model = {} # TriggerPropertiesCollectionPropertiesItem
         trigger_properties_collection_properties_item_model['name'] = 'testString'
         trigger_properties_collection_properties_item_model['value'] = 'testString'
+        trigger_properties_collection_properties_item_model['href'] = 'testString'
         trigger_properties_collection_properties_item_model['enum'] = ['testString']
         trigger_properties_collection_properties_item_model['type'] = 'secure'
         trigger_properties_collection_properties_item_model['path'] = 'testString'
-        trigger_properties_collection_properties_item_model['href'] = 'testString'
 
         # Construct a json representation of a TriggerPropertiesCollection model
         trigger_properties_collection_model_json = {}
@@ -5180,10 +5050,10 @@ class TestModel_TriggerPropertiesCollectionPropertiesItem():
         trigger_properties_collection_properties_item_model_json = {}
         trigger_properties_collection_properties_item_model_json['name'] = 'testString'
         trigger_properties_collection_properties_item_model_json['value'] = 'testString'
+        trigger_properties_collection_properties_item_model_json['href'] = 'testString'
         trigger_properties_collection_properties_item_model_json['enum'] = ['testString']
         trigger_properties_collection_properties_item_model_json['type'] = 'secure'
         trigger_properties_collection_properties_item_model_json['path'] = 'testString'
-        trigger_properties_collection_properties_item_model_json['href'] = 'testString'
 
         # Construct a model instance of TriggerPropertiesCollectionPropertiesItem by calling from_dict on the json representation
         trigger_properties_collection_properties_item_model = TriggerPropertiesCollectionPropertiesItem.from_dict(trigger_properties_collection_properties_item_model_json)
@@ -5214,6 +5084,7 @@ class TestModel_TriggerProperty():
         trigger_property_model_json = {}
         trigger_property_model_json['name'] = 'testString'
         trigger_property_model_json['value'] = 'testString'
+        trigger_property_model_json['href'] = 'testString'
         trigger_property_model_json['enum'] = ['testString']
         trigger_property_model_json['type'] = 'secure'
         trigger_property_model_json['path'] = 'testString'
@@ -5247,10 +5118,10 @@ class TestModel_TriggerScmTriggerPropertiesItem():
         trigger_scm_trigger_properties_item_model_json = {}
         trigger_scm_trigger_properties_item_model_json['name'] = 'testString'
         trigger_scm_trigger_properties_item_model_json['value'] = 'testString'
+        trigger_scm_trigger_properties_item_model_json['href'] = 'testString'
         trigger_scm_trigger_properties_item_model_json['enum'] = ['testString']
         trigger_scm_trigger_properties_item_model_json['type'] = 'secure'
         trigger_scm_trigger_properties_item_model_json['path'] = 'testString'
-        trigger_scm_trigger_properties_item_model_json['href'] = 'testString'
 
         # Construct a model instance of TriggerScmTriggerPropertiesItem by calling from_dict on the json representation
         trigger_scm_trigger_properties_item_model = TriggerScmTriggerPropertiesItem.from_dict(trigger_scm_trigger_properties_item_model_json)
@@ -5349,6 +5220,37 @@ class TestModel_TriggerSourceProperties():
         trigger_source_properties_model_json2 = trigger_source_properties_model.to_dict()
         assert trigger_source_properties_model_json2 == trigger_source_properties_model_json
 
+class TestModel_TriggerSourcePropertiesPrototype():
+    """
+    Test Class for TriggerSourcePropertiesPrototype
+    """
+
+    def test_trigger_source_properties_prototype_serialization(self):
+        """
+        Test serialization/deserialization for TriggerSourcePropertiesPrototype
+        """
+
+        # Construct a json representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model_json = {}
+        trigger_source_properties_prototype_model_json['url'] = 'testString'
+        trigger_source_properties_prototype_model_json['branch'] = 'testString'
+        trigger_source_properties_prototype_model_json['pattern'] = 'testString'
+
+        # Construct a model instance of TriggerSourcePropertiesPrototype by calling from_dict on the json representation
+        trigger_source_properties_prototype_model = TriggerSourcePropertiesPrototype.from_dict(trigger_source_properties_prototype_model_json)
+        assert trigger_source_properties_prototype_model != False
+
+        # Construct a model instance of TriggerSourcePropertiesPrototype by calling from_dict on the json representation
+        trigger_source_properties_prototype_model_dict = TriggerSourcePropertiesPrototype.from_dict(trigger_source_properties_prototype_model_json).__dict__
+        trigger_source_properties_prototype_model2 = TriggerSourcePropertiesPrototype(**trigger_source_properties_prototype_model_dict)
+
+        # Verify the model instances are equivalent
+        assert trigger_source_properties_prototype_model == trigger_source_properties_prototype_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        trigger_source_properties_prototype_model_json2 = trigger_source_properties_prototype_model.to_dict()
+        assert trigger_source_properties_prototype_model_json2 == trigger_source_properties_prototype_model_json
+
 class TestModel_TriggerSourcePropertiesTool():
     """
     Test Class for TriggerSourcePropertiesTool
@@ -5378,6 +5280,43 @@ class TestModel_TriggerSourcePropertiesTool():
         trigger_source_properties_tool_model_json2 = trigger_source_properties_tool_model.to_dict()
         assert trigger_source_properties_tool_model_json2 == trigger_source_properties_tool_model_json
 
+class TestModel_TriggerSourcePrototype():
+    """
+    Test Class for TriggerSourcePrototype
+    """
+
+    def test_trigger_source_prototype_serialization(self):
+        """
+        Test serialization/deserialization for TriggerSourcePrototype
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        trigger_source_properties_prototype_model = {} # TriggerSourcePropertiesPrototype
+        trigger_source_properties_prototype_model['url'] = 'testString'
+        trigger_source_properties_prototype_model['branch'] = 'testString'
+        trigger_source_properties_prototype_model['pattern'] = 'testString'
+
+        # Construct a json representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model_json = {}
+        trigger_source_prototype_model_json['type'] = 'testString'
+        trigger_source_prototype_model_json['properties'] = trigger_source_properties_prototype_model
+
+        # Construct a model instance of TriggerSourcePrototype by calling from_dict on the json representation
+        trigger_source_prototype_model = TriggerSourcePrototype.from_dict(trigger_source_prototype_model_json)
+        assert trigger_source_prototype_model != False
+
+        # Construct a model instance of TriggerSourcePrototype by calling from_dict on the json representation
+        trigger_source_prototype_model_dict = TriggerSourcePrototype.from_dict(trigger_source_prototype_model_json).__dict__
+        trigger_source_prototype_model2 = TriggerSourcePrototype(**trigger_source_prototype_model_dict)
+
+        # Verify the model instances are equivalent
+        assert trigger_source_prototype_model == trigger_source_prototype_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        trigger_source_prototype_model_json2 = trigger_source_prototype_model.to_dict()
+        assert trigger_source_prototype_model_json2 == trigger_source_prototype_model_json
+
 class TestModel_TriggerTimerTriggerPropertiesItem():
     """
     Test Class for TriggerTimerTriggerPropertiesItem
@@ -5392,10 +5331,10 @@ class TestModel_TriggerTimerTriggerPropertiesItem():
         trigger_timer_trigger_properties_item_model_json = {}
         trigger_timer_trigger_properties_item_model_json['name'] = 'testString'
         trigger_timer_trigger_properties_item_model_json['value'] = 'testString'
+        trigger_timer_trigger_properties_item_model_json['href'] = 'testString'
         trigger_timer_trigger_properties_item_model_json['enum'] = ['testString']
         trigger_timer_trigger_properties_item_model_json['type'] = 'secure'
         trigger_timer_trigger_properties_item_model_json['path'] = 'testString'
-        trigger_timer_trigger_properties_item_model_json['href'] = 'testString'
 
         # Construct a model instance of TriggerTimerTriggerPropertiesItem by calling from_dict on the json representation
         trigger_timer_trigger_properties_item_model = TriggerTimerTriggerPropertiesItem.from_dict(trigger_timer_trigger_properties_item_model_json)
@@ -5427,10 +5366,10 @@ class TestModel_TriggersCollection():
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5573,10 +5512,10 @@ class TestModel_TriggerGenericTrigger():
         trigger_generic_trigger_properties_item_model = {} # TriggerGenericTriggerPropertiesItem
         trigger_generic_trigger_properties_item_model['name'] = 'testString'
         trigger_generic_trigger_properties_item_model['value'] = 'testString'
+        trigger_generic_trigger_properties_item_model['href'] = 'testString'
         trigger_generic_trigger_properties_item_model['enum'] = ['testString']
         trigger_generic_trigger_properties_item_model['type'] = 'secure'
         trigger_generic_trigger_properties_item_model['path'] = 'testString'
-        trigger_generic_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5635,10 +5574,10 @@ class TestModel_TriggerManualTrigger():
         trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
         trigger_manual_trigger_properties_item_model['name'] = 'testString'
         trigger_manual_trigger_properties_item_model['value'] = 'testString'
+        trigger_manual_trigger_properties_item_model['href'] = 'testString'
         trigger_manual_trigger_properties_item_model['enum'] = ['testString']
         trigger_manual_trigger_properties_item_model['type'] = 'secure'
         trigger_manual_trigger_properties_item_model['path'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5688,10 +5627,10 @@ class TestModel_TriggerScmTrigger():
         trigger_scm_trigger_properties_item_model = {} # TriggerScmTriggerPropertiesItem
         trigger_scm_trigger_properties_item_model['name'] = 'testString'
         trigger_scm_trigger_properties_item_model['value'] = 'testString'
+        trigger_scm_trigger_properties_item_model['href'] = 'testString'
         trigger_scm_trigger_properties_item_model['enum'] = ['testString']
         trigger_scm_trigger_properties_item_model['type'] = 'secure'
         trigger_scm_trigger_properties_item_model['path'] = 'testString'
-        trigger_scm_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5758,10 +5697,10 @@ class TestModel_TriggerTimerTrigger():
         trigger_timer_trigger_properties_item_model = {} # TriggerTimerTriggerPropertiesItem
         trigger_timer_trigger_properties_item_model['name'] = 'testString'
         trigger_timer_trigger_properties_item_model['value'] = 'testString'
+        trigger_timer_trigger_properties_item_model['href'] = 'testString'
         trigger_timer_trigger_properties_item_model['enum'] = ['testString']
         trigger_timer_trigger_properties_item_model['type'] = 'secure'
         trigger_timer_trigger_properties_item_model['path'] = 'testString'
-        trigger_timer_trigger_properties_item_model['href'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'

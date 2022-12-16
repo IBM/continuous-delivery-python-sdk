@@ -158,6 +158,7 @@ class TestCdTektonPipelineV2():
         property_model = {
             'name': 'testString',
             'value': 'testString',
+            'href': 'testString',
             'enum': ['testString'],
             'type': 'secure',
             'path': 'testString',
@@ -423,25 +424,17 @@ class TestCdTektonPipelineV2():
             'algorithm': 'md4',
         }
 
-        # Construct a dict representation of a TriggerSourcePropertiesTool model
-        trigger_source_properties_tool_model = {
-            'id': 'testString',
-        }
-
-        # Construct a dict representation of a TriggerSourceProperties model
-        trigger_source_properties_model = {
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {
             'url': 'testString',
             'branch': 'testString',
             'pattern': 'testString',
-            'blind_connection': True,
-            'hook_id': 'testString',
-            'tool': trigger_source_properties_tool_model,
         }
 
-        # Construct a dict representation of a TriggerSource model
-        trigger_source_model = {
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {
             'type': 'testString',
-            'properties': trigger_source_properties_model,
+            'properties': trigger_source_properties_prototype_model,
         }
 
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_trigger(
@@ -449,14 +442,14 @@ class TestCdTektonPipelineV2():
             type='manual',
             name='Manual Trigger',
             event_listener='pr-listener',
-            enabled=True,
             tags=['testString'],
             worker=worker_model,
             max_concurrent_runs=3,
+            enabled=True,
             secret=generic_secret_model,
             cron='testString',
             timezone='testString',
-            source=trigger_source_model,
+            source=trigger_source_prototype_model,
             events=['push']
         )
 
@@ -495,25 +488,17 @@ class TestCdTektonPipelineV2():
             'algorithm': 'md4',
         }
 
-        # Construct a dict representation of a TriggerSourcePropertiesTool model
-        trigger_source_properties_tool_model = {
-            'id': 'testString',
-        }
-
-        # Construct a dict representation of a TriggerSourceProperties model
-        trigger_source_properties_model = {
+        # Construct a dict representation of a TriggerSourcePropertiesPrototype model
+        trigger_source_properties_prototype_model = {
             'url': 'testString',
             'branch': 'testString',
             'pattern': 'testString',
-            'blind_connection': True,
-            'hook_id': 'testString',
-            'tool': trigger_source_properties_tool_model,
         }
 
-        # Construct a dict representation of a TriggerSource model
-        trigger_source_model = {
+        # Construct a dict representation of a TriggerSourcePrototype model
+        trigger_source_prototype_model = {
             'type': 'testString',
-            'properties': trigger_source_properties_model,
+            'properties': trigger_source_properties_prototype_model,
         }
 
         # Construct a dict representation of a TriggerPatch model
@@ -528,7 +513,7 @@ class TestCdTektonPipelineV2():
             'secret': generic_secret_model,
             'cron': 'testString',
             'timezone': 'America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC',
-            'source': trigger_source_model,
+            'source': trigger_source_prototype_model,
             'events': ['push', 'pull_request'],
         }
 
@@ -619,11 +604,39 @@ class TestCdTektonPipelineV2():
         assert trigger_property is not None
 
     @needscredentials
-    def test_delete_tekton_pipeline_trigger_property(self):
+    def test_delete_tekton_pipeline(self):
 
-        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
+        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline(
+            id='94619026-912b-4d92-8f51-6c74f0692d90'
+        )
+
+        assert response.get_status_code() == 204
+
+    @needscredentials
+    def test_delete_tekton_pipeline_run(self):
+
+        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_run(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
+            id='94619026-912b-4d92-8f51-6c74f0692d90'
+        )
+
+        assert response.get_status_code() == 204
+
+    @needscredentials
+    def test_delete_tekton_pipeline_definition(self):
+
+        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_definition(
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
+        )
+
+        assert response.get_status_code() == 204
+
+    @needscredentials
+    def test_delete_tekton_pipeline_property(self):
+
+        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_property(
+            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             property_name='debug-pipeline'
         )
 
@@ -640,40 +653,12 @@ class TestCdTektonPipelineV2():
         assert response.get_status_code() == 204
 
     @needscredentials
-    def test_delete_tekton_pipeline_run(self):
+    def test_delete_tekton_pipeline_trigger_property(self):
 
-        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_run(
+        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            id='94619026-912b-4d92-8f51-6c74f0692d90'
-        )
-
-        assert response.get_status_code() == 204
-
-    @needscredentials
-    def test_delete_tekton_pipeline_property(self):
-
-        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_property(
-            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+            trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
             property_name='debug-pipeline'
-        )
-
-        assert response.get_status_code() == 204
-
-    @needscredentials
-    def test_delete_tekton_pipeline_definition(self):
-
-        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline_definition(
-            pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
-        )
-
-        assert response.get_status_code() == 204
-
-    @needscredentials
-    def test_delete_tekton_pipeline(self):
-
-        response = self.cd_tekton_pipeline_service.delete_tekton_pipeline(
-            id='94619026-912b-4d92-8f51-6c74f0692d90'
         )
 
         assert response.get_status_code() == 204
