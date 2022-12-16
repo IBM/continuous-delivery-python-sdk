@@ -191,6 +191,7 @@ class TestCdTektonPipelineV2Examples():
 
             property_model = {
                 'name': 'testString',
+                'href': 'testString',
                 'type': 'secure',
             }
 
@@ -570,9 +571,9 @@ class TestCdTektonPipelineV2Examples():
                 type='manual',
                 name='Manual Trigger',
                 event_listener='pr-listener',
-                enabled=True,
                 worker=worker_model,
-                max_concurrent_runs=3
+                max_concurrent_runs=3,
+                enabled=True
             )
             trigger = response.get_result()
 
@@ -755,40 +756,19 @@ class TestCdTektonPipelineV2Examples():
             pytest.fail(str(e))
 
     @needscredentials
-    def test_delete_tekton_pipeline_trigger_property_example(self):
+    def test_delete_tekton_pipeline_example(self):
         """
-        delete_tekton_pipeline_trigger_property request example
-        """
-        try:
-            # begin-delete_tekton_pipeline_trigger_property
-
-            response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
-                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                property_name='debug-pipeline'
-            )
-
-            # end-delete_tekton_pipeline_trigger_property
-            print('\ndelete_tekton_pipeline_trigger_property() response status code: ', response.get_status_code())
-
-        except ApiException as e:
-            pytest.fail(str(e))
-
-    @needscredentials
-    def test_delete_tekton_pipeline_trigger_example(self):
-        """
-        delete_tekton_pipeline_trigger request example
+        delete_tekton_pipeline request example
         """
         try:
-            # begin-delete_tekton_pipeline_trigger
+            # begin-delete_tekton_pipeline
 
-            response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger(
-                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147'
+            response = cd_tekton_pipeline_service.delete_tekton_pipeline(
+                id='94619026-912b-4d92-8f51-6c74f0692d90'
             )
 
-            # end-delete_tekton_pipeline_trigger
-            print('\ndelete_tekton_pipeline_trigger() response status code: ', response.get_status_code())
+            # end-delete_tekton_pipeline
+            print('\ndelete_tekton_pipeline() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -813,25 +793,6 @@ class TestCdTektonPipelineV2Examples():
             pytest.fail(str(e))
 
     @needscredentials
-    def test_delete_tekton_pipeline_property_example(self):
-        """
-        delete_tekton_pipeline_property request example
-        """
-        try:
-            # begin-delete_tekton_pipeline_property
-
-            response = cd_tekton_pipeline_service.delete_tekton_pipeline_property(
-                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                property_name='debug-pipeline'
-            )
-
-            # end-delete_tekton_pipeline_property
-            print('\ndelete_tekton_pipeline_property() response status code: ', response.get_status_code())
-
-        except ApiException as e:
-            pytest.fail(str(e))
-
-    @needscredentials
     def test_delete_tekton_pipeline_definition_example(self):
         """
         delete_tekton_pipeline_definition request example
@@ -851,19 +812,59 @@ class TestCdTektonPipelineV2Examples():
             pytest.fail(str(e))
 
     @needscredentials
-    def test_delete_tekton_pipeline_example(self):
+    def test_delete_tekton_pipeline_property_example(self):
         """
-        delete_tekton_pipeline request example
+        delete_tekton_pipeline_property request example
         """
         try:
-            # begin-delete_tekton_pipeline
+            # begin-delete_tekton_pipeline_property
 
-            response = cd_tekton_pipeline_service.delete_tekton_pipeline(
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+            response = cd_tekton_pipeline_service.delete_tekton_pipeline_property(
+                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+                property_name='debug-pipeline'
             )
 
-            # end-delete_tekton_pipeline
-            print('\ndelete_tekton_pipeline() response status code: ', response.get_status_code())
+            # end-delete_tekton_pipeline_property
+            print('\ndelete_tekton_pipeline_property() response status code: ', response.get_status_code())
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_delete_tekton_pipeline_trigger_example(self):
+        """
+        delete_tekton_pipeline_trigger request example
+        """
+        try:
+            # begin-delete_tekton_pipeline_trigger
+
+            response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger(
+                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147'
+            )
+
+            # end-delete_tekton_pipeline_trigger
+            print('\ndelete_tekton_pipeline_trigger() response status code: ', response.get_status_code())
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_delete_tekton_pipeline_trigger_property_example(self):
+        """
+        delete_tekton_pipeline_trigger_property request example
+        """
+        try:
+            # begin-delete_tekton_pipeline_trigger_property
+
+            response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
+                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
+                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
+                property_name='debug-pipeline'
+            )
+
+            # end-delete_tekton_pipeline_trigger_property
+            print('\ndelete_tekton_pipeline_trigger_property() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
