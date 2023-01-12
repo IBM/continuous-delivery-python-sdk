@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -164,13 +164,23 @@ class TestCdTektonPipelineV2():
             'path': 'testString',
         }
 
+        # Construct a dict representation of a PipelineRunTrigger model
+        pipeline_run_trigger_model = {
+            'name': 'Generic Webhook Trigger - 0',
+            'properties': [property_model],
+            'secure_properties': [property_model],
+            'headers': {'source':'api'},
+            'body': {'message':'hello world','enable':'true','detail':{'name':'example'}},
+        }
+
         response = self.cd_tekton_pipeline_service.create_tekton_pipeline_run(
             pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-            trigger_name='Generic Webhook Trigger - 0',
+            trigger_name='testString',
             trigger_properties=[property_model],
             secure_trigger_properties=[property_model],
-            trigger_headers={'source':'api'},
-            trigger_body={'message':'hello world','enable':'true','detail':{'name':'example'}}
+            trigger_headers={'foo': 'bar'},
+            trigger_body={'foo': 'bar'},
+            trigger=pipeline_run_trigger_model
         )
 
         assert response.get_status_code() == 201
@@ -254,8 +264,8 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_create_tekton_pipeline_definition(self):
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {
+        # Construct a dict representation of a Tool model
+        tool_model = {
             'id': 'testString',
         }
 
@@ -265,7 +275,7 @@ class TestCdTektonPipelineV2():
             'branch': 'master',
             'tag': 'testString',
             'path': '.tekton',
-            'tool': definition_source_properties_tool_model,
+            'tool': tool_model,
         }
 
         # Construct a dict representation of a DefinitionSource model
@@ -298,8 +308,8 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_replace_tekton_pipeline_definition(self):
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {
+        # Construct a dict representation of a Tool model
+        tool_model = {
             'id': 'testString',
         }
 
@@ -309,7 +319,7 @@ class TestCdTektonPipelineV2():
             'branch': 'testString',
             'tag': 'testString',
             'path': 'testString',
-            'tool': definition_source_properties_tool_model,
+            'tool': tool_model,
         }
 
         # Construct a dict representation of a DefinitionSource model
