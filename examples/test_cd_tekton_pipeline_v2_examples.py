@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -195,13 +195,17 @@ class TestCdTektonPipelineV2Examples():
                 'type': 'secure',
             }
 
+            pipeline_run_trigger_model = {
+                'name': 'Generic Webhook Trigger - 0',
+                'properties': [property_model],
+                'secure_properties': [property_model],
+                'headers': {'source':'api'},
+                'body': {'message':'hello world','enable':'true','detail':{'name':'example'}},
+            }
+
             response = cd_tekton_pipeline_service.create_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger_name='Generic Webhook Trigger - 0',
-                trigger_properties=[property_model],
-                secure_trigger_properties=[property_model],
-                trigger_headers={'source':'api'},
-                trigger_body={'message':'hello world','enable':'true','detail':{'name':'example'}}
+                trigger=pipeline_run_trigger_model
             )
             pipeline_run = response.get_result()
 

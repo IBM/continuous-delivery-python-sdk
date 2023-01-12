@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -534,7 +534,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -585,7 +585,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -621,7 +621,7 @@ class TestListTektonPipelineRuns():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"pipeline_runs": [{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "href": "href"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
+        mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -656,8 +656,8 @@ class TestListTektonPipelineRuns():
         """
         # Set up a two-page mock response
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response1,
@@ -691,8 +691,8 @@ class TestListTektonPipelineRuns():
         """
         # Set up a two-page mock response
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","href":"href"}]}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url"}]}'
         responses.add(responses.GET,
                       url,
                       body=mock_response1,
@@ -728,7 +728,7 @@ class TestCreateTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -744,22 +744,32 @@ class TestCreateTektonPipelineRun():
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
 
+        # Construct a dict representation of a PipelineRunTrigger model
+        pipeline_run_trigger_model = {}
+        pipeline_run_trigger_model['name'] = 'Generic Webhook Trigger - 0'
+        pipeline_run_trigger_model['properties'] = [property_model]
+        pipeline_run_trigger_model['secure_properties'] = [property_model]
+        pipeline_run_trigger_model['headers'] = {'foo': 'bar'}
+        pipeline_run_trigger_model['body'] = {'foo': 'bar'}
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        trigger_name = 'Generic Webhook Trigger - 0'
+        trigger_name = 'testString'
         trigger_properties = [property_model]
         secure_trigger_properties = [property_model]
         trigger_headers = {'foo': 'bar'}
         trigger_body = {'foo': 'bar'}
+        trigger = pipeline_run_trigger_model
 
         # Invoke method
         response = _service.create_tekton_pipeline_run(
             pipeline_id,
-            trigger_name,
+            trigger_name=trigger_name,
             trigger_properties=trigger_properties,
             secure_trigger_properties=secure_trigger_properties,
             trigger_headers=trigger_headers,
             trigger_body=trigger_body,
+            trigger=trigger,
             headers={}
         )
 
@@ -768,11 +778,12 @@ class TestCreateTektonPipelineRun():
         assert response.status_code == 201
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['trigger_name'] == 'Generic Webhook Trigger - 0'
+        assert req_body['trigger_name'] == 'testString'
         assert req_body['trigger_properties'] == [property_model]
         assert req_body['secure_trigger_properties'] == [property_model]
         assert req_body['trigger_headers'] == {'foo': 'bar'}
         assert req_body['trigger_body'] == {'foo': 'bar'}
+        assert req_body['trigger'] == pipeline_run_trigger_model
 
     def test_create_tekton_pipeline_run_all_params_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_run_all_params.
@@ -790,7 +801,7 @@ class TestCreateTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -806,18 +817,26 @@ class TestCreateTektonPipelineRun():
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
 
+        # Construct a dict representation of a PipelineRunTrigger model
+        pipeline_run_trigger_model = {}
+        pipeline_run_trigger_model['name'] = 'Generic Webhook Trigger - 0'
+        pipeline_run_trigger_model['properties'] = [property_model]
+        pipeline_run_trigger_model['secure_properties'] = [property_model]
+        pipeline_run_trigger_model['headers'] = {'foo': 'bar'}
+        pipeline_run_trigger_model['body'] = {'foo': 'bar'}
+
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
-        trigger_name = 'Generic Webhook Trigger - 0'
+        trigger_name = 'testString'
         trigger_properties = [property_model]
         secure_trigger_properties = [property_model]
         trigger_headers = {'foo': 'bar'}
         trigger_body = {'foo': 'bar'}
+        trigger = pipeline_run_trigger_model
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "pipeline_id": pipeline_id,
-            "trigger_name": trigger_name,
         }
         for param in req_param_dict.keys():
             req_copy = {key:val if key is not param else None for (key,val) in req_param_dict.items()}
@@ -845,7 +864,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -889,7 +908,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -927,7 +946,7 @@ class TestGetTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.GET,
                       url,
                       body=mock_response,
@@ -1043,7 +1062,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1086,7 +1105,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1124,7 +1143,7 @@ class TestCancelTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/cancel')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1166,7 +1185,7 @@ class TestRerunTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/rerun')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1204,7 +1223,7 @@ class TestRerunTektonPipelineRun():
         """
         # Set up mock
         url = preprocess_url('/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs/94619026-912b-4d92-8f51-6c74f0692d90/rerun')
-        mock_response = '{"id": "id", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
+        mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url"}'
         responses.add(responses.POST,
                       url,
                       body=mock_response,
@@ -1530,9 +1549,9 @@ class TestCreateTektonPipelineDefinition():
                       content_type='application/json',
                       status=201)
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {}
-        definition_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
@@ -1540,7 +1559,7 @@ class TestCreateTektonPipelineDefinition():
         definition_source_properties_model['branch'] = 'master'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = '.tekton'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         # Construct a dict representation of a DefinitionSource model
         definition_source_model = {}
@@ -1588,9 +1607,9 @@ class TestCreateTektonPipelineDefinition():
                       content_type='application/json',
                       status=201)
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {}
-        definition_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
@@ -1598,7 +1617,7 @@ class TestCreateTektonPipelineDefinition():
         definition_source_properties_model['branch'] = 'master'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = '.tekton'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         # Construct a dict representation of a DefinitionSource model
         definition_source_model = {}
@@ -1727,9 +1746,9 @@ class TestReplaceTektonPipelineDefinition():
                       content_type='application/json',
                       status=200)
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {}
-        definition_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
@@ -1737,7 +1756,7 @@ class TestReplaceTektonPipelineDefinition():
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         # Construct a dict representation of a DefinitionSource model
         definition_source_model = {}
@@ -1787,9 +1806,9 @@ class TestReplaceTektonPipelineDefinition():
                       content_type='application/json',
                       status=200)
 
-        # Construct a dict representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model = {}
-        definition_source_properties_tool_model['id'] = 'testString'
+        # Construct a dict representation of a Tool model
+        tool_model = {}
+        tool_model['id'] = 'testString'
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
@@ -1797,7 +1816,7 @@ class TestReplaceTektonPipelineDefinition():
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         # Construct a dict representation of a DefinitionSource model
         definition_source_model = {}
@@ -3741,15 +3760,15 @@ class TestModel_Definition():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         definition_source_properties_model = {} # DefinitionSourceProperties
         definition_source_properties_model['url'] = 'testString'
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         definition_source_model = {} # DefinitionSource
         definition_source_model['type'] = 'testString'
@@ -3788,15 +3807,15 @@ class TestModel_DefinitionSource():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         definition_source_properties_model = {} # DefinitionSourceProperties
         definition_source_properties_model['url'] = 'testString'
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         # Construct a json representation of a DefinitionSource model
         definition_source_model_json = {}
@@ -3830,8 +3849,8 @@ class TestModel_DefinitionSourceProperties():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         # Construct a json representation of a DefinitionSourceProperties model
         definition_source_properties_model_json = {}
@@ -3839,7 +3858,7 @@ class TestModel_DefinitionSourceProperties():
         definition_source_properties_model_json['branch'] = 'testString'
         definition_source_properties_model_json['tag'] = 'testString'
         definition_source_properties_model_json['path'] = 'testString'
-        definition_source_properties_model_json['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model_json['tool'] = tool_model
 
         # Construct a model instance of DefinitionSourceProperties by calling from_dict on the json representation
         definition_source_properties_model = DefinitionSourceProperties.from_dict(definition_source_properties_model_json)
@@ -3856,35 +3875,6 @@ class TestModel_DefinitionSourceProperties():
         definition_source_properties_model_json2 = definition_source_properties_model.to_dict()
         assert definition_source_properties_model_json2 == definition_source_properties_model_json
 
-class TestModel_DefinitionSourcePropertiesTool():
-    """
-    Test Class for DefinitionSourcePropertiesTool
-    """
-
-    def test_definition_source_properties_tool_serialization(self):
-        """
-        Test serialization/deserialization for DefinitionSourcePropertiesTool
-        """
-
-        # Construct a json representation of a DefinitionSourcePropertiesTool model
-        definition_source_properties_tool_model_json = {}
-        definition_source_properties_tool_model_json['id'] = 'testString'
-
-        # Construct a model instance of DefinitionSourcePropertiesTool by calling from_dict on the json representation
-        definition_source_properties_tool_model = DefinitionSourcePropertiesTool.from_dict(definition_source_properties_tool_model_json)
-        assert definition_source_properties_tool_model != False
-
-        # Construct a model instance of DefinitionSourcePropertiesTool by calling from_dict on the json representation
-        definition_source_properties_tool_model_dict = DefinitionSourcePropertiesTool.from_dict(definition_source_properties_tool_model_json).__dict__
-        definition_source_properties_tool_model2 = DefinitionSourcePropertiesTool(**definition_source_properties_tool_model_dict)
-
-        # Verify the model instances are equivalent
-        assert definition_source_properties_tool_model == definition_source_properties_tool_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        definition_source_properties_tool_model_json2 = definition_source_properties_tool_model.to_dict()
-        assert definition_source_properties_tool_model_json2 == definition_source_properties_tool_model_json
-
 class TestModel_DefinitionsCollection():
     """
     Test Class for DefinitionsCollection
@@ -3897,28 +3887,28 @@ class TestModel_DefinitionsCollection():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         definition_source_properties_model = {} # DefinitionSourceProperties
         definition_source_properties_model['url'] = 'testString'
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         definition_source_model = {} # DefinitionSource
         definition_source_model['type'] = 'testString'
         definition_source_model['properties'] = definition_source_properties_model
 
-        definitions_collection_definitions_item_model = {} # DefinitionsCollectionDefinitionsItem
-        definitions_collection_definitions_item_model['source'] = definition_source_model
-        definitions_collection_definitions_item_model['href'] = 'testString'
-        definitions_collection_definitions_item_model['id'] = 'testString'
+        definition_model = {} # Definition
+        definition_model['source'] = definition_source_model
+        definition_model['href'] = 'testString'
+        definition_model['id'] = 'testString'
 
         # Construct a json representation of a DefinitionsCollection model
         definitions_collection_model_json = {}
-        definitions_collection_model_json['definitions'] = [definitions_collection_definitions_item_model]
+        definitions_collection_model_json['definitions'] = [definition_model]
 
         # Construct a model instance of DefinitionsCollection by calling from_dict on the json representation
         definitions_collection_model = DefinitionsCollection.from_dict(definitions_collection_model_json)
@@ -3934,53 +3924,6 @@ class TestModel_DefinitionsCollection():
         # Convert model instance back to dict and verify no loss of data
         definitions_collection_model_json2 = definitions_collection_model.to_dict()
         assert definitions_collection_model_json2 == definitions_collection_model_json
-
-class TestModel_DefinitionsCollectionDefinitionsItem():
-    """
-    Test Class for DefinitionsCollectionDefinitionsItem
-    """
-
-    def test_definitions_collection_definitions_item_serialization(self):
-        """
-        Test serialization/deserialization for DefinitionsCollectionDefinitionsItem
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
-
-        definition_source_properties_model = {} # DefinitionSourceProperties
-        definition_source_properties_model['url'] = 'testString'
-        definition_source_properties_model['branch'] = 'testString'
-        definition_source_properties_model['tag'] = 'testString'
-        definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
-
-        definition_source_model = {} # DefinitionSource
-        definition_source_model['type'] = 'testString'
-        definition_source_model['properties'] = definition_source_properties_model
-
-        # Construct a json representation of a DefinitionsCollectionDefinitionsItem model
-        definitions_collection_definitions_item_model_json = {}
-        definitions_collection_definitions_item_model_json['source'] = definition_source_model
-        definitions_collection_definitions_item_model_json['href'] = 'testString'
-        definitions_collection_definitions_item_model_json['id'] = 'testString'
-
-        # Construct a model instance of DefinitionsCollectionDefinitionsItem by calling from_dict on the json representation
-        definitions_collection_definitions_item_model = DefinitionsCollectionDefinitionsItem.from_dict(definitions_collection_definitions_item_model_json)
-        assert definitions_collection_definitions_item_model != False
-
-        # Construct a model instance of DefinitionsCollectionDefinitionsItem by calling from_dict on the json representation
-        definitions_collection_definitions_item_model_dict = DefinitionsCollectionDefinitionsItem.from_dict(definitions_collection_definitions_item_model_json).__dict__
-        definitions_collection_definitions_item_model2 = DefinitionsCollectionDefinitionsItem(**definitions_collection_definitions_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert definitions_collection_definitions_item_model == definitions_collection_definitions_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        definitions_collection_definitions_item_model_json2 = definitions_collection_definitions_item_model.to_dict()
-        assert definitions_collection_definitions_item_model_json2 == definitions_collection_definitions_item_model_json
 
 class TestModel_GenericSecret():
     """
@@ -4098,8 +4041,8 @@ class TestModel_PipelineRun():
         user_info_model['iam_id'] = 'testString'
         user_info_model['sub'] = 'testString'
 
-        pipeline_run_definition_model = {} # PipelineRunDefinition
-        pipeline_run_definition_model['id'] = 'testString'
+        run_definition_model = {} # RunDefinition
+        run_definition_model['id'] = 'testString'
 
         pipeline_run_worker_model = {} # PipelineRunWorker
         pipeline_run_worker_model['name'] = 'testString'
@@ -4107,16 +4050,16 @@ class TestModel_PipelineRun():
         pipeline_run_worker_model['service_id'] = 'testString'
         pipeline_run_worker_model['id'] = 'testString'
 
-        pipeline_run_pipeline_model = {} # PipelineRunPipeline
-        pipeline_run_pipeline_model['id'] = 'testString'
+        run_pipeline_model = {} # RunPipeline
+        run_pipeline_model['id'] = 'testString'
 
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4129,7 +4072,7 @@ class TestModel_PipelineRun():
         trigger_model['href'] = 'testString'
         trigger_model['event_listener'] = 'testString'
         trigger_model['id'] = 'testString'
-        trigger_model['properties'] = [trigger_manual_trigger_properties_item_model]
+        trigger_model['properties'] = [trigger_property_model]
         trigger_model['tags'] = ['testString']
         trigger_model['worker'] = worker_model
         trigger_model['max_concurrent_runs'] = 4
@@ -4146,13 +4089,14 @@ class TestModel_PipelineRun():
         # Construct a json representation of a PipelineRun model
         pipeline_run_model_json = {}
         pipeline_run_model_json['id'] = 'testString'
+        pipeline_run_model_json['href'] = 'testString'
         pipeline_run_model_json['user_info'] = user_info_model
         pipeline_run_model_json['status'] = 'pending'
         pipeline_run_model_json['definition_id'] = 'testString'
-        pipeline_run_model_json['definition'] = pipeline_run_definition_model
+        pipeline_run_model_json['definition'] = run_definition_model
         pipeline_run_model_json['worker'] = pipeline_run_worker_model
         pipeline_run_model_json['pipeline_id'] = 'testString'
-        pipeline_run_model_json['pipeline'] = pipeline_run_pipeline_model
+        pipeline_run_model_json['pipeline'] = run_pipeline_model
         pipeline_run_model_json['listener_name'] = 'testString'
         pipeline_run_model_json['trigger'] = trigger_model
         pipeline_run_model_json['event_params_blob'] = 'testString'
@@ -4177,63 +4121,48 @@ class TestModel_PipelineRun():
         pipeline_run_model_json2 = pipeline_run_model.to_dict()
         assert pipeline_run_model_json2 == pipeline_run_model_json
 
-class TestModel_PipelineRunDefinition():
+class TestModel_PipelineRunTrigger():
     """
-    Test Class for PipelineRunDefinition
+    Test Class for PipelineRunTrigger
     """
 
-    def test_pipeline_run_definition_serialization(self):
+    def test_pipeline_run_trigger_serialization(self):
         """
-        Test serialization/deserialization for PipelineRunDefinition
+        Test serialization/deserialization for PipelineRunTrigger
         """
 
-        # Construct a json representation of a PipelineRunDefinition model
-        pipeline_run_definition_model_json = {}
-        pipeline_run_definition_model_json['id'] = 'testString'
+        # Construct dict forms of any model objects needed in order to build this model.
 
-        # Construct a model instance of PipelineRunDefinition by calling from_dict on the json representation
-        pipeline_run_definition_model = PipelineRunDefinition.from_dict(pipeline_run_definition_model_json)
-        assert pipeline_run_definition_model != False
+        property_model = {} # Property
+        property_model['name'] = 'testString'
+        property_model['value'] = 'testString'
+        property_model['href'] = 'testString'
+        property_model['enum'] = ['testString']
+        property_model['type'] = 'secure'
+        property_model['path'] = 'testString'
 
-        # Construct a model instance of PipelineRunDefinition by calling from_dict on the json representation
-        pipeline_run_definition_model_dict = PipelineRunDefinition.from_dict(pipeline_run_definition_model_json).__dict__
-        pipeline_run_definition_model2 = PipelineRunDefinition(**pipeline_run_definition_model_dict)
+        # Construct a json representation of a PipelineRunTrigger model
+        pipeline_run_trigger_model_json = {}
+        pipeline_run_trigger_model_json['name'] = 'start-deploy'
+        pipeline_run_trigger_model_json['properties'] = [property_model]
+        pipeline_run_trigger_model_json['secure_properties'] = [property_model]
+        pipeline_run_trigger_model_json['headers'] = {'foo': 'bar'}
+        pipeline_run_trigger_model_json['body'] = {'foo': 'bar'}
+
+        # Construct a model instance of PipelineRunTrigger by calling from_dict on the json representation
+        pipeline_run_trigger_model = PipelineRunTrigger.from_dict(pipeline_run_trigger_model_json)
+        assert pipeline_run_trigger_model != False
+
+        # Construct a model instance of PipelineRunTrigger by calling from_dict on the json representation
+        pipeline_run_trigger_model_dict = PipelineRunTrigger.from_dict(pipeline_run_trigger_model_json).__dict__
+        pipeline_run_trigger_model2 = PipelineRunTrigger(**pipeline_run_trigger_model_dict)
 
         # Verify the model instances are equivalent
-        assert pipeline_run_definition_model == pipeline_run_definition_model2
+        assert pipeline_run_trigger_model == pipeline_run_trigger_model2
 
         # Convert model instance back to dict and verify no loss of data
-        pipeline_run_definition_model_json2 = pipeline_run_definition_model.to_dict()
-        assert pipeline_run_definition_model_json2 == pipeline_run_definition_model_json
-
-class TestModel_PipelineRunPipeline():
-    """
-    Test Class for PipelineRunPipeline
-    """
-
-    def test_pipeline_run_pipeline_serialization(self):
-        """
-        Test serialization/deserialization for PipelineRunPipeline
-        """
-
-        # Construct a json representation of a PipelineRunPipeline model
-        pipeline_run_pipeline_model_json = {}
-        pipeline_run_pipeline_model_json['id'] = 'testString'
-
-        # Construct a model instance of PipelineRunPipeline by calling from_dict on the json representation
-        pipeline_run_pipeline_model = PipelineRunPipeline.from_dict(pipeline_run_pipeline_model_json)
-        assert pipeline_run_pipeline_model != False
-
-        # Construct a model instance of PipelineRunPipeline by calling from_dict on the json representation
-        pipeline_run_pipeline_model_dict = PipelineRunPipeline.from_dict(pipeline_run_pipeline_model_json).__dict__
-        pipeline_run_pipeline_model2 = PipelineRunPipeline(**pipeline_run_pipeline_model_dict)
-
-        # Verify the model instances are equivalent
-        assert pipeline_run_pipeline_model == pipeline_run_pipeline_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        pipeline_run_pipeline_model_json2 = pipeline_run_pipeline_model.to_dict()
-        assert pipeline_run_pipeline_model_json2 == pipeline_run_pipeline_model_json
+        pipeline_run_trigger_model_json2 = pipeline_run_trigger_model.to_dict()
+        assert pipeline_run_trigger_model_json2 == pipeline_run_trigger_model_json
 
 class TestModel_PipelineRunWorker():
     """
@@ -4283,8 +4212,8 @@ class TestModel_PipelineRunsCollection():
         user_info_model['iam_id'] = 'testString'
         user_info_model['sub'] = 'testString'
 
-        pipeline_run_definition_model = {} # PipelineRunDefinition
-        pipeline_run_definition_model['id'] = 'testString'
+        run_definition_model = {} # RunDefinition
+        run_definition_model['id'] = 'testString'
 
         pipeline_run_worker_model = {} # PipelineRunWorker
         pipeline_run_worker_model['name'] = 'testString'
@@ -4292,16 +4221,16 @@ class TestModel_PipelineRunsCollection():
         pipeline_run_worker_model['service_id'] = 'testString'
         pipeline_run_worker_model['id'] = 'testString'
 
-        pipeline_run_pipeline_model = {} # PipelineRunPipeline
-        pipeline_run_pipeline_model['id'] = 'testString'
+        run_pipeline_model = {} # RunPipeline
+        run_pipeline_model['id'] = 'testString'
 
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4314,7 +4243,7 @@ class TestModel_PipelineRunsCollection():
         trigger_model['href'] = 'testString'
         trigger_model['event_listener'] = 'testString'
         trigger_model['id'] = 'testString'
-        trigger_model['properties'] = [trigger_manual_trigger_properties_item_model]
+        trigger_model['properties'] = [trigger_property_model]
         trigger_model['tags'] = ['testString']
         trigger_model['worker'] = worker_model
         trigger_model['max_concurrent_runs'] = 4
@@ -4328,41 +4257,41 @@ class TestModel_PipelineRunsCollection():
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
 
-        pipeline_runs_collection_pipeline_runs_item_model = {} # PipelineRunsCollectionPipelineRunsItem
-        pipeline_runs_collection_pipeline_runs_item_model['id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['user_info'] = user_info_model
-        pipeline_runs_collection_pipeline_runs_item_model['status'] = 'pending'
-        pipeline_runs_collection_pipeline_runs_item_model['definition_id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['definition'] = pipeline_run_definition_model
-        pipeline_runs_collection_pipeline_runs_item_model['worker'] = pipeline_run_worker_model
-        pipeline_runs_collection_pipeline_runs_item_model['pipeline_id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['pipeline'] = pipeline_run_pipeline_model
-        pipeline_runs_collection_pipeline_runs_item_model['listener_name'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['trigger'] = trigger_model
-        pipeline_runs_collection_pipeline_runs_item_model['event_params_blob'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['trigger_headers'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['properties'] = [property_model]
-        pipeline_runs_collection_pipeline_runs_item_model['created_at'] = '2019-01-01T12:00:00Z'
-        pipeline_runs_collection_pipeline_runs_item_model['updated_at'] = '2019-01-01T12:00:00Z'
-        pipeline_runs_collection_pipeline_runs_item_model['run_url'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model['href'] = 'testString'
+        pipeline_run_model = {} # PipelineRun
+        pipeline_run_model['id'] = 'testString'
+        pipeline_run_model['href'] = 'testString'
+        pipeline_run_model['user_info'] = user_info_model
+        pipeline_run_model['status'] = 'pending'
+        pipeline_run_model['definition_id'] = 'testString'
+        pipeline_run_model['definition'] = run_definition_model
+        pipeline_run_model['worker'] = pipeline_run_worker_model
+        pipeline_run_model['pipeline_id'] = 'testString'
+        pipeline_run_model['pipeline'] = run_pipeline_model
+        pipeline_run_model['listener_name'] = 'testString'
+        pipeline_run_model['trigger'] = trigger_model
+        pipeline_run_model['event_params_blob'] = 'testString'
+        pipeline_run_model['trigger_headers'] = 'testString'
+        pipeline_run_model['properties'] = [property_model]
+        pipeline_run_model['created_at'] = '2019-01-01T12:00:00Z'
+        pipeline_run_model['updated_at'] = '2019-01-01T12:00:00Z'
+        pipeline_run_model['run_url'] = 'testString'
 
-        pipeline_runs_collection_first_model = {} # PipelineRunsCollectionFirst
-        pipeline_runs_collection_first_model['href'] = 'testString'
+        runs_first_page_model = {} # RunsFirstPage
+        runs_first_page_model['href'] = 'testString'
 
-        pipeline_runs_collection_next_model = {} # PipelineRunsCollectionNext
-        pipeline_runs_collection_next_model['href'] = 'testString'
+        runs_next_page_model = {} # RunsNextPage
+        runs_next_page_model['href'] = 'testString'
 
-        pipeline_runs_collection_last_model = {} # PipelineRunsCollectionLast
-        pipeline_runs_collection_last_model['href'] = 'testString'
+        runs_last_page_model = {} # RunsLastPage
+        runs_last_page_model['href'] = 'testString'
 
         # Construct a json representation of a PipelineRunsCollection model
         pipeline_runs_collection_model_json = {}
-        pipeline_runs_collection_model_json['pipeline_runs'] = [pipeline_runs_collection_pipeline_runs_item_model]
+        pipeline_runs_collection_model_json['pipeline_runs'] = [pipeline_run_model]
         pipeline_runs_collection_model_json['limit'] = 20
-        pipeline_runs_collection_model_json['first'] = pipeline_runs_collection_first_model
-        pipeline_runs_collection_model_json['next'] = pipeline_runs_collection_next_model
-        pipeline_runs_collection_model_json['last'] = pipeline_runs_collection_last_model
+        pipeline_runs_collection_model_json['first'] = runs_first_page_model
+        pipeline_runs_collection_model_json['next'] = runs_next_page_model
+        pipeline_runs_collection_model_json['last'] = runs_last_page_model
 
         # Construct a model instance of PipelineRunsCollection by calling from_dict on the json representation
         pipeline_runs_collection_model = PipelineRunsCollection.from_dict(pipeline_runs_collection_model_json)
@@ -4378,189 +4307,6 @@ class TestModel_PipelineRunsCollection():
         # Convert model instance back to dict and verify no loss of data
         pipeline_runs_collection_model_json2 = pipeline_runs_collection_model.to_dict()
         assert pipeline_runs_collection_model_json2 == pipeline_runs_collection_model_json
-
-class TestModel_PipelineRunsCollectionFirst():
-    """
-    Test Class for PipelineRunsCollectionFirst
-    """
-
-    def test_pipeline_runs_collection_first_serialization(self):
-        """
-        Test serialization/deserialization for PipelineRunsCollectionFirst
-        """
-
-        # Construct a json representation of a PipelineRunsCollectionFirst model
-        pipeline_runs_collection_first_model_json = {}
-        pipeline_runs_collection_first_model_json['href'] = 'testString'
-
-        # Construct a model instance of PipelineRunsCollectionFirst by calling from_dict on the json representation
-        pipeline_runs_collection_first_model = PipelineRunsCollectionFirst.from_dict(pipeline_runs_collection_first_model_json)
-        assert pipeline_runs_collection_first_model != False
-
-        # Construct a model instance of PipelineRunsCollectionFirst by calling from_dict on the json representation
-        pipeline_runs_collection_first_model_dict = PipelineRunsCollectionFirst.from_dict(pipeline_runs_collection_first_model_json).__dict__
-        pipeline_runs_collection_first_model2 = PipelineRunsCollectionFirst(**pipeline_runs_collection_first_model_dict)
-
-        # Verify the model instances are equivalent
-        assert pipeline_runs_collection_first_model == pipeline_runs_collection_first_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        pipeline_runs_collection_first_model_json2 = pipeline_runs_collection_first_model.to_dict()
-        assert pipeline_runs_collection_first_model_json2 == pipeline_runs_collection_first_model_json
-
-class TestModel_PipelineRunsCollectionLast():
-    """
-    Test Class for PipelineRunsCollectionLast
-    """
-
-    def test_pipeline_runs_collection_last_serialization(self):
-        """
-        Test serialization/deserialization for PipelineRunsCollectionLast
-        """
-
-        # Construct a json representation of a PipelineRunsCollectionLast model
-        pipeline_runs_collection_last_model_json = {}
-        pipeline_runs_collection_last_model_json['href'] = 'testString'
-
-        # Construct a model instance of PipelineRunsCollectionLast by calling from_dict on the json representation
-        pipeline_runs_collection_last_model = PipelineRunsCollectionLast.from_dict(pipeline_runs_collection_last_model_json)
-        assert pipeline_runs_collection_last_model != False
-
-        # Construct a model instance of PipelineRunsCollectionLast by calling from_dict on the json representation
-        pipeline_runs_collection_last_model_dict = PipelineRunsCollectionLast.from_dict(pipeline_runs_collection_last_model_json).__dict__
-        pipeline_runs_collection_last_model2 = PipelineRunsCollectionLast(**pipeline_runs_collection_last_model_dict)
-
-        # Verify the model instances are equivalent
-        assert pipeline_runs_collection_last_model == pipeline_runs_collection_last_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        pipeline_runs_collection_last_model_json2 = pipeline_runs_collection_last_model.to_dict()
-        assert pipeline_runs_collection_last_model_json2 == pipeline_runs_collection_last_model_json
-
-class TestModel_PipelineRunsCollectionNext():
-    """
-    Test Class for PipelineRunsCollectionNext
-    """
-
-    def test_pipeline_runs_collection_next_serialization(self):
-        """
-        Test serialization/deserialization for PipelineRunsCollectionNext
-        """
-
-        # Construct a json representation of a PipelineRunsCollectionNext model
-        pipeline_runs_collection_next_model_json = {}
-        pipeline_runs_collection_next_model_json['href'] = 'testString'
-
-        # Construct a model instance of PipelineRunsCollectionNext by calling from_dict on the json representation
-        pipeline_runs_collection_next_model = PipelineRunsCollectionNext.from_dict(pipeline_runs_collection_next_model_json)
-        assert pipeline_runs_collection_next_model != False
-
-        # Construct a model instance of PipelineRunsCollectionNext by calling from_dict on the json representation
-        pipeline_runs_collection_next_model_dict = PipelineRunsCollectionNext.from_dict(pipeline_runs_collection_next_model_json).__dict__
-        pipeline_runs_collection_next_model2 = PipelineRunsCollectionNext(**pipeline_runs_collection_next_model_dict)
-
-        # Verify the model instances are equivalent
-        assert pipeline_runs_collection_next_model == pipeline_runs_collection_next_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        pipeline_runs_collection_next_model_json2 = pipeline_runs_collection_next_model.to_dict()
-        assert pipeline_runs_collection_next_model_json2 == pipeline_runs_collection_next_model_json
-
-class TestModel_PipelineRunsCollectionPipelineRunsItem():
-    """
-    Test Class for PipelineRunsCollectionPipelineRunsItem
-    """
-
-    def test_pipeline_runs_collection_pipeline_runs_item_serialization(self):
-        """
-        Test serialization/deserialization for PipelineRunsCollectionPipelineRunsItem
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        user_info_model = {} # UserInfo
-        user_info_model['iam_id'] = 'testString'
-        user_info_model['sub'] = 'testString'
-
-        pipeline_run_definition_model = {} # PipelineRunDefinition
-        pipeline_run_definition_model['id'] = 'testString'
-
-        pipeline_run_worker_model = {} # PipelineRunWorker
-        pipeline_run_worker_model['name'] = 'testString'
-        pipeline_run_worker_model['agent_id'] = 'testString'
-        pipeline_run_worker_model['service_id'] = 'testString'
-        pipeline_run_worker_model['id'] = 'testString'
-
-        pipeline_run_pipeline_model = {} # PipelineRunPipeline
-        pipeline_run_pipeline_model['id'] = 'testString'
-
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
-
-        worker_model = {} # Worker
-        worker_model['name'] = 'testString'
-        worker_model['type'] = 'testString'
-        worker_model['id'] = 'testString'
-
-        trigger_model = {} # TriggerManualTrigger
-        trigger_model['type'] = 'testString'
-        trigger_model['name'] = 'start-deploy'
-        trigger_model['href'] = 'testString'
-        trigger_model['event_listener'] = 'testString'
-        trigger_model['id'] = 'testString'
-        trigger_model['properties'] = [trigger_manual_trigger_properties_item_model]
-        trigger_model['tags'] = ['testString']
-        trigger_model['worker'] = worker_model
-        trigger_model['max_concurrent_runs'] = 4
-        trigger_model['enabled'] = True
-
-        property_model = {} # Property
-        property_model['name'] = 'testString'
-        property_model['value'] = 'testString'
-        property_model['href'] = 'testString'
-        property_model['enum'] = ['testString']
-        property_model['type'] = 'secure'
-        property_model['path'] = 'testString'
-
-        # Construct a json representation of a PipelineRunsCollectionPipelineRunsItem model
-        pipeline_runs_collection_pipeline_runs_item_model_json = {}
-        pipeline_runs_collection_pipeline_runs_item_model_json['id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['user_info'] = user_info_model
-        pipeline_runs_collection_pipeline_runs_item_model_json['status'] = 'pending'
-        pipeline_runs_collection_pipeline_runs_item_model_json['definition_id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['definition'] = pipeline_run_definition_model
-        pipeline_runs_collection_pipeline_runs_item_model_json['worker'] = pipeline_run_worker_model
-        pipeline_runs_collection_pipeline_runs_item_model_json['pipeline_id'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['pipeline'] = pipeline_run_pipeline_model
-        pipeline_runs_collection_pipeline_runs_item_model_json['listener_name'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['trigger'] = trigger_model
-        pipeline_runs_collection_pipeline_runs_item_model_json['event_params_blob'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['trigger_headers'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['properties'] = [property_model]
-        pipeline_runs_collection_pipeline_runs_item_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        pipeline_runs_collection_pipeline_runs_item_model_json['updated_at'] = '2019-01-01T12:00:00Z'
-        pipeline_runs_collection_pipeline_runs_item_model_json['run_url'] = 'testString'
-        pipeline_runs_collection_pipeline_runs_item_model_json['href'] = 'testString'
-
-        # Construct a model instance of PipelineRunsCollectionPipelineRunsItem by calling from_dict on the json representation
-        pipeline_runs_collection_pipeline_runs_item_model = PipelineRunsCollectionPipelineRunsItem.from_dict(pipeline_runs_collection_pipeline_runs_item_model_json)
-        assert pipeline_runs_collection_pipeline_runs_item_model != False
-
-        # Construct a model instance of PipelineRunsCollectionPipelineRunsItem by calling from_dict on the json representation
-        pipeline_runs_collection_pipeline_runs_item_model_dict = PipelineRunsCollectionPipelineRunsItem.from_dict(pipeline_runs_collection_pipeline_runs_item_model_json).__dict__
-        pipeline_runs_collection_pipeline_runs_item_model2 = PipelineRunsCollectionPipelineRunsItem(**pipeline_runs_collection_pipeline_runs_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert pipeline_runs_collection_pipeline_runs_item_model == pipeline_runs_collection_pipeline_runs_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        pipeline_runs_collection_pipeline_runs_item_model_json2 = pipeline_runs_collection_pipeline_runs_item_model.to_dict()
-        assert pipeline_runs_collection_pipeline_runs_item_model_json2 == pipeline_runs_collection_pipeline_runs_item_model_json
 
 class TestModel_PropertiesCollection():
     """
@@ -4635,6 +4381,180 @@ class TestModel_Property():
         property_model_json2 = property_model.to_dict()
         assert property_model_json2 == property_model_json
 
+class TestModel_ResourceGroupReference():
+    """
+    Test Class for ResourceGroupReference
+    """
+
+    def test_resource_group_reference_serialization(self):
+        """
+        Test serialization/deserialization for ResourceGroupReference
+        """
+
+        # Construct a json representation of a ResourceGroupReference model
+        resource_group_reference_model_json = {}
+        resource_group_reference_model_json['id'] = 'testString'
+
+        # Construct a model instance of ResourceGroupReference by calling from_dict on the json representation
+        resource_group_reference_model = ResourceGroupReference.from_dict(resource_group_reference_model_json)
+        assert resource_group_reference_model != False
+
+        # Construct a model instance of ResourceGroupReference by calling from_dict on the json representation
+        resource_group_reference_model_dict = ResourceGroupReference.from_dict(resource_group_reference_model_json).__dict__
+        resource_group_reference_model2 = ResourceGroupReference(**resource_group_reference_model_dict)
+
+        # Verify the model instances are equivalent
+        assert resource_group_reference_model == resource_group_reference_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        resource_group_reference_model_json2 = resource_group_reference_model.to_dict()
+        assert resource_group_reference_model_json2 == resource_group_reference_model_json
+
+class TestModel_RunDefinition():
+    """
+    Test Class for RunDefinition
+    """
+
+    def test_run_definition_serialization(self):
+        """
+        Test serialization/deserialization for RunDefinition
+        """
+
+        # Construct a json representation of a RunDefinition model
+        run_definition_model_json = {}
+        run_definition_model_json['id'] = 'testString'
+
+        # Construct a model instance of RunDefinition by calling from_dict on the json representation
+        run_definition_model = RunDefinition.from_dict(run_definition_model_json)
+        assert run_definition_model != False
+
+        # Construct a model instance of RunDefinition by calling from_dict on the json representation
+        run_definition_model_dict = RunDefinition.from_dict(run_definition_model_json).__dict__
+        run_definition_model2 = RunDefinition(**run_definition_model_dict)
+
+        # Verify the model instances are equivalent
+        assert run_definition_model == run_definition_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        run_definition_model_json2 = run_definition_model.to_dict()
+        assert run_definition_model_json2 == run_definition_model_json
+
+class TestModel_RunPipeline():
+    """
+    Test Class for RunPipeline
+    """
+
+    def test_run_pipeline_serialization(self):
+        """
+        Test serialization/deserialization for RunPipeline
+        """
+
+        # Construct a json representation of a RunPipeline model
+        run_pipeline_model_json = {}
+        run_pipeline_model_json['id'] = 'testString'
+
+        # Construct a model instance of RunPipeline by calling from_dict on the json representation
+        run_pipeline_model = RunPipeline.from_dict(run_pipeline_model_json)
+        assert run_pipeline_model != False
+
+        # Construct a model instance of RunPipeline by calling from_dict on the json representation
+        run_pipeline_model_dict = RunPipeline.from_dict(run_pipeline_model_json).__dict__
+        run_pipeline_model2 = RunPipeline(**run_pipeline_model_dict)
+
+        # Verify the model instances are equivalent
+        assert run_pipeline_model == run_pipeline_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        run_pipeline_model_json2 = run_pipeline_model.to_dict()
+        assert run_pipeline_model_json2 == run_pipeline_model_json
+
+class TestModel_RunsFirstPage():
+    """
+    Test Class for RunsFirstPage
+    """
+
+    def test_runs_first_page_serialization(self):
+        """
+        Test serialization/deserialization for RunsFirstPage
+        """
+
+        # Construct a json representation of a RunsFirstPage model
+        runs_first_page_model_json = {}
+        runs_first_page_model_json['href'] = 'testString'
+
+        # Construct a model instance of RunsFirstPage by calling from_dict on the json representation
+        runs_first_page_model = RunsFirstPage.from_dict(runs_first_page_model_json)
+        assert runs_first_page_model != False
+
+        # Construct a model instance of RunsFirstPage by calling from_dict on the json representation
+        runs_first_page_model_dict = RunsFirstPage.from_dict(runs_first_page_model_json).__dict__
+        runs_first_page_model2 = RunsFirstPage(**runs_first_page_model_dict)
+
+        # Verify the model instances are equivalent
+        assert runs_first_page_model == runs_first_page_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        runs_first_page_model_json2 = runs_first_page_model.to_dict()
+        assert runs_first_page_model_json2 == runs_first_page_model_json
+
+class TestModel_RunsLastPage():
+    """
+    Test Class for RunsLastPage
+    """
+
+    def test_runs_last_page_serialization(self):
+        """
+        Test serialization/deserialization for RunsLastPage
+        """
+
+        # Construct a json representation of a RunsLastPage model
+        runs_last_page_model_json = {}
+        runs_last_page_model_json['href'] = 'testString'
+
+        # Construct a model instance of RunsLastPage by calling from_dict on the json representation
+        runs_last_page_model = RunsLastPage.from_dict(runs_last_page_model_json)
+        assert runs_last_page_model != False
+
+        # Construct a model instance of RunsLastPage by calling from_dict on the json representation
+        runs_last_page_model_dict = RunsLastPage.from_dict(runs_last_page_model_json).__dict__
+        runs_last_page_model2 = RunsLastPage(**runs_last_page_model_dict)
+
+        # Verify the model instances are equivalent
+        assert runs_last_page_model == runs_last_page_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        runs_last_page_model_json2 = runs_last_page_model.to_dict()
+        assert runs_last_page_model_json2 == runs_last_page_model_json
+
+class TestModel_RunsNextPage():
+    """
+    Test Class for RunsNextPage
+    """
+
+    def test_runs_next_page_serialization(self):
+        """
+        Test serialization/deserialization for RunsNextPage
+        """
+
+        # Construct a json representation of a RunsNextPage model
+        runs_next_page_model_json = {}
+        runs_next_page_model_json['href'] = 'testString'
+
+        # Construct a model instance of RunsNextPage by calling from_dict on the json representation
+        runs_next_page_model = RunsNextPage.from_dict(runs_next_page_model_json)
+        assert runs_next_page_model != False
+
+        # Construct a model instance of RunsNextPage by calling from_dict on the json representation
+        runs_next_page_model_dict = RunsNextPage.from_dict(runs_next_page_model_json).__dict__
+        runs_next_page_model2 = RunsNextPage(**runs_next_page_model_dict)
+
+        # Verify the model instances are equivalent
+        assert runs_next_page_model == runs_next_page_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        runs_next_page_model_json2 = runs_next_page_model.to_dict()
+        assert runs_next_page_model_json2 == runs_next_page_model_json
+
 class TestModel_StepLog():
     """
     Test Class for StepLog
@@ -4677,22 +4597,22 @@ class TestModel_TektonPipeline():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        tekton_pipeline_resource_group_model = {} # TektonPipelineResourceGroup
-        tekton_pipeline_resource_group_model['id'] = 'testString'
+        resource_group_reference_model = {} # ResourceGroupReference
+        resource_group_reference_model['id'] = 'testString'
 
         toolchain_reference_model = {} # ToolchainReference
         toolchain_reference_model['id'] = 'testString'
         toolchain_reference_model['crn'] = 'crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::'
 
-        definition_source_properties_tool_model = {} # DefinitionSourcePropertiesTool
-        definition_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         definition_source_properties_model = {} # DefinitionSourceProperties
         definition_source_properties_model['url'] = 'testString'
         definition_source_properties_model['branch'] = 'testString'
         definition_source_properties_model['tag'] = 'testString'
         definition_source_properties_model['path'] = 'testString'
-        definition_source_properties_model['tool'] = definition_source_properties_tool_model
+        definition_source_properties_model['tool'] = tool_model
 
         definition_source_model = {} # DefinitionSource
         definition_source_model['type'] = 'testString'
@@ -4711,13 +4631,13 @@ class TestModel_TektonPipeline():
         property_model['type'] = 'secure'
         property_model['path'] = 'testString'
 
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -4730,7 +4650,7 @@ class TestModel_TektonPipeline():
         trigger_model['href'] = 'testString'
         trigger_model['event_listener'] = 'testString'
         trigger_model['id'] = 'testString'
-        trigger_model['properties'] = [trigger_manual_trigger_properties_item_model]
+        trigger_model['properties'] = [trigger_property_model]
         trigger_model['tags'] = ['testString']
         trigger_model['worker'] = worker_model
         trigger_model['max_concurrent_runs'] = 4
@@ -4740,7 +4660,7 @@ class TestModel_TektonPipeline():
         tekton_pipeline_model_json = {}
         tekton_pipeline_model_json['name'] = 'testString'
         tekton_pipeline_model_json['status'] = 'configured'
-        tekton_pipeline_model_json['resource_group'] = tekton_pipeline_resource_group_model
+        tekton_pipeline_model_json['resource_group'] = resource_group_reference_model
         tekton_pipeline_model_json['toolchain'] = toolchain_reference_model
         tekton_pipeline_model_json['id'] = 'testString'
         tekton_pipeline_model_json['definitions'] = [definition_model]
@@ -4807,34 +4727,34 @@ class TestModel_TektonPipelinePatch():
         tekton_pipeline_patch_model_json2 = tekton_pipeline_patch_model.to_dict()
         assert tekton_pipeline_patch_model_json2 == tekton_pipeline_patch_model_json
 
-class TestModel_TektonPipelineResourceGroup():
+class TestModel_Tool():
     """
-    Test Class for TektonPipelineResourceGroup
+    Test Class for Tool
     """
 
-    def test_tekton_pipeline_resource_group_serialization(self):
+    def test_tool_serialization(self):
         """
-        Test serialization/deserialization for TektonPipelineResourceGroup
+        Test serialization/deserialization for Tool
         """
 
-        # Construct a json representation of a TektonPipelineResourceGroup model
-        tekton_pipeline_resource_group_model_json = {}
-        tekton_pipeline_resource_group_model_json['id'] = 'testString'
+        # Construct a json representation of a Tool model
+        tool_model_json = {}
+        tool_model_json['id'] = 'testString'
 
-        # Construct a model instance of TektonPipelineResourceGroup by calling from_dict on the json representation
-        tekton_pipeline_resource_group_model = TektonPipelineResourceGroup.from_dict(tekton_pipeline_resource_group_model_json)
-        assert tekton_pipeline_resource_group_model != False
+        # Construct a model instance of Tool by calling from_dict on the json representation
+        tool_model = Tool.from_dict(tool_model_json)
+        assert tool_model != False
 
-        # Construct a model instance of TektonPipelineResourceGroup by calling from_dict on the json representation
-        tekton_pipeline_resource_group_model_dict = TektonPipelineResourceGroup.from_dict(tekton_pipeline_resource_group_model_json).__dict__
-        tekton_pipeline_resource_group_model2 = TektonPipelineResourceGroup(**tekton_pipeline_resource_group_model_dict)
+        # Construct a model instance of Tool by calling from_dict on the json representation
+        tool_model_dict = Tool.from_dict(tool_model_json).__dict__
+        tool_model2 = Tool(**tool_model_dict)
 
         # Verify the model instances are equivalent
-        assert tekton_pipeline_resource_group_model == tekton_pipeline_resource_group_model2
+        assert tool_model == tool_model2
 
         # Convert model instance back to dict and verify no loss of data
-        tekton_pipeline_resource_group_model_json2 = tekton_pipeline_resource_group_model.to_dict()
-        assert tekton_pipeline_resource_group_model_json2 == tekton_pipeline_resource_group_model_json
+        tool_model_json2 = tool_model.to_dict()
+        assert tool_model_json2 == tool_model_json
 
 class TestModel_ToolchainReference():
     """
@@ -4865,74 +4785,6 @@ class TestModel_ToolchainReference():
         # Convert model instance back to dict and verify no loss of data
         toolchain_reference_model_json2 = toolchain_reference_model.to_dict()
         assert toolchain_reference_model_json2 == toolchain_reference_model_json
-
-class TestModel_TriggerGenericTriggerPropertiesItem():
-    """
-    Test Class for TriggerGenericTriggerPropertiesItem
-    """
-
-    def test_trigger_generic_trigger_properties_item_serialization(self):
-        """
-        Test serialization/deserialization for TriggerGenericTriggerPropertiesItem
-        """
-
-        # Construct a json representation of a TriggerGenericTriggerPropertiesItem model
-        trigger_generic_trigger_properties_item_model_json = {}
-        trigger_generic_trigger_properties_item_model_json['name'] = 'testString'
-        trigger_generic_trigger_properties_item_model_json['value'] = 'testString'
-        trigger_generic_trigger_properties_item_model_json['href'] = 'testString'
-        trigger_generic_trigger_properties_item_model_json['enum'] = ['testString']
-        trigger_generic_trigger_properties_item_model_json['type'] = 'secure'
-        trigger_generic_trigger_properties_item_model_json['path'] = 'testString'
-
-        # Construct a model instance of TriggerGenericTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_generic_trigger_properties_item_model = TriggerGenericTriggerPropertiesItem.from_dict(trigger_generic_trigger_properties_item_model_json)
-        assert trigger_generic_trigger_properties_item_model != False
-
-        # Construct a model instance of TriggerGenericTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_generic_trigger_properties_item_model_dict = TriggerGenericTriggerPropertiesItem.from_dict(trigger_generic_trigger_properties_item_model_json).__dict__
-        trigger_generic_trigger_properties_item_model2 = TriggerGenericTriggerPropertiesItem(**trigger_generic_trigger_properties_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_generic_trigger_properties_item_model == trigger_generic_trigger_properties_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_generic_trigger_properties_item_model_json2 = trigger_generic_trigger_properties_item_model.to_dict()
-        assert trigger_generic_trigger_properties_item_model_json2 == trigger_generic_trigger_properties_item_model_json
-
-class TestModel_TriggerManualTriggerPropertiesItem():
-    """
-    Test Class for TriggerManualTriggerPropertiesItem
-    """
-
-    def test_trigger_manual_trigger_properties_item_serialization(self):
-        """
-        Test serialization/deserialization for TriggerManualTriggerPropertiesItem
-        """
-
-        # Construct a json representation of a TriggerManualTriggerPropertiesItem model
-        trigger_manual_trigger_properties_item_model_json = {}
-        trigger_manual_trigger_properties_item_model_json['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model_json['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model_json['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model_json['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model_json['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model_json['path'] = 'testString'
-
-        # Construct a model instance of TriggerManualTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_manual_trigger_properties_item_model = TriggerManualTriggerPropertiesItem.from_dict(trigger_manual_trigger_properties_item_model_json)
-        assert trigger_manual_trigger_properties_item_model != False
-
-        # Construct a model instance of TriggerManualTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_manual_trigger_properties_item_model_dict = TriggerManualTriggerPropertiesItem.from_dict(trigger_manual_trigger_properties_item_model_json).__dict__
-        trigger_manual_trigger_properties_item_model2 = TriggerManualTriggerPropertiesItem(**trigger_manual_trigger_properties_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_manual_trigger_properties_item_model == trigger_manual_trigger_properties_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_manual_trigger_properties_item_model_json2 = trigger_manual_trigger_properties_item_model.to_dict()
-        assert trigger_manual_trigger_properties_item_model_json2 == trigger_manual_trigger_properties_item_model_json
 
 class TestModel_TriggerPatch():
     """
@@ -5009,17 +4861,17 @@ class TestModel_TriggerPropertiesCollection():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_properties_collection_properties_item_model = {} # TriggerPropertiesCollectionPropertiesItem
-        trigger_properties_collection_properties_item_model['name'] = 'testString'
-        trigger_properties_collection_properties_item_model['value'] = 'testString'
-        trigger_properties_collection_properties_item_model['href'] = 'testString'
-        trigger_properties_collection_properties_item_model['enum'] = ['testString']
-        trigger_properties_collection_properties_item_model['type'] = 'secure'
-        trigger_properties_collection_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         # Construct a json representation of a TriggerPropertiesCollection model
         trigger_properties_collection_model_json = {}
-        trigger_properties_collection_model_json['properties'] = [trigger_properties_collection_properties_item_model]
+        trigger_properties_collection_model_json['properties'] = [trigger_property_model]
 
         # Construct a model instance of TriggerPropertiesCollection by calling from_dict on the json representation
         trigger_properties_collection_model = TriggerPropertiesCollection.from_dict(trigger_properties_collection_model_json)
@@ -5035,40 +4887,6 @@ class TestModel_TriggerPropertiesCollection():
         # Convert model instance back to dict and verify no loss of data
         trigger_properties_collection_model_json2 = trigger_properties_collection_model.to_dict()
         assert trigger_properties_collection_model_json2 == trigger_properties_collection_model_json
-
-class TestModel_TriggerPropertiesCollectionPropertiesItem():
-    """
-    Test Class for TriggerPropertiesCollectionPropertiesItem
-    """
-
-    def test_trigger_properties_collection_properties_item_serialization(self):
-        """
-        Test serialization/deserialization for TriggerPropertiesCollectionPropertiesItem
-        """
-
-        # Construct a json representation of a TriggerPropertiesCollectionPropertiesItem model
-        trigger_properties_collection_properties_item_model_json = {}
-        trigger_properties_collection_properties_item_model_json['name'] = 'testString'
-        trigger_properties_collection_properties_item_model_json['value'] = 'testString'
-        trigger_properties_collection_properties_item_model_json['href'] = 'testString'
-        trigger_properties_collection_properties_item_model_json['enum'] = ['testString']
-        trigger_properties_collection_properties_item_model_json['type'] = 'secure'
-        trigger_properties_collection_properties_item_model_json['path'] = 'testString'
-
-        # Construct a model instance of TriggerPropertiesCollectionPropertiesItem by calling from_dict on the json representation
-        trigger_properties_collection_properties_item_model = TriggerPropertiesCollectionPropertiesItem.from_dict(trigger_properties_collection_properties_item_model_json)
-        assert trigger_properties_collection_properties_item_model != False
-
-        # Construct a model instance of TriggerPropertiesCollectionPropertiesItem by calling from_dict on the json representation
-        trigger_properties_collection_properties_item_model_dict = TriggerPropertiesCollectionPropertiesItem.from_dict(trigger_properties_collection_properties_item_model_json).__dict__
-        trigger_properties_collection_properties_item_model2 = TriggerPropertiesCollectionPropertiesItem(**trigger_properties_collection_properties_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_properties_collection_properties_item_model == trigger_properties_collection_properties_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_properties_collection_properties_item_model_json2 = trigger_properties_collection_properties_item_model.to_dict()
-        assert trigger_properties_collection_properties_item_model_json2 == trigger_properties_collection_properties_item_model_json
 
 class TestModel_TriggerProperty():
     """
@@ -5104,40 +4922,6 @@ class TestModel_TriggerProperty():
         trigger_property_model_json2 = trigger_property_model.to_dict()
         assert trigger_property_model_json2 == trigger_property_model_json
 
-class TestModel_TriggerScmTriggerPropertiesItem():
-    """
-    Test Class for TriggerScmTriggerPropertiesItem
-    """
-
-    def test_trigger_scm_trigger_properties_item_serialization(self):
-        """
-        Test serialization/deserialization for TriggerScmTriggerPropertiesItem
-        """
-
-        # Construct a json representation of a TriggerScmTriggerPropertiesItem model
-        trigger_scm_trigger_properties_item_model_json = {}
-        trigger_scm_trigger_properties_item_model_json['name'] = 'testString'
-        trigger_scm_trigger_properties_item_model_json['value'] = 'testString'
-        trigger_scm_trigger_properties_item_model_json['href'] = 'testString'
-        trigger_scm_trigger_properties_item_model_json['enum'] = ['testString']
-        trigger_scm_trigger_properties_item_model_json['type'] = 'secure'
-        trigger_scm_trigger_properties_item_model_json['path'] = 'testString'
-
-        # Construct a model instance of TriggerScmTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_scm_trigger_properties_item_model = TriggerScmTriggerPropertiesItem.from_dict(trigger_scm_trigger_properties_item_model_json)
-        assert trigger_scm_trigger_properties_item_model != False
-
-        # Construct a model instance of TriggerScmTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_scm_trigger_properties_item_model_dict = TriggerScmTriggerPropertiesItem.from_dict(trigger_scm_trigger_properties_item_model_json).__dict__
-        trigger_scm_trigger_properties_item_model2 = TriggerScmTriggerPropertiesItem(**trigger_scm_trigger_properties_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_scm_trigger_properties_item_model == trigger_scm_trigger_properties_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_scm_trigger_properties_item_model_json2 = trigger_scm_trigger_properties_item_model.to_dict()
-        assert trigger_scm_trigger_properties_item_model_json2 == trigger_scm_trigger_properties_item_model_json
-
 class TestModel_TriggerSource():
     """
     Test Class for TriggerSource
@@ -5150,8 +4934,8 @@ class TestModel_TriggerSource():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_source_properties_tool_model = {} # TriggerSourcePropertiesTool
-        trigger_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         trigger_source_properties_model = {} # TriggerSourceProperties
         trigger_source_properties_model['url'] = 'testString'
@@ -5159,7 +4943,7 @@ class TestModel_TriggerSource():
         trigger_source_properties_model['pattern'] = 'testString'
         trigger_source_properties_model['blind_connection'] = True
         trigger_source_properties_model['hook_id'] = 'testString'
-        trigger_source_properties_model['tool'] = trigger_source_properties_tool_model
+        trigger_source_properties_model['tool'] = tool_model
 
         # Construct a json representation of a TriggerSource model
         trigger_source_model_json = {}
@@ -5193,8 +4977,8 @@ class TestModel_TriggerSourceProperties():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_source_properties_tool_model = {} # TriggerSourcePropertiesTool
-        trigger_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         # Construct a json representation of a TriggerSourceProperties model
         trigger_source_properties_model_json = {}
@@ -5203,7 +4987,7 @@ class TestModel_TriggerSourceProperties():
         trigger_source_properties_model_json['pattern'] = 'testString'
         trigger_source_properties_model_json['blind_connection'] = True
         trigger_source_properties_model_json['hook_id'] = 'testString'
-        trigger_source_properties_model_json['tool'] = trigger_source_properties_tool_model
+        trigger_source_properties_model_json['tool'] = tool_model
 
         # Construct a model instance of TriggerSourceProperties by calling from_dict on the json representation
         trigger_source_properties_model = TriggerSourceProperties.from_dict(trigger_source_properties_model_json)
@@ -5251,35 +5035,6 @@ class TestModel_TriggerSourcePropertiesPrototype():
         trigger_source_properties_prototype_model_json2 = trigger_source_properties_prototype_model.to_dict()
         assert trigger_source_properties_prototype_model_json2 == trigger_source_properties_prototype_model_json
 
-class TestModel_TriggerSourcePropertiesTool():
-    """
-    Test Class for TriggerSourcePropertiesTool
-    """
-
-    def test_trigger_source_properties_tool_serialization(self):
-        """
-        Test serialization/deserialization for TriggerSourcePropertiesTool
-        """
-
-        # Construct a json representation of a TriggerSourcePropertiesTool model
-        trigger_source_properties_tool_model_json = {}
-        trigger_source_properties_tool_model_json['id'] = 'testString'
-
-        # Construct a model instance of TriggerSourcePropertiesTool by calling from_dict on the json representation
-        trigger_source_properties_tool_model = TriggerSourcePropertiesTool.from_dict(trigger_source_properties_tool_model_json)
-        assert trigger_source_properties_tool_model != False
-
-        # Construct a model instance of TriggerSourcePropertiesTool by calling from_dict on the json representation
-        trigger_source_properties_tool_model_dict = TriggerSourcePropertiesTool.from_dict(trigger_source_properties_tool_model_json).__dict__
-        trigger_source_properties_tool_model2 = TriggerSourcePropertiesTool(**trigger_source_properties_tool_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_source_properties_tool_model == trigger_source_properties_tool_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_source_properties_tool_model_json2 = trigger_source_properties_tool_model.to_dict()
-        assert trigger_source_properties_tool_model_json2 == trigger_source_properties_tool_model_json
-
 class TestModel_TriggerSourcePrototype():
     """
     Test Class for TriggerSourcePrototype
@@ -5317,40 +5072,6 @@ class TestModel_TriggerSourcePrototype():
         trigger_source_prototype_model_json2 = trigger_source_prototype_model.to_dict()
         assert trigger_source_prototype_model_json2 == trigger_source_prototype_model_json
 
-class TestModel_TriggerTimerTriggerPropertiesItem():
-    """
-    Test Class for TriggerTimerTriggerPropertiesItem
-    """
-
-    def test_trigger_timer_trigger_properties_item_serialization(self):
-        """
-        Test serialization/deserialization for TriggerTimerTriggerPropertiesItem
-        """
-
-        # Construct a json representation of a TriggerTimerTriggerPropertiesItem model
-        trigger_timer_trigger_properties_item_model_json = {}
-        trigger_timer_trigger_properties_item_model_json['name'] = 'testString'
-        trigger_timer_trigger_properties_item_model_json['value'] = 'testString'
-        trigger_timer_trigger_properties_item_model_json['href'] = 'testString'
-        trigger_timer_trigger_properties_item_model_json['enum'] = ['testString']
-        trigger_timer_trigger_properties_item_model_json['type'] = 'secure'
-        trigger_timer_trigger_properties_item_model_json['path'] = 'testString'
-
-        # Construct a model instance of TriggerTimerTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_timer_trigger_properties_item_model = TriggerTimerTriggerPropertiesItem.from_dict(trigger_timer_trigger_properties_item_model_json)
-        assert trigger_timer_trigger_properties_item_model != False
-
-        # Construct a model instance of TriggerTimerTriggerPropertiesItem by calling from_dict on the json representation
-        trigger_timer_trigger_properties_item_model_dict = TriggerTimerTriggerPropertiesItem.from_dict(trigger_timer_trigger_properties_item_model_json).__dict__
-        trigger_timer_trigger_properties_item_model2 = TriggerTimerTriggerPropertiesItem(**trigger_timer_trigger_properties_item_model_dict)
-
-        # Verify the model instances are equivalent
-        assert trigger_timer_trigger_properties_item_model == trigger_timer_trigger_properties_item_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        trigger_timer_trigger_properties_item_model_json2 = trigger_timer_trigger_properties_item_model.to_dict()
-        assert trigger_timer_trigger_properties_item_model_json2 == trigger_timer_trigger_properties_item_model_json
-
 class TestModel_TriggersCollection():
     """
     Test Class for TriggersCollection
@@ -5363,13 +5084,13 @@ class TestModel_TriggersCollection():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5382,7 +5103,7 @@ class TestModel_TriggersCollection():
         trigger_model['href'] = 'testString'
         trigger_model['event_listener'] = 'testString'
         trigger_model['id'] = 'testString'
-        trigger_model['properties'] = [trigger_manual_trigger_properties_item_model]
+        trigger_model['properties'] = [trigger_property_model]
         trigger_model['tags'] = ['testString']
         trigger_model['worker'] = worker_model
         trigger_model['max_concurrent_runs'] = 4
@@ -5509,13 +5230,13 @@ class TestModel_TriggerGenericTrigger():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_generic_trigger_properties_item_model = {} # TriggerGenericTriggerPropertiesItem
-        trigger_generic_trigger_properties_item_model['name'] = 'testString'
-        trigger_generic_trigger_properties_item_model['value'] = 'testString'
-        trigger_generic_trigger_properties_item_model['href'] = 'testString'
-        trigger_generic_trigger_properties_item_model['enum'] = ['testString']
-        trigger_generic_trigger_properties_item_model['type'] = 'secure'
-        trigger_generic_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5536,7 +5257,7 @@ class TestModel_TriggerGenericTrigger():
         trigger_generic_trigger_model_json['href'] = 'testString'
         trigger_generic_trigger_model_json['event_listener'] = 'testString'
         trigger_generic_trigger_model_json['id'] = 'testString'
-        trigger_generic_trigger_model_json['properties'] = [trigger_generic_trigger_properties_item_model]
+        trigger_generic_trigger_model_json['properties'] = [trigger_property_model]
         trigger_generic_trigger_model_json['tags'] = ['testString']
         trigger_generic_trigger_model_json['worker'] = worker_model
         trigger_generic_trigger_model_json['max_concurrent_runs'] = 4
@@ -5571,13 +5292,13 @@ class TestModel_TriggerManualTrigger():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_manual_trigger_properties_item_model = {} # TriggerManualTriggerPropertiesItem
-        trigger_manual_trigger_properties_item_model['name'] = 'testString'
-        trigger_manual_trigger_properties_item_model['value'] = 'testString'
-        trigger_manual_trigger_properties_item_model['href'] = 'testString'
-        trigger_manual_trigger_properties_item_model['enum'] = ['testString']
-        trigger_manual_trigger_properties_item_model['type'] = 'secure'
-        trigger_manual_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5591,7 +5312,7 @@ class TestModel_TriggerManualTrigger():
         trigger_manual_trigger_model_json['href'] = 'testString'
         trigger_manual_trigger_model_json['event_listener'] = 'testString'
         trigger_manual_trigger_model_json['id'] = 'testString'
-        trigger_manual_trigger_model_json['properties'] = [trigger_manual_trigger_properties_item_model]
+        trigger_manual_trigger_model_json['properties'] = [trigger_property_model]
         trigger_manual_trigger_model_json['tags'] = ['testString']
         trigger_manual_trigger_model_json['worker'] = worker_model
         trigger_manual_trigger_model_json['max_concurrent_runs'] = 4
@@ -5624,21 +5345,21 @@ class TestModel_TriggerScmTrigger():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_scm_trigger_properties_item_model = {} # TriggerScmTriggerPropertiesItem
-        trigger_scm_trigger_properties_item_model['name'] = 'testString'
-        trigger_scm_trigger_properties_item_model['value'] = 'testString'
-        trigger_scm_trigger_properties_item_model['href'] = 'testString'
-        trigger_scm_trigger_properties_item_model['enum'] = ['testString']
-        trigger_scm_trigger_properties_item_model['type'] = 'secure'
-        trigger_scm_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
         worker_model['type'] = 'testString'
         worker_model['id'] = 'testString'
 
-        trigger_source_properties_tool_model = {} # TriggerSourcePropertiesTool
-        trigger_source_properties_tool_model['id'] = 'testString'
+        tool_model = {} # Tool
+        tool_model['id'] = 'testString'
 
         trigger_source_properties_model = {} # TriggerSourceProperties
         trigger_source_properties_model['url'] = 'testString'
@@ -5646,7 +5367,7 @@ class TestModel_TriggerScmTrigger():
         trigger_source_properties_model['pattern'] = 'testString'
         trigger_source_properties_model['blind_connection'] = True
         trigger_source_properties_model['hook_id'] = 'testString'
-        trigger_source_properties_model['tool'] = trigger_source_properties_tool_model
+        trigger_source_properties_model['tool'] = tool_model
 
         trigger_source_model = {} # TriggerSource
         trigger_source_model['type'] = 'testString'
@@ -5659,7 +5380,7 @@ class TestModel_TriggerScmTrigger():
         trigger_scm_trigger_model_json['href'] = 'testString'
         trigger_scm_trigger_model_json['event_listener'] = 'testString'
         trigger_scm_trigger_model_json['id'] = 'testString'
-        trigger_scm_trigger_model_json['properties'] = [trigger_scm_trigger_properties_item_model]
+        trigger_scm_trigger_model_json['properties'] = [trigger_property_model]
         trigger_scm_trigger_model_json['tags'] = ['testString']
         trigger_scm_trigger_model_json['worker'] = worker_model
         trigger_scm_trigger_model_json['max_concurrent_runs'] = 4
@@ -5694,13 +5415,13 @@ class TestModel_TriggerTimerTrigger():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_timer_trigger_properties_item_model = {} # TriggerTimerTriggerPropertiesItem
-        trigger_timer_trigger_properties_item_model['name'] = 'testString'
-        trigger_timer_trigger_properties_item_model['value'] = 'testString'
-        trigger_timer_trigger_properties_item_model['href'] = 'testString'
-        trigger_timer_trigger_properties_item_model['enum'] = ['testString']
-        trigger_timer_trigger_properties_item_model['type'] = 'secure'
-        trigger_timer_trigger_properties_item_model['path'] = 'testString'
+        trigger_property_model = {} # TriggerProperty
+        trigger_property_model['name'] = 'testString'
+        trigger_property_model['value'] = 'testString'
+        trigger_property_model['href'] = 'testString'
+        trigger_property_model['enum'] = ['testString']
+        trigger_property_model['type'] = 'secure'
+        trigger_property_model['path'] = 'testString'
 
         worker_model = {} # Worker
         worker_model['name'] = 'testString'
@@ -5714,7 +5435,7 @@ class TestModel_TriggerTimerTrigger():
         trigger_timer_trigger_model_json['href'] = 'testString'
         trigger_timer_trigger_model_json['event_listener'] = 'testString'
         trigger_timer_trigger_model_json['id'] = 'testString'
-        trigger_timer_trigger_model_json['properties'] = [trigger_timer_trigger_properties_item_model]
+        trigger_timer_trigger_model_json['properties'] = [trigger_property_model]
         trigger_timer_trigger_model_json['tags'] = ['testString']
         trigger_timer_trigger_model_json['worker'] = worker_model
         trigger_timer_trigger_model_json['max_concurrent_runs'] = 4
