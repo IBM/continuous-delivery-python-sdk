@@ -1,3 +1,12 @@
+## [0.3.5](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.4...v0.3.5) (2023-01-12)
+
+
+### Bug Fixes
+
+* **build:** fix sem-ver release issue ([e469482](https://github.com/IBM/continuous-delivery-python-sdk/commit/e4694826095f3b12c488f569ef405357f73f56b1))
+* **tekton:** post GA updates ([9b1148c](https://github.com/IBM/continuous-delivery-python-sdk/commit/9b1148cf9cf9abc5879a17a51416cb76ba4ecf5f))
+* **tekton:** update to match latest API ([c283f3a](https://github.com/IBM/continuous-delivery-python-sdk/commit/c283f3a4c2da54b813613abb09dbffeff8cd225c))
+
 ## [0.3.4](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.3...v0.3.4) (2022-12-07)
 
 
