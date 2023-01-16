@@ -47,8 +47,8 @@ IBM Cloud services:
 
 Service Name | Module Name | Imported Class Name
 --- | --- | ---
-[Toolchain API](https://cloud.ibm.com/apidocs/toolchain?code=go) | CdToolchainV2
-[Tekton Pipeline API](https://cloud.ibm.com/apidocs/tekton-pipeline?code=go) | CdTektonPipelineV2
+[Toolchain API](https://cloud.ibm.com/apidocs/toolchain?code=python) | CdToolchainV2
+[Tekton Pipeline API](https://cloud.ibm.com/apidocs/tekton-pipeline?code=python) | CdTektonPipelineV2
 
 ## Prerequisites
 
