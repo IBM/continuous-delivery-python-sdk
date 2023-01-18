@@ -1394,7 +1394,7 @@ class CdTektonPipelineV2(BaseService):
         event_listener: str,
         *,
         tags: List[str] = None,
-        worker: 'Worker' = None,
+        worker: 'WorkerIdentity' = None,
         max_concurrent_runs: int = None,
         enabled: bool = None,
         secret: 'GenericSecret' = None,
@@ -1416,8 +1416,8 @@ class CdTektonPipelineV2(BaseService):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param List[str] tags: (optional) Trigger tags array.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param WorkerIdentity worker: (optional) Worker used to run the trigger. If
+               not specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
@@ -2080,21 +2080,22 @@ class Definition():
 
     :attr DefinitionSource source: Source repository containing the Tekton pipeline
           definition.
-    :attr str href: API URL for interacting with the definition.
+    :attr str href: (optional) API URL for interacting with the definition.
     :attr str id: The aggregated definition ID.
     """
 
     def __init__(self,
                  source: 'DefinitionSource',
-                 href: str,
-                 id: str) -> None:
+                 id: str,
+                 *,
+                 href: str = None) -> None:
         """
         Initialize a Definition object.
 
         :param DefinitionSource source: Source repository containing the Tekton
                pipeline definition.
-        :param str href: API URL for interacting with the definition.
         :param str id: The aggregated definition ID.
+        :param str href: (optional) API URL for interacting with the definition.
         """
         self.source = source
         self.href = href
@@ -2110,8 +2111,6 @@ class Definition():
             raise ValueError('Required property \'source\' not present in Definition JSON')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in Definition JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         else:
@@ -2526,21 +2525,22 @@ class Log():
     """
     Log data for Tekton pipeline run steps.
 
-    :attr str href: API for getting log content.
+    :attr str href: (optional) API for getting log content.
     :attr str id: Step log ID.
     :attr str name: <podName>/<containerName> of this log.
     """
 
     def __init__(self,
-                 href: str,
                  id: str,
-                 name: str) -> None:
+                 name: str,
+                 *,
+                 href: str = None) -> None:
         """
         Initialize a Log object.
 
-        :param str href: API for getting log content.
         :param str id: Step log ID.
         :param str name: <podName>/<containerName> of this log.
+        :param str href: (optional) API for getting log content.
         """
         self.href = href
         self.id = id
@@ -2552,8 +2552,6 @@ class Log():
         args = {}
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in Log JSON')
         if 'id' in _dict:
             args['id'] = _dict.get('id')
         else:
@@ -2665,7 +2663,7 @@ class PipelineRun():
     Single Tekton pipeline run object.
 
     :attr str id: UUID.
-    :attr str href: General href URL.
+    :attr str href: (optional) General href URL.
     :attr UserInfo user_info: (optional) Information about the user that triggered a
           pipeline run. Only included for pipeline runs that were manually triggered.
     :attr str status: Status of the pipeline run.
@@ -2696,7 +2694,6 @@ class PipelineRun():
 
     def __init__(self,
                  id: str,
-                 href: str,
                  status: str,
                  definition_id: str,
                  worker: 'PipelineRunWorker',
@@ -2707,6 +2704,7 @@ class PipelineRun():
                  created_at: datetime,
                  run_url: str,
                  *,
+                 href: str = None,
                  user_info: 'UserInfo' = None,
                  definition: 'RunDefinition' = None,
                  pipeline: 'RunPipeline' = None,
@@ -2717,7 +2715,6 @@ class PipelineRun():
         Initialize a PipelineRun object.
 
         :param str id: UUID.
-        :param str href: General href URL.
         :param str status: Status of the pipeline run.
         :param str definition_id: The aggregated definition ID.
         :param PipelineRunWorker worker: worker details used in this pipeline run.
@@ -2732,6 +2729,7 @@ class PipelineRun():
                properties are included.
         :param datetime created_at: Standard RFC 3339 Date Time String.
         :param str run_url: URL for the details page of this pipeline run.
+        :param str href: (optional) General href URL.
         :param UserInfo user_info: (optional) Information about the user that
                triggered a pipeline run. Only included for pipeline runs that were
                manually triggered.
@@ -2775,8 +2773,6 @@ class PipelineRun():
             raise ValueError('Required property \'id\' not present in PipelineRun JSON')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in PipelineRun JSON')
         if 'user_info' in _dict:
             args['user_info'] = UserInfo.from_dict(_dict.get('user_info'))
         if 'status' in _dict:
@@ -3318,7 +3314,7 @@ class Property():
 
     :attr str name: Property name.
     :attr str value: (optional) Property value. Any string value is valid.
-    :attr str href: API URL for interacting with the property.
+    :attr str href: (optional) API URL for interacting with the property.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed when using `single_select` property type.
     :attr str type: Property type.
@@ -3329,19 +3325,19 @@ class Property():
 
     def __init__(self,
                  name: str,
-                 href: str,
                  type: str,
                  *,
                  value: str = None,
+                 href: str = None,
                  enum: List[str] = None,
                  path: str = None) -> None:
         """
         Initialize a Property object.
 
         :param str name: Property name.
-        :param str href: API URL for interacting with the property.
         :param str type: Property type.
         :param str value: (optional) Property value. Any string value is valid.
+        :param str href: (optional) API URL for interacting with the property.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
@@ -3367,8 +3363,6 @@ class Property():
             args['value'] = _dict.get('value')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in Property JSON')
         if 'enum' in _dict:
             args['enum'] = _dict.get('enum')
         if 'type' in _dict:
@@ -3852,7 +3846,7 @@ class TektonPipeline():
     :attr List[Trigger] triggers: Tekton pipeline triggers list.
     :attr Worker worker: Default pipeline worker used to run the pipeline.
     :attr str runs_url: URL for this pipeline showing the list of pipeline runs.
-    :attr str href: API URL for interacting with the pipeline.
+    :attr str href: (optional) API URL for interacting with the pipeline.
     :attr int build_number: The latest pipeline run build number. If this property
           is absent, the pipeline hasn't had any pipeline runs.
     :attr bool enable_notifications: Flag whether to enable notifications for this
@@ -3880,11 +3874,12 @@ class TektonPipeline():
                  triggers: List['Trigger'],
                  worker: 'Worker',
                  runs_url: str,
-                 href: str,
                  build_number: int,
                  enable_notifications: bool,
                  enable_partial_cloning: bool,
-                 enabled: bool) -> None:
+                 enabled: bool,
+                 *,
+                 href: str = None) -> None:
         """
         Initialize a TektonPipeline object.
 
@@ -3903,7 +3898,6 @@ class TektonPipeline():
         :param Worker worker: Default pipeline worker used to run the pipeline.
         :param str runs_url: URL for this pipeline showing the list of pipeline
                runs.
-        :param str href: API URL for interacting with the pipeline.
         :param int build_number: The latest pipeline run build number. If this
                property is absent, the pipeline hasn't had any pipeline runs.
         :param bool enable_notifications: Flag whether to enable notifications for
@@ -3916,6 +3910,7 @@ class TektonPipeline():
                this means that symbolic links might not work. If omitted, this feature is
                disabled by default.
         :param bool enabled: Flag whether this pipeline is enabled.
+        :param str href: (optional) API URL for interacting with the pipeline.
         """
         self.name = name
         self.status = status
@@ -3989,8 +3984,6 @@ class TektonPipeline():
             raise ValueError('Required property \'runs_url\' not present in TektonPipeline JSON')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in TektonPipeline JSON')
         if 'build_number' in _dict:
             args['build_number'] = _dict.get('build_number')
         else:
@@ -4342,8 +4335,8 @@ class TriggerPatch():
           the definition repositories of the Tekton pipeline.
     :attr List[str] tags: (optional) Trigger tags array. Optional tags for the
           trigger.
-    :attr Worker worker: (optional) Worker used to run the trigger. If not specified
-          the trigger will use the default pipeline worker.
+    :attr WorkerIdentity worker: (optional) Worker used to run the trigger. If not
+          specified the trigger will use the default pipeline worker.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
@@ -4376,7 +4369,7 @@ class TriggerPatch():
                  name: str = None,
                  event_listener: str = None,
                  tags: List[str] = None,
-                 worker: 'Worker' = None,
+                 worker: 'WorkerIdentity' = None,
                  max_concurrent_runs: int = None,
                  enabled: bool = None,
                  secret: 'GenericSecret' = None,
@@ -4394,8 +4387,8 @@ class TriggerPatch():
                defined in the definition repositories of the Tekton pipeline.
         :param List[str] tags: (optional) Trigger tags array. Optional tags for the
                trigger.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param WorkerIdentity worker: (optional) Worker used to run the trigger. If
+               not specified the trigger will use the default pipeline worker.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
@@ -4448,7 +4441,7 @@ class TriggerPatch():
         if 'tags' in _dict:
             args['tags'] = _dict.get('tags')
         if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
+            args['worker'] = WorkerIdentity.from_dict(_dict.get('worker'))
         if 'max_concurrent_runs' in _dict:
             args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
         if 'enabled' in _dict:
@@ -4615,7 +4608,7 @@ class TriggerProperty():
 
     :attr str name: Property name.
     :attr str value: (optional) Property value. Any string value is valid.
-    :attr str href: API URL for interacting with the trigger property.
+    :attr str href: (optional) API URL for interacting with the trigger property.
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed for `single_select` property type.
     :attr str type: Property type.
@@ -4626,19 +4619,20 @@ class TriggerProperty():
 
     def __init__(self,
                  name: str,
-                 href: str,
                  type: str,
                  *,
                  value: str = None,
+                 href: str = None,
                  enum: List[str] = None,
                  path: str = None) -> None:
         """
         Initialize a TriggerProperty object.
 
         :param str name: Property name.
-        :param str href: API URL for interacting with the trigger property.
         :param str type: Property type.
         :param str value: (optional) Property value. Any string value is valid.
+        :param str href: (optional) API URL for interacting with the trigger
+               property.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed for `single_select` property type.
         :param str path: (optional) A dot notation path for `integration` type
@@ -4664,8 +4658,6 @@ class TriggerProperty():
             args['value'] = _dict.get('value')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
-        else:
-            raise ValueError('Required property \'href\' not present in TriggerProperty JSON')
         if 'enum' in _dict:
             args['enum'] = _dict.get('enum')
         if 'type' in _dict:

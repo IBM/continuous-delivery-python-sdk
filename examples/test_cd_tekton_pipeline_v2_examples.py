@@ -191,7 +191,6 @@ class TestCdTektonPipelineV2Examples():
 
             property_model = {
                 'name': 'testString',
-                'href': 'testString',
                 'type': 'secure',
             }
 
@@ -566,7 +565,7 @@ class TestCdTektonPipelineV2Examples():
             print('\ncreate_tekton_pipeline_trigger() result:')
             # begin-create_tekton_pipeline_trigger
 
-            worker_model = {
+            worker_identity_model = {
                 'id': 'public',
             }
 
@@ -575,7 +574,7 @@ class TestCdTektonPipelineV2Examples():
                 type='manual',
                 name='Manual Trigger',
                 event_listener='pr-listener',
-                worker=worker_model,
+                worker=worker_identity_model,
                 max_concurrent_runs=3,
                 enabled=True
             )

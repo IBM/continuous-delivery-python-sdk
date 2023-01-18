@@ -418,10 +418,8 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_create_tekton_pipeline_trigger(self):
 
-        # Construct a dict representation of a Worker model
-        worker_model = {
-            'name': 'testString',
-            'type': 'testString',
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {
             'id': 'public',
         }
 
@@ -453,7 +451,7 @@ class TestCdTektonPipelineV2():
             name='Manual Trigger',
             event_listener='pr-listener',
             tags=['testString'],
-            worker=worker_model,
+            worker=worker_identity_model,
             max_concurrent_runs=3,
             enabled=True,
             secret=generic_secret_model,
@@ -482,10 +480,8 @@ class TestCdTektonPipelineV2():
     @needscredentials
     def test_update_tekton_pipeline_trigger(self):
 
-        # Construct a dict representation of a Worker model
-        worker_model = {
-            'name': 'testString',
-            'type': 'testString',
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {
             'id': 'testString',
         }
 
@@ -517,7 +513,7 @@ class TestCdTektonPipelineV2():
             'name': 'start-deploy',
             'event_listener': 'testString',
             'tags': ['testString'],
-            'worker': worker_model,
+            'worker': worker_identity_model,
             'max_concurrent_runs': 4,
             'enabled': True,
             'secret': generic_secret_model,
