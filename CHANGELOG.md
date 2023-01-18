@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.5...v0.3.6) (2023-01-18)
+
+
+### Bug Fixes
+
+* **tekton:** WorkerIdentity and hrefs updated ([dc70e35](https://github.com/IBM/continuous-delivery-python-sdk/commit/dc70e35761405c95af0a908eab7ce0d8d8b7ab66))
+
 ## [0.3.5](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.4...v0.3.5) (2023-01-12)
 
 
