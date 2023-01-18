@@ -2633,11 +2633,9 @@ class TestCreateTektonPipelineTrigger():
                       content_type='application/json',
                       status=201)
 
-        # Construct a dict representation of a Worker model
-        worker_model = {}
-        worker_model['name'] = 'testString'
-        worker_model['type'] = 'testString'
-        worker_model['id'] = 'public'
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {}
+        worker_identity_model['id'] = 'public'
 
         # Construct a dict representation of a GenericSecret model
         generic_secret_model = {}
@@ -2664,7 +2662,7 @@ class TestCreateTektonPipelineTrigger():
         name = 'Manual Trigger'
         event_listener = 'pr-listener'
         tags = ['testString']
-        worker = worker_model
+        worker = worker_identity_model
         max_concurrent_runs = 3
         enabled = True
         secret = generic_secret_model
@@ -2700,7 +2698,7 @@ class TestCreateTektonPipelineTrigger():
         assert req_body['name'] == 'Manual Trigger'
         assert req_body['event_listener'] == 'pr-listener'
         assert req_body['tags'] == ['testString']
-        assert req_body['worker'] == worker_model
+        assert req_body['worker'] == worker_identity_model
         assert req_body['max_concurrent_runs'] == 3
         assert req_body['enabled'] == True
         assert req_body['secret'] == generic_secret_model
@@ -2732,11 +2730,9 @@ class TestCreateTektonPipelineTrigger():
                       content_type='application/json',
                       status=201)
 
-        # Construct a dict representation of a Worker model
-        worker_model = {}
-        worker_model['name'] = 'testString'
-        worker_model['type'] = 'testString'
-        worker_model['id'] = 'public'
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {}
+        worker_identity_model['id'] = 'public'
 
         # Construct a dict representation of a GenericSecret model
         generic_secret_model = {}
@@ -2763,7 +2759,7 @@ class TestCreateTektonPipelineTrigger():
         name = 'Manual Trigger'
         event_listener = 'pr-listener'
         tags = ['testString']
-        worker = worker_model
+        worker = worker_identity_model
         max_concurrent_runs = 3
         enabled = True
         secret = generic_secret_model
@@ -2892,11 +2888,9 @@ class TestUpdateTektonPipelineTrigger():
                       content_type='application/json',
                       status=200)
 
-        # Construct a dict representation of a Worker model
-        worker_model = {}
-        worker_model['name'] = 'testString'
-        worker_model['type'] = 'testString'
-        worker_model['id'] = 'testString'
+        # Construct a dict representation of a WorkerIdentity model
+        worker_identity_model = {}
+        worker_identity_model['id'] = 'testString'
 
         # Construct a dict representation of a GenericSecret model
         generic_secret_model = {}
@@ -2923,7 +2917,7 @@ class TestUpdateTektonPipelineTrigger():
         trigger_patch_model['name'] = 'start-deploy'
         trigger_patch_model['event_listener'] = 'testString'
         trigger_patch_model['tags'] = ['testString']
-        trigger_patch_model['worker'] = worker_model
+        trigger_patch_model['worker'] = worker_identity_model
         trigger_patch_model['max_concurrent_runs'] = 4
         trigger_patch_model['enabled'] = True
         trigger_patch_model['secret'] = generic_secret_model
@@ -4798,10 +4792,8 @@ class TestModel_TriggerPatch():
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        worker_model = {} # Worker
-        worker_model['name'] = 'testString'
-        worker_model['type'] = 'testString'
-        worker_model['id'] = 'testString'
+        worker_identity_model = {} # WorkerIdentity
+        worker_identity_model['id'] = 'testString'
 
         generic_secret_model = {} # GenericSecret
         generic_secret_model['type'] = 'token_matches'
@@ -4825,7 +4817,7 @@ class TestModel_TriggerPatch():
         trigger_patch_model_json['name'] = 'start-deploy'
         trigger_patch_model_json['event_listener'] = 'testString'
         trigger_patch_model_json['tags'] = ['testString']
-        trigger_patch_model_json['worker'] = worker_model
+        trigger_patch_model_json['worker'] = worker_identity_model
         trigger_patch_model_json['max_concurrent_runs'] = 4
         trigger_patch_model_json['enabled'] = True
         trigger_patch_model_json['secret'] = generic_secret_model
