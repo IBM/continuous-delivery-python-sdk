@@ -1,3 +1,10 @@
+## [0.3.7](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.6...v0.3.7) (2023-02-16)
+
+
+### Bug Fixes
+
+* **doc:** fix up readme issues ([332bfa0](https://github.com/IBM/continuous-delivery-python-sdk/commit/332bfa0914a798fc61cc85248a79887ccc0800a5))
+
 ## [0.3.6](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.5...v0.3.6) (2023-01-18)
 
 
