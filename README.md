@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://img.shields.io/pypi/v/ibm-continuous-delivery.svg)](https://pypi.python.org/pypi/ibm-continuous-delivery)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM Cloud Continuous Delivery Python SDK v0.3.6
+# IBM Cloud Continuous Delivery Python SDK v0.3.7
 
 Python client library to interact with various [IBM Cloud Continuous Delivery APIs](https://cloud.ibm.com/apidocs?category=continuous-delivery).
 
@@ -27,7 +27,7 @@ The current minimum Python version supported is 3.7.
 
 <!-- toc -->
 
-- [IBM Cloud Continuous Delivery Python SDK v0.3.6](#ibm-cloud-continuous-delivery-python-sdk-v036)
+- [IBM Cloud Continuous Delivery Python SDK v0.3.7](#ibm-cloud-continuous-delivery-python-sdk-v036)
 - [Python Version](#python-version)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
