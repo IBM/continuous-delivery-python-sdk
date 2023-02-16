@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.com/IBM/continuous-delivery-python-sdk.svg?branch=main)](https://travis.ibm.com/IBM/continuous-delivery-python-sdk)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ibm-continuous-delivery)](https://pypi.org/project/ibm-continuous-delivery/)
+[![Latest Stable Version](https://img.shields.io/pypi/v/ibm-continuous-delivery.svg)](https://pypi.python.org/pypi/ibm-continuous-delivery)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 # IBM Cloud Continuous Delivery Python SDK v0.3.6
@@ -25,7 +27,7 @@ The current minimum Python version supported is 3.7.
 
 <!-- toc -->
 
-- [IBM Cloud Continuous Delivery Python SDK v0.3.0](#ibm-cloud-continuous-delivery-python-sdk-v030)
+- [IBM Cloud Continuous Delivery Python SDK v0.3.6](#ibm-cloud-continuous-delivery-python-sdk-v036)
 - [Python Version](#python-version)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
@@ -47,8 +49,8 @@ IBM Cloud services:
 
 Service Name | Module Name | Imported Class Name
 --- | --- | ---
-[Toolchain API](https://cloud.ibm.com/apidocs/toolchain?code=python) | CdToolchainV2
-[Tekton Pipeline API](https://cloud.ibm.com/apidocs/tekton-pipeline?code=python) | CdTektonPipelineV2
+[Toolchain API](https://cloud.ibm.com/apidocs/toolchain?code=python) | cd_toolchain_v2| CdToolchainV2
+[Tekton Pipeline API](https://cloud.ibm.com/apidocs/tekton-pipeline?code=python) | cd_tekton_pipeline_v2 | CdTektonPipelineV2
 
 ## Prerequisites
 
