@@ -1,3 +1,17 @@
+# [1.0.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.7...v1.0.0) (2023-02-21)
+
+
+### Features
+
+* **build:** trigger major version build ([e9f2e84](https://github.com/IBM/continuous-delivery-python-sdk/commit/e9f2e845edacbdc23957003f541eb7d0d3c3ed3c))
+
+
+### BREAKING CHANGES
+
+* **build:** release v1.0.0
+
+Signed-off-by: Omar Al Bastami <omar.albastami@ibm.com>
+
 ## [0.3.7](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.6...v0.3.7) (2023-02-16)
 
 
