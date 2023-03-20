@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.62.0-a2a22f95-20221115-162524
+# IBM OpenAPI SDK Code Generator Version: 3.68.2-ac7def68-20230310-195410
 
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
@@ -112,6 +112,7 @@ class CdTektonPipelineV2(BaseService):
     def create_tekton_pipeline(self,
         id: str,
         *,
+        next_build_number: int = None,
         enable_notifications: bool = None,
         enable_partial_cloning: bool = None,
         worker: 'WorkerIdentity' = None,
@@ -129,6 +130,9 @@ class CdTektonPipelineV2(BaseService):
                created in the target toolchain. To get the pipeline ID call the toolchain
                API https://cloud.ibm.com/apidocs/toolchain#list-tools and find the
                pipeline tool.
+        :param int next_build_number: (optional) Specify the build number that will
+               be used for the next pipeline run. Build numbers can be any positive whole
+               number between 0 and 100000000000000.
         :param bool enable_notifications: (optional) Flag whether to enable
                notifications for this pipeline. When enabled, pipeline run events are
                published on all slack integration specified channels in the parent
@@ -156,9 +160,10 @@ class CdTektonPipelineV2(BaseService):
 
         data = {
             'id': id,
+            'next_build_number': next_build_number,
             'enable_notifications': enable_notifications,
             'enable_partial_cloning': enable_partial_cloning,
-            'worker': worker
+            'worker': worker,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -357,7 +362,7 @@ class CdTektonPipelineV2(BaseService):
             'start': start,
             'limit': limit,
             'status': status,
-            'trigger.name': trigger_name
+            'trigger.name': trigger_name,
         }
 
         if 'headers' in kwargs:
@@ -392,8 +397,8 @@ class CdTektonPipelineV2(BaseService):
         """
         Trigger a pipeline run.
 
-        Trigger a new pipeline run using the named manual trigger, using the provided
-        additional or override properties.
+        Trigger a new pipeline run with the named manual or timer trigger, using the
+        provided additional or override properties.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str trigger_name: (optional) Trigger name.
@@ -440,7 +445,7 @@ class CdTektonPipelineV2(BaseService):
             'secure_trigger_properties': secure_trigger_properties,
             'trigger_headers': trigger_headers,
             'trigger_body': trigger_body,
-            'trigger': trigger
+            'trigger': trigger,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -496,7 +501,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         params = {
-            'includes': includes
+            'includes': includes,
         }
 
         if 'headers' in kwargs:
@@ -592,7 +597,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'force': force
+            'force': force,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -842,7 +847,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'source': source
+            'source': source,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -945,7 +950,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'source': source
+            'source': source,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1053,7 +1058,7 @@ class CdTektonPipelineV2(BaseService):
         params = {
             'name': name,
             'type': convert_list(type),
-            'sort': sort
+            'sort': sort,
         }
 
         if 'headers' in kwargs:
@@ -1120,7 +1125,7 @@ class CdTektonPipelineV2(BaseService):
             'type': type,
             'value': value,
             'enum': enum,
-            'path': path
+            'path': path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1240,7 +1245,7 @@ class CdTektonPipelineV2(BaseService):
             'type': type,
             'value': value,
             'enum': enum,
-            'path': path
+            'path': path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1366,7 +1371,7 @@ class CdTektonPipelineV2(BaseService):
             'worker.id': worker_id,
             'worker.name': worker_name,
             'disabled': disabled,
-            'tags': tags
+            'tags': tags,
         }
 
         if 'headers' in kwargs:
@@ -1481,7 +1486,7 @@ class CdTektonPipelineV2(BaseService):
             'cron': cron,
             'timezone': timezone,
             'source': source,
-            'events': events
+            'events': events,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1680,7 +1685,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
-            'name': name
+            'name': name,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1748,7 +1753,7 @@ class CdTektonPipelineV2(BaseService):
         params = {
             'name': name,
             'type': type,
-            'sort': sort
+            'sort': sort,
         }
 
         if 'headers' in kwargs:
@@ -1819,7 +1824,7 @@ class CdTektonPipelineV2(BaseService):
             'type': type,
             'value': value,
             'enum': enum,
-            'path': path
+            'path': path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1945,7 +1950,7 @@ class CdTektonPipelineV2(BaseService):
             'type': type,
             'value': value,
             'enum': enum,
-            'path': path
+            'path': path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -3849,6 +3854,8 @@ class TektonPipeline():
     :attr str href: (optional) API URL for interacting with the pipeline.
     :attr int build_number: The latest pipeline run build number. If this property
           is absent, the pipeline hasn't had any pipeline runs.
+    :attr int next_build_number: The build number that will be used for the next
+          pipeline run.
     :attr bool enable_notifications: Flag whether to enable notifications for this
           pipeline. When enabled, pipeline run events will be published on all slack
           integration specified channels in the parent toolchain. If omitted, this feature
@@ -3875,6 +3882,7 @@ class TektonPipeline():
                  worker: 'Worker',
                  runs_url: str,
                  build_number: int,
+                 next_build_number: int,
                  enable_notifications: bool,
                  enable_partial_cloning: bool,
                  enabled: bool,
@@ -3900,6 +3908,8 @@ class TektonPipeline():
                runs.
         :param int build_number: The latest pipeline run build number. If this
                property is absent, the pipeline hasn't had any pipeline runs.
+        :param int next_build_number: The build number that will be used for the
+               next pipeline run.
         :param bool enable_notifications: Flag whether to enable notifications for
                this pipeline. When enabled, pipeline run events will be published on all
                slack integration specified channels in the parent toolchain. If omitted,
@@ -3926,6 +3936,7 @@ class TektonPipeline():
         self.runs_url = runs_url
         self.href = href
         self.build_number = build_number
+        self.next_build_number = next_build_number
         self.enable_notifications = enable_notifications
         self.enable_partial_cloning = enable_partial_cloning
         self.enabled = enabled
@@ -3988,6 +3999,10 @@ class TektonPipeline():
             args['build_number'] = _dict.get('build_number')
         else:
             raise ValueError('Required property \'build_number\' not present in TektonPipeline JSON')
+        if 'next_build_number' in _dict:
+            args['next_build_number'] = _dict.get('next_build_number')
+        else:
+            raise ValueError('Required property \'next_build_number\' not present in TektonPipeline JSON')
         if 'enable_notifications' in _dict:
             args['enable_notifications'] = _dict.get('enable_notifications')
         else:
@@ -4065,6 +4080,8 @@ class TektonPipeline():
             _dict['href'] = self.href
         if hasattr(self, 'build_number') and self.build_number is not None:
             _dict['build_number'] = self.build_number
+        if hasattr(self, 'next_build_number') and self.next_build_number is not None:
+            _dict['next_build_number'] = self.next_build_number
         if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
             _dict['enable_notifications'] = self.enable_notifications
         if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
@@ -4103,6 +4120,9 @@ class TektonPipelinePatch():
     """
     Request body used to update this pipeline.
 
+    :attr int next_build_number: (optional) Specify the build number that will be
+          used for the next pipeline run. Build numbers can be any positive whole number
+          between 0 and 100000000000000.
     :attr bool enable_notifications: (optional) Flag whether to enable notifications
           for this pipeline. When enabled, pipeline run events are published on all slack
           integration specified channels in the parent toolchain.
@@ -4116,12 +4136,16 @@ class TektonPipelinePatch():
 
     def __init__(self,
                  *,
+                 next_build_number: int = None,
                  enable_notifications: bool = None,
                  enable_partial_cloning: bool = None,
                  worker: 'WorkerIdentity' = None) -> None:
         """
         Initialize a TektonPipelinePatch object.
 
+        :param int next_build_number: (optional) Specify the build number that will
+               be used for the next pipeline run. Build numbers can be any positive whole
+               number between 0 and 100000000000000.
         :param bool enable_notifications: (optional) Flag whether to enable
                notifications for this pipeline. When enabled, pipeline run events are
                published on all slack integration specified channels in the parent
@@ -4133,6 +4157,7 @@ class TektonPipelinePatch():
         :param WorkerIdentity worker: (optional) Worker object containing worker ID
                only. If omitted the IBM Managed shared workers are used by default.
         """
+        self.next_build_number = next_build_number
         self.enable_notifications = enable_notifications
         self.enable_partial_cloning = enable_partial_cloning
         self.worker = worker
@@ -4141,6 +4166,8 @@ class TektonPipelinePatch():
     def from_dict(cls, _dict: Dict) -> 'TektonPipelinePatch':
         """Initialize a TektonPipelinePatch object from a json dictionary."""
         args = {}
+        if 'next_build_number' in _dict:
+            args['next_build_number'] = _dict.get('next_build_number')
         if 'enable_notifications' in _dict:
             args['enable_notifications'] = _dict.get('enable_notifications')
         if 'enable_partial_cloning' in _dict:
@@ -4157,6 +4184,8 @@ class TektonPipelinePatch():
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
+        if hasattr(self, 'next_build_number') and self.next_build_number is not None:
+            _dict['next_build_number'] = self.next_build_number
         if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
             _dict['enable_notifications'] = self.enable_notifications
         if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
@@ -4803,10 +4832,12 @@ class TriggerSourceProperties():
     :attr str url: URL of the repository to which the trigger is listening.
     :attr str branch: (optional) Name of a branch from the repo. One of branch or
           pattern must be specified, but only one or the other.
-    :attr str pattern: (optional) Git branch or tag pattern to listen to, specify
-          one of branch or pattern only. When specifying a tag to listen to, you can also
-          specify a simple glob pattern such as '!test' or '*master' to match against
-          multiple tags/branches in the repository.
+    :attr str pattern: (optional) The pattern of Git branch or tag to which to
+          listen. You can specify a glob pattern such as '!test' or '*master' to match
+          against multiple tags/branches in the repository. The glob pattern used must
+          conform to Bash 4.3 specifications, see bash documentation for more info:
+          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
+          branch or pattern must be specified, but only one or the other.
     :attr bool blind_connection: True if the repository server is not addressable on
           the public internet. IBM Cloud will not be able to validate the connection
           details you provide.
@@ -4833,10 +4864,13 @@ class TriggerSourceProperties():
         :param Tool tool: Reference to the repository tool in the parent toolchain.
         :param str branch: (optional) Name of a branch from the repo. One of branch
                or pattern must be specified, but only one or the other.
-        :param str pattern: (optional) Git branch or tag pattern to listen to,
-               specify one of branch or pattern only. When specifying a tag to listen to,
-               you can also specify a simple glob pattern such as '!test' or '*master' to
-               match against multiple tags/branches in the repository.
+        :param str pattern: (optional) The pattern of Git branch or tag to which to
+               listen. You can specify a glob pattern such as '!test' or '*master' to
+               match against multiple tags/branches in the repository. The glob pattern
+               used must conform to Bash 4.3 specifications, see bash documentation for
+               more info:
+               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
+               branch or pattern must be specified, but only one or the other.
         :param str hook_id: (optional) ID of the webhook from the repo. Computed
                upon creation of the trigger.
         """
@@ -4922,10 +4956,12 @@ class TriggerSourcePropertiesPrototype():
     :attr str url: URL of the repository to which the trigger is listening.
     :attr str branch: (optional) Name of a branch from the repo. One of branch or
           pattern must be specified, but only one or the other.
-    :attr str pattern: (optional) Git branch or tag pattern to listen to, specify
-          one of branch or pattern only. When specifying a tag to listen to, you can also
-          specify a simple glob pattern such as '!test' or '*master' to match against
-          multiple tags/branches in the repository.
+    :attr str pattern: (optional) The pattern of Git branch or tag to which to
+          listen. You can specify a glob pattern such as '!test' or '*master' to match
+          against multiple tags/branches in the repository. The glob pattern used must
+          conform to Bash 4.3 specifications, see bash documentation for more info:
+          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
+          branch or pattern must be specified, but only one or the other.
     """
 
     def __init__(self,
@@ -4939,10 +4975,13 @@ class TriggerSourcePropertiesPrototype():
         :param str url: URL of the repository to which the trigger is listening.
         :param str branch: (optional) Name of a branch from the repo. One of branch
                or pattern must be specified, but only one or the other.
-        :param str pattern: (optional) Git branch or tag pattern to listen to,
-               specify one of branch or pattern only. When specifying a tag to listen to,
-               you can also specify a simple glob pattern such as '!test' or '*master' to
-               match against multiple tags/branches in the repository.
+        :param str pattern: (optional) The pattern of Git branch or tag to which to
+               listen. You can specify a glob pattern such as '!test' or '*master' to
+               match against multiple tags/branches in the repository. The glob pattern
+               used must conform to Bash 4.3 specifications, see bash documentation for
+               more info:
+               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
+               branch or pattern must be specified, but only one or the other.
         """
         self.url = url
         self.branch = branch
