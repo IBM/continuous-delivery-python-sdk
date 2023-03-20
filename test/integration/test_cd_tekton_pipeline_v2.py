@@ -57,11 +57,7 @@ class TestCdTektonPipelineV2():
             assert cls.config is not None
             
             # Create pipeline service
-            apikey = env("CD_TEKTON_PIPELINE_APIKEY")
-            assert apikey is not None
-            authenticator = IAMAuthenticator(apikey)
-            assert authenticator is not None
-            cls.cd_pipeline_service = CdTektonPipelineV2(authenticator=authenticator)
+            cls.cd_pipeline_service = CdTektonPipelineV2.new_instance()
             assert cls.cd_pipeline_service is not None
             cls.config = read_external_sources(CdTektonPipelineV2.DEFAULT_SERVICE_NAME)
             print('\n Setup complete.', flush=True)

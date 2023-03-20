@@ -90,7 +90,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.create_tekton_pipeline(
                 id='94619026-912b-4d92-8f51-6c74f0692d90',
-                worker=worker_identity_model
+                worker=worker_identity_model,
             )
             tekton_pipeline = response.get_result()
 
@@ -111,7 +111,7 @@ class TestCdTektonPipelineV2Examples():
             # begin-get_tekton_pipeline
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline(
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
             tekton_pipeline = response.get_result()
 
@@ -141,7 +141,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.update_tekton_pipeline(
                 id='94619026-912b-4d92-8f51-6c74f0692d90',
-                tekton_pipeline_patch=tekton_pipeline_patch_model
+                tekton_pipeline_patch=tekton_pipeline_patch_model,
             )
             tekton_pipeline = response.get_result()
 
@@ -204,7 +204,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.create_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger=pipeline_run_trigger_model
+                trigger=pipeline_run_trigger_model,
             )
             pipeline_run = response.get_result()
 
@@ -227,7 +227,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 id='94619026-912b-4d92-8f51-6c74f0692d90',
-                includes='definitions'
+                includes='definitions',
             )
             pipeline_run = response.get_result()
 
@@ -250,7 +250,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.cancel_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 id='94619026-912b-4d92-8f51-6c74f0692d90',
-                force=True
+                force=True,
             )
             pipeline_run = response.get_result()
 
@@ -272,7 +272,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.rerun_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
             pipeline_run = response.get_result()
 
@@ -294,7 +294,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run_logs(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
             logs_collection = response.get_result()
 
@@ -317,7 +317,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run_log_content(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 pipeline_run_id='bf4b3abd-0c93-416b-911e-9cf42f1a1085',
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
             step_log = response.get_result()
 
@@ -338,7 +338,7 @@ class TestCdTektonPipelineV2Examples():
             # begin-list_tekton_pipeline_definitions
 
             response = cd_tekton_pipeline_service.list_tekton_pipeline_definitions(
-                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90'
+                pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
             definitions_collection = response.get_result()
 
@@ -371,7 +371,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.create_tekton_pipeline_definition(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                source=definition_source_model
+                source=definition_source_model,
             )
             definition = response.get_result()
 
@@ -393,7 +393,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_definition(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
+                definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada',
             )
             definition = response.get_result()
 
@@ -426,7 +426,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.replace_tekton_pipeline_definition(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada',
-                source=definition_source_model
+                source=definition_source_model,
             )
             definition = response.get_result()
 
@@ -450,7 +450,7 @@ class TestCdTektonPipelineV2Examples():
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 name='prod',
                 type=['secure', 'text'],
-                sort='name'
+                sort='name',
             )
             properties_collection = response.get_result()
 
@@ -474,7 +474,7 @@ class TestCdTektonPipelineV2Examples():
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 name='prop1',
                 type='text',
-                value='https://github.com/open-toolchain/hello-tekton.git'
+                value='https://github.com/open-toolchain/hello-tekton.git',
             )
             property = response.get_result()
 
@@ -496,7 +496,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_property(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                property_name='debug-pipeline'
+                property_name='debug-pipeline',
             )
             property = response.get_result()
 
@@ -521,7 +521,7 @@ class TestCdTektonPipelineV2Examples():
                 property_name='debug-pipeline',
                 name='prop1',
                 type='text',
-                value='https://github.com/open-toolchain/hello-tekton.git'
+                value='https://github.com/open-toolchain/hello-tekton.git',
             )
             property = response.get_result()
 
@@ -545,7 +545,7 @@ class TestCdTektonPipelineV2Examples():
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 type='manual,scm',
                 disabled='true',
-                tags='tag1,tag2'
+                tags='tag1,tag2',
             )
             triggers_collection = response.get_result()
 
@@ -576,7 +576,7 @@ class TestCdTektonPipelineV2Examples():
                 event_listener='pr-listener',
                 worker=worker_identity_model,
                 max_concurrent_runs=3,
-                enabled=True
+                enabled=True,
             )
             trigger = response.get_result()
 
@@ -598,7 +598,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147'
+                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
             )
             trigger = response.get_result()
 
@@ -625,7 +625,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.update_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                trigger_patch=trigger_patch_model
+                trigger_patch=trigger_patch_model,
             )
             trigger = response.get_result()
 
@@ -648,7 +648,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.duplicate_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 source_trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                name='triggerName'
+                name='triggerName',
             )
             trigger = response.get_result()
 
@@ -673,7 +673,7 @@ class TestCdTektonPipelineV2Examples():
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
                 name='prod',
                 type='secure,text',
-                sort='name'
+                sort='name',
             )
             trigger_properties_collection = response.get_result()
 
@@ -698,7 +698,7 @@ class TestCdTektonPipelineV2Examples():
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
                 name='prop1',
                 type='text',
-                value='https://github.com/open-toolchain/hello-tekton.git'
+                value='https://github.com/open-toolchain/hello-tekton.git',
             )
             trigger_property = response.get_result()
 
@@ -721,7 +721,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.get_tekton_pipeline_trigger_property(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                property_name='debug-pipeline'
+                property_name='debug-pipeline',
             )
             trigger_property = response.get_result()
 
@@ -747,7 +747,7 @@ class TestCdTektonPipelineV2Examples():
                 property_name='debug-pipeline',
                 name='prop1',
                 type='text',
-                value='https://github.com/open-toolchain/hello-tekton.git'
+                value='https://github.com/open-toolchain/hello-tekton.git',
             )
             trigger_property = response.get_result()
 
@@ -767,7 +767,7 @@ class TestCdTektonPipelineV2Examples():
             # begin-delete_tekton_pipeline
 
             response = cd_tekton_pipeline_service.delete_tekton_pipeline(
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
 
             # end-delete_tekton_pipeline
@@ -786,7 +786,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.delete_tekton_pipeline_run(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                id='94619026-912b-4d92-8f51-6c74f0692d90'
+                id='94619026-912b-4d92-8f51-6c74f0692d90',
             )
 
             # end-delete_tekton_pipeline_run
@@ -805,7 +805,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.delete_tekton_pipeline_definition(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada'
+                definition_id='94299034-d45f-4e9a-8ed5-6bd5c7bb7ada',
             )
 
             # end-delete_tekton_pipeline_definition
@@ -824,7 +824,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.delete_tekton_pipeline_property(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                property_name='debug-pipeline'
+                property_name='debug-pipeline',
             )
 
             # end-delete_tekton_pipeline_property
@@ -843,7 +843,7 @@ class TestCdTektonPipelineV2Examples():
 
             response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
-                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147'
+                trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
             )
 
             # end-delete_tekton_pipeline_trigger
@@ -863,7 +863,7 @@ class TestCdTektonPipelineV2Examples():
             response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
                 pipeline_id='94619026-912b-4d92-8f51-6c74f0692d90',
                 trigger_id='1bb892a1-2e04-4768-a369-b1159eace147',
-                property_name='debug-pipeline'
+                property_name='debug-pipeline',
             )
 
             # end-delete_tekton_pipeline_trigger_property
