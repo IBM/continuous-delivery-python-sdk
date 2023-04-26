@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.0.0...v1.0.1) (2023-04-26)
+
+
+### Bug Fixes
+
+* sync with template repo ([baf894b](https://github.com/IBM/continuous-delivery-python-sdk/commit/baf894baced182de65392b634f67b7f44b464009))
+
 # [1.0.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v0.3.7...v1.0.0) (2023-02-21)
 
 
