@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.0.1...v1.1.0) (2023-04-27)
+
+
+### Features
+
+* **tekton:** add next build number support ([282171e](https://github.com/IBM/continuous-delivery-python-sdk/commit/282171ed1e7402d00871857e0265edc6ab37ed18))
+
 ## [1.0.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.0.0...v1.0.1) (2023-04-26)
 
 
