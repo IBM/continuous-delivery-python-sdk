@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://img.shields.io/pypi/v/ibm-continuous-delivery.svg)](https://pypi.python.org/pypi/ibm-continuous-delivery)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM Cloud Continuous Delivery Python SDK v1.0.1
+# IBM Cloud Continuous Delivery Python SDK v1.1.0
  
 The Python client library to interact with the [IBM Cloud Continuous Delivery Toolchain and Tekton Pipeline APIs](https://cloud.ibm.com/docs?tab=api-docs&category=devops).
 
@@ -24,7 +24,7 @@ The current minimum Python version supported is 3.7.
 
 <!-- toc -->
 
-- [IBM Cloud Continuous Delivery Python SDK v1.0.1](#ibm-cloud-continuous-delivery-python-sdk-v037)
+- [IBM Cloud Continuous Delivery Python SDK v1.1.0](#ibm-cloud-continuous-delivery-python-sdk-v037)
 - [Python Version](#python-version)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
