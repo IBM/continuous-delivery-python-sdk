@@ -1,5 +1,7 @@
 dist: focal
 
+group: focal
+
 language: python
 
 cache: pip
@@ -12,19 +14,22 @@ matrix:
     - python: 3.7
     - python: 3.8
     - python: 3.9
-#    - python: 3.10
+    - python: 3.10
 
 install:
 - sudo apt-get update
 - sudo apt-get install pandoc
 - pip install pypandoc
+- echo -e "machine github.ibm.com\n  login $GITHUB_ACCESS_TOKEN" > ~/.netrc
 - pip install setuptools=="60.8.2"
 
 script:
 - make ci
 
 before_deploy:
-  - nvm install 14
+  - nvm install 18
+  - node --version
+  - npm --version
   - npm install
   - pip install bump2version
 
