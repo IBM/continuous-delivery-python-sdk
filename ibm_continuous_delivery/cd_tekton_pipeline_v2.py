@@ -775,7 +775,7 @@ class CdTektonPipelineV2(BaseService):
         :param str id: ID of current instance.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
-        :rtype: DetailedResponse with `dict` result representing a `Log` object
+        :rtype: DetailedResponse with `dict` result representing a `StepLog` object
         """
 
         if not pipeline_id:
@@ -4811,7 +4811,7 @@ class TriggerPatch:
 
 class TriggerPropertiesCollection:
     """
-    Tekton pipeline trigger object used for updating the trigger.
+    Trigger properties object.
 
     :attr List[TriggerProperty] properties: Trigger properties list.
     """
@@ -4913,7 +4913,6 @@ class TriggerProperty:
                properties only, that selects a value from the tool integration. If left
                blank the full tool integration data will be used.
         """
-        self.type = type
         self.name = name
         self.value = value
         self.href = href
@@ -4925,8 +4924,8 @@ class TriggerProperty:
     def from_dict(cls, _dict: Dict) -> 'TriggerProperty':
         """Initialize a TriggerProperty object from a json dictionary."""
         args = {}
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
         else:
             raise ValueError('Required property \'name\' not present in TriggerProperty JSON')
         if 'value' in _dict:
@@ -5138,8 +5137,8 @@ class TriggerSourceProperties:
     def from_dict(cls, _dict: Dict) -> 'TriggerSourceProperties':
         """Initialize a TriggerSourceProperties object from a json dictionary."""
         args = {}
-        if 'properties' in _dict:
-            args['properties'] = [TriggerPropertiesCollectionPropertiesItem.from_dict(x) for x in _dict.get('properties')]
+        if 'url' in _dict:
+            args['url'] = _dict.get('url')
         else:
             raise ValueError('Required property \'url\' not present in TriggerSourceProperties JSON')
         if 'branch' in _dict:
@@ -5373,11 +5372,7 @@ class TriggerSourcePrototype:
 
 class TriggersCollection:
     """
-<<<<<<< HEAD
-    Source repository for a Git trigger. Only required for Git triggers. The referenced
-    repository URL must match the URL of a repository tool integration in the parent
-    toolchain. Obtain the list of integrations from the toolchain API
-    https://cloud.ibm.com/apidocs/toolchain#list-tools.
+    Tekton pipeline triggers object.
 
     :attr List[Trigger] triggers: Tekton pipeline triggers list.
     """
@@ -5391,15 +5386,14 @@ class TriggersCollection:
 
         :param List[Trigger] triggers: Tekton pipeline triggers list.
         """
-        self.type = type
-        self.properties = properties
+        self.triggers = triggers
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggersCollection':
         """Initialize a TriggersCollection object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if 'triggers' in _dict:
+            args['triggers'] = _dict.get('triggers')
         else:
             raise ValueError('Required property \'triggers\' not present in TriggersCollection JSON')
         return cls(**args)
@@ -6467,8 +6461,6 @@ class TektonPipelineRunsPager:
         :param str pipeline_id: The Tekton pipeline ID.
         :param int limit: (optional) The number of pipeline runs to return, sorted
                by creation time, most recent first.
-        :param int offset: (optional) Skip the specified number of pipeline runs.
-               Cannot be used in combination with `start`.
         :param str status: (optional) Filters the collection to resources with the
                specified status.
         :param str trigger_name: (optional) Filters the collection to resources
@@ -6479,7 +6471,6 @@ class TektonPipelineRunsPager:
         self._page_context = {'next': None}
         self._pipeline_id = pipeline_id
         self._limit = limit
-        self._offset = offset
         self._status = status
         self._trigger_name = trigger_name
 
@@ -6501,7 +6492,6 @@ class TektonPipelineRunsPager:
         result = self._client.list_tekton_pipeline_runs(
             pipeline_id=self._pipeline_id,
             limit=self._limit,
-            offset=self._offset,
             status=self._status,
             trigger_name=self._trigger_name,
             start=self._page_context.get('next'),
