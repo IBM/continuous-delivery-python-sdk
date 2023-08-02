@@ -46,7 +46,7 @@ config = None
 # Start of Examples for Service: CdTektonPipelineV2
 ##############################################################################
 # region
-class TestCdTektonPipelineV2Examples():
+class TestCdTektonPipelineV2Examples:
     """
     Example Test Class for CdTektonPipelineV2
     """
@@ -196,7 +196,7 @@ class TestCdTektonPipelineV2Examples():
             }
 
             pipeline_run_trigger_model = {
-                'name': 'Generic Webhook Trigger - 0',
+                'name': 'Manual Trigger 1',
                 'properties': [property_model],
                 'secure_properties': [property_model],
                 'headers': {'source':'api'},
@@ -872,6 +872,7 @@ class TestCdTektonPipelineV2Examples():
 
         except ApiException as e:
             pytest.fail(str(e))
+
 
 # endregion
 ##############################################################################

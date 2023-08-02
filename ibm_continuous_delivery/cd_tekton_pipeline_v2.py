@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.68.2-ac7def68-20230310-195410
+# IBM OpenAPI SDK Code Generator Version: 3.76.0-ad3e6f96-20230724-172814
 
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
@@ -42,6 +42,7 @@ from .common import get_sdk_headers
 # Service
 ##############################################################################
 
+
 class CdTektonPipelineV2(BaseService):
     """The CD Tekton Pipeline V2 service."""
 
@@ -61,9 +62,10 @@ class CdTektonPipelineV2(BaseService):
     }
 
     @classmethod
-    def new_instance(cls,
-                     service_name: str = DEFAULT_SERVICE_NAME,
-                    ) -> 'CdTektonPipelineV2':
+    def new_instance(
+        cls,
+        service_name: str = DEFAULT_SERVICE_NAME,
+    ) -> 'CdTektonPipelineV2':
         """
         Return a new client for the CD Tekton Pipeline service using the specified
                parameters and external configuration.
@@ -89,9 +91,10 @@ class CdTektonPipelineV2(BaseService):
         """
         return cls.REGIONAL_ENDPOINTS.get(region, None)
 
-    def __init__(self,
-                 authenticator: Authenticator = None,
-                ) -> None:
+    def __init__(
+        self,
+        authenticator: Authenticator = None,
+    ) -> None:
         """
         Construct a new client for the CD Tekton Pipeline service.
 
@@ -99,24 +102,21 @@ class CdTektonPipelineV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(self,
-                             service_url=self.DEFAULT_SERVICE_URL,
-                             authenticator=authenticator)
-
+        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
 
     #########################
     # Pipeline
     #########################
 
-
-    def create_tekton_pipeline(self,
+    def create_tekton_pipeline(
+        self,
         id: str,
         *,
         next_build_number: int = None,
         enable_notifications: bool = None,
         enable_partial_cloning: bool = None,
         worker: 'WorkerIdentity' = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create Tekton pipeline.
@@ -141,8 +141,10 @@ class CdTektonPipelineV2(BaseService):
                partial cloning for this pipeline. When partial clone is enabled, only the
                files contained within the paths specified in definition repositories are
                read and cloned, this means that symbolic links might not work.
-        :param WorkerIdentity worker: (optional) Worker object containing worker ID
-               only. If omitted the IBM Managed shared workers are used by default.
+        :param WorkerIdentity worker: (optional) Specify the worker used to run the
+               trigger, as a worker object containing the worker ID only. If omitted, or
+               specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
+               used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TektonPipeline` object
@@ -153,9 +155,11 @@ class CdTektonPipelineV2(BaseService):
         if worker is not None:
             worker = convert_model(worker)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -175,18 +179,20 @@ class CdTektonPipelineV2(BaseService):
         headers['Accept'] = 'application/json'
 
         url = '/tekton_pipelines'
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline(self,
+    def get_tekton_pipeline(
+        self,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get Tekton pipeline data.
@@ -203,9 +209,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -217,19 +225,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def update_tekton_pipeline(self,
+    def update_tekton_pipeline(
+        self,
         id: str,
         *,
         tekton_pipeline_patch: 'TektonPipelinePatch' = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Update Tekton pipeline data.
@@ -247,12 +257,14 @@ class CdTektonPipelineV2(BaseService):
 
         if not id:
             raise ValueError('id must be provided')
-        if  tekton_pipeline_patch is not None and isinstance(tekton_pipeline_patch, TektonPipelinePatch):
+        if tekton_pipeline_patch is not None and isinstance(tekton_pipeline_patch, TektonPipelinePatch):
             tekton_pipeline_patch = convert_model(tekton_pipeline_patch)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='update_tekton_pipeline')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='update_tekton_pipeline',
+        )
         headers.update(sdk_headers)
 
         data = json.dumps(tekton_pipeline_patch)
@@ -267,18 +279,20 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='PATCH',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline(self,
+    def delete_tekton_pipeline(
+        self,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete Tekton pipeline instance.
@@ -295,9 +309,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -308,9 +324,11 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -319,15 +337,15 @@ class CdTektonPipelineV2(BaseService):
     # PipelineRuns
     #########################
 
-
-    def list_tekton_pipeline_runs(self,
+    def list_tekton_pipeline_runs(
+        self,
         pipeline_id: str,
         *,
         start: str = None,
         limit: int = None,
         status: str = None,
         trigger_name: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         List pipeline run records.
@@ -353,9 +371,11 @@ class CdTektonPipelineV2(BaseService):
         if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tekton_pipeline_runs')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tekton_pipeline_runs',
+        )
         headers.update(sdk_headers)
 
         params = {
@@ -374,16 +394,18 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tekton_pipeline_run(self,
+    def create_tekton_pipeline_run(
+        self,
         pipeline_id: str,
         *,
         trigger_name: str = None,
@@ -392,7 +414,7 @@ class CdTektonPipelineV2(BaseService):
         trigger_headers: dict = None,
         trigger_body: dict = None,
         trigger: 'PipelineRunTrigger' = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Trigger a pipeline run.
@@ -434,9 +456,11 @@ class CdTektonPipelineV2(BaseService):
         if trigger is not None:
             trigger = convert_model(trigger)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline_run')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline_run',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -460,21 +484,23 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_run(self,
+    def get_tekton_pipeline_run(
+        self,
         pipeline_id: str,
         id: str,
         *,
         includes: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a pipeline run record.
@@ -495,9 +521,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_run')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_run',
+        )
         headers.update(sdk_headers)
 
         params = {
@@ -513,19 +541,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline_run(self,
+    def delete_tekton_pipeline_run(
+        self,
         pipeline_id: str,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a pipeline run record.
@@ -544,9 +574,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline_run')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline_run',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -557,20 +589,22 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def cancel_tekton_pipeline_run(self,
+    def cancel_tekton_pipeline_run(
+        self,
         pipeline_id: str,
         id: str,
         *,
         force: bool = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Cancel a pipeline run.
@@ -591,9 +625,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='cancel_tekton_pipeline_run')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='cancel_tekton_pipeline_run',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -612,19 +648,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/cancel'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def rerun_tekton_pipeline_run(self,
+    def rerun_tekton_pipeline_run(
+        self,
         pipeline_id: str,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Rerun a pipeline run.
@@ -644,9 +682,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='rerun_tekton_pipeline_run')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='rerun_tekton_pipeline_run',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -658,18 +698,20 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/rerun'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_run_logs(self,
+    def get_tekton_pipeline_run_logs(
+        self,
         pipeline_id: str,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a list of pipeline run log objects.
@@ -689,9 +731,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_run_logs')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_run_logs',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -703,19 +747,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/logs'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_run_log_content(self,
+    def get_tekton_pipeline_run_log_content(
+        self,
         pipeline_id: str,
         pipeline_run_id: str,
         id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get the log content of a pipeline run step.
@@ -739,9 +785,11 @@ class CdTektonPipelineV2(BaseService):
         if not id:
             raise ValueError('id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_run_log_content')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_run_log_content',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -753,9 +801,11 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, pipeline_run_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{pipeline_run_id}/logs/{id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -764,10 +814,10 @@ class CdTektonPipelineV2(BaseService):
     # Definitions
     #########################
 
-
-    def list_tekton_pipeline_definitions(self,
+    def list_tekton_pipeline_definitions(
+        self,
         pipeline_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         List pipeline definitions.
@@ -789,9 +839,11 @@ class CdTektonPipelineV2(BaseService):
         if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tekton_pipeline_definitions')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tekton_pipeline_definitions',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -803,18 +855,20 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/definitions'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tekton_pipeline_definition(self,
+    def create_tekton_pipeline_definition(
+        self,
         pipeline_id: str,
         source: 'DefinitionSource',
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a single definition.
@@ -841,9 +895,11 @@ class CdTektonPipelineV2(BaseService):
             raise ValueError('source must be provided')
         source = convert_model(source)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline_definition')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline_definition',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -862,19 +918,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/definitions'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_definition(self,
+    def get_tekton_pipeline_definition(
+        self,
         pipeline_id: str,
         definition_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Retrieve a single definition entry.
@@ -894,9 +952,11 @@ class CdTektonPipelineV2(BaseService):
         if not definition_id:
             raise ValueError('definition_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_definition')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_definition',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -908,19 +968,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def replace_tekton_pipeline_definition(self,
+    def replace_tekton_pipeline_definition(
+        self,
         pipeline_id: str,
         definition_id: str,
         source: 'DefinitionSource',
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Edit a single definition entry.
@@ -944,9 +1006,11 @@ class CdTektonPipelineV2(BaseService):
             raise ValueError('source must be provided')
         source = convert_model(source)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='replace_tekton_pipeline_definition')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='replace_tekton_pipeline_definition',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -965,19 +1029,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='PUT',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PUT',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline_definition(self,
+    def delete_tekton_pipeline_definition(
+        self,
         pipeline_id: str,
         definition_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a single definition entry.
@@ -996,9 +1062,11 @@ class CdTektonPipelineV2(BaseService):
         if not definition_id:
             raise ValueError('definition_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline_definition')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline_definition',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1009,9 +1077,11 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -1020,14 +1090,14 @@ class CdTektonPipelineV2(BaseService):
     # Environment properties
     #########################
 
-
-    def list_tekton_pipeline_properties(self,
+    def list_tekton_pipeline_properties(
+        self,
         pipeline_id: str,
         *,
         name: str = None,
         type: List[str] = None,
         sort: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         List the pipeline's environment properties.
@@ -1050,9 +1120,11 @@ class CdTektonPipelineV2(BaseService):
         if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tekton_pipeline_properties')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tekton_pipeline_properties',
+        )
         headers.update(sdk_headers)
 
         params = {
@@ -1070,16 +1142,18 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/properties'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tekton_pipeline_properties(self,
+    def create_tekton_pipeline_properties(
+        self,
         pipeline_id: str,
         name: str,
         type: str,
@@ -1087,7 +1161,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a pipeline environment property.
@@ -1115,9 +1189,11 @@ class CdTektonPipelineV2(BaseService):
         if type is None:
             raise ValueError('type must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline_properties')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline_properties',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1140,19 +1216,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/properties'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_property(self,
+    def get_tekton_pipeline_property(
+        self,
         pipeline_id: str,
         property_name: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a pipeline environment property.
@@ -1172,9 +1250,11 @@ class CdTektonPipelineV2(BaseService):
         if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_property',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1186,15 +1266,17 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def replace_tekton_pipeline_property(self,
+    def replace_tekton_pipeline_property(
+        self,
         pipeline_id: str,
         property_name: str,
         name: str,
@@ -1203,7 +1285,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Replace the value of an environment property.
@@ -1235,9 +1317,11 @@ class CdTektonPipelineV2(BaseService):
         if type is None:
             raise ValueError('type must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='replace_tekton_pipeline_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='replace_tekton_pipeline_property',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1260,19 +1344,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='PUT',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PUT',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline_property(self,
+    def delete_tekton_pipeline_property(
+        self,
         pipeline_id: str,
         property_name: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a single pipeline environment property.
@@ -1291,9 +1377,11 @@ class CdTektonPipelineV2(BaseService):
         if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline_property',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1304,9 +1392,11 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -1315,8 +1405,8 @@ class CdTektonPipelineV2(BaseService):
     # Triggers
     #########################
 
-
-    def list_tekton_pipeline_triggers(self,
+    def list_tekton_pipeline_triggers(
+        self,
         pipeline_id: str,
         *,
         type: str = None,
@@ -1326,7 +1416,7 @@ class CdTektonPipelineV2(BaseService):
         worker_name: str = None,
         disabled: str = None,
         tags: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         List pipeline triggers.
@@ -1359,9 +1449,11 @@ class CdTektonPipelineV2(BaseService):
         if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tekton_pipeline_triggers')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tekton_pipeline_triggers',
+        )
         headers.update(sdk_headers)
 
         params = {
@@ -1383,16 +1475,18 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tekton_pipeline_trigger(self,
+    def create_tekton_pipeline_trigger(
+        self,
         pipeline_id: str,
         type: str,
         name: str,
@@ -1407,7 +1501,8 @@ class CdTektonPipelineV2(BaseService):
         timezone: str = None,
         source: 'TriggerSourcePrototype' = None,
         events: List[str] = None,
-        **kwargs
+        favorite: bool = None,
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a trigger.
@@ -1421,8 +1516,9 @@ class CdTektonPipelineV2(BaseService):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param List[str] tags: (optional) Trigger tags array.
-        :param WorkerIdentity worker: (optional) Worker used to run the trigger. If
-               not specified the trigger will use the default pipeline worker.
+        :param WorkerIdentity worker: (optional) Specify the worker used to run the
+               trigger. Use `worker: { id: 'public' }` to use the IBM Managed workers. Use
+               `worker: { id: 'inherit' }` to inherit the worker used by the pipeline.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
@@ -1449,6 +1545,7 @@ class CdTektonPipelineV2(BaseService):
                'pull_request' and 'pull_request_closed'. For SCM repositories that use
                'merge request' events, such events map to the equivalent 'pull request'
                events.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
@@ -1469,9 +1566,11 @@ class CdTektonPipelineV2(BaseService):
         if source is not None:
             source = convert_model(source)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline_trigger')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline_trigger',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1487,6 +1586,7 @@ class CdTektonPipelineV2(BaseService):
             'timezone': timezone,
             'source': source,
             'events': events,
+            'favorite': favorite,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -1501,19 +1601,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_trigger(self,
+    def get_tekton_pipeline_trigger(
+        self,
         pipeline_id: str,
         trigger_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a single trigger.
@@ -1532,9 +1634,11 @@ class CdTektonPipelineV2(BaseService):
         if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_trigger')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_trigger',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1546,20 +1650,22 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def update_tekton_pipeline_trigger(self,
+    def update_tekton_pipeline_trigger(
+        self,
         pipeline_id: str,
         trigger_id: str,
         *,
         trigger_patch: 'TriggerPatch' = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Edit a trigger.
@@ -1580,12 +1686,14 @@ class CdTektonPipelineV2(BaseService):
             raise ValueError('pipeline_id must be provided')
         if not trigger_id:
             raise ValueError('trigger_id must be provided')
-        if  trigger_patch is not None and isinstance(trigger_patch, TriggerPatch):
+        if trigger_patch is not None and isinstance(trigger_patch, TriggerPatch):
             trigger_patch = convert_model(trigger_patch)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='update_tekton_pipeline_trigger')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='update_tekton_pipeline_trigger',
+        )
         headers.update(sdk_headers)
 
         data = json.dumps(trigger_patch)
@@ -1600,19 +1708,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='PATCH',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline_trigger(self,
+    def delete_tekton_pipeline_trigger(
+        self,
         pipeline_id: str,
         trigger_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a single trigger.
@@ -1631,9 +1741,11 @@ class CdTektonPipelineV2(BaseService):
         if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline_trigger')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline_trigger',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1644,19 +1756,21 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def duplicate_tekton_pipeline_trigger(self,
+    def duplicate_tekton_pipeline_trigger(
+        self,
         pipeline_id: str,
         source_trigger_id: str,
         name: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Duplicate a trigger.
@@ -1679,9 +1793,11 @@ class CdTektonPipelineV2(BaseService):
         if name is None:
             raise ValueError('name must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='duplicate_tekton_pipeline_trigger')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='duplicate_tekton_pipeline_trigger',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1700,10 +1816,12 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, source_trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{source_trigger_id}/duplicate'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -1712,15 +1830,15 @@ class CdTektonPipelineV2(BaseService):
     # Trigger properties
     #########################
 
-
-    def list_tekton_pipeline_trigger_properties(self,
+    def list_tekton_pipeline_trigger_properties(
+        self,
         pipeline_id: str,
         trigger_id: str,
         *,
         name: str = None,
         type: str = None,
         sort: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         List trigger properties.
@@ -1745,9 +1863,11 @@ class CdTektonPipelineV2(BaseService):
         if not trigger_id:
             raise ValueError('trigger_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tekton_pipeline_trigger_properties')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tekton_pipeline_trigger_properties',
+        )
         headers.update(sdk_headers)
 
         params = {
@@ -1765,16 +1885,18 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tekton_pipeline_trigger_properties(self,
+    def create_tekton_pipeline_trigger_properties(
+        self,
         pipeline_id: str,
         trigger_id: str,
         name: str,
@@ -1783,7 +1905,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a trigger property.
@@ -1814,9 +1936,11 @@ class CdTektonPipelineV2(BaseService):
         if type is None:
             raise ValueError('type must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tekton_pipeline_trigger_properties')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tekton_pipeline_trigger_properties',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1839,20 +1963,22 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tekton_pipeline_trigger_property(self,
+    def get_tekton_pipeline_trigger_property(
+        self,
         pipeline_id: str,
         trigger_id: str,
         property_name: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a trigger property.
@@ -1874,9 +2000,11 @@ class CdTektonPipelineV2(BaseService):
         if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tekton_pipeline_trigger_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tekton_pipeline_trigger_property',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -1888,15 +2016,17 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def replace_tekton_pipeline_trigger_property(self,
+    def replace_tekton_pipeline_trigger_property(
+        self,
         pipeline_id: str,
         trigger_id: str,
         property_name: str,
@@ -1906,7 +2036,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Replace a trigger property value.
@@ -1940,9 +2070,11 @@ class CdTektonPipelineV2(BaseService):
         if type is None:
             raise ValueError('type must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='replace_tekton_pipeline_trigger_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='replace_tekton_pipeline_trigger_property',
+        )
         headers.update(sdk_headers)
 
         data = {
@@ -1965,20 +2097,22 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='PUT',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PUT',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tekton_pipeline_trigger_property(self,
+    def delete_tekton_pipeline_trigger_property(
+        self,
         pipeline_id: str,
         trigger_id: str,
         property_name: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a trigger property.
@@ -2000,9 +2134,11 @@ class CdTektonPipelineV2(BaseService):
         if not property_name:
             raise ValueError('property_name must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tekton_pipeline_trigger_property')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tekton_pipeline_trigger_property',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -2013,9 +2149,11 @@ class CdTektonPipelineV2(BaseService):
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -2030,6 +2168,7 @@ class ListTektonPipelineRunsEnums:
         """
         Filters the collection to resources with the specified status.
         """
+
         PENDING = 'pending'
         WAITING = 'waiting'
         QUEUED = 'queued'
@@ -2050,6 +2189,7 @@ class GetTektonPipelineRunEnums:
         """
         Defines if response includes definition metadata.
         """
+
         DEFINITIONS = 'definitions'
 
 
@@ -2062,6 +2202,7 @@ class ListTektonPipelinePropertiesEnums:
         """
         Filters the collection to resources with the specified property type.
         """
+
         SECURE = 'secure'
         TEXT = 'text'
         INTEGRATION = 'integration'
@@ -2074,7 +2215,7 @@ class ListTektonPipelinePropertiesEnums:
 ##############################################################################
 
 
-class Definition():
+class Definition:
     """
     Tekton pipeline definition entry object, consisting of a repository url, a repository
     path and a branch or tag. The referenced repository URL must match the URL of a
@@ -2089,11 +2230,13 @@ class Definition():
     :attr str id: The aggregated definition ID.
     """
 
-    def __init__(self,
-                 source: 'DefinitionSource',
-                 id: str,
-                 *,
-                 href: str = None) -> None:
+    def __init__(
+        self,
+        source: 'DefinitionSource',
+        id: str,
+        *,
+        href: str = None,
+    ) -> None:
         """
         Initialize a Definition object.
 
@@ -2159,7 +2302,8 @@ class Definition():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class DefinitionSource():
+
+class DefinitionSource:
     """
     Source repository containing the Tekton pipeline definition.
 
@@ -2169,9 +2313,11 @@ class DefinitionSource():
           define the URL of the repository and a branch or tag.
     """
 
-    def __init__(self,
-                 type: str,
-                 properties: 'DefinitionSourceProperties') -> None:
+    def __init__(
+        self,
+        type: str,
+        properties: 'DefinitionSourceProperties',
+    ) -> None:
         """
         Initialize a DefinitionSource object.
 
@@ -2232,7 +2378,8 @@ class DefinitionSource():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class DefinitionSourceProperties():
+
+class DefinitionSourceProperties:
     """
     Properties of the source, which define the URL of the repository and a branch or tag.
 
@@ -2246,13 +2393,15 @@ class DefinitionSourceProperties():
           toolchain.
     """
 
-    def __init__(self,
-                 url: str,
-                 path: str,
-                 *,
-                 branch: str = None,
-                 tag: str = None,
-                 tool: 'Tool' = None) -> None:
+    def __init__(
+        self,
+        url: str,
+        path: str,
+        *,
+        branch: str = None,
+        tag: str = None,
+        tool: 'Tool' = None,
+    ) -> None:
         """
         Initialize a DefinitionSourceProperties object.
 
@@ -2332,7 +2481,8 @@ class DefinitionSourceProperties():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class DefinitionsCollection():
+
+class DefinitionsCollection:
     """
     Pipeline definitions is a collection of individual definition entries, each entry
     consists of a repository URL, branch/tag and path.
@@ -2340,8 +2490,10 @@ class DefinitionsCollection():
     :attr List[Definition] definitions: The list of all definitions in the pipeline.
     """
 
-    def __init__(self,
-                 definitions: List['Definition']) -> None:
+    def __init__(
+        self,
+        definitions: List['Definition'],
+    ) -> None:
         """
         Initialize a DefinitionsCollection object.
 
@@ -2396,7 +2548,8 @@ class DefinitionsCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class GenericSecret():
+
+class GenericSecret:
     """
     Only needed for generic webhook trigger type. Secret used to start generic webhook
     trigger.
@@ -2412,13 +2565,15 @@ class GenericSecret():
           Only needed for `digest_matches` secret type.
     """
 
-    def __init__(self,
-                 *,
-                 type: str = None,
-                 value: str = None,
-                 source: str = None,
-                 key_name: str = None,
-                 algorithm: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        type: str = None,
+        value: str = None,
+        source: str = None,
+        key_name: str = None,
+        algorithm: str = None,
+    ) -> None:
         """
         Initialize a GenericSecret object.
 
@@ -2496,6 +2651,7 @@ class GenericSecret():
         """
         Secret type.
         """
+
         TOKEN_MATCHES = 'token_matches'
         DIGEST_MATCHES = 'digest_matches'
         INTERNAL_VALIDATION = 'internal_validation'
@@ -2505,6 +2661,7 @@ class GenericSecret():
         """
         Secret location, not needed if secret type is `internal_validation`.
         """
+
         HEADER = 'header'
         PAYLOAD = 'payload'
         QUERY = 'query'
@@ -2515,6 +2672,7 @@ class GenericSecret():
         Algorithm used for `digest_matches` secret type. Only needed for `digest_matches`
         secret type.
         """
+
         MD4 = 'md4'
         MD5 = 'md5'
         SHA1 = 'sha1'
@@ -2526,7 +2684,8 @@ class GenericSecret():
         RIPEMD160 = 'ripemd160'
 
 
-class Log():
+
+class Log:
     """
     Log data for Tekton pipeline run steps.
 
@@ -2535,11 +2694,13 @@ class Log():
     :attr str name: <podName>/<containerName> of this log.
     """
 
-    def __init__(self,
-                 id: str,
-                 name: str,
-                 *,
-                 href: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        *,
+        href: str = None,
+    ) -> None:
         """
         Initialize a Log object.
 
@@ -2601,15 +2762,18 @@ class Log():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class LogsCollection():
+
+class LogsCollection:
     """
     List of pipeline run log objects.
 
     :attr List[Log] logs: The list of pipeline run log objects.
     """
 
-    def __init__(self,
-                 logs: List['Log']) -> None:
+    def __init__(
+        self,
+        logs: List['Log'],
+    ) -> None:
         """
         Initialize a LogsCollection object.
 
@@ -2663,7 +2827,8 @@ class LogsCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class PipelineRun():
+
+class PipelineRun:
     """
     Single Tekton pipeline run object.
 
@@ -2675,7 +2840,7 @@ class PipelineRun():
     :attr str definition_id: The aggregated definition ID.
     :attr RunDefinition definition: (optional) Reference to the pipeline definition
           of a pipeline run.
-    :attr PipelineRunWorker worker: worker details used in this pipeline run.
+    :attr PipelineRunWorker worker: Worker details used in this pipeline run.
     :attr str pipeline_id: The ID of the pipeline to which this pipeline run
           belongs.
     :attr RunPipeline pipeline: (optional) Reference to the pipeline to which a
@@ -2697,32 +2862,34 @@ class PipelineRun():
     :attr str run_url: URL for the details page of this pipeline run.
     """
 
-    def __init__(self,
-                 id: str,
-                 status: str,
-                 definition_id: str,
-                 worker: 'PipelineRunWorker',
-                 pipeline_id: str,
-                 listener_name: str,
-                 trigger: 'Trigger',
-                 event_params_blob: str,
-                 created_at: datetime,
-                 run_url: str,
-                 *,
-                 href: str = None,
-                 user_info: 'UserInfo' = None,
-                 definition: 'RunDefinition' = None,
-                 pipeline: 'RunPipeline' = None,
-                 trigger_headers: str = None,
-                 properties: List['Property'] = None,
-                 updated_at: datetime = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        status: str,
+        definition_id: str,
+        worker: 'PipelineRunWorker',
+        pipeline_id: str,
+        listener_name: str,
+        trigger: 'Trigger',
+        event_params_blob: str,
+        created_at: datetime,
+        run_url: str,
+        *,
+        href: str = None,
+        user_info: 'UserInfo' = None,
+        definition: 'RunDefinition' = None,
+        pipeline: 'RunPipeline' = None,
+        trigger_headers: str = None,
+        properties: List['Property'] = None,
+        updated_at: datetime = None,
+    ) -> None:
         """
         Initialize a PipelineRun object.
 
         :param str id: UUID.
         :param str status: Status of the pipeline run.
         :param str definition_id: The aggregated definition ID.
-        :param PipelineRunWorker worker: worker details used in this pipeline run.
+        :param PipelineRunWorker worker: Worker details used in this pipeline run.
         :param str pipeline_id: The ID of the pipeline to which this pipeline run
                belongs.
         :param str listener_name: Listener name used to start the run.
@@ -2915,6 +3082,7 @@ class PipelineRun():
         """
         Status of the pipeline run.
         """
+
         PENDING = 'pending'
         WAITING = 'waiting'
         QUEUED = 'queued'
@@ -2926,7 +3094,8 @@ class PipelineRun():
         SUCCEEDED = 'succeeded'
 
 
-class PipelineRunTrigger():
+
+class PipelineRunTrigger:
     """
     Trigger details passed when triggering a Tekton pipeline run.
 
@@ -2947,13 +3116,15 @@ class PipelineRunTrigger():
           is created.
     """
 
-    def __init__(self,
-                 name: str,
-                 *,
-                 properties: List['Property'] = None,
-                 secure_properties: List['Property'] = None,
-                 headers_: dict = None,
-                 body: dict = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        *,
+        properties: List['Property'] = None,
+        secure_properties: List['Property'] = None,
+        headers_: dict = None,
+        body: dict = None,
+    ) -> None:
         """
         Initialize a PipelineRunTrigger object.
 
@@ -3049,9 +3220,10 @@ class PipelineRunTrigger():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class PipelineRunWorker():
+
+class PipelineRunWorker:
     """
-    worker details used in this pipeline run.
+    Worker details used in this pipeline run.
 
     :attr str name: (optional) Name of the worker. Computed based on the worker ID.
     :attr str agent_id: (optional) The agent ID of the corresponding private worker
@@ -3061,12 +3233,14 @@ class PipelineRunWorker():
     :attr str id: UUID.
     """
 
-    def __init__(self,
-                 id: str,
-                 *,
-                 name: str = None,
-                 agent_id: str = None,
-                 service_id: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        *,
+        name: str = None,
+        agent_id: str = None,
+        service_id: str = None,
+    ) -> None:
         """
         Initialize a PipelineRunWorker object.
 
@@ -3135,7 +3309,8 @@ class PipelineRunWorker():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class PipelineRunsCollection():
+
+class PipelineRunsCollection:
     """
     Tekton pipeline runs object.
 
@@ -3149,14 +3324,15 @@ class PipelineRunsCollection():
           `start` and `limit` params. Only included when the last page has been reached.
     """
 
-    def __init__(self,
-                 pipeline_runs: List['PipelineRun'],
-                 limit: int,
-                 first: 'RunsCollectionFirstPage',
-                 *,
-                 next: 'RunsNextPage' = None,
-                 last: 'RunsCollectionLastPage' = None,
-                 last: 'PipelineRunsCollectionLast' = None) -> None:
+    def __init__(
+        self,
+        pipeline_runs: List['PipelineRun'],
+        limit: int,
+        first: 'RunsFirstPage',
+        *,
+        next: 'RunsNextPage' = None,
+        last: 'RunsLastPage' = None,
+    ) -> None:
         """
         Initialize a PipelineRunsCollection object.
 
@@ -3252,15 +3428,18 @@ class PipelineRunsCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class PropertiesCollection():
+
+class PropertiesCollection:
     """
     Pipeline properties object.
 
     :attr List[Property] properties: Pipeline properties list.
     """
 
-    def __init__(self,
-                 properties: List['Property']) -> None:
+    def __init__(
+        self,
+        properties: List['Property'],
+    ) -> None:
         """
         Initialize a PropertiesCollection object.
 
@@ -3314,7 +3493,8 @@ class PropertiesCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class Property():
+
+class Property:
     """
     Property object.
 
@@ -3329,14 +3509,16 @@ class Property():
           tool integration data will be used.
     """
 
-    def __init__(self,
-                 name: str,
-                 type: str,
-                 *,
-                 value: str = None,
-                 href: str = None,
-                 enum: List[str] = None,
-                 path: str = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        type: str,
+        *,
+        value: str = None,
+        href: str = None,
+        enum: List[str] = None,
+        path: str = None,
+    ) -> None:
         """
         Initialize a Property object.
 
@@ -3423,6 +3605,7 @@ class Property():
         """
         Property type.
         """
+
         SECURE = 'secure'
         TEXT = 'text'
         INTEGRATION = 'integration'
@@ -3430,16 +3613,19 @@ class Property():
         APPCONFIG = 'appconfig'
 
 
-class ResourceGroupReference():
+
+class ResourceGroupReference:
     """
     The resource group in which the pipeline was created.
 
     :attr str id: (optional) ID.
     """
 
-    def __init__(self,
-                 *,
-                 id: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        id: str = None,
+    ) -> None:
         """
         Initialize a ResourceGroupReference object.
 
@@ -3485,16 +3671,19 @@ class ResourceGroupReference():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class RunDefinition():
+
+class RunDefinition:
     """
     Reference to the pipeline definition of a pipeline run.
 
     :attr str id: (optional) The ID of the definition used for a pipeline run.
     """
 
-    def __init__(self,
-                 *,
-                 id: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        id: str = None,
+    ) -> None:
         """
         Initialize a RunDefinition object.
 
@@ -3540,16 +3729,19 @@ class RunDefinition():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class RunPipeline():
+
+class RunPipeline:
     """
     Reference to the pipeline to which a pipeline run belongs.
 
     :attr str id: (optional) The ID of the pipeline to which a pipeline run belongs.
     """
 
-    def __init__(self,
-                 *,
-                 id: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        id: str = None,
+    ) -> None:
         """
         Initialize a RunPipeline object.
 
@@ -3596,15 +3788,18 @@ class RunPipeline():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class RunsFirstPage():
+
+class RunsFirstPage:
     """
     First page of pipeline runs.
 
     :attr str href: General href URL.
     """
 
-    def __init__(self,
-                 href: str) -> None:
+    def __init__(
+        self,
+        href: str,
+    ) -> None:
         """
         Initialize a RunsFirstPage object.
 
@@ -3652,7 +3847,8 @@ class RunsFirstPage():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class RunsLastPage():
+
+class RunsLastPage:
     """
     Last page of pipeline runs relative to the `start` and `limit` params. Only included
     when the last page has been reached.
@@ -3660,8 +3856,10 @@ class RunsLastPage():
     :attr str href: General href URL.
     """
 
-    def __init__(self,
-                 href: str) -> None:
+    def __init__(
+        self,
+        href: str,
+    ) -> None:
         """
         Initialize a RunsLastPage object.
 
@@ -3709,7 +3907,8 @@ class RunsLastPage():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class RunsNextPage():
+
+class RunsNextPage:
     """
     Next page of pipeline runs relative to the `start` and `limit` params. Only included
     when there are more pages available.
@@ -3717,8 +3916,10 @@ class RunsNextPage():
     :attr str href: General href URL.
     """
 
-    def __init__(self,
-                 href: str) -> None:
+    def __init__(
+        self,
+        href: str,
+    ) -> None:
         """
         Initialize a RunsNextPage object.
 
@@ -3766,7 +3967,8 @@ class RunsNextPage():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class StepLog():
+
+class StepLog:
     """
     Logs for a Tekton pipeline run step.
 
@@ -3775,9 +3977,11 @@ class StepLog():
     :attr str id: Step log ID.
     """
 
-    def __init__(self,
-                 data: str,
-                 id: str) -> None:
+    def __init__(
+        self,
+        data: str,
+        id: str,
+    ) -> None:
         """
         Initialize a StepLog object.
 
@@ -3834,9 +4038,8 @@ class StepLog():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-=======
->>>>>>> 42c707e (feat(tekton): update for latest v2 tekton APIs (#1))
-class TektonPipeline():
+
+class TektonPipeline:
     """
     Tekton pipeline object.
 
@@ -3852,13 +4055,13 @@ class TektonPipeline():
     :attr datetime updated_at: Standard RFC 3339 Date Time String.
     :attr datetime created_at: Standard RFC 3339 Date Time String.
     :attr List[Trigger] triggers: Tekton pipeline triggers list.
-    :attr Worker worker: Default pipeline worker used to run the pipeline.
+    :attr Worker worker: Details of the worker used to run the pipeline.
     :attr str runs_url: URL for this pipeline showing the list of pipeline runs.
     :attr str href: (optional) API URL for interacting with the pipeline.
     :attr int build_number: The latest pipeline run build number. If this property
           is absent, the pipeline hasn't had any pipeline runs.
-    :attr int next_build_number: The build number that will be used for the next
-          pipeline run.
+    :attr int next_build_number: (optional) The build number that will be used for
+          the next pipeline run.
     :attr bool enable_notifications: Flag whether to enable notifications for this
           pipeline. When enabled, pipeline run events will be published on all slack
           integration specified channels in the parent toolchain. If omitted, this feature
@@ -3871,26 +4074,28 @@ class TektonPipeline():
     :attr bool enabled: Flag whether this pipeline is enabled.
     """
 
-    def __init__(self,
-                 name: str,
-                 status: str,
-                 resource_group: 'ResourceGroupReference',
-                 toolchain: 'ToolchainReference',
-                 id: str,
-                 definitions: List['Definition'],
-                 properties: List['Property'],
-                 updated_at: datetime,
-                 created_at: datetime,
-                 triggers: List['Trigger'],
-                 worker: 'Worker',
-                 runs_url: str,
-                 build_number: int,
-                 next_build_number: int,
-                 enable_notifications: bool,
-                 enable_partial_cloning: bool,
-                 enabled: bool,
-                 *,
-                 href: str = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        status: str,
+        resource_group: 'ResourceGroupReference',
+        toolchain: 'ToolchainReference',
+        id: str,
+        definitions: List['Definition'],
+        properties: List['Property'],
+        updated_at: datetime,
+        created_at: datetime,
+        triggers: List['Trigger'],
+        worker: 'Worker',
+        runs_url: str,
+        build_number: int,
+        enable_notifications: bool,
+        enable_partial_cloning: bool,
+        enabled: bool,
+        *,
+        href: str = None,
+        next_build_number: int = None,
+    ) -> None:
         """
         Initialize a TektonPipeline object.
 
@@ -3906,13 +4111,11 @@ class TektonPipeline():
         :param datetime updated_at: Standard RFC 3339 Date Time String.
         :param datetime created_at: Standard RFC 3339 Date Time String.
         :param List[Trigger] triggers: Tekton pipeline triggers list.
-        :param Worker worker: Default pipeline worker used to run the pipeline.
+        :param Worker worker: Details of the worker used to run the pipeline.
         :param str runs_url: URL for this pipeline showing the list of pipeline
                runs.
         :param int build_number: The latest pipeline run build number. If this
                property is absent, the pipeline hasn't had any pipeline runs.
-        :param int next_build_number: The build number that will be used for the
-               next pipeline run.
         :param bool enable_notifications: Flag whether to enable notifications for
                this pipeline. When enabled, pipeline run events will be published on all
                slack integration specified channels in the parent toolchain. If omitted,
@@ -3924,6 +4127,8 @@ class TektonPipeline():
                disabled by default.
         :param bool enabled: Flag whether this pipeline is enabled.
         :param str href: (optional) API URL for interacting with the pipeline.
+        :param int next_build_number: (optional) The build number that will be used
+               for the next pipeline run.
         """
         self.name = name
         self.status = status
@@ -4004,8 +4209,6 @@ class TektonPipeline():
             raise ValueError('Required property \'build_number\' not present in TektonPipeline JSON')
         if 'next_build_number' in _dict:
             args['next_build_number'] = _dict.get('next_build_number')
-        else:
-            raise ValueError('Required property \'next_build_number\' not present in TektonPipeline JSON')
         if 'enable_notifications' in _dict:
             args['enable_notifications'] = _dict.get('enable_notifications')
         else:
@@ -4115,11 +4318,13 @@ class TektonPipeline():
         """
         Pipeline status.
         """
+
         CONFIGURED = 'configured'
         CONFIGURING = 'configuring'
 
 
-class TektonPipelinePatch():
+
+class TektonPipelinePatch:
     """
     Request body used to update this pipeline.
 
@@ -4133,16 +4338,20 @@ class TektonPipelinePatch():
           cloning for this pipeline. When partial clone is enabled, only the files
           contained within the paths specified in definition repositories are read and
           cloned, this means that symbolic links might not work.
-    :attr WorkerIdentity worker: (optional) Worker object containing worker ID only.
-          If omitted the IBM Managed shared workers are used by default.
+    :attr WorkerIdentity worker: (optional) Specify the worker used to run the
+          trigger, as a worker object containing the worker ID only. If omitted, or
+          specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
+          used.
     """
 
-    def __init__(self,
-                 *,
-                 next_build_number: int = None,
-                 enable_notifications: bool = None,
-                 enable_partial_cloning: bool = None,
-                 worker: 'WorkerIdentity' = None) -> None:
+    def __init__(
+        self,
+        *,
+        next_build_number: int = None,
+        enable_notifications: bool = None,
+        enable_partial_cloning: bool = None,
+        worker: 'WorkerIdentity' = None,
+    ) -> None:
         """
         Initialize a TektonPipelinePatch object.
 
@@ -4157,8 +4366,10 @@ class TektonPipelinePatch():
                partial cloning for this pipeline. When partial clone is enabled, only the
                files contained within the paths specified in definition repositories are
                read and cloned, this means that symbolic links might not work.
-        :param WorkerIdentity worker: (optional) Worker object containing worker ID
-               only. If omitted the IBM Managed shared workers are used by default.
+        :param WorkerIdentity worker: (optional) Specify the worker used to run the
+               trigger, as a worker object containing the worker ID only. If omitted, or
+               specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
+               used.
         """
         self.next_build_number = next_build_number
         self.enable_notifications = enable_notifications
@@ -4218,15 +4429,18 @@ class TektonPipelinePatch():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class Tool():
+
+class Tool:
     """
     Reference to the repository tool in the parent toolchain.
 
     :attr str id: ID of the repository tool instance in the parent toolchain.
     """
 
-    def __init__(self,
-                 id: str) -> None:
+    def __init__(
+        self,
+        id: str,
+    ) -> None:
         """
         Initialize a Tool object.
 
@@ -4274,7 +4488,8 @@ class Tool():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainReference():
+
+class ToolchainReference:
     """
     Toolchain object containing references to the parent toolchain.
 
@@ -4282,9 +4497,11 @@ class ToolchainReference():
     :attr str crn: The CRN for the toolchain that contains the Tekton pipeline.
     """
 
-    def __init__(self,
-                 id: str,
-                 crn: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        crn: str,
+    ) -> None:
         """
         Initialize a ToolchainReference object.
 
@@ -4341,22 +4558,27 @@ class ToolchainReference():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class Trigger():
+
+class Trigger:
     """
     Tekton pipeline trigger.
 
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+    ) -> None:
         """
         Initialize a Trigger object.
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-                  ", ".join(['TriggerManualTrigger', 'TriggerScmTrigger', 'TriggerTimerTrigger', 'TriggerGenericTrigger']))
+            ", ".join(['TriggerManualTrigger', 'TriggerScmTrigger', 'TriggerTimerTrigger', 'TriggerGenericTrigger'])
+        )
         raise Exception(msg)
 
-class TriggerPatch():
+
+class TriggerPatch:
     """
     Tekton pipeline trigger object used for updating the trigger.
 
@@ -4367,11 +4589,12 @@ class TriggerPatch():
           the definition repositories of the Tekton pipeline.
     :attr List[str] tags: (optional) Trigger tags array. Optional tags for the
           trigger.
-    :attr WorkerIdentity worker: (optional) Worker used to run the trigger. If not
-          specified the trigger will use the default pipeline worker.
+    :attr WorkerIdentity worker: (optional) Specify the worker used to run the
+          trigger. Use `worker: { id: 'public' }` to use the IBM Managed workers. Use
+          `worker: { id: 'inherit' }` to inherit the worker used by the pipeline.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
-          concurrent runs for this trigger. If omitted then the concurrency limit is
-          disabled for this trigger.
+          concurrent runs for this trigger. If set to 0 then the custom concurrency limit
+          is disabled for this trigger.
     :attr bool enabled: (optional) Defines if this trigger is enabled.
     :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
           type. Secret used to start generic webhook trigger.
@@ -4393,22 +4616,26 @@ class TriggerPatch():
           to which a Git trigger listens. Choose one or more from: 'push', 'pull_request'
           and 'pull_request_closed'. For SCM repositories that use 'merge request' events,
           such events map to the equivalent 'pull request' events.
+    :attr bool favorite: (optional) Mark the trigger as a favorite.
     """
 
-    def __init__(self,
-                 *,
-                 type: str = None,
-                 name: str = None,
-                 event_listener: str = None,
-                 tags: List[str] = None,
-                 worker: 'WorkerIdentity' = None,
-                 max_concurrent_runs: int = None,
-                 enabled: bool = None,
-                 secret: 'GenericSecret' = None,
-                 cron: str = None,
-                 timezone: str = None,
-                 source: 'TriggerSourcePrototype' = None,
-                 events: List[str] = None) -> None:
+    def __init__(
+        self,
+        *,
+        type: str = None,
+        name: str = None,
+        event_listener: str = None,
+        tags: List[str] = None,
+        worker: 'WorkerIdentity' = None,
+        max_concurrent_runs: int = None,
+        enabled: bool = None,
+        secret: 'GenericSecret' = None,
+        cron: str = None,
+        timezone: str = None,
+        source: 'TriggerSourcePrototype' = None,
+        events: List[str] = None,
+        favorite: bool = None,
+    ) -> None:
         """
         Initialize a TriggerPatch object.
 
@@ -4419,11 +4646,12 @@ class TriggerPatch():
                defined in the definition repositories of the Tekton pipeline.
         :param List[str] tags: (optional) Trigger tags array. Optional tags for the
                trigger.
-        :param WorkerIdentity worker: (optional) Worker used to run the trigger. If
-               not specified the trigger will use the default pipeline worker.
+        :param WorkerIdentity worker: (optional) Specify the worker used to run the
+               trigger. Use `worker: { id: 'public' }` to use the IBM Managed workers. Use
+               `worker: { id: 'inherit' }` to inherit the worker used by the pipeline.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
-               concurrent runs for this trigger. If omitted then the concurrency limit is
-               disabled for this trigger.
+               concurrent runs for this trigger. If set to 0 then the custom concurrency
+               limit is disabled for this trigger.
         :param bool enabled: (optional) Defines if this trigger is enabled.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
@@ -4446,6 +4674,7 @@ class TriggerPatch():
                'pull_request' and 'pull_request_closed'. For SCM repositories that use
                'merge request' events, such events map to the equivalent 'pull request'
                events.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         """
         self.type = type
         self.name = name
@@ -4459,6 +4688,7 @@ class TriggerPatch():
         self.timezone = timezone
         self.source = source
         self.events = events
+        self.favorite = favorite
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerPatch':
@@ -4488,6 +4718,8 @@ class TriggerPatch():
             args['source'] = TriggerSourcePrototype.from_dict(_dict.get('source'))
         if 'events' in _dict:
             args['events'] = _dict.get('events')
+        if 'favorite' in _dict:
+            args['favorite'] = _dict.get('favorite')
         return cls(**args)
 
     @classmethod
@@ -4531,6 +4763,8 @@ class TriggerPatch():
                 _dict['source'] = self.source.to_dict()
         if hasattr(self, 'events') and self.events is not None:
             _dict['events'] = self.events
+        if hasattr(self, 'favorite') and self.favorite is not None:
+            _dict['favorite'] = self.favorite
         return _dict
 
     def _to_dict(self):
@@ -4555,6 +4789,7 @@ class TriggerPatch():
         """
         Trigger type.
         """
+
         MANUAL = 'manual'
         SCM = 'scm'
         TIMER = 'timer'
@@ -4567,20 +4802,24 @@ class TriggerPatch():
         'pull_request_closed' Git webhook events and 'pull_request' for 'open pull
         request' or 'update pull request' Git webhook events.
         """
+
         PUSH = 'push'
         PULL_REQUEST = 'pull_request'
         PULL_REQUEST_CLOSED = 'pull_request_closed'
 
 
-class TriggerPropertiesCollection():
+
+class TriggerPropertiesCollection:
     """
     Tekton pipeline trigger object used for updating the trigger.
 
     :attr List[TriggerProperty] properties: Trigger properties list.
     """
 
-    def __init__(self,
-                 properties: List['TriggerProperty']) -> None:
+    def __init__(
+        self,
+        properties: List['TriggerProperty'],
+    ) -> None:
         """
         Initialize a TriggerPropertiesCollection object.
 
@@ -4634,7 +4873,8 @@ class TriggerPropertiesCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TriggerProperty():
+
+class TriggerProperty:
     """
     Trigger property object.
 
@@ -4649,12 +4889,16 @@ class TriggerProperty():
           tool integration data will be used.
     """
 
-    def __init__(self,
-                 *,
-                 value: str = None,
-                 href: str = None,
-                 enum: List[str] = None,
-                 path: str = None) -> None:
+    def __init__(
+        self,
+        name: str,
+        type: str,
+        *,
+        value: str = None,
+        href: str = None,
+        enum: List[str] = None,
+        path: str = None,
+    ) -> None:
         """
         Initialize a TriggerProperty object.
 
@@ -4743,6 +4987,7 @@ class TriggerProperty():
         """
         Property type.
         """
+
         SECURE = 'secure'
         TEXT = 'text'
         INTEGRATION = 'integration'
@@ -4750,7 +4995,8 @@ class TriggerProperty():
         APPCONFIG = 'appconfig'
 
 
-class TriggerSource():
+
+class TriggerSource:
     """
     Source repository for a Git trigger. Only required for Git triggers. The referenced
     repository URL must match the URL of a repository tool integration in the parent
@@ -4763,9 +5009,11 @@ class TriggerSource():
           the URL of the repository and a branch or pattern.
     """
 
-    def __init__(self,
-                 type: str,
-                 properties: 'TriggerSourceProperties') -> None:
+    def __init__(
+        self,
+        type: str,
+        properties: 'TriggerSourceProperties',
+    ) -> None:
         """
         Initialize a TriggerSource object.
 
@@ -4826,7 +5074,8 @@ class TriggerSource():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TriggerSourceProperties():
+
+class TriggerSourceProperties:
     """
     Properties of the source, which define the URL of the repository and a branch or
     pattern.
@@ -4848,14 +5097,16 @@ class TriggerSourceProperties():
     :attr Tool tool: Reference to the repository tool in the parent toolchain.
     """
 
-    def __init__(self,
-                 url: str,
-                 blind_connection: bool,
-                 tool: 'Tool',
-                 *,
-                 branch: str = None,
-                 pattern: str = None,
-                 hook_id: str = None) -> None:
+    def __init__(
+        self,
+        url: str,
+        blind_connection: bool,
+        tool: 'Tool',
+        *,
+        branch: str = None,
+        pattern: str = None,
+        hook_id: str = None,
+    ) -> None:
         """
         Initialize a TriggerSourceProperties object.
 
@@ -4950,7 +5201,8 @@ class TriggerSourceProperties():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TriggerSourcePropertiesPrototype():
+
+class TriggerSourcePropertiesPrototype:
     """
     Properties of the source, which define the URL of the repository and a branch or
     pattern.
@@ -4966,11 +5218,13 @@ class TriggerSourcePropertiesPrototype():
           branch or pattern must be specified, but only one or the other.
     """
 
-    def __init__(self,
-                 url: str,
-                 *,
-                 branch: str = None,
-                 pattern: str = None) -> None:
+    def __init__(
+        self,
+        url: str,
+        *,
+        branch: str = None,
+        pattern: str = None,
+    ) -> None:
         """
         Initialize a TriggerSourcePropertiesPrototype object.
 
@@ -5037,7 +5291,8 @@ class TriggerSourcePropertiesPrototype():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TriggerSourcePrototype():
+
+class TriggerSourcePrototype:
     """
     Source repository for a Git trigger. Only required for Git triggers. The referenced
     repository URL must match the URL of a repository tool integration in the parent
@@ -5050,9 +5305,11 @@ class TriggerSourcePrototype():
           which define the URL of the repository and a branch or pattern.
     """
 
-    def __init__(self,
-                 type: str,
-                 properties: 'TriggerSourcePropertiesPrototype') -> None:
+    def __init__(
+        self,
+        type: str,
+        properties: 'TriggerSourcePropertiesPrototype',
+    ) -> None:
         """
         Initialize a TriggerSourcePrototype object.
 
@@ -5113,7 +5370,8 @@ class TriggerSourcePrototype():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class TriggersCollection():
+
+class TriggersCollection:
     """
 <<<<<<< HEAD
     Source repository for a Git trigger. Only required for Git triggers. The referenced
@@ -5124,8 +5382,10 @@ class TriggersCollection():
     :attr List[Trigger] triggers: Tekton pipeline triggers list.
     """
 
-    def __init__(self,
-                 triggers: List['Trigger']) -> None:
+    def __init__(
+        self,
+        triggers: List['Trigger'],
+    ) -> None:
         """
         Initialize a TriggersCollection object.
 
@@ -5180,7 +5440,8 @@ class TriggersCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class UserInfo():
+
+class UserInfo:
     """
     Information about the user that triggered a pipeline run. Only included for pipeline
     runs that were manually triggered.
@@ -5189,9 +5450,11 @@ class UserInfo():
     :attr str sub: User email address.
     """
 
-    def __init__(self,
-                 iam_id: str,
-                 sub: str) -> None:
+    def __init__(
+        self,
+        iam_id: str,
+        sub: str,
+    ) -> None:
         """
         Initialize a UserInfo object.
 
@@ -5247,20 +5510,23 @@ class UserInfo():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class Worker():
+
+class Worker:
     """
-    Default pipeline worker used to run the pipeline.
+    Details of the worker used to run the pipeline.
 
     :attr str name: (optional) Name of the worker. Computed based on the worker ID.
     :attr str type: (optional) Type of the worker. Computed based on the worker ID.
     :attr str id: ID of the worker.
     """
 
-    def __init__(self,
-                 id: str,
-                 *,
-                 name: str = None,
-                 type: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        *,
+        name: str = None,
+        type: str = None,
+    ) -> None:
         """
         Initialize a Worker object.
 
@@ -5322,16 +5588,20 @@ class Worker():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class WorkerIdentity():
+
+class WorkerIdentity:
     """
-    Worker object containing worker ID only. If omitted the IBM Managed shared workers are
-    used by default.
+    Specify the worker used to run the trigger, as a worker object containing the worker
+    ID only. If omitted, or specified as `worker: { id: 'public' }`, the IBM Managed
+    shared workers are used.
 
     :attr str id: ID of the worker.
     """
 
-    def __init__(self,
-                 id: str) -> None:
+    def __init__(
+        self,
+        id: str,
+    ) -> None:
         """
         Initialize a WorkerIdentity object.
 
@@ -5379,6 +5649,7 @@ class WorkerIdentity():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+
 class TriggerGenericTrigger(Trigger):
     """
     Generic webhook trigger, which triggers a pipeline run when the Tekton Pipeline
@@ -5396,32 +5667,35 @@ class TriggerGenericTrigger(Trigger):
           used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
-    :attr Worker worker: (optional) Worker used to run the trigger. If not specified
-          the trigger will use the default pipeline worker.
+    :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
     :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool favorite: (optional) Mark the trigger as a favorite.
     :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
           type. Secret used to start generic webhook trigger.
     :attr str webhook_url: (optional) Webhook URL that can be used to trigger
           pipeline runs.
     """
 
-    def __init__(self,
-                 type: str,
-                 name: str,
-                 event_listener: str,
-                 id: str,
-                 enabled: bool,
-                 *,
-                 href: str = None,
-                 properties: List['TriggerProperty'] = None,
-                 tags: List[str] = None,
-                 worker: 'Worker' = None,
-                 max_concurrent_runs: int = None,
-                 secret: 'GenericSecret' = None,
-                 webhook_url: str = None) -> None:
+    def __init__(
+        self,
+        type: str,
+        name: str,
+        event_listener: str,
+        id: str,
+        enabled: bool,
+        *,
+        href: str = None,
+        properties: List['TriggerProperty'] = None,
+        tags: List[str] = None,
+        worker: 'Worker' = None,
+        max_concurrent_runs: int = None,
+        favorite: bool = None,
+        secret: 'GenericSecret' = None,
+        webhook_url: str = None,
+    ) -> None:
         """
         Initialize a TriggerGenericTrigger object.
 
@@ -5438,11 +5712,12 @@ class TriggerGenericTrigger(Trigger):
                properties used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param Worker worker: (optional) Details of the worker used to run the
+               trigger.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         :param GenericSecret secret: (optional) Only needed for generic webhook
                trigger type. Secret used to start generic webhook trigger.
         :param str webhook_url: (optional) Webhook URL that can be used to trigger
@@ -5459,6 +5734,7 @@ class TriggerGenericTrigger(Trigger):
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
+        self.favorite = favorite
         self.secret = secret
         self.webhook_url = webhook_url
 
@@ -5496,6 +5772,8 @@ class TriggerGenericTrigger(Trigger):
             args['enabled'] = _dict.get('enabled')
         else:
             raise ValueError('Required property \'enabled\' not present in TriggerGenericTrigger JSON')
+        if 'favorite' in _dict:
+            args['favorite'] = _dict.get('favorite')
         if 'secret' in _dict:
             args['secret'] = GenericSecret.from_dict(_dict.get('secret'))
         if 'webhook_url' in _dict:
@@ -5539,6 +5817,8 @@ class TriggerGenericTrigger(Trigger):
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
         if hasattr(self, 'enabled') and self.enabled is not None:
             _dict['enabled'] = self.enabled
+        if hasattr(self, 'favorite') and self.favorite is not None:
+            _dict['favorite'] = self.favorite
         if hasattr(self, 'secret') and self.secret is not None:
             if isinstance(self.secret, dict):
                 _dict['secret'] = self.secret
@@ -5566,6 +5846,7 @@ class TriggerGenericTrigger(Trigger):
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+
 class TriggerManualTrigger(Trigger):
     """
     Manual trigger.
@@ -5582,26 +5863,29 @@ class TriggerManualTrigger(Trigger):
           used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
-    :attr Worker worker: (optional) Worker used to run the trigger. If not specified
-          the trigger will use the default pipeline worker.
+    :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
     :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool favorite: (optional) Mark the trigger as a favorite.
     """
 
-    def __init__(self,
-                 type: str,
-                 name: str,
-                 event_listener: str,
-                 id: str,
-                 enabled: bool,
-                 *,
-                 href: str = None,
-                 properties: List['TriggerProperty'] = None,
-                 tags: List[str] = None,
-                 worker: 'Worker' = None,
-                 max_concurrent_runs: int = None) -> None:
+    def __init__(
+        self,
+        type: str,
+        name: str,
+        event_listener: str,
+        id: str,
+        enabled: bool,
+        *,
+        href: str = None,
+        properties: List['TriggerProperty'] = None,
+        tags: List[str] = None,
+        worker: 'Worker' = None,
+        max_concurrent_runs: int = None,
+        favorite: bool = None,
+    ) -> None:
         """
         Initialize a TriggerManualTrigger object.
 
@@ -5618,11 +5902,12 @@ class TriggerManualTrigger(Trigger):
                properties used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param Worker worker: (optional) Details of the worker used to run the
+               trigger.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -5635,6 +5920,7 @@ class TriggerManualTrigger(Trigger):
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
+        self.favorite = favorite
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerManualTrigger':
@@ -5670,6 +5956,8 @@ class TriggerManualTrigger(Trigger):
             args['enabled'] = _dict.get('enabled')
         else:
             raise ValueError('Required property \'enabled\' not present in TriggerManualTrigger JSON')
+        if 'favorite' in _dict:
+            args['favorite'] = _dict.get('favorite')
         return cls(**args)
 
     @classmethod
@@ -5709,6 +5997,8 @@ class TriggerManualTrigger(Trigger):
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
         if hasattr(self, 'enabled') and self.enabled is not None:
             _dict['enabled'] = self.enabled
+        if hasattr(self, 'favorite') and self.favorite is not None:
+            _dict['favorite'] = self.favorite
         return _dict
 
     def _to_dict(self):
@@ -5729,6 +6019,7 @@ class TriggerManualTrigger(Trigger):
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+
 class TriggerScmTrigger(Trigger):
     """
     Git type trigger, which automatically triggers a pipeline run when the Tekton Pipeline
@@ -5746,12 +6037,12 @@ class TriggerScmTrigger(Trigger):
           used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
-    :attr Worker worker: (optional) Worker used to run the trigger. If not specified
-          the trigger will use the default pipeline worker.
+    :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
     :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool favorite: (optional) Mark the trigger as a favorite.
     :attr TriggerSource source: (optional) Source repository for a Git trigger. Only
           required for Git triggers. The referenced repository URL must match the URL of a
           repository tool integration in the parent toolchain. Obtain the list of
@@ -5763,20 +6054,23 @@ class TriggerScmTrigger(Trigger):
           such events map to the equivalent 'pull request' events.
     """
 
-    def __init__(self,
-                 type: str,
-                 name: str,
-                 event_listener: str,
-                 id: str,
-                 enabled: bool,
-                 *,
-                 href: str = None,
-                 properties: List['TriggerProperty'] = None,
-                 tags: List[str] = None,
-                 worker: 'Worker' = None,
-                 max_concurrent_runs: int = None,
-                 source: 'TriggerSource' = None,
-                 events: List[str] = None) -> None:
+    def __init__(
+        self,
+        type: str,
+        name: str,
+        event_listener: str,
+        id: str,
+        enabled: bool,
+        *,
+        href: str = None,
+        properties: List['TriggerProperty'] = None,
+        tags: List[str] = None,
+        worker: 'Worker' = None,
+        max_concurrent_runs: int = None,
+        favorite: bool = None,
+        source: 'TriggerSource' = None,
+        events: List[str] = None,
+    ) -> None:
         """
         Initialize a TriggerScmTrigger object.
 
@@ -5793,11 +6087,12 @@ class TriggerScmTrigger(Trigger):
                properties used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param Worker worker: (optional) Details of the worker used to run the
+               trigger.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         :param TriggerSource source: (optional) Source repository for a Git
                trigger. Only required for Git triggers. The referenced repository URL must
                match the URL of a repository tool integration in the parent toolchain.
@@ -5820,6 +6115,7 @@ class TriggerScmTrigger(Trigger):
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
+        self.favorite = favorite
         self.source = source
         self.events = events
 
@@ -5857,6 +6153,8 @@ class TriggerScmTrigger(Trigger):
             args['enabled'] = _dict.get('enabled')
         else:
             raise ValueError('Required property \'enabled\' not present in TriggerScmTrigger JSON')
+        if 'favorite' in _dict:
+            args['favorite'] = _dict.get('favorite')
         if 'source' in _dict:
             args['source'] = TriggerSource.from_dict(_dict.get('source'))
         if 'events' in _dict:
@@ -5900,6 +6198,8 @@ class TriggerScmTrigger(Trigger):
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
         if hasattr(self, 'enabled') and self.enabled is not None:
             _dict['enabled'] = self.enabled
+        if hasattr(self, 'favorite') and self.favorite is not None:
+            _dict['favorite'] = self.favorite
         if hasattr(self, 'source') and self.source is not None:
             if isinstance(self.source, dict):
                 _dict['source'] = self.source
@@ -5933,9 +6233,11 @@ class TriggerScmTrigger(Trigger):
         'pull_request_closed' Git webhook events and 'pull_request' for 'open pull
         request' or 'update pull request' Git webhook events.
         """
+
         PUSH = 'push'
         PULL_REQUEST = 'pull_request'
         PULL_REQUEST_CLOSED = 'pull_request_closed'
+
 
 
 class TriggerTimerTrigger(Trigger):
@@ -5955,12 +6257,12 @@ class TriggerTimerTrigger(Trigger):
           used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
-    :attr Worker worker: (optional) Worker used to run the trigger. If not specified
-          the trigger will use the default pipeline worker.
+    :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
     :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool favorite: (optional) Mark the trigger as a favorite.
     :attr str cron: (optional) Only needed for timer triggers. Cron expression that
           indicates when this trigger will activate. Maximum frequency is every 5 minutes.
           The string is based on UNIX crontab syntax: minute, hour, day of month, month,
@@ -5972,20 +6274,23 @@ class TriggerTimerTrigger(Trigger):
           timezone database, https://www.iana.org/time-zones.
     """
 
-    def __init__(self,
-                 type: str,
-                 name: str,
-                 event_listener: str,
-                 id: str,
-                 enabled: bool,
-                 *,
-                 href: str = None,
-                 properties: List['TriggerProperty'] = None,
-                 tags: List[str] = None,
-                 worker: 'Worker' = None,
-                 max_concurrent_runs: int = None,
-                 cron: str = None,
-                 timezone: str = None) -> None:
+    def __init__(
+        self,
+        type: str,
+        name: str,
+        event_listener: str,
+        id: str,
+        enabled: bool,
+        *,
+        href: str = None,
+        properties: List['TriggerProperty'] = None,
+        tags: List[str] = None,
+        worker: 'Worker' = None,
+        max_concurrent_runs: int = None,
+        favorite: bool = None,
+        cron: str = None,
+        timezone: str = None,
+    ) -> None:
         """
         Initialize a TriggerTimerTrigger object.
 
@@ -6002,11 +6307,12 @@ class TriggerTimerTrigger(Trigger):
                properties used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
-        :param Worker worker: (optional) Worker used to run the trigger. If not
-               specified the trigger will use the default pipeline worker.
+        :param Worker worker: (optional) Details of the worker used to run the
+               trigger.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
+        :param bool favorite: (optional) Mark the trigger as a favorite.
         :param str cron: (optional) Only needed for timer triggers. Cron expression
                that indicates when this trigger will activate. Maximum frequency is every
                5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
@@ -6028,6 +6334,7 @@ class TriggerTimerTrigger(Trigger):
         self.worker = worker
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
+        self.favorite = favorite
         self.cron = cron
         self.timezone = timezone
 
@@ -6065,6 +6372,8 @@ class TriggerTimerTrigger(Trigger):
             args['enabled'] = _dict.get('enabled')
         else:
             raise ValueError('Required property \'enabled\' not present in TriggerTimerTrigger JSON')
+        if 'favorite' in _dict:
+            args['favorite'] = _dict.get('favorite')
         if 'cron' in _dict:
             args['cron'] = _dict.get('cron')
         if 'timezone' in _dict:
@@ -6108,6 +6417,8 @@ class TriggerTimerTrigger(Trigger):
             _dict['max_concurrent_runs'] = self.max_concurrent_runs
         if hasattr(self, 'enabled') and self.enabled is not None:
             _dict['enabled'] = self.enabled
+        if hasattr(self, 'favorite') and self.favorite is not None:
+            _dict['favorite'] = self.favorite
         if hasattr(self, 'cron') and self.cron is not None:
             _dict['cron'] = self.cron
         if hasattr(self, 'timezone') and self.timezone is not None:
@@ -6136,19 +6447,20 @@ class TriggerTimerTrigger(Trigger):
 # Pagers
 ##############################################################################
 
-class TektonPipelineRunsPager():
+
+class TektonPipelineRunsPager:
     """
     TektonPipelineRunsPager can be used to simplify the use of the "list_tekton_pipeline_runs" method.
     """
 
-    def __init__(self,
-                 *,
-                 client: CdTektonPipelineV2,
-                 pipeline_id: str,
-                 limit: int = None,
-                 offset: int = None,
-                 status: str = None,
-                 trigger_name: str = None,
+    def __init__(
+        self,
+        *,
+        client: CdTektonPipelineV2,
+        pipeline_id: str,
+        limit: int = None,
+        status: str = None,
+        trigger_name: str = None,
     ) -> None:
         """
         Initialize a TektonPipelineRunsPager object.
@@ -6164,7 +6476,7 @@ class TektonPipelineRunsPager():
         """
         self._has_next = True
         self._client = client
-        self._page_context = { 'next': None }
+        self._page_context = {'next': None}
         self._pipeline_id = pipeline_id
         self._limit = limit
         self._offset = offset
