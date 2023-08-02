@@ -163,7 +163,6 @@ class TestCdTektonPipelineV2():
             'url': 'https://github.com/open-toolchain/hello-tekton.git',
             'branch': 'master',
             'path': '.tekton',
-            'service_instance_id': 'testString',
         }
         # Construct a dict representation of a DefinitionSource model
         definition_source_model = {
