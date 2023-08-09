@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.1.0...v1.2.0) (2023-08-09)
+
+
+### Bug Fixes
+
+* **tekton:** support favorite triggers ([35cd5d8](https://github.com/IBM/continuous-delivery-python-sdk/commit/35cd5d85931047263f75c7e8fde253d064e6d967))
+
+
+### Features
+
+* **tekton:** update for latest v2 tekton APIs ([#1](https://github.com/IBM/continuous-delivery-python-sdk/issues/1)) ([0cf77f4](https://github.com/IBM/continuous-delivery-python-sdk/commit/0cf77f4a2b935fa16296e9025d9077d039968d74))
+
 # [1.1.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.0.1...v1.1.0) (2023-04-27)
 
 
