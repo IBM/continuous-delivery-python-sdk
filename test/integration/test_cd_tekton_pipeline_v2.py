@@ -69,6 +69,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_toolchain(self):
+        print('\n Create toolchain.', flush=True)
         global toolchain_id_link
         response = self.cd_toolchain_service.create_toolchain(
             name='PythonPipelineSDKTest',
@@ -82,6 +83,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_github_tool(self):
+        print('\n Create github tool.', flush=True)
         global github_tool_id_link
         response = self.cd_toolchain_service.create_tool(
             toolchain_id=toolchain_id_link,
@@ -101,6 +103,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_pipeline_tool(self):
+        print('\n Create pipeline tool.', flush=True)
         global pipeline_tool_id_link
         response = self.cd_toolchain_service.create_tool(
             toolchain_id=toolchain_id_link,
@@ -117,6 +120,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline(self):
+        print('\n Create Tekton Pipeline.', flush=True)
         # Construct a dict representation of a WorkerIdentity model
         worker_identity_model = {
             'id': 'public',
@@ -133,6 +137,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline(self):
+        print('\n Get Tekton Pipeline.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline(
             id=pipeline_tool_id_link
         )
@@ -142,6 +147,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_update_tekton_pipeline(self):
+        print('\n Update Tekton Pipeline.', flush=True)
         # Construct a dict representation of a TektonPipelinePatch model
         tekton_pipeline_patch_model = {
             'enable_notifications': True,
@@ -157,6 +163,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline_definition(self):
+        print('\n Create definition.', flush=True)
         global definition_id_link
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {
@@ -190,6 +197,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline_definition(self):
+        print('\n Get definition.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline_definition(
             pipeline_id=pipeline_tool_id_link,
             definition_id=definition_id_link
@@ -200,6 +208,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_list_tekton_pipeline_definitions(self):
+        print('\n List definitions.', flush=True)
         response = self.cd_pipeline_service.list_tekton_pipeline_definitions(
             pipeline_id=pipeline_tool_id_link
         )
@@ -219,6 +228,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline_properties(self):
+        print('\n Create property.', flush=True)
         response = self.cd_pipeline_service.create_tekton_pipeline_properties(
             pipeline_id=pipeline_tool_id_link,
             name='prop1',
@@ -234,6 +244,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline_property(self):
+        print('\n Get property definition.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline_property(
             pipeline_id=pipeline_tool_id_link,
             property_name='prop1'
@@ -244,6 +255,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_replace_tekton_pipeline_property(self):
+        print('\n Update property.', flush=True)
         response = self.cd_pipeline_service.replace_tekton_pipeline_property(
             pipeline_id=pipeline_tool_id_link,
             property_name='prop1',
@@ -260,6 +272,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_list_tekton_pipeline_properties(self):
+        print('\n List properties.', flush=True)
         response = self.cd_pipeline_service.list_tekton_pipeline_properties(
             pipeline_id=pipeline_tool_id_link,
             sort='name'
@@ -276,6 +289,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline_trigger(self):
+        print('\n Create trigger.', flush=True)
         global trigger_id_link
         response = self.cd_pipeline_service.create_tekton_pipeline_trigger(
             pipeline_id=pipeline_tool_id_link,
@@ -298,6 +312,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline_trigger(self):
+        print('\n Get trigger.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline_trigger(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link
@@ -315,6 +330,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_update_tekton_pipeline_trigger(self):
+        print('\n Update trigger.', flush=True)
         # Construct a dict representation of a TriggerPatch model
         trigger_patch_model = {
             'type': 'manual',
@@ -341,6 +357,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_duplicate_tekton_pipeline_trigger(self):
+        print('\n Duplicate trigger.', flush=True)
         response = self.cd_pipeline_service.duplicate_tekton_pipeline_trigger(
             pipeline_id=pipeline_tool_id_link,
             source_trigger_id=trigger_id_link,
@@ -359,6 +376,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_list_tekton_pipeline_triggers(self):
+        print('\n List triggers.', flush=True)
         response = self.cd_pipeline_service.list_tekton_pipeline_triggers(
             pipeline_id=pipeline_tool_id_link,
             type='manual'
@@ -379,6 +397,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline_trigger_properties(self):
+        print('\n Create trigger property.', flush=True)
         global trigger_prop_name_link
         response = self.cd_pipeline_service.create_tekton_pipeline_trigger_properties(
             pipeline_id=pipeline_tool_id_link,
@@ -397,6 +416,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline_trigger_property(self):
+        print('\n Get trigger property.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline_trigger_property(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link,
@@ -411,6 +431,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_replace_tekton_pipeline_trigger_property(self):
+        print('\n Update trigger property.', flush=True)
         response = self.cd_pipeline_service.replace_tekton_pipeline_trigger_property(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link,
@@ -428,6 +449,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_list_tekton_pipeline_trigger_properties(self):
+        print('\n List trigger properties.', flush=True)
         response = self.cd_pipeline_service.list_tekton_pipeline_trigger_properties(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link,
@@ -444,20 +466,13 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_create_tekton_pipeline_run(self):
+        print('\n Create PipelineRun.', flush=True)
         global pipeline_run_id_link
-        # Construct a dict representation of a Property model
-        property_model = {
-            'addedProp1': 'addedProp123'
-        }
-        # Construct a dict representation of a Secure Property model
-        secure_property_model = {
-            'addedSecProp1': 'addedSecProp123'
-        }
         # Construct a dict representation of a Trigger model
         trigger_model = {
             'name': 'start-deploy',
-            'properties': property_model,
-            'secure_properties': secure_property_model,
+            'properties': {'addedProp1': 'addedProp123'},
+            'secure_properties': {'addedSecProp1': 'addedSecProp123'},
             'headers': {'source':'api'},
             'body': {'message':'hello world','enable':'true','detail':{'name':'example'}},
         }
@@ -485,6 +500,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_get_tekton_pipeline_run(self):
+        print('\n Get PipelineRun.', flush=True)
         response = self.cd_pipeline_service.get_tekton_pipeline_run(
             pipeline_id=pipeline_tool_id_link,
             id=pipeline_run_id_link
@@ -508,6 +524,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_rerun_tekton_pipeline_run(self):
+        print('\n Rerun PipelineRun.', flush=True)
         global rerun_id_link
         response = self.cd_pipeline_service.rerun_tekton_pipeline_run(
             pipeline_id=pipeline_tool_id_link,
@@ -533,6 +550,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_list_tekton_pipeline_runs(self):
+        print('\n List PipelineRuns.', flush=True)
         response = self.cd_pipeline_service.list_tekton_pipeline_runs(
             pipeline_id=pipeline_tool_id_link,
             limit=5
@@ -593,9 +611,9 @@ class TestCdTektonPipelineV2():
     #     step_log = response.get_result()
     #     assert step_log is not None
 
-
     @needscredentials
     def test_delete_tekton_pipeline_run(self):
+        print('\n Delete PipelineRun.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline_run(
             pipeline_id=pipeline_tool_id_link,
             id=pipeline_run_id_link
@@ -605,6 +623,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_tekton_pipeline_definition(self):
+        print('\n Delete definition.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline_definition(
             pipeline_id=pipeline_tool_id_link,
             definition_id=definition_id_link
@@ -614,6 +633,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_tekton_pipeline_property(self):
+        print('\n Delete property.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline_property(
             pipeline_id=pipeline_tool_id_link,
             property_name='prop1'
@@ -623,6 +643,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_tekton_pipeline_trigger_property(self):
+        print('\n Delete trigger property.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline_trigger_property(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link,
@@ -633,6 +654,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_tekton_pipeline_trigger(self):
+        print('\n Delete trigger.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline_trigger(
             pipeline_id=pipeline_tool_id_link,
             trigger_id=trigger_id_link
@@ -642,6 +664,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_tekton_pipeline(self):
+        print('\n Delete tekton pipeline.', flush=True)
         response = self.cd_pipeline_service.delete_tekton_pipeline(
             id=pipeline_tool_id_link
         )
@@ -650,6 +673,7 @@ class TestCdTektonPipelineV2():
 
     @needscredentials
     def test_delete_toolchain(self):
+        print('\n Delete toolchain.', flush=True)
         response = self.cd_toolchain_service.delete_toolchain(
             toolchain_id=toolchain_id_link
         )

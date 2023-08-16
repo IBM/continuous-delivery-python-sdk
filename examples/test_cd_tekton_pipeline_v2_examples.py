@@ -189,15 +189,10 @@ class TestCdTektonPipelineV2Examples:
             print('\ncreate_tekton_pipeline_run() result:')
             # begin-create_tekton_pipeline_run
 
-            property_model = {
-                'name': 'testString',
-                'type': 'secure',
-            }
-
             pipeline_run_trigger_model = {
                 'name': 'Manual Trigger 1',
-                'properties': [property_model],
-                'secure_properties': [property_model],
+                'properties': {'pipeline-debug':'false'},
+                'secure_properties': {'secure-property-key':'secure value'},
                 'headers': {'source':'api'},
                 'body': {'message':'hello world','enable':'true','detail':{'name':'example'}},
             }
