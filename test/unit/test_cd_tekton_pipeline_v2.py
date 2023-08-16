@@ -783,28 +783,19 @@ class TestCreateTektonPipelineRun:
             status=201,
         )
 
-        # Construct a dict representation of a Property model
-        property_model = {}
-        property_model['name'] = 'testString'
-        property_model['value'] = 'testString'
-        property_model['href'] = 'testString'
-        property_model['enum'] = ['testString']
-        property_model['type'] = 'secure'
-        property_model['path'] = 'testString'
-
         # Construct a dict representation of a PipelineRunTrigger model
         pipeline_run_trigger_model = {}
         pipeline_run_trigger_model['name'] = 'Manual Trigger 1'
-        pipeline_run_trigger_model['properties'] = [property_model]
-        pipeline_run_trigger_model['secure_properties'] = [property_model]
+        pipeline_run_trigger_model['properties'] = {'anyKey': 'anyValue'}
+        pipeline_run_trigger_model['secure_properties'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model['headers'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model['body'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         trigger_name = 'testString'
-        trigger_properties = [property_model]
-        secure_trigger_properties = [property_model]
+        trigger_properties = {'anyKey': 'anyValue'}
+        secure_trigger_properties = {'anyKey': 'anyValue'}
         trigger_headers = {'anyKey': 'anyValue'}
         trigger_body = {'anyKey': 'anyValue'}
         trigger = pipeline_run_trigger_model
@@ -827,8 +818,8 @@ class TestCreateTektonPipelineRun:
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body['trigger_name'] == 'testString'
-        assert req_body['trigger_properties'] == [property_model]
-        assert req_body['secure_trigger_properties'] == [property_model]
+        assert req_body['trigger_properties'] == {'anyKey': 'anyValue'}
+        assert req_body['secure_trigger_properties'] == {'anyKey': 'anyValue'}
         assert req_body['trigger_headers'] == {'anyKey': 'anyValue'}
         assert req_body['trigger_body'] == {'anyKey': 'anyValue'}
         assert req_body['trigger'] == pipeline_run_trigger_model
@@ -858,28 +849,19 @@ class TestCreateTektonPipelineRun:
             status=201,
         )
 
-        # Construct a dict representation of a Property model
-        property_model = {}
-        property_model['name'] = 'testString'
-        property_model['value'] = 'testString'
-        property_model['href'] = 'testString'
-        property_model['enum'] = ['testString']
-        property_model['type'] = 'secure'
-        property_model['path'] = 'testString'
-
         # Construct a dict representation of a PipelineRunTrigger model
         pipeline_run_trigger_model = {}
         pipeline_run_trigger_model['name'] = 'Manual Trigger 1'
-        pipeline_run_trigger_model['properties'] = [property_model]
-        pipeline_run_trigger_model['secure_properties'] = [property_model]
+        pipeline_run_trigger_model['properties'] = {'anyKey': 'anyValue'}
+        pipeline_run_trigger_model['secure_properties'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model['headers'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model['body'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
         trigger_name = 'testString'
-        trigger_properties = [property_model]
-        secure_trigger_properties = [property_model]
+        trigger_properties = {'anyKey': 'anyValue'}
+        secure_trigger_properties = {'anyKey': 'anyValue'}
         trigger_headers = {'anyKey': 'anyValue'}
         trigger_body = {'anyKey': 'anyValue'}
         trigger = pipeline_run_trigger_model
@@ -4347,21 +4329,11 @@ class TestModel_PipelineRunTrigger:
         Test serialization/deserialization for PipelineRunTrigger
         """
 
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        property_model = {}  # Property
-        property_model['name'] = 'testString'
-        property_model['value'] = 'testString'
-        property_model['href'] = 'testString'
-        property_model['enum'] = ['testString']
-        property_model['type'] = 'secure'
-        property_model['path'] = 'testString'
-
         # Construct a json representation of a PipelineRunTrigger model
         pipeline_run_trigger_model_json = {}
         pipeline_run_trigger_model_json['name'] = 'start-deploy'
-        pipeline_run_trigger_model_json['properties'] = [property_model]
-        pipeline_run_trigger_model_json['secure_properties'] = [property_model]
+        pipeline_run_trigger_model_json['properties'] = {'anyKey': 'anyValue'}
+        pipeline_run_trigger_model_json['secure_properties'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model_json['headers'] = {'anyKey': 'anyValue'}
         pipeline_run_trigger_model_json['body'] = {'anyKey': 'anyValue'}
 

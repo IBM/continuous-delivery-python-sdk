@@ -409,8 +409,8 @@ class CdTektonPipelineV2(BaseService):
         pipeline_id: str,
         *,
         trigger_name: str = None,
-        trigger_properties: List['Property'] = None,
-        secure_trigger_properties: List['Property'] = None,
+        trigger_properties: dict = None,
+        secure_trigger_properties: dict = None,
         trigger_headers: dict = None,
         trigger_body: dict = None,
         trigger: 'PipelineRunTrigger' = None,
@@ -424,12 +424,12 @@ class CdTektonPipelineV2(BaseService):
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str trigger_name: (optional) Trigger name.
-        :param List[Property] trigger_properties: (optional) An object containing
-               string values only that provides additional `text` properties, or overrides
+        :param dict trigger_properties: (optional) An object containing string
+               values only that provides additional `text` properties, or overrides
                existing pipeline/trigger properties, to use for the created run.
-        :param List[Property] secure_trigger_properties: (optional) An object
-               containing string values only that provides additional `secure` properties,
-               or overrides existing `secure` pipeline/trigger properties, to use for the
+        :param dict secure_trigger_properties: (optional) An object containing
+               string values only that provides additional `secure` properties, or
+               overrides existing `secure` pipeline/trigger properties, to use for the
                created run.
         :param dict trigger_headers: (optional) An object containing string values
                only that provides the request headers. Use `$(header.header_key_name)` to
@@ -449,10 +449,6 @@ class CdTektonPipelineV2(BaseService):
 
         if not pipeline_id:
             raise ValueError('pipeline_id must be provided')
-        if trigger_properties is not None:
-            trigger_properties = [convert_model(x) for x in trigger_properties]
-        if secure_trigger_properties is not None:
-            secure_trigger_properties = [convert_model(x) for x in secure_trigger_properties]
         if trigger is not None:
             trigger = convert_model(trigger)
         headers = {}
@@ -3100,12 +3096,12 @@ class PipelineRunTrigger:
     Trigger details passed when triggering a Tekton pipeline run.
 
     :attr str name: Trigger name.
-    :attr List[Property] properties: (optional) An object containing string values
-          only that provides additional `text` properties, or overrides existing
+    :attr dict properties: (optional) An object containing string values only that
+          provides additional `text` properties, or overrides existing pipeline/trigger
+          properties, to use for the created run.
+    :attr dict secure_properties: (optional) An object containing string values only
+          that provides additional `secure` properties, or overrides existing `secure`
           pipeline/trigger properties, to use for the created run.
-    :attr List[Property] secure_properties: (optional) An object containing string
-          values only that provides additional `secure` properties, or overrides existing
-          `secure` pipeline/trigger properties, to use for the created run.
     :attr dict headers_: (optional) An object containing string values only that
           provides the request headers. Use `$(header.header_key_name)` to access it in a
           TriggerBinding. Most commonly used as part of a Generic Webhook to provide a
@@ -3120,8 +3116,8 @@ class PipelineRunTrigger:
         self,
         name: str,
         *,
-        properties: List['Property'] = None,
-        secure_properties: List['Property'] = None,
+        properties: dict = None,
+        secure_properties: dict = None,
         headers_: dict = None,
         body: dict = None,
     ) -> None:
@@ -3129,13 +3125,12 @@ class PipelineRunTrigger:
         Initialize a PipelineRunTrigger object.
 
         :param str name: Trigger name.
-        :param List[Property] properties: (optional) An object containing string
-               values only that provides additional `text` properties, or overrides
-               existing pipeline/trigger properties, to use for the created run.
-        :param List[Property] secure_properties: (optional) An object containing
-               string values only that provides additional `secure` properties, or
-               overrides existing `secure` pipeline/trigger properties, to use for the
-               created run.
+        :param dict properties: (optional) An object containing string values only
+               that provides additional `text` properties, or overrides existing
+               pipeline/trigger properties, to use for the created run.
+        :param dict secure_properties: (optional) An object containing string
+               values only that provides additional `secure` properties, or overrides
+               existing `secure` pipeline/trigger properties, to use for the created run.
         :param dict headers_: (optional) An object containing string values only
                that provides the request headers. Use `$(header.header_key_name)` to
                access it in a TriggerBinding. Most commonly used as part of a Generic
@@ -3161,9 +3156,9 @@ class PipelineRunTrigger:
         else:
             raise ValueError('Required property \'name\' not present in PipelineRunTrigger JSON')
         if 'properties' in _dict:
-            args['properties'] = [Property.from_dict(v) for v in _dict.get('properties')]
+            args['properties'] = _dict.get('properties')
         if 'secure_properties' in _dict:
-            args['secure_properties'] = [Property.from_dict(v) for v in _dict.get('secure_properties')]
+            args['secure_properties'] = _dict.get('secure_properties')
         if 'headers' in _dict:
             args['headers_'] = _dict.get('headers')
         if 'body' in _dict:
@@ -3181,21 +3176,9 @@ class PipelineRunTrigger:
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
         if hasattr(self, 'properties') and self.properties is not None:
-            properties_list = []
-            for v in self.properties:
-                if isinstance(v, dict):
-                    properties_list.append(v)
-                else:
-                    properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
+            _dict['properties'] = self.properties
         if hasattr(self, 'secure_properties') and self.secure_properties is not None:
-            secure_properties_list = []
-            for v in self.secure_properties:
-                if isinstance(v, dict):
-                    secure_properties_list.append(v)
-                else:
-                    secure_properties_list.append(v.to_dict())
-            _dict['secure_properties'] = secure_properties_list
+            _dict['secure_properties'] = self.secure_properties
         if hasattr(self, 'headers_') and self.headers_ is not None:
             _dict['headers'] = self.headers_
         if hasattr(self, 'body') and self.body is not None:
