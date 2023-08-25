@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.2.0...v1.2.1) (2023-08-25)
+
+
+### Bug Fixes
+
+* **tekton:** pipeline run trigger properties ([e1c8083](https://github.com/IBM/continuous-delivery-python-sdk/commit/e1c808325b800b2f102fbdc1eabe99a9e7ea4eb5))
+
 # [1.2.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.1.0...v1.2.0) (2023-08-09)
 
 
