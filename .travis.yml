@@ -17,6 +17,7 @@ matrix:
     - python: 3.10
 
 install:
+- wget -qO - https://package.perforce.com/perforce.pubkey | sudo apt-key add -
 - sudo apt-get update
 - sudo apt-get install pandoc
 - pip install pypandoc
