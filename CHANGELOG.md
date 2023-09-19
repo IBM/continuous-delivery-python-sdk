@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.2.1...v1.3.0) (2023-09-19)
+
+
+### Features
+
+* **toolchain:** add name query param to list toolchains ([41beaa6](https://github.com/IBM/continuous-delivery-python-sdk/commit/41beaa6d57ce18f6a8fb16e314a3060fb048cc87))
+
 ## [1.2.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.2.0...v1.2.1) (2023-08-25)
 
 
