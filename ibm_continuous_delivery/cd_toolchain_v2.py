@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.60.0-13f6e1ba-20221019-164457
+# IBM OpenAPI SDK Code Generator Version: 3.77.0-42417df0-20230811-192318
 
 """
 This swagger document describes the options and endpoints of the Toolchain API.<br><br>
@@ -44,6 +44,7 @@ from .common import get_sdk_headers
 # Service
 ##############################################################################
 
+
 class CdToolchainV2(BaseService):
     """The CD Toolchain V2 service."""
 
@@ -63,9 +64,10 @@ class CdToolchainV2(BaseService):
     }
 
     @classmethod
-    def new_instance(cls,
-                     service_name: str = DEFAULT_SERVICE_NAME,
-                    ) -> 'CdToolchainV2':
+    def new_instance(
+        cls,
+        service_name: str = DEFAULT_SERVICE_NAME,
+    ) -> 'CdToolchainV2':
         """
         Return a new client for the CD Toolchain service using the specified
                parameters and external configuration.
@@ -91,9 +93,10 @@ class CdToolchainV2(BaseService):
         """
         return cls.REGIONAL_ENDPOINTS.get(region, None)
 
-    def __init__(self,
-                 authenticator: Authenticator = None,
-                ) -> None:
+    def __init__(
+        self,
+        authenticator: Authenticator = None,
+    ) -> None:
         """
         Construct a new client for the CD Toolchain service.
 
@@ -101,22 +104,20 @@ class CdToolchainV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(self,
-                             service_url=self.DEFAULT_SERVICE_URL,
-                             authenticator=authenticator)
-
+        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
 
     #########################
     # Toolchains
     #########################
 
-
-    def list_toolchains(self,
+    def list_toolchains(
+        self,
         resource_group_id: str,
         *,
         limit: int = None,
         start: str = None,
-        **kwargs
+        name: str = None,
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a list of toolchains.
@@ -128,6 +129,7 @@ class CdToolchainV2(BaseService):
                exist.
         :param int limit: (optional) Limit the number of results.
         :param str start: (optional) Pagination token.
+        :param str name: (optional) Name of toolchain to look up.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ToolchainCollection` object
@@ -136,15 +138,18 @@ class CdToolchainV2(BaseService):
         if not resource_group_id:
             raise ValueError('resource_group_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_toolchains')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_toolchains',
+        )
         headers.update(sdk_headers)
 
         params = {
             'resource_group_id': resource_group_id,
             'limit': limit,
-            'start': start
+            'start': start,
+            'name': name,
         }
 
         if 'headers' in kwargs:
@@ -153,21 +158,23 @@ class CdToolchainV2(BaseService):
         headers['Accept'] = 'application/json'
 
         url = '/toolchains'
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_toolchain(self,
+    def create_toolchain(
+        self,
         name: str,
         resource_group_id: str,
         *,
         description: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a toolchain.
@@ -188,15 +195,17 @@ class CdToolchainV2(BaseService):
         if resource_group_id is None:
             raise ValueError('resource_group_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_toolchain')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_toolchain',
+        )
         headers.update(sdk_headers)
 
         data = {
             'name': name,
             'resource_group_id': resource_group_id,
-            'description': description
+            'description': description,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -208,18 +217,20 @@ class CdToolchainV2(BaseService):
         headers['Accept'] = 'application/json'
 
         url = '/toolchains'
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_toolchain_by_id(self,
+    def get_toolchain_by_id(
+        self,
         toolchain_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a toolchain.
@@ -235,9 +246,11 @@ class CdToolchainV2(BaseService):
         if not toolchain_id:
             raise ValueError('toolchain_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_toolchain_by_id')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_toolchain_by_id',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -249,17 +262,19 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_toolchain(self,
+    def delete_toolchain(
+        self,
         toolchain_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a toolchain.
@@ -275,9 +290,11 @@ class CdToolchainV2(BaseService):
         if not toolchain_id:
             raise ValueError('toolchain_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_toolchain')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_toolchain',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -288,18 +305,20 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def update_toolchain(self,
+    def update_toolchain(
+        self,
         toolchain_id: str,
         toolchain_prototype_patch: 'ToolchainPrototypePatch',
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Update a toolchain.
@@ -320,9 +339,11 @@ class CdToolchainV2(BaseService):
         if isinstance(toolchain_prototype_patch, ToolchainPrototypePatch):
             toolchain_prototype_patch = convert_model(toolchain_prototype_patch)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='update_toolchain')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='update_toolchain',
+        )
         headers.update(sdk_headers)
 
         data = json.dumps(toolchain_prototype_patch)
@@ -337,10 +358,12 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='PATCH',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -349,13 +372,13 @@ class CdToolchainV2(BaseService):
     # Tools
     #########################
 
-
-    def list_tools(self,
+    def list_tools(
+        self,
         toolchain_id: str,
         *,
         limit: int = None,
         start: str = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a list of tools bound to a toolchain.
@@ -374,14 +397,16 @@ class CdToolchainV2(BaseService):
         if not toolchain_id:
             raise ValueError('toolchain_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='list_tools')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='list_tools',
+        )
         headers.update(sdk_headers)
 
         params = {
             'limit': limit,
-            'start': start
+            'start': start,
         }
 
         if 'headers' in kwargs:
@@ -393,22 +418,24 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}/tools'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers,
-                                       params=params)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+            params=params,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def create_tool(self,
+    def create_tool(
+        self,
         toolchain_id: str,
         tool_type_id: str,
         *,
         name: str = None,
         parameters: dict = None,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Create a tool.
@@ -438,15 +465,17 @@ class CdToolchainV2(BaseService):
         if tool_type_id is None:
             raise ValueError('tool_type_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='create_tool')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='create_tool',
+        )
         headers.update(sdk_headers)
 
         data = {
             'tool_type_id': tool_type_id,
             'name': name,
-            'parameters': parameters
+            'parameters': parameters,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -461,19 +490,21 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}/tools'.format(**path_param_dict)
-        request = self.prepare_request(method='POST',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def get_tool_by_id(self,
+    def get_tool_by_id(
+        self,
         toolchain_id: str,
         tool_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Get a tool.
@@ -492,9 +523,11 @@ class CdToolchainV2(BaseService):
         if not tool_id:
             raise ValueError('tool_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='get_tool_by_id')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='get_tool_by_id',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -506,18 +539,20 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id, tool_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}/tools/{tool_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='GET',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='GET',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def delete_tool(self,
+    def delete_tool(
+        self,
         toolchain_id: str,
         tool_id: str,
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Delete a tool.
@@ -536,9 +571,11 @@ class CdToolchainV2(BaseService):
         if not tool_id:
             raise ValueError('tool_id must be provided')
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='delete_tool')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='delete_tool',
+        )
         headers.update(sdk_headers)
 
         if 'headers' in kwargs:
@@ -549,19 +586,21 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id, tool_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}/tools/{tool_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='DELETE',
-                                       url=url,
-                                       headers=headers)
+        request = self.prepare_request(
+            method='DELETE',
+            url=url,
+            headers=headers,
+        )
 
         response = self.send(request, **kwargs)
         return response
 
-
-    def update_tool(self,
+    def update_tool(
+        self,
         toolchain_id: str,
         tool_id: str,
         toolchain_tool_prototype_patch: 'ToolchainToolPrototypePatch',
-        **kwargs
+        **kwargs,
     ) -> DetailedResponse:
         """
         Update a tool.
@@ -585,9 +624,11 @@ class CdToolchainV2(BaseService):
         if isinstance(toolchain_tool_prototype_patch, ToolchainToolPrototypePatch):
             toolchain_tool_prototype_patch = convert_model(toolchain_tool_prototype_patch)
         headers = {}
-        sdk_headers = get_sdk_headers(service_name=self.DEFAULT_SERVICE_NAME,
-                                      service_version='V2',
-                                      operation_id='update_tool')
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V2',
+            operation_id='update_tool',
+        )
         headers.update(sdk_headers)
 
         data = json.dumps(toolchain_tool_prototype_patch)
@@ -602,10 +643,12 @@ class CdToolchainV2(BaseService):
         path_param_values = self.encode_path_vars(toolchain_id, tool_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = '/toolchains/{toolchain_id}/tools/{tool_id}'.format(**path_param_dict)
-        request = self.prepare_request(method='PATCH',
-                                       url=url,
-                                       headers=headers,
-                                       data=data)
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
+        )
 
         response = self.send(request, **kwargs)
         return response
@@ -616,7 +659,7 @@ class CdToolchainV2(BaseService):
 ##############################################################################
 
 
-class ToolModel():
+class ToolModel:
     """
     Model describing tool resource.
 
@@ -643,20 +686,22 @@ class ToolModel():
     :attr str state: Current configuration state of the tool.
     """
 
-    def __init__(self,
-                 id: str,
-                 resource_group_id: str,
-                 crn: str,
-                 tool_type_id: str,
-                 toolchain_id: str,
-                 toolchain_crn: str,
-                 href: str,
-                 referent: 'ToolModelReferent',
-                 updated_at: datetime,
-                 parameters: dict,
-                 state: str,
-                 *,
-                 name: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        resource_group_id: str,
+        crn: str,
+        tool_type_id: str,
+        toolchain_id: str,
+        toolchain_crn: str,
+        href: str,
+        referent: 'ToolModelReferent',
+        updated_at: datetime,
+        parameters: dict,
+        state: str,
+        *,
+        name: str = None,
+    ) -> None:
         """
         Initialize a ToolModel object.
 
@@ -770,7 +815,10 @@ class ToolModel():
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'referent') and self.referent is not None:
-            _dict['referent'] = self.referent.to_dict()
+            if isinstance(self.referent, dict):
+                _dict['referent'] = self.referent
+            else:
+                _dict['referent'] = self.referent.to_dict()
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
         if hasattr(self, 'updated_at') and self.updated_at is not None:
@@ -803,13 +851,15 @@ class ToolModel():
         """
         Current configuration state of the tool.
         """
+
         CONFIGURED = 'configured'
         CONFIGURING = 'configuring'
         MISCONFIGURED = 'misconfigured'
         UNCONFIGURED = 'unconfigured'
 
 
-class ToolModelReferent():
+
+class ToolModelReferent:
     """
     Information on URIs to access this resource through the UI or API.
 
@@ -817,10 +867,12 @@ class ToolModelReferent():
     :attr str api_href: (optional) URI representing this resource through an API.
     """
 
-    def __init__(self,
-                 *,
-                 ui_href: str = None,
-                 api_href: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        ui_href: str = None,
+        api_href: str = None,
+    ) -> None:
         """
         Initialize a ToolModelReferent object.
 
@@ -874,7 +926,8 @@ class ToolModelReferent():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class Toolchain():
+
+class Toolchain:
     """
     Response structure for GET toolchains.
 
@@ -892,19 +945,21 @@ class Toolchain():
     :attr str created_by: Identity that created the toolchain.
     """
 
-    def __init__(self,
-                 id: str,
-                 name: str,
-                 description: str,
-                 account_id: str,
-                 location: str,
-                 resource_group_id: str,
-                 crn: str,
-                 href: str,
-                 ui_href: str,
-                 created_at: datetime,
-                 updated_at: datetime,
-                 created_by: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        description: str,
+        account_id: str,
+        location: str,
+        resource_group_id: str,
+        crn: str,
+        href: str,
+        ui_href: str,
+        created_at: datetime,
+        updated_at: datetime,
+        created_by: str,
+    ) -> None:
         """
         Initialize a Toolchain object.
 
@@ -1041,7 +1096,8 @@ class Toolchain():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainCollection():
+
+class ToolchainCollection:
     """
     Response structure for GET toolchains.
 
@@ -1059,15 +1115,17 @@ class ToolchainCollection():
           from the collection.
     """
 
-    def __init__(self,
-                 total_count: int,
-                 limit: int,
-                 first: 'ToolchainCollectionFirst',
-                 last: 'ToolchainCollectionLast',
-                 *,
-                 previous: 'ToolchainCollectionPrevious' = None,
-                 next: 'ToolchainCollectionNext' = None,
-                 toolchains: List['ToolchainModel'] = None) -> None:
+    def __init__(
+        self,
+        total_count: int,
+        limit: int,
+        first: 'ToolchainCollectionFirst',
+        last: 'ToolchainCollectionLast',
+        *,
+        previous: 'ToolchainCollectionPrevious' = None,
+        next: 'ToolchainCollectionNext' = None,
+        toolchains: List['ToolchainModel'] = None,
+    ) -> None:
         """
         Initialize a ToolchainCollection object.
 
@@ -1117,7 +1175,7 @@ class ToolchainCollection():
         else:
             raise ValueError('Required property \'last\' not present in ToolchainCollection JSON')
         if 'toolchains' in _dict:
-            args['toolchains'] = [ToolchainModel.from_dict(x) for x in _dict.get('toolchains')]
+            args['toolchains'] = [ToolchainModel.from_dict(v) for v in _dict.get('toolchains')]
         return cls(**args)
 
     @classmethod
@@ -1133,15 +1191,33 @@ class ToolchainCollection():
         if hasattr(self, 'limit') and self.limit is not None:
             _dict['limit'] = self.limit
         if hasattr(self, 'first') and self.first is not None:
-            _dict['first'] = self.first.to_dict()
+            if isinstance(self.first, dict):
+                _dict['first'] = self.first
+            else:
+                _dict['first'] = self.first.to_dict()
         if hasattr(self, 'previous') and self.previous is not None:
-            _dict['previous'] = self.previous.to_dict()
+            if isinstance(self.previous, dict):
+                _dict['previous'] = self.previous
+            else:
+                _dict['previous'] = self.previous.to_dict()
         if hasattr(self, 'next') and self.next is not None:
-            _dict['next'] = self.next.to_dict()
+            if isinstance(self.next, dict):
+                _dict['next'] = self.next
+            else:
+                _dict['next'] = self.next.to_dict()
         if hasattr(self, 'last') and self.last is not None:
-            _dict['last'] = self.last.to_dict()
+            if isinstance(self.last, dict):
+                _dict['last'] = self.last
+            else:
+                _dict['last'] = self.last.to_dict()
         if hasattr(self, 'toolchains') and self.toolchains is not None:
-            _dict['toolchains'] = [x.to_dict() for x in self.toolchains]
+            toolchains_list = []
+            for v in self.toolchains:
+                if isinstance(v, dict):
+                    toolchains_list.append(v)
+                else:
+                    toolchains_list.append(v.to_dict())
+            _dict['toolchains'] = toolchains_list
         return _dict
 
     def _to_dict(self):
@@ -1162,15 +1238,18 @@ class ToolchainCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainCollectionFirst():
+
+class ToolchainCollectionFirst:
     """
     Information about retrieving first toolchain results from the collection.
 
     :attr str href: URI that can be used to get first results from the collection.
     """
 
-    def __init__(self,
-                 href: str) -> None:
+    def __init__(
+        self,
+        href: str,
+    ) -> None:
         """
         Initialize a ToolchainCollectionFirst object.
 
@@ -1219,7 +1298,8 @@ class ToolchainCollectionFirst():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainCollectionLast():
+
+class ToolchainCollectionLast:
     """
     Information about retrieving last toolchain results from the collection.
 
@@ -1228,10 +1308,12 @@ class ToolchainCollectionLast():
     :attr str href: URI that can be used to get last results from the collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainCollectionLast object.
 
@@ -1287,7 +1369,8 @@ class ToolchainCollectionLast():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainCollectionNext():
+
+class ToolchainCollectionNext:
     """
     Information about retrieving next toolchain results from the collection.
 
@@ -1296,10 +1379,12 @@ class ToolchainCollectionNext():
     :attr str href: URI that can be used to get next results from the collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainCollectionNext object.
 
@@ -1355,7 +1440,8 @@ class ToolchainCollectionNext():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainCollectionPrevious():
+
+class ToolchainCollectionPrevious:
     """
     Information about retrieving previous toolchain results from the collection.
 
@@ -1365,10 +1451,12 @@ class ToolchainCollectionPrevious():
           collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainCollectionPrevious object.
 
@@ -1424,7 +1512,8 @@ class ToolchainCollectionPrevious():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainModel():
+
+class ToolchainModel:
     """
     Model describing toolchain resource.
 
@@ -1442,19 +1531,21 @@ class ToolchainModel():
     :attr str created_by: Identity that created the toolchain.
     """
 
-    def __init__(self,
-                 id: str,
-                 name: str,
-                 description: str,
-                 account_id: str,
-                 location: str,
-                 resource_group_id: str,
-                 crn: str,
-                 href: str,
-                 ui_href: str,
-                 created_at: datetime,
-                 updated_at: datetime,
-                 created_by: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        description: str,
+        account_id: str,
+        location: str,
+        resource_group_id: str,
+        crn: str,
+        href: str,
+        ui_href: str,
+        created_at: datetime,
+        updated_at: datetime,
+        created_by: str,
+    ) -> None:
         """
         Initialize a ToolchainModel object.
 
@@ -1591,7 +1682,8 @@ class ToolchainModel():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainPatch():
+
+class ToolchainPatch:
     """
     Response structure for PATCH toolchain.
 
@@ -1609,19 +1701,21 @@ class ToolchainPatch():
     :attr str created_by: Identity that created the toolchain.
     """
 
-    def __init__(self,
-                 id: str,
-                 name: str,
-                 description: str,
-                 account_id: str,
-                 location: str,
-                 resource_group_id: str,
-                 crn: str,
-                 href: str,
-                 ui_href: str,
-                 created_at: datetime,
-                 updated_at: datetime,
-                 created_by: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        description: str,
+        account_id: str,
+        location: str,
+        resource_group_id: str,
+        crn: str,
+        href: str,
+        ui_href: str,
+        created_at: datetime,
+        updated_at: datetime,
+        created_by: str,
+    ) -> None:
         """
         Initialize a ToolchainPatch object.
 
@@ -1758,7 +1852,8 @@ class ToolchainPatch():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainPost():
+
+class ToolchainPost:
     """
     Response structure for POST toolchain.
 
@@ -1776,19 +1871,21 @@ class ToolchainPost():
     :attr str created_by: Identity that created the toolchain.
     """
 
-    def __init__(self,
-                 id: str,
-                 name: str,
-                 description: str,
-                 account_id: str,
-                 location: str,
-                 resource_group_id: str,
-                 crn: str,
-                 href: str,
-                 ui_href: str,
-                 created_at: datetime,
-                 updated_at: datetime,
-                 created_by: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        name: str,
+        description: str,
+        account_id: str,
+        location: str,
+        resource_group_id: str,
+        crn: str,
+        href: str,
+        ui_href: str,
+        created_at: datetime,
+        updated_at: datetime,
+        created_by: str,
+    ) -> None:
         """
         Initialize a ToolchainPost object.
 
@@ -1925,7 +2022,8 @@ class ToolchainPost():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainPrototypePatch():
+
+class ToolchainPrototypePatch:
     """
     Body structure for the update toolchain PATCH request.
 
@@ -1933,10 +2031,12 @@ class ToolchainPrototypePatch():
     :attr str description: (optional) An optional description.
     """
 
-    def __init__(self,
-                 *,
-                 name: str = None,
-                 description: str = None) -> None:
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+    ) -> None:
         """
         Initialize a ToolchainPrototypePatch object.
 
@@ -1988,7 +2088,8 @@ class ToolchainPrototypePatch():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainTool():
+
+class ToolchainTool:
     """
     Response structure for GET tool.
 
@@ -2015,20 +2116,22 @@ class ToolchainTool():
     :attr str state: Current configuration state of the tool.
     """
 
-    def __init__(self,
-                 id: str,
-                 resource_group_id: str,
-                 crn: str,
-                 tool_type_id: str,
-                 toolchain_id: str,
-                 toolchain_crn: str,
-                 href: str,
-                 referent: 'ToolModelReferent',
-                 updated_at: datetime,
-                 parameters: dict,
-                 state: str,
-                 *,
-                 name: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        resource_group_id: str,
+        crn: str,
+        tool_type_id: str,
+        toolchain_id: str,
+        toolchain_crn: str,
+        href: str,
+        referent: 'ToolModelReferent',
+        updated_at: datetime,
+        parameters: dict,
+        state: str,
+        *,
+        name: str = None,
+    ) -> None:
         """
         Initialize a ToolchainTool object.
 
@@ -2142,7 +2245,10 @@ class ToolchainTool():
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'referent') and self.referent is not None:
-            _dict['referent'] = self.referent.to_dict()
+            if isinstance(self.referent, dict):
+                _dict['referent'] = self.referent
+            else:
+                _dict['referent'] = self.referent.to_dict()
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
         if hasattr(self, 'updated_at') and self.updated_at is not None:
@@ -2175,13 +2281,15 @@ class ToolchainTool():
         """
         Current configuration state of the tool.
         """
+
         CONFIGURED = 'configured'
         CONFIGURING = 'configuring'
         MISCONFIGURED = 'misconfigured'
         UNCONFIGURED = 'unconfigured'
 
 
-class ToolchainToolCollection():
+
+class ToolchainToolCollection:
     """
     Response structure for GET tools.
 
@@ -2198,15 +2306,17 @@ class ToolchainToolCollection():
     :attr List[ToolModel] tools: Tool results returned from the collection.
     """
 
-    def __init__(self,
-                 limit: int,
-                 total_count: int,
-                 first: 'ToolchainToolCollectionFirst',
-                 last: 'ToolchainToolCollectionLast',
-                 tools: List['ToolModel'],
-                 *,
-                 previous: 'ToolchainToolCollectionPrevious' = None,
-                 next: 'ToolchainToolCollectionNext' = None) -> None:
+    def __init__(
+        self,
+        limit: int,
+        total_count: int,
+        first: 'ToolchainToolCollectionFirst',
+        last: 'ToolchainToolCollectionLast',
+        tools: List['ToolModel'],
+        *,
+        previous: 'ToolchainToolCollectionPrevious' = None,
+        next: 'ToolchainToolCollectionNext' = None,
+    ) -> None:
         """
         Initialize a ToolchainToolCollection object.
 
@@ -2255,7 +2365,7 @@ class ToolchainToolCollection():
         else:
             raise ValueError('Required property \'last\' not present in ToolchainToolCollection JSON')
         if 'tools' in _dict:
-            args['tools'] = [ToolModel.from_dict(x) for x in _dict.get('tools')]
+            args['tools'] = [ToolModel.from_dict(v) for v in _dict.get('tools')]
         else:
             raise ValueError('Required property \'tools\' not present in ToolchainToolCollection JSON')
         return cls(**args)
@@ -2273,15 +2383,33 @@ class ToolchainToolCollection():
         if hasattr(self, 'total_count') and self.total_count is not None:
             _dict['total_count'] = self.total_count
         if hasattr(self, 'first') and self.first is not None:
-            _dict['first'] = self.first.to_dict()
+            if isinstance(self.first, dict):
+                _dict['first'] = self.first
+            else:
+                _dict['first'] = self.first.to_dict()
         if hasattr(self, 'previous') and self.previous is not None:
-            _dict['previous'] = self.previous.to_dict()
+            if isinstance(self.previous, dict):
+                _dict['previous'] = self.previous
+            else:
+                _dict['previous'] = self.previous.to_dict()
         if hasattr(self, 'next') and self.next is not None:
-            _dict['next'] = self.next.to_dict()
+            if isinstance(self.next, dict):
+                _dict['next'] = self.next
+            else:
+                _dict['next'] = self.next.to_dict()
         if hasattr(self, 'last') and self.last is not None:
-            _dict['last'] = self.last.to_dict()
+            if isinstance(self.last, dict):
+                _dict['last'] = self.last
+            else:
+                _dict['last'] = self.last.to_dict()
         if hasattr(self, 'tools') and self.tools is not None:
-            _dict['tools'] = [x.to_dict() for x in self.tools]
+            tools_list = []
+            for v in self.tools:
+                if isinstance(v, dict):
+                    tools_list.append(v)
+                else:
+                    tools_list.append(v.to_dict())
+            _dict['tools'] = tools_list
         return _dict
 
     def _to_dict(self):
@@ -2302,15 +2430,18 @@ class ToolchainToolCollection():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainToolCollectionFirst():
+
+class ToolchainToolCollectionFirst:
     """
     Information about retrieving first tool results from the collection.
 
     :attr str href: URI that can be used to get first results from the collection.
     """
 
-    def __init__(self,
-                 href: str) -> None:
+    def __init__(
+        self,
+        href: str,
+    ) -> None:
         """
         Initialize a ToolchainToolCollectionFirst object.
 
@@ -2359,7 +2490,8 @@ class ToolchainToolCollectionFirst():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainToolCollectionLast():
+
+class ToolchainToolCollectionLast:
     """
     Information about retrieving last tool results from the collection.
 
@@ -2368,10 +2500,12 @@ class ToolchainToolCollectionLast():
     :attr str href: URI that can be used to get last results from the collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainToolCollectionLast object.
 
@@ -2427,7 +2561,8 @@ class ToolchainToolCollectionLast():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainToolCollectionNext():
+
+class ToolchainToolCollectionNext:
     """
     Information about retrieving next tool results from the collection.
 
@@ -2436,10 +2571,12 @@ class ToolchainToolCollectionNext():
     :attr str href: URI that can be used to get next results from the collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainToolCollectionNext object.
 
@@ -2495,7 +2632,8 @@ class ToolchainToolCollectionNext():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainToolCollectionPrevious():
+
+class ToolchainToolCollectionPrevious:
     """
     Information about retrieving previous tool results from the collection.
 
@@ -2505,10 +2643,12 @@ class ToolchainToolCollectionPrevious():
           collection.
     """
 
-    def __init__(self,
-                 href: str,
-                 *,
-                 start: str = None) -> None:
+    def __init__(
+        self,
+        href: str,
+        *,
+        start: str = None,
+    ) -> None:
         """
         Initialize a ToolchainToolCollectionPrevious object.
 
@@ -2564,7 +2704,8 @@ class ToolchainToolCollectionPrevious():
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-class ToolchainToolPatch():
+
+class ToolchainToolPatch:
     """
     Response structure for PATCH tool.
 
@@ -2591,20 +2732,22 @@ class ToolchainToolPatch():
     :attr str state: Current configuration state of the tool.
     """
 
-    def __init__(self,
-                 id: str,
-                 resource_group_id: str,
-                 crn: str,
-                 tool_type_id: str,
-                 toolchain_id: str,
-                 toolchain_crn: str,
-                 href: str,
-                 referent: 'ToolModelReferent',
-                 updated_at: datetime,
-                 parameters: dict,
-                 state: str,
-                 *,
-                 name: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        resource_group_id: str,
+        crn: str,
+        tool_type_id: str,
+        toolchain_id: str,
+        toolchain_crn: str,
+        href: str,
+        referent: 'ToolModelReferent',
+        updated_at: datetime,
+        parameters: dict,
+        state: str,
+        *,
+        name: str = None,
+    ) -> None:
         """
         Initialize a ToolchainToolPatch object.
 
@@ -2718,7 +2861,10 @@ class ToolchainToolPatch():
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'referent') and self.referent is not None:
-            _dict['referent'] = self.referent.to_dict()
+            if isinstance(self.referent, dict):
+                _dict['referent'] = self.referent
+            else:
+                _dict['referent'] = self.referent.to_dict()
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
         if hasattr(self, 'updated_at') and self.updated_at is not None:
@@ -2751,13 +2897,15 @@ class ToolchainToolPatch():
         """
         Current configuration state of the tool.
         """
+
         CONFIGURED = 'configured'
         CONFIGURING = 'configuring'
         MISCONFIGURED = 'misconfigured'
         UNCONFIGURED = 'unconfigured'
 
 
-class ToolchainToolPost():
+
+class ToolchainToolPost:
     """
     POST tool response body.
 
@@ -2784,20 +2932,22 @@ class ToolchainToolPost():
     :attr str state: Current configuration state of the tool.
     """
 
-    def __init__(self,
-                 id: str,
-                 resource_group_id: str,
-                 crn: str,
-                 tool_type_id: str,
-                 toolchain_id: str,
-                 toolchain_crn: str,
-                 href: str,
-                 referent: 'ToolModelReferent',
-                 updated_at: datetime,
-                 parameters: dict,
-                 state: str,
-                 *,
-                 name: str = None) -> None:
+    def __init__(
+        self,
+        id: str,
+        resource_group_id: str,
+        crn: str,
+        tool_type_id: str,
+        toolchain_id: str,
+        toolchain_crn: str,
+        href: str,
+        referent: 'ToolModelReferent',
+        updated_at: datetime,
+        parameters: dict,
+        state: str,
+        *,
+        name: str = None,
+    ) -> None:
         """
         Initialize a ToolchainToolPost object.
 
@@ -2911,7 +3061,10 @@ class ToolchainToolPost():
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'referent') and self.referent is not None:
-            _dict['referent'] = self.referent.to_dict()
+            if isinstance(self.referent, dict):
+                _dict['referent'] = self.referent
+            else:
+                _dict['referent'] = self.referent.to_dict()
         if hasattr(self, 'name') and self.name is not None:
             _dict['name'] = self.name
         if hasattr(self, 'updated_at') and self.updated_at is not None:
@@ -2944,13 +3097,15 @@ class ToolchainToolPost():
         """
         Current configuration state of the tool.
         """
+
         CONFIGURED = 'configured'
         CONFIGURING = 'configuring'
         MISCONFIGURED = 'misconfigured'
         UNCONFIGURED = 'unconfigured'
 
 
-class ToolchainToolPrototypePatch():
+
+class ToolchainToolPrototypePatch:
     """
     Details on the new tool.
 
@@ -2967,11 +3122,13 @@ class ToolchainToolPrototypePatch():
           tool integrations page</a>.
     """
 
-    def __init__(self,
-                 *,
-                 name: str = None,
-                 tool_type_id: str = None,
-                 parameters: dict = None) -> None:
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        tool_type_id: str = None,
+        parameters: dict = None,
+    ) -> None:
         """
         Initialize a ToolchainToolPrototypePatch object.
 
@@ -3041,28 +3198,33 @@ class ToolchainToolPrototypePatch():
 # Pagers
 ##############################################################################
 
-class ToolchainsPager():
+
+class ToolchainsPager:
     """
     ToolchainsPager can be used to simplify the use of the "list_toolchains" method.
     """
 
-    def __init__(self,
-                 *,
-                 client: CdToolchainV2,
-                 resource_group_id: str,
-                 limit: int = None,
+    def __init__(
+        self,
+        *,
+        client: CdToolchainV2,
+        resource_group_id: str,
+        limit: int = None,
+        name: str = None,
     ) -> None:
         """
         Initialize a ToolchainsPager object.
         :param str resource_group_id: The resource group ID where the toolchains
                exist.
         :param int limit: (optional) Limit the number of results.
+        :param str name: (optional) Name of toolchain to look up.
         """
         self._has_next = True
         self._client = client
-        self._page_context = { 'next': None }
+        self._page_context = {'next': None}
         self._resource_group_id = resource_group_id
         self._limit = limit
+        self._name = name
 
     def has_next(self) -> bool:
         """
@@ -3082,6 +3244,7 @@ class ToolchainsPager():
         result = self._client.list_toolchains(
             resource_group_id=self._resource_group_id,
             limit=self._limit,
+            name=self._name,
             start=self._page_context.get('next'),
         ).get_result()
 
@@ -3108,16 +3271,18 @@ class ToolchainsPager():
             results.extend(next_page)
         return results
 
-class ToolsPager():
+
+class ToolsPager:
     """
     ToolsPager can be used to simplify the use of the "list_tools" method.
     """
 
-    def __init__(self,
-                 *,
-                 client: CdToolchainV2,
-                 toolchain_id: str,
-                 limit: int = None,
+    def __init__(
+        self,
+        *,
+        client: CdToolchainV2,
+        toolchain_id: str,
+        limit: int = None,
     ) -> None:
         """
         Initialize a ToolsPager object.
@@ -3126,7 +3291,7 @@ class ToolsPager():
         """
         self._has_next = True
         self._client = client
-        self._page_context = { 'next': None }
+        self._page_context = {'next': None}
         self._toolchain_id = toolchain_id
         self._limit = limit
 

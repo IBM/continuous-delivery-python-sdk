@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ config_file = 'cd_toolchain_v2.env'
 tool_id_link = None
 toolchain_id_link = None
 
-class TestCdToolchainV2():
+
+class TestCdToolchainV2:
     """
     Integration Test Class for CdToolchainV2
     """
@@ -43,8 +44,7 @@ class TestCdToolchainV2():
             )
             assert cls.cd_toolchain_service is not None
 
-            cls.config = read_external_sources(
-                CdToolchainV2.DEFAULT_SERVICE_NAME)
+            cls.config = read_external_sources(CdToolchainV2.DEFAULT_SERVICE_NAME)
             assert cls.config is not None
 
             cls.cd_toolchain_service.enable_retries()
@@ -62,7 +62,7 @@ class TestCdToolchainV2():
         response = self.cd_toolchain_service.create_toolchain(
             name='TestToolchainV2',
             resource_group_id='6a9a01f2cff54a7f966f803d92877123',
-            description='A sample toolchain to test the API'
+            description='A sample toolchain to test the API',
         )
 
         assert response.get_status_code() == 201
@@ -79,7 +79,7 @@ class TestCdToolchainV2():
             toolchain_id=toolchain_id_link,
             tool_type_id='draservicebroker',
             name='testString',
-            parameters={'foo': 'bar'}
+            parameters={'anyKey': 'anyValue'},
         )
 
         assert response.get_status_code() == 201
@@ -90,11 +90,11 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_list_toolchains(self):
-
         response = self.cd_toolchain_service.list_toolchains(
             resource_group_id='testString',
-            limit=1,
-            start='testString'
+            limit=20,
+            start='testString',
+            name='TestToolchainV2',
         )
 
         assert response.get_status_code() == 200
@@ -110,6 +110,7 @@ class TestCdToolchainV2():
             client=self.cd_toolchain_service,
             resource_group_id='testString',
             limit=10,
+            name='TestToolchainV2',
         )
         while pager.has_next():
             next_page = pager.get_next()
@@ -121,6 +122,7 @@ class TestCdToolchainV2():
             client=self.cd_toolchain_service,
             resource_group_id='testString',
             limit=10,
+            name='TestToolchainV2',
         )
         all_items = pager.get_all()
         assert all_items is not None
@@ -130,9 +132,8 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_get_toolchain_by_id(self):
-
         response = self.cd_toolchain_service.get_toolchain_by_id(
-            toolchain_id=toolchain_id_link
+            toolchain_id=toolchain_id_link,
         )
 
         assert response.get_status_code() == 200
@@ -141,7 +142,6 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_update_toolchain(self):
-
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {
             'name': 'newToolchainName',
@@ -150,7 +150,7 @@ class TestCdToolchainV2():
 
         response = self.cd_toolchain_service.update_toolchain(
             toolchain_id=toolchain_id_link,
-            toolchain_prototype_patch=toolchain_prototype_patch_model
+            toolchain_prototype_patch=toolchain_prototype_patch_model,
         )
 
         assert response.get_status_code() == 200
@@ -159,11 +159,10 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_list_tools(self):
-
         response = self.cd_toolchain_service.list_tools(
             toolchain_id=toolchain_id_link,
-            limit=1,
-            start='testString'
+            limit=20,
+            start='testString',
         )
 
         assert response.get_status_code() == 200
@@ -199,10 +198,9 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_get_tool_by_id(self):
-
         response = self.cd_toolchain_service.get_tool_by_id(
             toolchain_id=toolchain_id_link,
-            tool_id=tool_id_link
+            tool_id=tool_id_link,
         )
 
         assert response.get_status_code() == 200
@@ -211,18 +209,17 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_update_tool(self):
-
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {
             'name': 'MyTool',
             'tool_type_id': 'draservicebroker',
-            'parameters': {'foo': 'bar'},
+            'parameters': {'anyKey': 'anyValue'},
         }
 
         response = self.cd_toolchain_service.update_tool(
             toolchain_id=toolchain_id_link,
             tool_id=tool_id_link,
-            toolchain_tool_prototype_patch=toolchain_tool_prototype_patch_model
+            toolchain_tool_prototype_patch=toolchain_tool_prototype_patch_model,
         )
 
         assert response.get_status_code() == 200
@@ -231,19 +228,17 @@ class TestCdToolchainV2():
 
     @needscredentials
     def test_delete_tool(self):
-
         response = self.cd_toolchain_service.delete_tool(
             toolchain_id=toolchain_id_link,
-            tool_id=tool_id_link
+            tool_id=tool_id_link,
         )
 
         assert response.get_status_code() == 204
 
     @needscredentials
     def test_delete_toolchain(self):
-
         response = self.cd_toolchain_service.delete_toolchain(
-            toolchain_id=toolchain_id_link
+            toolchain_id=toolchain_id_link,
         )
 
         assert response.get_status_code() == 204

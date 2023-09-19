@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2022.
+# (C) Copyright IBM Corp. 2023.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ toolchain_id_link = None
 # Start of Examples for Service: CdToolchainV2
 ##############################################################################
 # region
-class TestCdToolchainV2Examples():
+class TestCdToolchainV2Examples:
     """
     Example Test Class for CdToolchainV2
     """
@@ -90,7 +90,7 @@ class TestCdToolchainV2Examples():
 
             response = cd_toolchain_service.create_toolchain(
                 name='TestToolchainV2',
-                resource_group_id='6a9a01f2cff54a7f966f803d92877123'
+                resource_group_id='6a9a01f2cff54a7f966f803d92877123',
             )
             toolchain_post = response.get_result()
 
@@ -114,7 +114,7 @@ class TestCdToolchainV2Examples():
 
             response = cd_toolchain_service.create_tool(
                 toolchain_id=toolchain_id_link,
-                tool_type_id='draservicebroker'
+                tool_type_id='draservicebroker',
             )
             toolchain_tool_post = response.get_result()
 
@@ -140,6 +140,7 @@ class TestCdToolchainV2Examples():
                 client=cd_toolchain_service,
                 resource_group_id='testString',
                 limit=10,
+                name='TestToolchainV2',
             )
             while pager.has_next():
                 next_page = pager.get_next()
@@ -162,7 +163,7 @@ class TestCdToolchainV2Examples():
             # begin-get_toolchain_by_id
 
             response = cd_toolchain_service.get_toolchain_by_id(
-                toolchain_id=toolchain_id_link
+                toolchain_id=toolchain_id_link,
             )
             toolchain = response.get_result()
 
@@ -187,7 +188,7 @@ class TestCdToolchainV2Examples():
 
             response = cd_toolchain_service.update_toolchain(
                 toolchain_id=toolchain_id_link,
-                toolchain_prototype_patch=toolchain_prototype_patch_model
+                toolchain_prototype_patch=toolchain_prototype_patch_model,
             )
             toolchain_patch = response.get_result()
 
@@ -235,7 +236,7 @@ class TestCdToolchainV2Examples():
 
             response = cd_toolchain_service.get_tool_by_id(
                 toolchain_id=toolchain_id_link,
-                tool_id=tool_id_link
+                tool_id=tool_id_link,
             )
             toolchain_tool = response.get_result()
 
@@ -261,7 +262,7 @@ class TestCdToolchainV2Examples():
             response = cd_toolchain_service.update_tool(
                 toolchain_id=toolchain_id_link,
                 tool_id=tool_id_link,
-                toolchain_tool_prototype_patch=toolchain_tool_prototype_patch_model
+                toolchain_tool_prototype_patch=toolchain_tool_prototype_patch_model,
             )
             toolchain_tool_patch = response.get_result()
 
@@ -282,7 +283,7 @@ class TestCdToolchainV2Examples():
 
             response = cd_toolchain_service.delete_tool(
                 toolchain_id=toolchain_id_link,
-                tool_id=tool_id_link
+                tool_id=tool_id_link,
             )
 
             # end-delete_tool
@@ -300,7 +301,7 @@ class TestCdToolchainV2Examples():
             # begin-delete_toolchain
 
             response = cd_toolchain_service.delete_toolchain(
-                toolchain_id=toolchain_id_link
+                toolchain_id=toolchain_id_link,
             )
 
             # end-delete_toolchain
@@ -308,6 +309,7 @@ class TestCdToolchainV2Examples():
 
         except ApiException as e:
             pytest.fail(str(e))
+
 
 # endregion
 ##############################################################################
