@@ -2856,6 +2856,8 @@ class PipelineRun:
     :attr datetime updated_at: (optional) Standard RFC 3339 Date Time String. Only
           included if the run has been updated since it was created.
     :attr str run_url: URL for the details page of this pipeline run.
+    :attr str error_message: (optional) Error message that provides details when a
+          pipeline run encounters an error.
     """
 
     def __init__(
@@ -2878,6 +2880,7 @@ class PipelineRun:
         trigger_headers: str = None,
         properties: List['Property'] = None,
         updated_at: datetime = None,
+        error_message: str = None,
     ) -> None:
         """
         Initialize a PipelineRun object.
@@ -2912,6 +2915,8 @@ class PipelineRun:
                pipeline run. Not included when fetching the list of pipeline runs.
         :param datetime updated_at: (optional) Standard RFC 3339 Date Time String.
                Only included if the run has been updated since it was created.
+        :param str error_message: (optional) Error message that provides details
+               when a pipeline run encounters an error.
         """
         self.id = id
         self.href = href
@@ -2930,6 +2935,7 @@ class PipelineRun:
         self.created_at = created_at
         self.updated_at = updated_at
         self.run_url = run_url
+        self.error_message = error_message
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'PipelineRun':
@@ -2989,6 +2995,8 @@ class PipelineRun:
             args['run_url'] = _dict.get('run_url')
         else:
             raise ValueError('Required property \'run_url\' not present in PipelineRun JSON')
+        if 'error_message' in _dict:
+            args['error_message'] = _dict.get('error_message')
         return cls(**args)
 
     @classmethod
@@ -3054,6 +3062,8 @@ class PipelineRun:
             _dict['updated_at'] = datetime_to_string(self.updated_at)
         if hasattr(self, 'run_url') and self.run_url is not None:
             _dict['run_url'] = self.run_url
+        if hasattr(self, 'error_message') and self.error_message is not None:
+            _dict['error_message'] = self.error_message
         return _dict
 
     def _to_dict(self):
