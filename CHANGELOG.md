@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.3.0...v1.3.1) (2023-10-27)
+
+
+### Bug Fixes
+
+* **tekton:** add error message to PipelineRun ([77c0ae9](https://github.com/IBM/continuous-delivery-python-sdk/commit/77c0ae91f64e3f24c0872f1113a6f2089cc7061f))
+
 # [1.3.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.2.1...v1.3.0) (2023-09-19)
 
 
