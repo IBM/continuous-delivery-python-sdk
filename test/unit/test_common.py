@@ -21,6 +21,7 @@ Test methods in the common module
 import unittest
 from ibm_continuous_delivery import common
 
+
 class TestCommon(unittest.TestCase):
     """
     Test methods in the common module
@@ -30,10 +31,14 @@ class TestCommon(unittest.TestCase):
         """
         Test the get_sdk_headers method
         """
-        headers = common.get_sdk_headers(service_name='example_service', service_version='V1', operation_id='operation1')
+        headers = common.get_sdk_headers(
+            service_name="example_service",
+            service_version="V1",
+            operation_id="operation1",
+        )
         self.assertIsNotNone(headers)
-        self.assertIsNotNone(headers.get('User-Agent'))
-        self.assertIn('continuous-delivery-python-sdk', headers.get('User-Agent'))
+        self.assertIsNotNone(headers.get("User-Agent"))
+        self.assertIn("continuous-delivery-python-sdk", headers.get("User-Agent"))
 
     def test_get_system_info(self):
         """
@@ -41,7 +46,7 @@ class TestCommon(unittest.TestCase):
         """
         system_info = common.get_system_info()
         self.assertIsNotNone(system_info)
-        self.assertIn('lang=', system_info)
-        self.assertIn('arch=', system_info)
-        self.assertIn('os=', system_info)
-        self.assertIn('python.version=', system_info)
+        self.assertIn("lang=", system_info)
+        self.assertIn("arch=", system_info)
+        self.assertIn("os=", system_info)
+        self.assertIn("python.version=", system_info)

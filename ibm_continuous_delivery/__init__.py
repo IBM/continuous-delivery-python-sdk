@@ -15,7 +15,12 @@
 
 """IBM Cloud Continuous Delivery Python SDK"""
 
-from ibm_cloud_sdk_core import IAMTokenManager, DetailedResponse, BaseService, ApiException
+from ibm_cloud_sdk_core import (
+    IAMTokenManager,
+    DetailedResponse,
+    BaseService,
+    ApiException,
+)
 
 from .common import get_sdk_headers
 from .version import __version__

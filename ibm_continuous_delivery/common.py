@@ -21,17 +21,20 @@ This module provides common methods for use across all service modules.
 import platform
 from ibm_continuous_delivery.version import __version__
 
-HEADER_NAME_USER_AGENT = 'User-Agent'
-SDK_NAME = 'continuous-delivery-python-sdk'
+HEADER_NAME_USER_AGENT = "User-Agent"
+SDK_NAME = "continuous-delivery-python-sdk"
+
 
 def get_system_info():
     """
     Get information about the system to be inserted into the User-Agent header.
     """
-    return 'lang={0}; arch={1}; os={2}; python.version={3}'.format('python',
-                                platform.machine(), # Architecture
-                                platform.system(), # OS
-                                platform.python_version()) # Python version
+    return "lang={0}; arch={1}; os={2}; python.version={3}".format(
+        "python",
+        platform.machine(),  # Architecture
+        platform.system(),  # OS
+        platform.python_version(),
+    )  # Python version
 
 
 def get_user_agent():
@@ -41,14 +44,14 @@ def get_user_agent():
     return USER_AGENT
 
 
-USER_AGENT = '{0}/{1} ({2})'.format(SDK_NAME, __version__, get_system_info())
+USER_AGENT = "{0}/{1} ({2})".format(SDK_NAME, __version__, get_system_info())
 
 
 def get_sdk_headers(service_name, service_version, operation_id):
-    #pylint: disable=unused-argument
+    # pylint: disable=unused-argument
     """
     Get the request headers to be sent in requests by the SDK.
-    
+
     If you plan to gather metrics for your SDK, the User-Agent header value must
     be a string similar to the following:
     continuous-delivery-python-sdk/0.0.1 (lang=python; arch=x86_64; os=Linux; python.version=3.7.4)
