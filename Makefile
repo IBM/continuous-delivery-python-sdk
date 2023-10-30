@@ -3,7 +3,7 @@
 # example: "make setup"
 
 PYTHON=python3
-LINT_DIRS=mysdk test/unit test/integration examples
+LINT_DIRS=ibm_continuous_delivery test/unit test/integration examples
 
 setup: deps dev_deps install_project
 
