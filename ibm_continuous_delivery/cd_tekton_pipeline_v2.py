@@ -34,7 +34,12 @@ import json
 from ibm_cloud_sdk_core import BaseService, DetailedResponse, get_query_param
 from ibm_cloud_sdk_core.authenticators.authenticator import Authenticator
 from ibm_cloud_sdk_core.get_authenticator import get_authenticator_from_environment
-from ibm_cloud_sdk_core.utils import convert_list, convert_model, datetime_to_string, string_to_datetime
+from ibm_cloud_sdk_core.utils import (
+    convert_list,
+    convert_model,
+    datetime_to_string,
+    string_to_datetime,
+)
 
 from .common import get_sdk_headers
 
@@ -46,34 +51,32 @@ from .common import get_sdk_headers
 class CdTektonPipelineV2(BaseService):
     """The CD Tekton Pipeline V2 service."""
 
-    DEFAULT_SERVICE_URL = 'https://api.us-south.devops.cloud.ibm.com/pipeline/v2'
-    DEFAULT_SERVICE_NAME = 'cd_tekton_pipeline'
+    DEFAULT_SERVICE_URL = "https://api.us-south.devops.cloud.ibm.com/pipeline/v2"
+    DEFAULT_SERVICE_NAME = "cd_tekton_pipeline"
 
     REGIONAL_ENDPOINTS = {
-        'us-south': 'https://api.us-south.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the us-south region.
-        'us-east': 'https://api.us-east.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the us-east region.
-        'eu-de': 'https://api.eu-de.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the eu-de region.
-        'eu-gb': 'https://api.eu-gb.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the eu-gb region.
-        'jp-osa': 'https://api.jp-osa.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the jp-osa region.
-        'jp-tok': 'https://api.jp-tok.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the jp-tok region.
-        'au-syd': 'https://api.au-syd.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the au-syd region.
-        'ca-tor': 'https://api.ca-tor.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the ca-tor region.
-        'br-sao': 'https://api.br-sao.devops.cloud.ibm.com/pipeline/v2', # The host URL for Tekton Pipeline Service in the br-sao region.
+        "us-south": "https://api.us-south.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the us-south region.
+        "us-east": "https://api.us-east.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the us-east region.
+        "eu-de": "https://api.eu-de.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the eu-de region.
+        "eu-gb": "https://api.eu-gb.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the eu-gb region.
+        "jp-osa": "https://api.jp-osa.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the jp-osa region.
+        "jp-tok": "https://api.jp-tok.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the jp-tok region.
+        "au-syd": "https://api.au-syd.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the au-syd region.
+        "ca-tor": "https://api.ca-tor.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the ca-tor region.
+        "br-sao": "https://api.br-sao.devops.cloud.ibm.com/pipeline/v2",  # The host URL for Tekton Pipeline Service in the br-sao region.
     }
 
     @classmethod
     def new_instance(
         cls,
         service_name: str = DEFAULT_SERVICE_NAME,
-    ) -> 'CdTektonPipelineV2':
+    ) -> "CdTektonPipelineV2":
         """
         Return a new client for the CD Tekton Pipeline service using the specified
                parameters and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -102,7 +105,9 @@ class CdTektonPipelineV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
+        BaseService.__init__(
+            self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator
+        )
 
     #########################
     # Pipeline
@@ -115,7 +120,7 @@ class CdTektonPipelineV2(BaseService):
         next_build_number: int = None,
         enable_notifications: bool = None,
         enable_partial_cloning: bool = None,
-        worker: 'WorkerIdentity' = None,
+        worker: "WorkerIdentity" = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -151,36 +156,36 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if id is None:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         if worker is not None:
             worker = convert_model(worker)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline',
+            service_version="V2",
+            operation_id="create_tekton_pipeline",
         )
         headers.update(sdk_headers)
 
         data = {
-            'id': id,
-            'next_build_number': next_build_number,
-            'enable_notifications': enable_notifications,
-            'enable_partial_cloning': enable_partial_cloning,
-            'worker': worker,
+            "id": id,
+            "next_build_number": next_build_number,
+            "enable_notifications": enable_notifications,
+            "enable_partial_cloning": enable_partial_cloning,
+            "worker": worker,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        url = '/tekton_pipelines'
+        url = "/tekton_pipelines"
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -207,26 +212,26 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline',
+            service_version="V2",
+            operation_id="get_tekton_pipeline",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['id']
+        path_param_keys = ["id"]
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{id}".format(**path_param_dict)
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -238,7 +243,7 @@ class CdTektonPipelineV2(BaseService):
         self,
         id: str,
         *,
-        tekton_pipeline_patch: 'TektonPipelinePatch' = None,
+        tekton_pipeline_patch: "TektonPipelinePatch" = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -256,31 +261,33 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not id:
-            raise ValueError('id must be provided')
-        if tekton_pipeline_patch is not None and isinstance(tekton_pipeline_patch, TektonPipelinePatch):
+            raise ValueError("id must be provided")
+        if tekton_pipeline_patch is not None and isinstance(
+            tekton_pipeline_patch, TektonPipelinePatch
+        ):
             tekton_pipeline_patch = convert_model(tekton_pipeline_patch)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='update_tekton_pipeline',
+            service_version="V2",
+            operation_id="update_tekton_pipeline",
         )
         headers.update(sdk_headers)
 
         data = json.dumps(tekton_pipeline_patch)
-        headers['content-type'] = 'application/merge-patch+json'
+        headers["content-type"] = "application/merge-patch+json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['id']
+        path_param_keys = ["id"]
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{id}".format(**path_param_dict)
         request = self.prepare_request(
-            method='PATCH',
+            method="PATCH",
             url=url,
             headers=headers,
             data=data,
@@ -307,25 +314,25 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['id']
+        path_param_keys = ["id"]
         path_param_values = self.encode_path_vars(id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{id}".format(**path_param_dict)
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -369,33 +376,33 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='list_tekton_pipeline_runs',
+            service_version="V2",
+            operation_id="list_tekton_pipeline_runs",
         )
         headers.update(sdk_headers)
 
         params = {
-            'start': start,
-            'limit': limit,
-            'status': status,
-            'trigger.name': trigger_name,
+            "start": start,
+            "limit": limit,
+            "status": status,
+            "trigger.name": trigger_name,
         }
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs".format(**path_param_dict)
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
             params=params,
@@ -413,7 +420,7 @@ class CdTektonPipelineV2(BaseService):
         secure_trigger_properties: dict = None,
         trigger_headers: dict = None,
         trigger_body: dict = None,
-        trigger: 'PipelineRunTrigger' = None,
+        trigger: "PipelineRunTrigger" = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -448,40 +455,40 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if trigger is not None:
             trigger = convert_model(trigger)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline_run',
+            service_version="V2",
+            operation_id="create_tekton_pipeline_run",
         )
         headers.update(sdk_headers)
 
         data = {
-            'trigger_name': trigger_name,
-            'trigger_properties': trigger_properties,
-            'secure_trigger_properties': secure_trigger_properties,
-            'trigger_headers': trigger_headers,
-            'trigger_body': trigger_body,
-            'trigger': trigger,
+            "trigger_name": trigger_name,
+            "trigger_properties": trigger_properties,
+            "secure_trigger_properties": secure_trigger_properties,
+            "trigger_headers": trigger_headers,
+            "trigger_body": trigger_body,
+            "trigger": trigger,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs".format(**path_param_dict)
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -513,32 +520,34 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_run',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_run",
         )
         headers.update(sdk_headers)
 
         params = {
-            'includes': includes,
+            "includes": includes,
         }
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'id']
+        path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
             params=params,
@@ -566,27 +575,29 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline_run',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline_run",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['pipeline_id', 'id']
+        path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -617,35 +628,37 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='cancel_tekton_pipeline_run',
+            service_version="V2",
+            operation_id="cancel_tekton_pipeline_run",
         )
         headers.update(sdk_headers)
 
         data = {
-            'force': force,
+            "force": force,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'id']
+        path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/cancel'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/cancel".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -674,28 +687,30 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='rerun_tekton_pipeline_run',
+            service_version="V2",
+            operation_id="rerun_tekton_pipeline_run",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'id']
+        path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/rerun'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/rerun".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
         )
@@ -723,28 +738,30 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_run_logs',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_run_logs",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'id']
+        path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/logs'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/logs".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -775,30 +792,32 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not pipeline_run_id:
-            raise ValueError('pipeline_run_id must be provided')
+            raise ValueError("pipeline_run_id must be provided")
         if not id:
-            raise ValueError('id must be provided')
+            raise ValueError("id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_run_log_content',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_run_log_content",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'pipeline_run_id', 'id']
+        path_param_keys = ["pipeline_id", "pipeline_run_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, pipeline_run_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/pipeline_runs/{pipeline_run_id}/logs/{id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{pipeline_run_id}/logs/{id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -833,26 +852,26 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='list_tekton_pipeline_definitions',
+            service_version="V2",
+            operation_id="list_tekton_pipeline_definitions",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/definitions'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/definitions".format(**path_param_dict)
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -863,7 +882,7 @@ class CdTektonPipelineV2(BaseService):
     def create_tekton_pipeline_definition(
         self,
         pipeline_id: str,
-        source: 'DefinitionSource',
+        source: "DefinitionSource",
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -886,36 +905,36 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if source is None:
-            raise ValueError('source must be provided')
+            raise ValueError("source must be provided")
         source = convert_model(source)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline_definition',
+            service_version="V2",
+            operation_id="create_tekton_pipeline_definition",
         )
         headers.update(sdk_headers)
 
         data = {
-            'source': source,
+            "source": source,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/definitions'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/definitions".format(**path_param_dict)
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -944,28 +963,30 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not definition_id:
-            raise ValueError('definition_id must be provided')
+            raise ValueError("definition_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_definition',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_definition",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'definition_id']
+        path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -977,7 +998,7 @@ class CdTektonPipelineV2(BaseService):
         self,
         pipeline_id: str,
         definition_id: str,
-        source: 'DefinitionSource',
+        source: "DefinitionSource",
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -995,38 +1016,40 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not definition_id:
-            raise ValueError('definition_id must be provided')
+            raise ValueError("definition_id must be provided")
         if source is None:
-            raise ValueError('source must be provided')
+            raise ValueError("source must be provided")
         source = convert_model(source)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='replace_tekton_pipeline_definition',
+            service_version="V2",
+            operation_id="replace_tekton_pipeline_definition",
         )
         headers.update(sdk_headers)
 
         data = {
-            'source': source,
+            "source": source,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'definition_id']
+        path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='PUT',
+            method="PUT",
             url=url,
             headers=headers,
             data=data,
@@ -1054,27 +1077,29 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not definition_id:
-            raise ValueError('definition_id must be provided')
+            raise ValueError("definition_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline_definition',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline_definition",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['pipeline_id', 'definition_id']
+        path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/definitions/{definition_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -1114,32 +1139,32 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='list_tekton_pipeline_properties',
+            service_version="V2",
+            operation_id="list_tekton_pipeline_properties",
         )
         headers.update(sdk_headers)
 
         params = {
-            'name': name,
-            'type': convert_list(type),
-            'sort': sort,
+            "name": name,
+            "type": convert_list(type),
+            "sort": sort,
         }
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/properties'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/properties".format(**path_param_dict)
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
             params=params,
@@ -1179,41 +1204,41 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         if type is None:
-            raise ValueError('type must be provided')
+            raise ValueError("type must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline_properties',
+            service_version="V2",
+            operation_id="create_tekton_pipeline_properties",
         )
         headers.update(sdk_headers)
 
         data = {
-            'name': name,
-            'type': type,
-            'value': value,
-            'enum': enum,
-            'path': path,
+            "name": name,
+            "type": type,
+            "value": value,
+            "enum": enum,
+            "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/properties'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/properties".format(**path_param_dict)
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -1242,28 +1267,30 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_property',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_property",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'property_name']
+        path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -1305,43 +1332,45 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         if type is None:
-            raise ValueError('type must be provided')
+            raise ValueError("type must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='replace_tekton_pipeline_property',
+            service_version="V2",
+            operation_id="replace_tekton_pipeline_property",
         )
         headers.update(sdk_headers)
 
         data = {
-            'name': name,
-            'type': type,
-            'value': value,
-            'enum': enum,
-            'path': path,
+            "name": name,
+            "type": type,
+            "value": value,
+            "enum": enum,
+            "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'property_name']
+        path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='PUT',
+            method="PUT",
             url=url,
             headers=headers,
             data=data,
@@ -1369,27 +1398,29 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline_property',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline_property",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['pipeline_id', 'property_name']
+        path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -1443,36 +1474,36 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='list_tekton_pipeline_triggers',
+            service_version="V2",
+            operation_id="list_tekton_pipeline_triggers",
         )
         headers.update(sdk_headers)
 
         params = {
-            'type': type,
-            'name': name,
-            'event_listener': event_listener,
-            'worker.id': worker_id,
-            'worker.name': worker_name,
-            'disabled': disabled,
-            'tags': tags,
+            "type": type,
+            "name": name,
+            "event_listener": event_listener,
+            "worker.id": worker_id,
+            "worker.name": worker_name,
+            "disabled": disabled,
+            "tags": tags,
         }
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers".format(**path_param_dict)
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
             params=params,
@@ -1489,13 +1520,13 @@ class CdTektonPipelineV2(BaseService):
         event_listener: str,
         *,
         tags: List[str] = None,
-        worker: 'WorkerIdentity' = None,
+        worker: "WorkerIdentity" = None,
         max_concurrent_runs: int = None,
         enabled: bool = None,
-        secret: 'GenericSecret' = None,
+        secret: "GenericSecret" = None,
         cron: str = None,
         timezone: str = None,
-        source: 'TriggerSourcePrototype' = None,
+        source: "TriggerSourcePrototype" = None,
         events: List[str] = None,
         favorite: bool = None,
         **kwargs,
@@ -1548,13 +1579,13 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if type is None:
-            raise ValueError('type must be provided')
+            raise ValueError("type must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         if event_listener is None:
-            raise ValueError('event_listener must be provided')
+            raise ValueError("event_listener must be provided")
         if worker is not None:
             worker = convert_model(worker)
         if secret is not None:
@@ -1564,41 +1595,41 @@ class CdTektonPipelineV2(BaseService):
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline_trigger',
+            service_version="V2",
+            operation_id="create_tekton_pipeline_trigger",
         )
         headers.update(sdk_headers)
 
         data = {
-            'type': type,
-            'name': name,
-            'event_listener': event_listener,
-            'tags': tags,
-            'worker': worker,
-            'max_concurrent_runs': max_concurrent_runs,
-            'enabled': enabled,
-            'secret': secret,
-            'cron': cron,
-            'timezone': timezone,
-            'source': source,
-            'events': events,
-            'favorite': favorite,
+            "type": type,
+            "name": name,
+            "event_listener": event_listener,
+            "tags": tags,
+            "worker": worker,
+            "max_concurrent_runs": max_concurrent_runs,
+            "enabled": enabled,
+            "secret": secret,
+            "cron": cron,
+            "timezone": timezone,
+            "source": source,
+            "events": events,
+            "favorite": favorite,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id']
+        path_param_keys = ["pipeline_id"]
         path_param_values = self.encode_path_vars(pipeline_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers".format(**path_param_dict)
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -1626,28 +1657,30 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_trigger',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_trigger",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id']
+        path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -1660,7 +1693,7 @@ class CdTektonPipelineV2(BaseService):
         pipeline_id: str,
         trigger_id: str,
         *,
-        trigger_patch: 'TriggerPatch' = None,
+        trigger_patch: "TriggerPatch" = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -1679,33 +1712,35 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         if trigger_patch is not None and isinstance(trigger_patch, TriggerPatch):
             trigger_patch = convert_model(trigger_patch)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='update_tekton_pipeline_trigger',
+            service_version="V2",
+            operation_id="update_tekton_pipeline_trigger",
         )
         headers.update(sdk_headers)
 
         data = json.dumps(trigger_patch)
-        headers['content-type'] = 'application/merge-patch+json'
+        headers["content-type"] = "application/merge-patch+json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id']
+        path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='PATCH',
+            method="PATCH",
             url=url,
             headers=headers,
             data=data,
@@ -1733,27 +1768,29 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline_trigger',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline_trigger",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['pipeline_id', 'trigger_id']
+        path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -1783,37 +1820,39 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not source_trigger_id:
-            raise ValueError('source_trigger_id must be provided')
+            raise ValueError("source_trigger_id must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='duplicate_tekton_pipeline_trigger',
+            service_version="V2",
+            operation_id="duplicate_tekton_pipeline_trigger",
         )
         headers.update(sdk_headers)
 
         data = {
-            'name': name,
+            "name": name,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'source_trigger_id']
+        path_param_keys = ["pipeline_id", "source_trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, source_trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{source_trigger_id}/duplicate'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{source_trigger_id}/duplicate".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -1855,34 +1894,36 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='list_tekton_pipeline_trigger_properties',
+            service_version="V2",
+            operation_id="list_tekton_pipeline_trigger_properties",
         )
         headers.update(sdk_headers)
 
         params = {
-            'name': name,
-            'type': type,
-            'sort': sort,
+            "name": name,
+            "type": type,
+            "sort": sort,
         }
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id']
+        path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
             params=params,
@@ -1924,43 +1965,45 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         if type is None:
-            raise ValueError('type must be provided')
+            raise ValueError("type must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='create_tekton_pipeline_trigger_properties',
+            service_version="V2",
+            operation_id="create_tekton_pipeline_trigger_properties",
         )
         headers.update(sdk_headers)
 
         data = {
-            'name': name,
-            'type': type,
-            'value': value,
-            'enum': enum,
-            'path': path,
+            "name": name,
+            "type": type,
+            "value": value,
+            "enum": enum,
+            "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id']
+        path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='POST',
+            method="POST",
             url=url,
             headers=headers,
             data=data,
@@ -1990,30 +2033,34 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='get_tekton_pipeline_trigger_property',
+            service_version="V2",
+            operation_id="get_tekton_pipeline_trigger_property",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
-        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
+        path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
+        path_param_values = self.encode_path_vars(
+            pipeline_id, trigger_id, property_name
+        )
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='GET',
+            method="GET",
             url=url,
             headers=headers,
         )
@@ -2056,45 +2103,49 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         if name is None:
-            raise ValueError('name must be provided')
+            raise ValueError("name must be provided")
         if type is None:
-            raise ValueError('type must be provided')
+            raise ValueError("type must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='replace_tekton_pipeline_trigger_property',
+            service_version="V2",
+            operation_id="replace_tekton_pipeline_trigger_property",
         )
         headers.update(sdk_headers)
 
         data = {
-            'name': name,
-            'type': type,
-            'value': value,
-            'enum': enum,
-            'path': path,
+            "name": name,
+            "type": type,
+            "value": value,
+            "enum": enum,
+            "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
-        headers['content-type'] = 'application/json'
+        headers["content-type"] = "application/json"
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
-        headers['Accept'] = 'application/json'
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
 
-        path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
-        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
+        path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
+        path_param_values = self.encode_path_vars(
+            pipeline_id, trigger_id, property_name
+        )
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='PUT',
+            method="PUT",
             url=url,
             headers=headers,
             data=data,
@@ -2124,29 +2175,33 @@ class CdTektonPipelineV2(BaseService):
         """
 
         if not pipeline_id:
-            raise ValueError('pipeline_id must be provided')
+            raise ValueError("pipeline_id must be provided")
         if not trigger_id:
-            raise ValueError('trigger_id must be provided')
+            raise ValueError("trigger_id must be provided")
         if not property_name:
-            raise ValueError('property_name must be provided')
+            raise ValueError("property_name must be provided")
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
-            service_version='V2',
-            operation_id='delete_tekton_pipeline_trigger_property',
+            service_version="V2",
+            operation_id="delete_tekton_pipeline_trigger_property",
         )
         headers.update(sdk_headers)
 
-        if 'headers' in kwargs:
-            headers.update(kwargs.get('headers'))
-            del kwargs['headers']
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
 
-        path_param_keys = ['pipeline_id', 'trigger_id', 'property_name']
-        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
+        path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
+        path_param_values = self.encode_path_vars(
+            pipeline_id, trigger_id, property_name
+        )
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = '/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}'.format(**path_param_dict)
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
+            **path_param_dict
+        )
         request = self.prepare_request(
-            method='DELETE',
+            method="DELETE",
             url=url,
             headers=headers,
         )
@@ -2165,15 +2220,15 @@ class ListTektonPipelineRunsEnums:
         Filters the collection to resources with the specified status.
         """
 
-        PENDING = 'pending'
-        WAITING = 'waiting'
-        QUEUED = 'queued'
-        RUNNING = 'running'
-        CANCELLED = 'cancelled'
-        CANCELLING = 'cancelling'
-        FAILED = 'failed'
-        ERROR = 'error'
-        SUCCEEDED = 'succeeded'
+        PENDING = "pending"
+        WAITING = "waiting"
+        QUEUED = "queued"
+        RUNNING = "running"
+        CANCELLED = "cancelled"
+        CANCELLING = "cancelling"
+        FAILED = "failed"
+        ERROR = "error"
+        SUCCEEDED = "succeeded"
 
 
 class GetTektonPipelineRunEnums:
@@ -2186,7 +2241,7 @@ class GetTektonPipelineRunEnums:
         Defines if response includes definition metadata.
         """
 
-        DEFINITIONS = 'definitions'
+        DEFINITIONS = "definitions"
 
 
 class ListTektonPipelinePropertiesEnums:
@@ -2199,11 +2254,11 @@ class ListTektonPipelinePropertiesEnums:
         Filters the collection to resources with the specified property type.
         """
 
-        SECURE = 'secure'
-        TEXT = 'text'
-        INTEGRATION = 'integration'
-        SINGLE_SELECT = 'single_select'
-        APPCONFIG = 'appconfig'
+        SECURE = "secure"
+        TEXT = "text"
+        INTEGRATION = "integration"
+        SINGLE_SELECT = "single_select"
+        APPCONFIG = "appconfig"
 
 
 ##############################################################################
@@ -2228,7 +2283,7 @@ class Definition:
 
     def __init__(
         self,
-        source: 'DefinitionSource',
+        source: "DefinitionSource",
         id: str,
         *,
         href: str = None,
@@ -2246,19 +2301,21 @@ class Definition:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Definition':
+    def from_dict(cls, _dict: Dict) -> "Definition":
         """Initialize a Definition object from a json dictionary."""
         args = {}
-        if 'source' in _dict:
-            args['source'] = DefinitionSource.from_dict(_dict.get('source'))
+        if "source" in _dict:
+            args["source"] = DefinitionSource.from_dict(_dict.get("source"))
         else:
-            raise ValueError('Required property \'source\' not present in Definition JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'source' not present in Definition JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in Definition JSON')
+            raise ValueError("Required property 'id' not present in Definition JSON")
         return cls(**args)
 
     @classmethod
@@ -2269,15 +2326,15 @@ class Definition:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'source') and self.source is not None:
+        if hasattr(self, "source") and self.source is not None:
             if isinstance(self.source, dict):
-                _dict['source'] = self.source
+                _dict["source"] = self.source
             else:
-                _dict['source'] = self.source.to_dict()
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+                _dict["source"] = self.source.to_dict()
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -2288,13 +2345,13 @@ class Definition:
         """Return a `str` version of this Definition object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Definition') -> bool:
+    def __eq__(self, other: "Definition") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Definition') -> bool:
+    def __ne__(self, other: "Definition") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2312,7 +2369,7 @@ class DefinitionSource:
     def __init__(
         self,
         type: str,
-        properties: 'DefinitionSourceProperties',
+        properties: "DefinitionSourceProperties",
     ) -> None:
         """
         Initialize a DefinitionSource object.
@@ -2326,17 +2383,23 @@ class DefinitionSource:
         self.properties = properties
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'DefinitionSource':
+    def from_dict(cls, _dict: Dict) -> "DefinitionSource":
         """Initialize a DefinitionSource object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in DefinitionSource JSON')
-        if 'properties' in _dict:
-            args['properties'] = DefinitionSourceProperties.from_dict(_dict.get('properties'))
+            raise ValueError(
+                "Required property 'type' not present in DefinitionSource JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = DefinitionSourceProperties.from_dict(
+                _dict.get("properties")
+            )
         else:
-            raise ValueError('Required property \'properties\' not present in DefinitionSource JSON')
+            raise ValueError(
+                "Required property 'properties' not present in DefinitionSource JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -2347,13 +2410,13 @@ class DefinitionSource:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "properties") and self.properties is not None:
             if isinstance(self.properties, dict):
-                _dict['properties'] = self.properties
+                _dict["properties"] = self.properties
             else:
-                _dict['properties'] = self.properties.to_dict()
+                _dict["properties"] = self.properties.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -2364,13 +2427,13 @@ class DefinitionSource:
         """Return a `str` version of this DefinitionSource object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'DefinitionSource') -> bool:
+    def __eq__(self, other: "DefinitionSource") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'DefinitionSource') -> bool:
+    def __ne__(self, other: "DefinitionSource") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2396,7 +2459,7 @@ class DefinitionSourceProperties:
         *,
         branch: str = None,
         tag: str = None,
-        tool: 'Tool' = None,
+        tool: "Tool" = None,
     ) -> None:
         """
         Initialize a DefinitionSourceProperties object.
@@ -2417,23 +2480,27 @@ class DefinitionSourceProperties:
         self.tool = tool
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'DefinitionSourceProperties':
+    def from_dict(cls, _dict: Dict) -> "DefinitionSourceProperties":
         """Initialize a DefinitionSourceProperties object from a json dictionary."""
         args = {}
-        if 'url' in _dict:
-            args['url'] = _dict.get('url')
+        if "url" in _dict:
+            args["url"] = _dict.get("url")
         else:
-            raise ValueError('Required property \'url\' not present in DefinitionSourceProperties JSON')
-        if 'branch' in _dict:
-            args['branch'] = _dict.get('branch')
-        if 'tag' in _dict:
-            args['tag'] = _dict.get('tag')
-        if 'path' in _dict:
-            args['path'] = _dict.get('path')
+            raise ValueError(
+                "Required property 'url' not present in DefinitionSourceProperties JSON"
+            )
+        if "branch" in _dict:
+            args["branch"] = _dict.get("branch")
+        if "tag" in _dict:
+            args["tag"] = _dict.get("tag")
+        if "path" in _dict:
+            args["path"] = _dict.get("path")
         else:
-            raise ValueError('Required property \'path\' not present in DefinitionSourceProperties JSON')
-        if 'tool' in _dict:
-            args['tool'] = Tool.from_dict(_dict.get('tool'))
+            raise ValueError(
+                "Required property 'path' not present in DefinitionSourceProperties JSON"
+            )
+        if "tool" in _dict:
+            args["tool"] = Tool.from_dict(_dict.get("tool"))
         return cls(**args)
 
     @classmethod
@@ -2444,19 +2511,19 @@ class DefinitionSourceProperties:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'url') and self.url is not None:
-            _dict['url'] = self.url
-        if hasattr(self, 'branch') and self.branch is not None:
-            _dict['branch'] = self.branch
-        if hasattr(self, 'tag') and self.tag is not None:
-            _dict['tag'] = self.tag
-        if hasattr(self, 'path') and self.path is not None:
-            _dict['path'] = self.path
-        if hasattr(self, 'tool') and self.tool is not None:
+        if hasattr(self, "url") and self.url is not None:
+            _dict["url"] = self.url
+        if hasattr(self, "branch") and self.branch is not None:
+            _dict["branch"] = self.branch
+        if hasattr(self, "tag") and self.tag is not None:
+            _dict["tag"] = self.tag
+        if hasattr(self, "path") and self.path is not None:
+            _dict["path"] = self.path
+        if hasattr(self, "tool") and self.tool is not None:
             if isinstance(self.tool, dict):
-                _dict['tool'] = self.tool
+                _dict["tool"] = self.tool
             else:
-                _dict['tool'] = self.tool.to_dict()
+                _dict["tool"] = self.tool.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -2467,13 +2534,13 @@ class DefinitionSourceProperties:
         """Return a `str` version of this DefinitionSourceProperties object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'DefinitionSourceProperties') -> bool:
+    def __eq__(self, other: "DefinitionSourceProperties") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'DefinitionSourceProperties') -> bool:
+    def __ne__(self, other: "DefinitionSourceProperties") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2488,7 +2555,7 @@ class DefinitionsCollection:
 
     def __init__(
         self,
-        definitions: List['Definition'],
+        definitions: List["Definition"],
     ) -> None:
         """
         Initialize a DefinitionsCollection object.
@@ -2499,13 +2566,17 @@ class DefinitionsCollection:
         self.definitions = definitions
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'DefinitionsCollection':
+    def from_dict(cls, _dict: Dict) -> "DefinitionsCollection":
         """Initialize a DefinitionsCollection object from a json dictionary."""
         args = {}
-        if 'definitions' in _dict:
-            args['definitions'] = [Definition.from_dict(v) for v in _dict.get('definitions')]
+        if "definitions" in _dict:
+            args["definitions"] = [
+                Definition.from_dict(v) for v in _dict.get("definitions")
+            ]
         else:
-            raise ValueError('Required property \'definitions\' not present in DefinitionsCollection JSON')
+            raise ValueError(
+                "Required property 'definitions' not present in DefinitionsCollection JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -2516,14 +2587,14 @@ class DefinitionsCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'definitions') and self.definitions is not None:
+        if hasattr(self, "definitions") and self.definitions is not None:
             definitions_list = []
             for v in self.definitions:
                 if isinstance(v, dict):
                     definitions_list.append(v)
                 else:
                     definitions_list.append(v.to_dict())
-            _dict['definitions'] = definitions_list
+            _dict["definitions"] = definitions_list
         return _dict
 
     def _to_dict(self):
@@ -2534,13 +2605,13 @@ class DefinitionsCollection:
         """Return a `str` version of this DefinitionsCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'DefinitionsCollection') -> bool:
+    def __eq__(self, other: "DefinitionsCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'DefinitionsCollection') -> bool:
+    def __ne__(self, other: "DefinitionsCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2590,19 +2661,19 @@ class GenericSecret:
         self.algorithm = algorithm
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'GenericSecret':
+    def from_dict(cls, _dict: Dict) -> "GenericSecret":
         """Initialize a GenericSecret object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
-        if 'value' in _dict:
-            args['value'] = _dict.get('value')
-        if 'source' in _dict:
-            args['source'] = _dict.get('source')
-        if 'key_name' in _dict:
-            args['key_name'] = _dict.get('key_name')
-        if 'algorithm' in _dict:
-            args['algorithm'] = _dict.get('algorithm')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
+        if "value" in _dict:
+            args["value"] = _dict.get("value")
+        if "source" in _dict:
+            args["source"] = _dict.get("source")
+        if "key_name" in _dict:
+            args["key_name"] = _dict.get("key_name")
+        if "algorithm" in _dict:
+            args["algorithm"] = _dict.get("algorithm")
         return cls(**args)
 
     @classmethod
@@ -2613,16 +2684,16 @@ class GenericSecret:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'value') and self.value is not None:
-            _dict['value'] = self.value
-        if hasattr(self, 'source') and self.source is not None:
-            _dict['source'] = self.source
-        if hasattr(self, 'key_name') and self.key_name is not None:
-            _dict['key_name'] = self.key_name
-        if hasattr(self, 'algorithm') and self.algorithm is not None:
-            _dict['algorithm'] = self.algorithm
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "value") and self.value is not None:
+            _dict["value"] = self.value
+        if hasattr(self, "source") and self.source is not None:
+            _dict["source"] = self.source
+        if hasattr(self, "key_name") and self.key_name is not None:
+            _dict["key_name"] = self.key_name
+        if hasattr(self, "algorithm") and self.algorithm is not None:
+            _dict["algorithm"] = self.algorithm
         return _dict
 
     def _to_dict(self):
@@ -2633,13 +2704,13 @@ class GenericSecret:
         """Return a `str` version of this GenericSecret object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'GenericSecret') -> bool:
+    def __eq__(self, other: "GenericSecret") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'GenericSecret') -> bool:
+    def __ne__(self, other: "GenericSecret") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2648,20 +2719,18 @@ class GenericSecret:
         Secret type.
         """
 
-        TOKEN_MATCHES = 'token_matches'
-        DIGEST_MATCHES = 'digest_matches'
-        INTERNAL_VALIDATION = 'internal_validation'
-
+        TOKEN_MATCHES = "token_matches"
+        DIGEST_MATCHES = "digest_matches"
+        INTERNAL_VALIDATION = "internal_validation"
 
     class SourceEnum(str, Enum):
         """
         Secret location, not needed if secret type is `internal_validation`.
         """
 
-        HEADER = 'header'
-        PAYLOAD = 'payload'
-        QUERY = 'query'
-
+        HEADER = "header"
+        PAYLOAD = "payload"
+        QUERY = "query"
 
     class AlgorithmEnum(str, Enum):
         """
@@ -2669,16 +2738,15 @@ class GenericSecret:
         secret type.
         """
 
-        MD4 = 'md4'
-        MD5 = 'md5'
-        SHA1 = 'sha1'
-        SHA256 = 'sha256'
-        SHA384 = 'sha384'
-        SHA512 = 'sha512'
-        SHA512_224 = 'sha512_224'
-        SHA512_256 = 'sha512_256'
-        RIPEMD160 = 'ripemd160'
-
+        MD4 = "md4"
+        MD5 = "md5"
+        SHA1 = "sha1"
+        SHA256 = "sha256"
+        SHA384 = "sha384"
+        SHA512 = "sha512"
+        SHA512_224 = "sha512_224"
+        SHA512_256 = "sha512_256"
+        RIPEMD160 = "ripemd160"
 
 
 class Log:
@@ -2709,19 +2777,19 @@ class Log:
         self.name = name
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Log':
+    def from_dict(cls, _dict: Dict) -> "Log":
         """Initialize a Log object from a json dictionary."""
         args = {}
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in Log JSON')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+            raise ValueError("Required property 'id' not present in Log JSON")
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in Log JSON')
+            raise ValueError("Required property 'name' not present in Log JSON")
         return cls(**args)
 
     @classmethod
@@ -2732,12 +2800,12 @@ class Log:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
         return _dict
 
     def _to_dict(self):
@@ -2748,13 +2816,13 @@ class Log:
         """Return a `str` version of this Log object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Log') -> bool:
+    def __eq__(self, other: "Log") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Log') -> bool:
+    def __ne__(self, other: "Log") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2768,7 +2836,7 @@ class LogsCollection:
 
     def __init__(
         self,
-        logs: List['Log'],
+        logs: List["Log"],
     ) -> None:
         """
         Initialize a LogsCollection object.
@@ -2778,13 +2846,15 @@ class LogsCollection:
         self.logs = logs
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'LogsCollection':
+    def from_dict(cls, _dict: Dict) -> "LogsCollection":
         """Initialize a LogsCollection object from a json dictionary."""
         args = {}
-        if 'logs' in _dict:
-            args['logs'] = [Log.from_dict(v) for v in _dict.get('logs')]
+        if "logs" in _dict:
+            args["logs"] = [Log.from_dict(v) for v in _dict.get("logs")]
         else:
-            raise ValueError('Required property \'logs\' not present in LogsCollection JSON')
+            raise ValueError(
+                "Required property 'logs' not present in LogsCollection JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -2795,14 +2865,14 @@ class LogsCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'logs') and self.logs is not None:
+        if hasattr(self, "logs") and self.logs is not None:
             logs_list = []
             for v in self.logs:
                 if isinstance(v, dict):
                     logs_list.append(v)
                 else:
                     logs_list.append(v.to_dict())
-            _dict['logs'] = logs_list
+            _dict["logs"] = logs_list
         return _dict
 
     def _to_dict(self):
@@ -2813,13 +2883,13 @@ class LogsCollection:
         """Return a `str` version of this LogsCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'LogsCollection') -> bool:
+    def __eq__(self, other: "LogsCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'LogsCollection') -> bool:
+    def __ne__(self, other: "LogsCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -2865,20 +2935,20 @@ class PipelineRun:
         id: str,
         status: str,
         definition_id: str,
-        worker: 'PipelineRunWorker',
+        worker: "PipelineRunWorker",
         pipeline_id: str,
         listener_name: str,
-        trigger: 'Trigger',
+        trigger: "Trigger",
         event_params_blob: str,
         created_at: datetime,
         run_url: str,
         *,
         href: str = None,
-        user_info: 'UserInfo' = None,
-        definition: 'RunDefinition' = None,
-        pipeline: 'RunPipeline' = None,
+        user_info: "UserInfo" = None,
+        definition: "RunDefinition" = None,
+        pipeline: "RunPipeline" = None,
         trigger_headers: str = None,
-        properties: List['Property'] = None,
+        properties: List["Property"] = None,
         updated_at: datetime = None,
         error_message: str = None,
     ) -> None:
@@ -2938,65 +3008,85 @@ class PipelineRun:
         self.error_message = error_message
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'PipelineRun':
+    def from_dict(cls, _dict: Dict) -> "PipelineRun":
         """Initialize a PipelineRun object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in PipelineRun JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'user_info' in _dict:
-            args['user_info'] = UserInfo.from_dict(_dict.get('user_info'))
-        if 'status' in _dict:
-            args['status'] = _dict.get('status')
+            raise ValueError("Required property 'id' not present in PipelineRun JSON")
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "user_info" in _dict:
+            args["user_info"] = UserInfo.from_dict(_dict.get("user_info"))
+        if "status" in _dict:
+            args["status"] = _dict.get("status")
         else:
-            raise ValueError('Required property \'status\' not present in PipelineRun JSON')
-        if 'definition_id' in _dict:
-            args['definition_id'] = _dict.get('definition_id')
+            raise ValueError(
+                "Required property 'status' not present in PipelineRun JSON"
+            )
+        if "definition_id" in _dict:
+            args["definition_id"] = _dict.get("definition_id")
         else:
-            raise ValueError('Required property \'definition_id\' not present in PipelineRun JSON')
-        if 'definition' in _dict:
-            args['definition'] = RunDefinition.from_dict(_dict.get('definition'))
-        if 'worker' in _dict:
-            args['worker'] = PipelineRunWorker.from_dict(_dict.get('worker'))
+            raise ValueError(
+                "Required property 'definition_id' not present in PipelineRun JSON"
+            )
+        if "definition" in _dict:
+            args["definition"] = RunDefinition.from_dict(_dict.get("definition"))
+        if "worker" in _dict:
+            args["worker"] = PipelineRunWorker.from_dict(_dict.get("worker"))
         else:
-            raise ValueError('Required property \'worker\' not present in PipelineRun JSON')
-        if 'pipeline_id' in _dict:
-            args['pipeline_id'] = _dict.get('pipeline_id')
+            raise ValueError(
+                "Required property 'worker' not present in PipelineRun JSON"
+            )
+        if "pipeline_id" in _dict:
+            args["pipeline_id"] = _dict.get("pipeline_id")
         else:
-            raise ValueError('Required property \'pipeline_id\' not present in PipelineRun JSON')
-        if 'pipeline' in _dict:
-            args['pipeline'] = RunPipeline.from_dict(_dict.get('pipeline'))
-        if 'listener_name' in _dict:
-            args['listener_name'] = _dict.get('listener_name')
+            raise ValueError(
+                "Required property 'pipeline_id' not present in PipelineRun JSON"
+            )
+        if "pipeline" in _dict:
+            args["pipeline"] = RunPipeline.from_dict(_dict.get("pipeline"))
+        if "listener_name" in _dict:
+            args["listener_name"] = _dict.get("listener_name")
         else:
-            raise ValueError('Required property \'listener_name\' not present in PipelineRun JSON')
-        if 'trigger' in _dict:
-            args['trigger'] = _dict.get('trigger')
+            raise ValueError(
+                "Required property 'listener_name' not present in PipelineRun JSON"
+            )
+        if "trigger" in _dict:
+            args["trigger"] = _dict.get("trigger")
         else:
-            raise ValueError('Required property \'trigger\' not present in PipelineRun JSON')
-        if 'event_params_blob' in _dict:
-            args['event_params_blob'] = _dict.get('event_params_blob')
+            raise ValueError(
+                "Required property 'trigger' not present in PipelineRun JSON"
+            )
+        if "event_params_blob" in _dict:
+            args["event_params_blob"] = _dict.get("event_params_blob")
         else:
-            raise ValueError('Required property \'event_params_blob\' not present in PipelineRun JSON')
-        if 'trigger_headers' in _dict:
-            args['trigger_headers'] = _dict.get('trigger_headers')
-        if 'properties' in _dict:
-            args['properties'] = [Property.from_dict(v) for v in _dict.get('properties')]
-        if 'created_at' in _dict:
-            args['created_at'] = string_to_datetime(_dict.get('created_at'))
+            raise ValueError(
+                "Required property 'event_params_blob' not present in PipelineRun JSON"
+            )
+        if "trigger_headers" in _dict:
+            args["trigger_headers"] = _dict.get("trigger_headers")
+        if "properties" in _dict:
+            args["properties"] = [
+                Property.from_dict(v) for v in _dict.get("properties")
+            ]
+        if "created_at" in _dict:
+            args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError('Required property \'created_at\' not present in PipelineRun JSON')
-        if 'updated_at' in _dict:
-            args['updated_at'] = string_to_datetime(_dict.get('updated_at'))
-        if 'run_url' in _dict:
-            args['run_url'] = _dict.get('run_url')
+            raise ValueError(
+                "Required property 'created_at' not present in PipelineRun JSON"
+            )
+        if "updated_at" in _dict:
+            args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
+        if "run_url" in _dict:
+            args["run_url"] = _dict.get("run_url")
         else:
-            raise ValueError('Required property \'run_url\' not present in PipelineRun JSON')
-        if 'error_message' in _dict:
-            args['error_message'] = _dict.get('error_message')
+            raise ValueError(
+                "Required property 'run_url' not present in PipelineRun JSON"
+            )
+        if "error_message" in _dict:
+            args["error_message"] = _dict.get("error_message")
         return cls(**args)
 
     @classmethod
@@ -3007,63 +3097,63 @@ class PipelineRun:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'user_info') and self.user_info is not None:
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "user_info") and self.user_info is not None:
             if isinstance(self.user_info, dict):
-                _dict['user_info'] = self.user_info
+                _dict["user_info"] = self.user_info
             else:
-                _dict['user_info'] = self.user_info.to_dict()
-        if hasattr(self, 'status') and self.status is not None:
-            _dict['status'] = self.status
-        if hasattr(self, 'definition_id') and self.definition_id is not None:
-            _dict['definition_id'] = self.definition_id
-        if hasattr(self, 'definition') and self.definition is not None:
+                _dict["user_info"] = self.user_info.to_dict()
+        if hasattr(self, "status") and self.status is not None:
+            _dict["status"] = self.status
+        if hasattr(self, "definition_id") and self.definition_id is not None:
+            _dict["definition_id"] = self.definition_id
+        if hasattr(self, "definition") and self.definition is not None:
             if isinstance(self.definition, dict):
-                _dict['definition'] = self.definition
+                _dict["definition"] = self.definition
             else:
-                _dict['definition'] = self.definition.to_dict()
-        if hasattr(self, 'worker') and self.worker is not None:
+                _dict["definition"] = self.definition.to_dict()
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'pipeline_id') and self.pipeline_id is not None:
-            _dict['pipeline_id'] = self.pipeline_id
-        if hasattr(self, 'pipeline') and self.pipeline is not None:
+                _dict["worker"] = self.worker.to_dict()
+        if hasattr(self, "pipeline_id") and self.pipeline_id is not None:
+            _dict["pipeline_id"] = self.pipeline_id
+        if hasattr(self, "pipeline") and self.pipeline is not None:
             if isinstance(self.pipeline, dict):
-                _dict['pipeline'] = self.pipeline
+                _dict["pipeline"] = self.pipeline
             else:
-                _dict['pipeline'] = self.pipeline.to_dict()
-        if hasattr(self, 'listener_name') and self.listener_name is not None:
-            _dict['listener_name'] = self.listener_name
-        if hasattr(self, 'trigger') and self.trigger is not None:
+                _dict["pipeline"] = self.pipeline.to_dict()
+        if hasattr(self, "listener_name") and self.listener_name is not None:
+            _dict["listener_name"] = self.listener_name
+        if hasattr(self, "trigger") and self.trigger is not None:
             if isinstance(self.trigger, dict):
-                _dict['trigger'] = self.trigger
+                _dict["trigger"] = self.trigger
             else:
-                _dict['trigger'] = self.trigger.to_dict()
-        if hasattr(self, 'event_params_blob') and self.event_params_blob is not None:
-            _dict['event_params_blob'] = self.event_params_blob
-        if hasattr(self, 'trigger_headers') and self.trigger_headers is not None:
-            _dict['trigger_headers'] = self.trigger_headers
-        if hasattr(self, 'properties') and self.properties is not None:
+                _dict["trigger"] = self.trigger.to_dict()
+        if hasattr(self, "event_params_blob") and self.event_params_blob is not None:
+            _dict["event_params_blob"] = self.event_params_blob
+        if hasattr(self, "trigger_headers") and self.trigger_headers is not None:
+            _dict["trigger_headers"] = self.trigger_headers
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'created_at') and self.created_at is not None:
-            _dict['created_at'] = datetime_to_string(self.created_at)
-        if hasattr(self, 'updated_at') and self.updated_at is not None:
-            _dict['updated_at'] = datetime_to_string(self.updated_at)
-        if hasattr(self, 'run_url') and self.run_url is not None:
-            _dict['run_url'] = self.run_url
-        if hasattr(self, 'error_message') and self.error_message is not None:
-            _dict['error_message'] = self.error_message
+            _dict["properties"] = properties_list
+        if hasattr(self, "created_at") and self.created_at is not None:
+            _dict["created_at"] = datetime_to_string(self.created_at)
+        if hasattr(self, "updated_at") and self.updated_at is not None:
+            _dict["updated_at"] = datetime_to_string(self.updated_at)
+        if hasattr(self, "run_url") and self.run_url is not None:
+            _dict["run_url"] = self.run_url
+        if hasattr(self, "error_message") and self.error_message is not None:
+            _dict["error_message"] = self.error_message
         return _dict
 
     def _to_dict(self):
@@ -3074,13 +3164,13 @@ class PipelineRun:
         """Return a `str` version of this PipelineRun object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'PipelineRun') -> bool:
+    def __eq__(self, other: "PipelineRun") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'PipelineRun') -> bool:
+    def __ne__(self, other: "PipelineRun") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3089,16 +3179,15 @@ class PipelineRun:
         Status of the pipeline run.
         """
 
-        PENDING = 'pending'
-        WAITING = 'waiting'
-        QUEUED = 'queued'
-        RUNNING = 'running'
-        CANCELLED = 'cancelled'
-        CANCELLING = 'cancelling'
-        FAILED = 'failed'
-        ERROR = 'error'
-        SUCCEEDED = 'succeeded'
-
+        PENDING = "pending"
+        WAITING = "waiting"
+        QUEUED = "queued"
+        RUNNING = "running"
+        CANCELLED = "cancelled"
+        CANCELLING = "cancelling"
+        FAILED = "failed"
+        ERROR = "error"
+        SUCCEEDED = "succeeded"
 
 
 class PipelineRunTrigger:
@@ -3158,21 +3247,23 @@ class PipelineRunTrigger:
         self.body = body
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'PipelineRunTrigger':
+    def from_dict(cls, _dict: Dict) -> "PipelineRunTrigger":
         """Initialize a PipelineRunTrigger object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in PipelineRunTrigger JSON')
-        if 'properties' in _dict:
-            args['properties'] = _dict.get('properties')
-        if 'secure_properties' in _dict:
-            args['secure_properties'] = _dict.get('secure_properties')
-        if 'headers' in _dict:
-            args['headers_'] = _dict.get('headers')
-        if 'body' in _dict:
-            args['body'] = _dict.get('body')
+            raise ValueError(
+                "Required property 'name' not present in PipelineRunTrigger JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = _dict.get("properties")
+        if "secure_properties" in _dict:
+            args["secure_properties"] = _dict.get("secure_properties")
+        if "headers" in _dict:
+            args["headers_"] = _dict.get("headers")
+        if "body" in _dict:
+            args["body"] = _dict.get("body")
         return cls(**args)
 
     @classmethod
@@ -3183,16 +3274,16 @@ class PipelineRunTrigger:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'properties') and self.properties is not None:
-            _dict['properties'] = self.properties
-        if hasattr(self, 'secure_properties') and self.secure_properties is not None:
-            _dict['secure_properties'] = self.secure_properties
-        if hasattr(self, 'headers_') and self.headers_ is not None:
-            _dict['headers'] = self.headers_
-        if hasattr(self, 'body') and self.body is not None:
-            _dict['body'] = self.body
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "properties") and self.properties is not None:
+            _dict["properties"] = self.properties
+        if hasattr(self, "secure_properties") and self.secure_properties is not None:
+            _dict["secure_properties"] = self.secure_properties
+        if hasattr(self, "headers_") and self.headers_ is not None:
+            _dict["headers"] = self.headers_
+        if hasattr(self, "body") and self.body is not None:
+            _dict["body"] = self.body
         return _dict
 
     def _to_dict(self):
@@ -3203,13 +3294,13 @@ class PipelineRunTrigger:
         """Return a `str` version of this PipelineRunTrigger object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'PipelineRunTrigger') -> bool:
+    def __eq__(self, other: "PipelineRunTrigger") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'PipelineRunTrigger') -> bool:
+    def __ne__(self, other: "PipelineRunTrigger") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3251,19 +3342,21 @@ class PipelineRunWorker:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'PipelineRunWorker':
+    def from_dict(cls, _dict: Dict) -> "PipelineRunWorker":
         """Initialize a PipelineRunWorker object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        if 'agent_id' in _dict:
-            args['agent_id'] = _dict.get('agent_id')
-        if 'service_id' in _dict:
-            args['service_id'] = _dict.get('service_id')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
+        if "agent_id" in _dict:
+            args["agent_id"] = _dict.get("agent_id")
+        if "service_id" in _dict:
+            args["service_id"] = _dict.get("service_id")
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in PipelineRunWorker JSON')
+            raise ValueError(
+                "Required property 'id' not present in PipelineRunWorker JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -3274,14 +3367,14 @@ class PipelineRunWorker:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'agent_id') and self.agent_id is not None:
-            _dict['agent_id'] = self.agent_id
-        if hasattr(self, 'service_id') and self.service_id is not None:
-            _dict['service_id'] = self.service_id
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "agent_id") and self.agent_id is not None:
+            _dict["agent_id"] = self.agent_id
+        if hasattr(self, "service_id") and self.service_id is not None:
+            _dict["service_id"] = self.service_id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -3292,13 +3385,13 @@ class PipelineRunWorker:
         """Return a `str` version of this PipelineRunWorker object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'PipelineRunWorker') -> bool:
+    def __eq__(self, other: "PipelineRunWorker") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'PipelineRunWorker') -> bool:
+    def __ne__(self, other: "PipelineRunWorker") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3319,12 +3412,12 @@ class PipelineRunsCollection:
 
     def __init__(
         self,
-        pipeline_runs: List['PipelineRun'],
+        pipeline_runs: List["PipelineRun"],
         limit: int,
-        first: 'RunsFirstPage',
+        first: "RunsFirstPage",
         *,
-        next: 'RunsNextPage' = None,
-        last: 'RunsLastPage' = None,
+        next: "RunsNextPage" = None,
+        last: "RunsLastPage" = None,
     ) -> None:
         """
         Initialize a PipelineRunsCollection object.
@@ -3347,25 +3440,33 @@ class PipelineRunsCollection:
         self.last = last
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'PipelineRunsCollection':
+    def from_dict(cls, _dict: Dict) -> "PipelineRunsCollection":
         """Initialize a PipelineRunsCollection object from a json dictionary."""
         args = {}
-        if 'pipeline_runs' in _dict:
-            args['pipeline_runs'] = [PipelineRun.from_dict(v) for v in _dict.get('pipeline_runs')]
+        if "pipeline_runs" in _dict:
+            args["pipeline_runs"] = [
+                PipelineRun.from_dict(v) for v in _dict.get("pipeline_runs")
+            ]
         else:
-            raise ValueError('Required property \'pipeline_runs\' not present in PipelineRunsCollection JSON')
-        if 'limit' in _dict:
-            args['limit'] = _dict.get('limit')
+            raise ValueError(
+                "Required property 'pipeline_runs' not present in PipelineRunsCollection JSON"
+            )
+        if "limit" in _dict:
+            args["limit"] = _dict.get("limit")
         else:
-            raise ValueError('Required property \'limit\' not present in PipelineRunsCollection JSON')
-        if 'first' in _dict:
-            args['first'] = RunsFirstPage.from_dict(_dict.get('first'))
+            raise ValueError(
+                "Required property 'limit' not present in PipelineRunsCollection JSON"
+            )
+        if "first" in _dict:
+            args["first"] = RunsFirstPage.from_dict(_dict.get("first"))
         else:
-            raise ValueError('Required property \'first\' not present in PipelineRunsCollection JSON')
-        if 'next' in _dict:
-            args['next'] = RunsNextPage.from_dict(_dict.get('next'))
-        if 'last' in _dict:
-            args['last'] = RunsLastPage.from_dict(_dict.get('last'))
+            raise ValueError(
+                "Required property 'first' not present in PipelineRunsCollection JSON"
+            )
+        if "next" in _dict:
+            args["next"] = RunsNextPage.from_dict(_dict.get("next"))
+        if "last" in _dict:
+            args["last"] = RunsLastPage.from_dict(_dict.get("last"))
         return cls(**args)
 
     @classmethod
@@ -3376,31 +3477,31 @@ class PipelineRunsCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'pipeline_runs') and self.pipeline_runs is not None:
+        if hasattr(self, "pipeline_runs") and self.pipeline_runs is not None:
             pipeline_runs_list = []
             for v in self.pipeline_runs:
                 if isinstance(v, dict):
                     pipeline_runs_list.append(v)
                 else:
                     pipeline_runs_list.append(v.to_dict())
-            _dict['pipeline_runs'] = pipeline_runs_list
-        if hasattr(self, 'limit') and self.limit is not None:
-            _dict['limit'] = self.limit
-        if hasattr(self, 'first') and self.first is not None:
+            _dict["pipeline_runs"] = pipeline_runs_list
+        if hasattr(self, "limit") and self.limit is not None:
+            _dict["limit"] = self.limit
+        if hasattr(self, "first") and self.first is not None:
             if isinstance(self.first, dict):
-                _dict['first'] = self.first
+                _dict["first"] = self.first
             else:
-                _dict['first'] = self.first.to_dict()
-        if hasattr(self, 'next') and self.next is not None:
+                _dict["first"] = self.first.to_dict()
+        if hasattr(self, "next") and self.next is not None:
             if isinstance(self.next, dict):
-                _dict['next'] = self.next
+                _dict["next"] = self.next
             else:
-                _dict['next'] = self.next.to_dict()
-        if hasattr(self, 'last') and self.last is not None:
+                _dict["next"] = self.next.to_dict()
+        if hasattr(self, "last") and self.last is not None:
             if isinstance(self.last, dict):
-                _dict['last'] = self.last
+                _dict["last"] = self.last
             else:
-                _dict['last'] = self.last.to_dict()
+                _dict["last"] = self.last.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -3411,13 +3512,13 @@ class PipelineRunsCollection:
         """Return a `str` version of this PipelineRunsCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'PipelineRunsCollection') -> bool:
+    def __eq__(self, other: "PipelineRunsCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'PipelineRunsCollection') -> bool:
+    def __ne__(self, other: "PipelineRunsCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3431,7 +3532,7 @@ class PropertiesCollection:
 
     def __init__(
         self,
-        properties: List['Property'],
+        properties: List["Property"],
     ) -> None:
         """
         Initialize a PropertiesCollection object.
@@ -3441,13 +3542,17 @@ class PropertiesCollection:
         self.properties = properties
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'PropertiesCollection':
+    def from_dict(cls, _dict: Dict) -> "PropertiesCollection":
         """Initialize a PropertiesCollection object from a json dictionary."""
         args = {}
-        if 'properties' in _dict:
-            args['properties'] = [Property.from_dict(v) for v in _dict.get('properties')]
+        if "properties" in _dict:
+            args["properties"] = [
+                Property.from_dict(v) for v in _dict.get("properties")
+            ]
         else:
-            raise ValueError('Required property \'properties\' not present in PropertiesCollection JSON')
+            raise ValueError(
+                "Required property 'properties' not present in PropertiesCollection JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -3458,14 +3563,14 @@ class PropertiesCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
+            _dict["properties"] = properties_list
         return _dict
 
     def _to_dict(self):
@@ -3476,13 +3581,13 @@ class PropertiesCollection:
         """Return a `str` version of this PropertiesCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'PropertiesCollection') -> bool:
+    def __eq__(self, other: "PropertiesCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'PropertiesCollection') -> bool:
+    def __ne__(self, other: "PropertiesCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3533,25 +3638,25 @@ class Property:
         self.path = path
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Property':
+    def from_dict(cls, _dict: Dict) -> "Property":
         """Initialize a Property object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in Property JSON')
-        if 'value' in _dict:
-            args['value'] = _dict.get('value')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'enum' in _dict:
-            args['enum'] = _dict.get('enum')
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+            raise ValueError("Required property 'name' not present in Property JSON")
+        if "value" in _dict:
+            args["value"] = _dict.get("value")
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "enum" in _dict:
+            args["enum"] = _dict.get("enum")
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in Property JSON')
-        if 'path' in _dict:
-            args['path'] = _dict.get('path')
+            raise ValueError("Required property 'type' not present in Property JSON")
+        if "path" in _dict:
+            args["path"] = _dict.get("path")
         return cls(**args)
 
     @classmethod
@@ -3562,18 +3667,18 @@ class Property:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'value') and self.value is not None:
-            _dict['value'] = self.value
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'enum') and self.enum is not None:
-            _dict['enum'] = self.enum
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'path') and self.path is not None:
-            _dict['path'] = self.path
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "value") and self.value is not None:
+            _dict["value"] = self.value
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "enum") and self.enum is not None:
+            _dict["enum"] = self.enum
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "path") and self.path is not None:
+            _dict["path"] = self.path
         return _dict
 
     def _to_dict(self):
@@ -3584,13 +3689,13 @@ class Property:
         """Return a `str` version of this Property object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Property') -> bool:
+    def __eq__(self, other: "Property") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Property') -> bool:
+    def __ne__(self, other: "Property") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3599,12 +3704,11 @@ class Property:
         Property type.
         """
 
-        SECURE = 'secure'
-        TEXT = 'text'
-        INTEGRATION = 'integration'
-        SINGLE_SELECT = 'single_select'
-        APPCONFIG = 'appconfig'
-
+        SECURE = "secure"
+        TEXT = "text"
+        INTEGRATION = "integration"
+        SINGLE_SELECT = "single_select"
+        APPCONFIG = "appconfig"
 
 
 class ResourceGroupReference:
@@ -3627,11 +3731,11 @@ class ResourceGroupReference:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ResourceGroupReference':
+    def from_dict(cls, _dict: Dict) -> "ResourceGroupReference":
         """Initialize a ResourceGroupReference object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         return cls(**args)
 
     @classmethod
@@ -3642,8 +3746,8 @@ class ResourceGroupReference:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -3654,13 +3758,13 @@ class ResourceGroupReference:
         """Return a `str` version of this ResourceGroupReference object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'ResourceGroupReference') -> bool:
+    def __eq__(self, other: "ResourceGroupReference") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'ResourceGroupReference') -> bool:
+    def __ne__(self, other: "ResourceGroupReference") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3685,11 +3789,11 @@ class RunDefinition:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'RunDefinition':
+    def from_dict(cls, _dict: Dict) -> "RunDefinition":
         """Initialize a RunDefinition object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         return cls(**args)
 
     @classmethod
@@ -3700,8 +3804,8 @@ class RunDefinition:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -3712,13 +3816,13 @@ class RunDefinition:
         """Return a `str` version of this RunDefinition object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'RunDefinition') -> bool:
+    def __eq__(self, other: "RunDefinition") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'RunDefinition') -> bool:
+    def __ne__(self, other: "RunDefinition") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3744,11 +3848,11 @@ class RunPipeline:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'RunPipeline':
+    def from_dict(cls, _dict: Dict) -> "RunPipeline":
         """Initialize a RunPipeline object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         return cls(**args)
 
     @classmethod
@@ -3759,8 +3863,8 @@ class RunPipeline:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -3771,13 +3875,13 @@ class RunPipeline:
         """Return a `str` version of this RunPipeline object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'RunPipeline') -> bool:
+    def __eq__(self, other: "RunPipeline") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'RunPipeline') -> bool:
+    def __ne__(self, other: "RunPipeline") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3801,13 +3905,15 @@ class RunsFirstPage:
         self.href = href
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'RunsFirstPage':
+    def from_dict(cls, _dict: Dict) -> "RunsFirstPage":
         """Initialize a RunsFirstPage object from a json dictionary."""
         args = {}
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
         else:
-            raise ValueError('Required property \'href\' not present in RunsFirstPage JSON')
+            raise ValueError(
+                "Required property 'href' not present in RunsFirstPage JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -3818,8 +3924,8 @@ class RunsFirstPage:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
         return _dict
 
     def _to_dict(self):
@@ -3830,13 +3936,13 @@ class RunsFirstPage:
         """Return a `str` version of this RunsFirstPage object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'RunsFirstPage') -> bool:
+    def __eq__(self, other: "RunsFirstPage") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'RunsFirstPage') -> bool:
+    def __ne__(self, other: "RunsFirstPage") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3861,13 +3967,15 @@ class RunsLastPage:
         self.href = href
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'RunsLastPage':
+    def from_dict(cls, _dict: Dict) -> "RunsLastPage":
         """Initialize a RunsLastPage object from a json dictionary."""
         args = {}
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
         else:
-            raise ValueError('Required property \'href\' not present in RunsLastPage JSON')
+            raise ValueError(
+                "Required property 'href' not present in RunsLastPage JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -3878,8 +3986,8 @@ class RunsLastPage:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
         return _dict
 
     def _to_dict(self):
@@ -3890,13 +3998,13 @@ class RunsLastPage:
         """Return a `str` version of this RunsLastPage object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'RunsLastPage') -> bool:
+    def __eq__(self, other: "RunsLastPage") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'RunsLastPage') -> bool:
+    def __ne__(self, other: "RunsLastPage") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3921,13 +4029,15 @@ class RunsNextPage:
         self.href = href
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'RunsNextPage':
+    def from_dict(cls, _dict: Dict) -> "RunsNextPage":
         """Initialize a RunsNextPage object from a json dictionary."""
         args = {}
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
         else:
-            raise ValueError('Required property \'href\' not present in RunsNextPage JSON')
+            raise ValueError(
+                "Required property 'href' not present in RunsNextPage JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -3938,8 +4048,8 @@ class RunsNextPage:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
         return _dict
 
     def _to_dict(self):
@@ -3950,13 +4060,13 @@ class RunsNextPage:
         """Return a `str` version of this RunsNextPage object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'RunsNextPage') -> bool:
+    def __eq__(self, other: "RunsNextPage") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'RunsNextPage') -> bool:
+    def __ne__(self, other: "RunsNextPage") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3986,17 +4096,17 @@ class StepLog:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'StepLog':
+    def from_dict(cls, _dict: Dict) -> "StepLog":
         """Initialize a StepLog object from a json dictionary."""
         args = {}
-        if 'data' in _dict:
-            args['data'] = _dict.get('data')
+        if "data" in _dict:
+            args["data"] = _dict.get("data")
         else:
-            raise ValueError('Required property \'data\' not present in StepLog JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError("Required property 'data' not present in StepLog JSON")
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in StepLog JSON')
+            raise ValueError("Required property 'id' not present in StepLog JSON")
         return cls(**args)
 
     @classmethod
@@ -4007,10 +4117,10 @@ class StepLog:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'data') and self.data is not None:
-            _dict['data'] = self.data
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "data") and self.data is not None:
+            _dict["data"] = self.data
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -4021,13 +4131,13 @@ class StepLog:
         """Return a `str` version of this StepLog object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'StepLog') -> bool:
+    def __eq__(self, other: "StepLog") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'StepLog') -> bool:
+    def __ne__(self, other: "StepLog") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4071,15 +4181,15 @@ class TektonPipeline:
         self,
         name: str,
         status: str,
-        resource_group: 'ResourceGroupReference',
-        toolchain: 'ToolchainReference',
+        resource_group: "ResourceGroupReference",
+        toolchain: "ToolchainReference",
         id: str,
-        definitions: List['Definition'],
-        properties: List['Property'],
+        definitions: List["Definition"],
+        properties: List["Property"],
         updated_at: datetime,
         created_at: datetime,
-        triggers: List['Trigger'],
-        worker: 'Worker',
+        triggers: List["Trigger"],
+        worker: "Worker",
         runs_url: str,
         build_number: int,
         enable_notifications: bool,
@@ -4143,77 +4253,115 @@ class TektonPipeline:
         self.enabled = enabled
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TektonPipeline':
+    def from_dict(cls, _dict: Dict) -> "TektonPipeline":
         """Initialize a TektonPipeline object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TektonPipeline JSON')
-        if 'status' in _dict:
-            args['status'] = _dict.get('status')
+            raise ValueError(
+                "Required property 'name' not present in TektonPipeline JSON"
+            )
+        if "status" in _dict:
+            args["status"] = _dict.get("status")
         else:
-            raise ValueError('Required property \'status\' not present in TektonPipeline JSON')
-        if 'resource_group' in _dict:
-            args['resource_group'] = ResourceGroupReference.from_dict(_dict.get('resource_group'))
+            raise ValueError(
+                "Required property 'status' not present in TektonPipeline JSON"
+            )
+        if "resource_group" in _dict:
+            args["resource_group"] = ResourceGroupReference.from_dict(
+                _dict.get("resource_group")
+            )
         else:
-            raise ValueError('Required property \'resource_group\' not present in TektonPipeline JSON')
-        if 'toolchain' in _dict:
-            args['toolchain'] = ToolchainReference.from_dict(_dict.get('toolchain'))
+            raise ValueError(
+                "Required property 'resource_group' not present in TektonPipeline JSON"
+            )
+        if "toolchain" in _dict:
+            args["toolchain"] = ToolchainReference.from_dict(_dict.get("toolchain"))
         else:
-            raise ValueError('Required property \'toolchain\' not present in TektonPipeline JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'toolchain' not present in TektonPipeline JSON"
+            )
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in TektonPipeline JSON')
-        if 'definitions' in _dict:
-            args['definitions'] = [Definition.from_dict(v) for v in _dict.get('definitions')]
+            raise ValueError(
+                "Required property 'id' not present in TektonPipeline JSON"
+            )
+        if "definitions" in _dict:
+            args["definitions"] = [
+                Definition.from_dict(v) for v in _dict.get("definitions")
+            ]
         else:
-            raise ValueError('Required property \'definitions\' not present in TektonPipeline JSON')
-        if 'properties' in _dict:
-            args['properties'] = [Property.from_dict(v) for v in _dict.get('properties')]
+            raise ValueError(
+                "Required property 'definitions' not present in TektonPipeline JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = [
+                Property.from_dict(v) for v in _dict.get("properties")
+            ]
         else:
-            raise ValueError('Required property \'properties\' not present in TektonPipeline JSON')
-        if 'updated_at' in _dict:
-            args['updated_at'] = string_to_datetime(_dict.get('updated_at'))
+            raise ValueError(
+                "Required property 'properties' not present in TektonPipeline JSON"
+            )
+        if "updated_at" in _dict:
+            args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError('Required property \'updated_at\' not present in TektonPipeline JSON')
-        if 'created_at' in _dict:
-            args['created_at'] = string_to_datetime(_dict.get('created_at'))
+            raise ValueError(
+                "Required property 'updated_at' not present in TektonPipeline JSON"
+            )
+        if "created_at" in _dict:
+            args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError('Required property \'created_at\' not present in TektonPipeline JSON')
-        if 'triggers' in _dict:
-            args['triggers'] = _dict.get('triggers')
+            raise ValueError(
+                "Required property 'created_at' not present in TektonPipeline JSON"
+            )
+        if "triggers" in _dict:
+            args["triggers"] = _dict.get("triggers")
         else:
-            raise ValueError('Required property \'triggers\' not present in TektonPipeline JSON')
-        if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
+            raise ValueError(
+                "Required property 'triggers' not present in TektonPipeline JSON"
+            )
+        if "worker" in _dict:
+            args["worker"] = Worker.from_dict(_dict.get("worker"))
         else:
-            raise ValueError('Required property \'worker\' not present in TektonPipeline JSON')
-        if 'runs_url' in _dict:
-            args['runs_url'] = _dict.get('runs_url')
+            raise ValueError(
+                "Required property 'worker' not present in TektonPipeline JSON"
+            )
+        if "runs_url" in _dict:
+            args["runs_url"] = _dict.get("runs_url")
         else:
-            raise ValueError('Required property \'runs_url\' not present in TektonPipeline JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'build_number' in _dict:
-            args['build_number'] = _dict.get('build_number')
+            raise ValueError(
+                "Required property 'runs_url' not present in TektonPipeline JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "build_number" in _dict:
+            args["build_number"] = _dict.get("build_number")
         else:
-            raise ValueError('Required property \'build_number\' not present in TektonPipeline JSON')
-        if 'next_build_number' in _dict:
-            args['next_build_number'] = _dict.get('next_build_number')
-        if 'enable_notifications' in _dict:
-            args['enable_notifications'] = _dict.get('enable_notifications')
+            raise ValueError(
+                "Required property 'build_number' not present in TektonPipeline JSON"
+            )
+        if "next_build_number" in _dict:
+            args["next_build_number"] = _dict.get("next_build_number")
+        if "enable_notifications" in _dict:
+            args["enable_notifications"] = _dict.get("enable_notifications")
         else:
-            raise ValueError('Required property \'enable_notifications\' not present in TektonPipeline JSON')
-        if 'enable_partial_cloning' in _dict:
-            args['enable_partial_cloning'] = _dict.get('enable_partial_cloning')
+            raise ValueError(
+                "Required property 'enable_notifications' not present in TektonPipeline JSON"
+            )
+        if "enable_partial_cloning" in _dict:
+            args["enable_partial_cloning"] = _dict.get("enable_partial_cloning")
         else:
-            raise ValueError('Required property \'enable_partial_cloning\' not present in TektonPipeline JSON')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
+            raise ValueError(
+                "Required property 'enable_partial_cloning' not present in TektonPipeline JSON"
+            )
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError('Required property \'enabled\' not present in TektonPipeline JSON')
+            raise ValueError(
+                "Required property 'enabled' not present in TektonPipeline JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -4224,69 +4372,75 @@ class TektonPipeline:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'status') and self.status is not None:
-            _dict['status'] = self.status
-        if hasattr(self, 'resource_group') and self.resource_group is not None:
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "status") and self.status is not None:
+            _dict["status"] = self.status
+        if hasattr(self, "resource_group") and self.resource_group is not None:
             if isinstance(self.resource_group, dict):
-                _dict['resource_group'] = self.resource_group
+                _dict["resource_group"] = self.resource_group
             else:
-                _dict['resource_group'] = self.resource_group.to_dict()
-        if hasattr(self, 'toolchain') and self.toolchain is not None:
+                _dict["resource_group"] = self.resource_group.to_dict()
+        if hasattr(self, "toolchain") and self.toolchain is not None:
             if isinstance(self.toolchain, dict):
-                _dict['toolchain'] = self.toolchain
+                _dict["toolchain"] = self.toolchain
             else:
-                _dict['toolchain'] = self.toolchain.to_dict()
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'definitions') and self.definitions is not None:
+                _dict["toolchain"] = self.toolchain.to_dict()
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "definitions") and self.definitions is not None:
             definitions_list = []
             for v in self.definitions:
                 if isinstance(v, dict):
                     definitions_list.append(v)
                 else:
                     definitions_list.append(v.to_dict())
-            _dict['definitions'] = definitions_list
-        if hasattr(self, 'properties') and self.properties is not None:
+            _dict["definitions"] = definitions_list
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'updated_at') and self.updated_at is not None:
-            _dict['updated_at'] = datetime_to_string(self.updated_at)
-        if hasattr(self, 'created_at') and self.created_at is not None:
-            _dict['created_at'] = datetime_to_string(self.created_at)
-        if hasattr(self, 'triggers') and self.triggers is not None:
+            _dict["properties"] = properties_list
+        if hasattr(self, "updated_at") and self.updated_at is not None:
+            _dict["updated_at"] = datetime_to_string(self.updated_at)
+        if hasattr(self, "created_at") and self.created_at is not None:
+            _dict["created_at"] = datetime_to_string(self.created_at)
+        if hasattr(self, "triggers") and self.triggers is not None:
             triggers_list = []
             for v in self.triggers:
                 if isinstance(v, dict):
                     triggers_list.append(v)
                 else:
                     triggers_list.append(v.to_dict())
-            _dict['triggers'] = triggers_list
-        if hasattr(self, 'worker') and self.worker is not None:
+            _dict["triggers"] = triggers_list
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'runs_url') and self.runs_url is not None:
-            _dict['runs_url'] = self.runs_url
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'build_number') and self.build_number is not None:
-            _dict['build_number'] = self.build_number
-        if hasattr(self, 'next_build_number') and self.next_build_number is not None:
-            _dict['next_build_number'] = self.next_build_number
-        if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
-            _dict['enable_notifications'] = self.enable_notifications
-        if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
-            _dict['enable_partial_cloning'] = self.enable_partial_cloning
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
+                _dict["worker"] = self.worker.to_dict()
+        if hasattr(self, "runs_url") and self.runs_url is not None:
+            _dict["runs_url"] = self.runs_url
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "build_number") and self.build_number is not None:
+            _dict["build_number"] = self.build_number
+        if hasattr(self, "next_build_number") and self.next_build_number is not None:
+            _dict["next_build_number"] = self.next_build_number
+        if (
+            hasattr(self, "enable_notifications")
+            and self.enable_notifications is not None
+        ):
+            _dict["enable_notifications"] = self.enable_notifications
+        if (
+            hasattr(self, "enable_partial_cloning")
+            and self.enable_partial_cloning is not None
+        ):
+            _dict["enable_partial_cloning"] = self.enable_partial_cloning
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
         return _dict
 
     def _to_dict(self):
@@ -4297,13 +4451,13 @@ class TektonPipeline:
         """Return a `str` version of this TektonPipeline object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TektonPipeline') -> bool:
+    def __eq__(self, other: "TektonPipeline") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TektonPipeline') -> bool:
+    def __ne__(self, other: "TektonPipeline") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4312,9 +4466,8 @@ class TektonPipeline:
         Pipeline status.
         """
 
-        CONFIGURED = 'configured'
-        CONFIGURING = 'configuring'
-
+        CONFIGURED = "configured"
+        CONFIGURING = "configuring"
 
 
 class TektonPipelinePatch:
@@ -4343,7 +4496,7 @@ class TektonPipelinePatch:
         next_build_number: int = None,
         enable_notifications: bool = None,
         enable_partial_cloning: bool = None,
-        worker: 'WorkerIdentity' = None,
+        worker: "WorkerIdentity" = None,
     ) -> None:
         """
         Initialize a TektonPipelinePatch object.
@@ -4370,17 +4523,17 @@ class TektonPipelinePatch:
         self.worker = worker
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TektonPipelinePatch':
+    def from_dict(cls, _dict: Dict) -> "TektonPipelinePatch":
         """Initialize a TektonPipelinePatch object from a json dictionary."""
         args = {}
-        if 'next_build_number' in _dict:
-            args['next_build_number'] = _dict.get('next_build_number')
-        if 'enable_notifications' in _dict:
-            args['enable_notifications'] = _dict.get('enable_notifications')
-        if 'enable_partial_cloning' in _dict:
-            args['enable_partial_cloning'] = _dict.get('enable_partial_cloning')
-        if 'worker' in _dict:
-            args['worker'] = WorkerIdentity.from_dict(_dict.get('worker'))
+        if "next_build_number" in _dict:
+            args["next_build_number"] = _dict.get("next_build_number")
+        if "enable_notifications" in _dict:
+            args["enable_notifications"] = _dict.get("enable_notifications")
+        if "enable_partial_cloning" in _dict:
+            args["enable_partial_cloning"] = _dict.get("enable_partial_cloning")
+        if "worker" in _dict:
+            args["worker"] = WorkerIdentity.from_dict(_dict.get("worker"))
         return cls(**args)
 
     @classmethod
@@ -4391,17 +4544,23 @@ class TektonPipelinePatch:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'next_build_number') and self.next_build_number is not None:
-            _dict['next_build_number'] = self.next_build_number
-        if hasattr(self, 'enable_notifications') and self.enable_notifications is not None:
-            _dict['enable_notifications'] = self.enable_notifications
-        if hasattr(self, 'enable_partial_cloning') and self.enable_partial_cloning is not None:
-            _dict['enable_partial_cloning'] = self.enable_partial_cloning
-        if hasattr(self, 'worker') and self.worker is not None:
+        if hasattr(self, "next_build_number") and self.next_build_number is not None:
+            _dict["next_build_number"] = self.next_build_number
+        if (
+            hasattr(self, "enable_notifications")
+            and self.enable_notifications is not None
+        ):
+            _dict["enable_notifications"] = self.enable_notifications
+        if (
+            hasattr(self, "enable_partial_cloning")
+            and self.enable_partial_cloning is not None
+        ):
+            _dict["enable_partial_cloning"] = self.enable_partial_cloning
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
+                _dict["worker"] = self.worker.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -4412,13 +4571,13 @@ class TektonPipelinePatch:
         """Return a `str` version of this TektonPipelinePatch object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TektonPipelinePatch') -> bool:
+    def __eq__(self, other: "TektonPipelinePatch") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TektonPipelinePatch') -> bool:
+    def __ne__(self, other: "TektonPipelinePatch") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4442,13 +4601,13 @@ class Tool:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Tool':
+    def from_dict(cls, _dict: Dict) -> "Tool":
         """Initialize a Tool object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in Tool JSON')
+            raise ValueError("Required property 'id' not present in Tool JSON")
         return cls(**args)
 
     @classmethod
@@ -4459,8 +4618,8 @@ class Tool:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -4471,13 +4630,13 @@ class Tool:
         """Return a `str` version of this Tool object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Tool') -> bool:
+    def __eq__(self, other: "Tool") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Tool') -> bool:
+    def __ne__(self, other: "Tool") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4506,17 +4665,21 @@ class ToolchainReference:
         self.crn = crn
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ToolchainReference':
+    def from_dict(cls, _dict: Dict) -> "ToolchainReference":
         """Initialize a ToolchainReference object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in ToolchainReference JSON')
-        if 'crn' in _dict:
-            args['crn'] = _dict.get('crn')
+            raise ValueError(
+                "Required property 'id' not present in ToolchainReference JSON"
+            )
+        if "crn" in _dict:
+            args["crn"] = _dict.get("crn")
         else:
-            raise ValueError('Required property \'crn\' not present in ToolchainReference JSON')
+            raise ValueError(
+                "Required property 'crn' not present in ToolchainReference JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -4527,10 +4690,10 @@ class ToolchainReference:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'crn') and self.crn is not None:
-            _dict['crn'] = self.crn
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "crn") and self.crn is not None:
+            _dict["crn"] = self.crn
         return _dict
 
     def _to_dict(self):
@@ -4541,13 +4704,13 @@ class ToolchainReference:
         """Return a `str` version of this ToolchainReference object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'ToolchainReference') -> bool:
+    def __eq__(self, other: "ToolchainReference") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'ToolchainReference') -> bool:
+    def __ne__(self, other: "ToolchainReference") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4566,7 +4729,14 @@ class Trigger:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['TriggerManualTrigger', 'TriggerScmTrigger', 'TriggerTimerTrigger', 'TriggerGenericTrigger'])
+            ", ".join(
+                [
+                    "TriggerManualTrigger",
+                    "TriggerScmTrigger",
+                    "TriggerTimerTrigger",
+                    "TriggerGenericTrigger",
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -4619,13 +4789,13 @@ class TriggerPatch:
         name: str = None,
         event_listener: str = None,
         tags: List[str] = None,
-        worker: 'WorkerIdentity' = None,
+        worker: "WorkerIdentity" = None,
         max_concurrent_runs: int = None,
         enabled: bool = None,
-        secret: 'GenericSecret' = None,
+        secret: "GenericSecret" = None,
         cron: str = None,
         timezone: str = None,
-        source: 'TriggerSourcePrototype' = None,
+        source: "TriggerSourcePrototype" = None,
         events: List[str] = None,
         favorite: bool = None,
     ) -> None:
@@ -4684,35 +4854,35 @@ class TriggerPatch:
         self.favorite = favorite
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerPatch':
+    def from_dict(cls, _dict: Dict) -> "TriggerPatch":
         """Initialize a TriggerPatch object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        if 'event_listener' in _dict:
-            args['event_listener'] = _dict.get('event_listener')
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        if 'worker' in _dict:
-            args['worker'] = WorkerIdentity.from_dict(_dict.get('worker'))
-        if 'max_concurrent_runs' in _dict:
-            args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
-        if 'secret' in _dict:
-            args['secret'] = GenericSecret.from_dict(_dict.get('secret'))
-        if 'cron' in _dict:
-            args['cron'] = _dict.get('cron')
-        if 'timezone' in _dict:
-            args['timezone'] = _dict.get('timezone')
-        if 'source' in _dict:
-            args['source'] = TriggerSourcePrototype.from_dict(_dict.get('source'))
-        if 'events' in _dict:
-            args['events'] = _dict.get('events')
-        if 'favorite' in _dict:
-            args['favorite'] = _dict.get('favorite')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
+        if "event_listener" in _dict:
+            args["event_listener"] = _dict.get("event_listener")
+        if "tags" in _dict:
+            args["tags"] = _dict.get("tags")
+        if "worker" in _dict:
+            args["worker"] = WorkerIdentity.from_dict(_dict.get("worker"))
+        if "max_concurrent_runs" in _dict:
+            args["max_concurrent_runs"] = _dict.get("max_concurrent_runs")
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
+        if "secret" in _dict:
+            args["secret"] = GenericSecret.from_dict(_dict.get("secret"))
+        if "cron" in _dict:
+            args["cron"] = _dict.get("cron")
+        if "timezone" in _dict:
+            args["timezone"] = _dict.get("timezone")
+        if "source" in _dict:
+            args["source"] = TriggerSourcePrototype.from_dict(_dict.get("source"))
+        if "events" in _dict:
+            args["events"] = _dict.get("events")
+        if "favorite" in _dict:
+            args["favorite"] = _dict.get("favorite")
         return cls(**args)
 
     @classmethod
@@ -4723,41 +4893,44 @@ class TriggerPatch:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'event_listener') and self.event_listener is not None:
-            _dict['event_listener'] = self.event_listener
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
-        if hasattr(self, 'worker') and self.worker is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "event_listener") and self.event_listener is not None:
+            _dict["event_listener"] = self.event_listener
+        if hasattr(self, "tags") and self.tags is not None:
+            _dict["tags"] = self.tags
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
-            _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
-        if hasattr(self, 'secret') and self.secret is not None:
+                _dict["worker"] = self.worker.to_dict()
+        if (
+            hasattr(self, "max_concurrent_runs")
+            and self.max_concurrent_runs is not None
+        ):
+            _dict["max_concurrent_runs"] = self.max_concurrent_runs
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
+        if hasattr(self, "secret") and self.secret is not None:
             if isinstance(self.secret, dict):
-                _dict['secret'] = self.secret
+                _dict["secret"] = self.secret
             else:
-                _dict['secret'] = self.secret.to_dict()
-        if hasattr(self, 'cron') and self.cron is not None:
-            _dict['cron'] = self.cron
-        if hasattr(self, 'timezone') and self.timezone is not None:
-            _dict['timezone'] = self.timezone
-        if hasattr(self, 'source') and self.source is not None:
+                _dict["secret"] = self.secret.to_dict()
+        if hasattr(self, "cron") and self.cron is not None:
+            _dict["cron"] = self.cron
+        if hasattr(self, "timezone") and self.timezone is not None:
+            _dict["timezone"] = self.timezone
+        if hasattr(self, "source") and self.source is not None:
             if isinstance(self.source, dict):
-                _dict['source'] = self.source
+                _dict["source"] = self.source
             else:
-                _dict['source'] = self.source.to_dict()
-        if hasattr(self, 'events') and self.events is not None:
-            _dict['events'] = self.events
-        if hasattr(self, 'favorite') and self.favorite is not None:
-            _dict['favorite'] = self.favorite
+                _dict["source"] = self.source.to_dict()
+        if hasattr(self, "events") and self.events is not None:
+            _dict["events"] = self.events
+        if hasattr(self, "favorite") and self.favorite is not None:
+            _dict["favorite"] = self.favorite
         return _dict
 
     def _to_dict(self):
@@ -4768,13 +4941,13 @@ class TriggerPatch:
         """Return a `str` version of this TriggerPatch object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerPatch') -> bool:
+    def __eq__(self, other: "TriggerPatch") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerPatch') -> bool:
+    def __ne__(self, other: "TriggerPatch") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4783,11 +4956,10 @@ class TriggerPatch:
         Trigger type.
         """
 
-        MANUAL = 'manual'
-        SCM = 'scm'
-        TIMER = 'timer'
-        GENERIC = 'generic'
-
+        MANUAL = "manual"
+        SCM = "scm"
+        TIMER = "timer"
+        GENERIC = "generic"
 
     class EventsEnum(str, Enum):
         """
@@ -4796,10 +4968,9 @@ class TriggerPatch:
         request' or 'update pull request' Git webhook events.
         """
 
-        PUSH = 'push'
-        PULL_REQUEST = 'pull_request'
-        PULL_REQUEST_CLOSED = 'pull_request_closed'
-
+        PUSH = "push"
+        PULL_REQUEST = "pull_request"
+        PULL_REQUEST_CLOSED = "pull_request_closed"
 
 
 class TriggerPropertiesCollection:
@@ -4811,7 +4982,7 @@ class TriggerPropertiesCollection:
 
     def __init__(
         self,
-        properties: List['TriggerProperty'],
+        properties: List["TriggerProperty"],
     ) -> None:
         """
         Initialize a TriggerPropertiesCollection object.
@@ -4821,13 +4992,17 @@ class TriggerPropertiesCollection:
         self.properties = properties
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerPropertiesCollection':
+    def from_dict(cls, _dict: Dict) -> "TriggerPropertiesCollection":
         """Initialize a TriggerPropertiesCollection object from a json dictionary."""
         args = {}
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
+        if "properties" in _dict:
+            args["properties"] = [
+                TriggerProperty.from_dict(v) for v in _dict.get("properties")
+            ]
         else:
-            raise ValueError('Required property \'properties\' not present in TriggerPropertiesCollection JSON')
+            raise ValueError(
+                "Required property 'properties' not present in TriggerPropertiesCollection JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -4838,14 +5013,14 @@ class TriggerPropertiesCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
+            _dict["properties"] = properties_list
         return _dict
 
     def _to_dict(self):
@@ -4856,13 +5031,13 @@ class TriggerPropertiesCollection:
         """Return a `str` version of this TriggerPropertiesCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerPropertiesCollection') -> bool:
+    def __eq__(self, other: "TriggerPropertiesCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerPropertiesCollection') -> bool:
+    def __ne__(self, other: "TriggerPropertiesCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4914,25 +5089,29 @@ class TriggerProperty:
         self.path = path
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerProperty':
+    def from_dict(cls, _dict: Dict) -> "TriggerProperty":
         """Initialize a TriggerProperty object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TriggerProperty JSON')
-        if 'value' in _dict:
-            args['value'] = _dict.get('value')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'enum' in _dict:
-            args['enum'] = _dict.get('enum')
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+            raise ValueError(
+                "Required property 'name' not present in TriggerProperty JSON"
+            )
+        if "value" in _dict:
+            args["value"] = _dict.get("value")
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "enum" in _dict:
+            args["enum"] = _dict.get("enum")
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerProperty JSON')
-        if 'path' in _dict:
-            args['path'] = _dict.get('path')
+            raise ValueError(
+                "Required property 'type' not present in TriggerProperty JSON"
+            )
+        if "path" in _dict:
+            args["path"] = _dict.get("path")
         return cls(**args)
 
     @classmethod
@@ -4943,18 +5122,18 @@ class TriggerProperty:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'value') and self.value is not None:
-            _dict['value'] = self.value
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'enum') and self.enum is not None:
-            _dict['enum'] = self.enum
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'path') and self.path is not None:
-            _dict['path'] = self.path
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "value") and self.value is not None:
+            _dict["value"] = self.value
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "enum") and self.enum is not None:
+            _dict["enum"] = self.enum
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "path") and self.path is not None:
+            _dict["path"] = self.path
         return _dict
 
     def _to_dict(self):
@@ -4965,13 +5144,13 @@ class TriggerProperty:
         """Return a `str` version of this TriggerProperty object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerProperty') -> bool:
+    def __eq__(self, other: "TriggerProperty") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerProperty') -> bool:
+    def __ne__(self, other: "TriggerProperty") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -4980,12 +5159,11 @@ class TriggerProperty:
         Property type.
         """
 
-        SECURE = 'secure'
-        TEXT = 'text'
-        INTEGRATION = 'integration'
-        SINGLE_SELECT = 'single_select'
-        APPCONFIG = 'appconfig'
-
+        SECURE = "secure"
+        TEXT = "text"
+        INTEGRATION = "integration"
+        SINGLE_SELECT = "single_select"
+        APPCONFIG = "appconfig"
 
 
 class TriggerSource:
@@ -5004,7 +5182,7 @@ class TriggerSource:
     def __init__(
         self,
         type: str,
-        properties: 'TriggerSourceProperties',
+        properties: "TriggerSourceProperties",
     ) -> None:
         """
         Initialize a TriggerSource object.
@@ -5018,17 +5196,23 @@ class TriggerSource:
         self.properties = properties
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerSource':
+    def from_dict(cls, _dict: Dict) -> "TriggerSource":
         """Initialize a TriggerSource object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerSource JSON')
-        if 'properties' in _dict:
-            args['properties'] = TriggerSourceProperties.from_dict(_dict.get('properties'))
+            raise ValueError(
+                "Required property 'type' not present in TriggerSource JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = TriggerSourceProperties.from_dict(
+                _dict.get("properties")
+            )
         else:
-            raise ValueError('Required property \'properties\' not present in TriggerSource JSON')
+            raise ValueError(
+                "Required property 'properties' not present in TriggerSource JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -5039,13 +5223,13 @@ class TriggerSource:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "properties") and self.properties is not None:
             if isinstance(self.properties, dict):
-                _dict['properties'] = self.properties
+                _dict["properties"] = self.properties
             else:
-                _dict['properties'] = self.properties.to_dict()
+                _dict["properties"] = self.properties.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -5056,13 +5240,13 @@ class TriggerSource:
         """Return a `str` version of this TriggerSource object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerSource') -> bool:
+    def __eq__(self, other: "TriggerSource") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerSource') -> bool:
+    def __ne__(self, other: "TriggerSource") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5093,7 +5277,7 @@ class TriggerSourceProperties:
         self,
         url: str,
         blind_connection: bool,
-        tool: 'Tool',
+        tool: "Tool",
         *,
         branch: str = None,
         pattern: str = None,
@@ -5127,27 +5311,33 @@ class TriggerSourceProperties:
         self.tool = tool
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerSourceProperties':
+    def from_dict(cls, _dict: Dict) -> "TriggerSourceProperties":
         """Initialize a TriggerSourceProperties object from a json dictionary."""
         args = {}
-        if 'url' in _dict:
-            args['url'] = _dict.get('url')
+        if "url" in _dict:
+            args["url"] = _dict.get("url")
         else:
-            raise ValueError('Required property \'url\' not present in TriggerSourceProperties JSON')
-        if 'branch' in _dict:
-            args['branch'] = _dict.get('branch')
-        if 'pattern' in _dict:
-            args['pattern'] = _dict.get('pattern')
-        if 'blind_connection' in _dict:
-            args['blind_connection'] = _dict.get('blind_connection')
+            raise ValueError(
+                "Required property 'url' not present in TriggerSourceProperties JSON"
+            )
+        if "branch" in _dict:
+            args["branch"] = _dict.get("branch")
+        if "pattern" in _dict:
+            args["pattern"] = _dict.get("pattern")
+        if "blind_connection" in _dict:
+            args["blind_connection"] = _dict.get("blind_connection")
         else:
-            raise ValueError('Required property \'blind_connection\' not present in TriggerSourceProperties JSON')
-        if 'hook_id' in _dict:
-            args['hook_id'] = _dict.get('hook_id')
-        if 'tool' in _dict:
-            args['tool'] = Tool.from_dict(_dict.get('tool'))
+            raise ValueError(
+                "Required property 'blind_connection' not present in TriggerSourceProperties JSON"
+            )
+        if "hook_id" in _dict:
+            args["hook_id"] = _dict.get("hook_id")
+        if "tool" in _dict:
+            args["tool"] = Tool.from_dict(_dict.get("tool"))
         else:
-            raise ValueError('Required property \'tool\' not present in TriggerSourceProperties JSON')
+            raise ValueError(
+                "Required property 'tool' not present in TriggerSourceProperties JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -5158,21 +5348,21 @@ class TriggerSourceProperties:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'url') and self.url is not None:
-            _dict['url'] = self.url
-        if hasattr(self, 'branch') and self.branch is not None:
-            _dict['branch'] = self.branch
-        if hasattr(self, 'pattern') and self.pattern is not None:
-            _dict['pattern'] = self.pattern
-        if hasattr(self, 'blind_connection') and self.blind_connection is not None:
-            _dict['blind_connection'] = self.blind_connection
-        if hasattr(self, 'hook_id') and self.hook_id is not None:
-            _dict['hook_id'] = self.hook_id
-        if hasattr(self, 'tool') and self.tool is not None:
+        if hasattr(self, "url") and self.url is not None:
+            _dict["url"] = self.url
+        if hasattr(self, "branch") and self.branch is not None:
+            _dict["branch"] = self.branch
+        if hasattr(self, "pattern") and self.pattern is not None:
+            _dict["pattern"] = self.pattern
+        if hasattr(self, "blind_connection") and self.blind_connection is not None:
+            _dict["blind_connection"] = self.blind_connection
+        if hasattr(self, "hook_id") and self.hook_id is not None:
+            _dict["hook_id"] = self.hook_id
+        if hasattr(self, "tool") and self.tool is not None:
             if isinstance(self.tool, dict):
-                _dict['tool'] = self.tool
+                _dict["tool"] = self.tool
             else:
-                _dict['tool'] = self.tool.to_dict()
+                _dict["tool"] = self.tool.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -5183,13 +5373,13 @@ class TriggerSourceProperties:
         """Return a `str` version of this TriggerSourceProperties object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerSourceProperties') -> bool:
+    def __eq__(self, other: "TriggerSourceProperties") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerSourceProperties') -> bool:
+    def __ne__(self, other: "TriggerSourceProperties") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5236,17 +5426,19 @@ class TriggerSourcePropertiesPrototype:
         self.pattern = pattern
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerSourcePropertiesPrototype':
+    def from_dict(cls, _dict: Dict) -> "TriggerSourcePropertiesPrototype":
         """Initialize a TriggerSourcePropertiesPrototype object from a json dictionary."""
         args = {}
-        if 'url' in _dict:
-            args['url'] = _dict.get('url')
+        if "url" in _dict:
+            args["url"] = _dict.get("url")
         else:
-            raise ValueError('Required property \'url\' not present in TriggerSourcePropertiesPrototype JSON')
-        if 'branch' in _dict:
-            args['branch'] = _dict.get('branch')
-        if 'pattern' in _dict:
-            args['pattern'] = _dict.get('pattern')
+            raise ValueError(
+                "Required property 'url' not present in TriggerSourcePropertiesPrototype JSON"
+            )
+        if "branch" in _dict:
+            args["branch"] = _dict.get("branch")
+        if "pattern" in _dict:
+            args["pattern"] = _dict.get("pattern")
         return cls(**args)
 
     @classmethod
@@ -5257,12 +5449,12 @@ class TriggerSourcePropertiesPrototype:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'url') and self.url is not None:
-            _dict['url'] = self.url
-        if hasattr(self, 'branch') and self.branch is not None:
-            _dict['branch'] = self.branch
-        if hasattr(self, 'pattern') and self.pattern is not None:
-            _dict['pattern'] = self.pattern
+        if hasattr(self, "url") and self.url is not None:
+            _dict["url"] = self.url
+        if hasattr(self, "branch") and self.branch is not None:
+            _dict["branch"] = self.branch
+        if hasattr(self, "pattern") and self.pattern is not None:
+            _dict["pattern"] = self.pattern
         return _dict
 
     def _to_dict(self):
@@ -5273,13 +5465,13 @@ class TriggerSourcePropertiesPrototype:
         """Return a `str` version of this TriggerSourcePropertiesPrototype object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerSourcePropertiesPrototype') -> bool:
+    def __eq__(self, other: "TriggerSourcePropertiesPrototype") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerSourcePropertiesPrototype') -> bool:
+    def __ne__(self, other: "TriggerSourcePropertiesPrototype") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5300,7 +5492,7 @@ class TriggerSourcePrototype:
     def __init__(
         self,
         type: str,
-        properties: 'TriggerSourcePropertiesPrototype',
+        properties: "TriggerSourcePropertiesPrototype",
     ) -> None:
         """
         Initialize a TriggerSourcePrototype object.
@@ -5314,17 +5506,23 @@ class TriggerSourcePrototype:
         self.properties = properties
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerSourcePrototype':
+    def from_dict(cls, _dict: Dict) -> "TriggerSourcePrototype":
         """Initialize a TriggerSourcePrototype object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerSourcePrototype JSON')
-        if 'properties' in _dict:
-            args['properties'] = TriggerSourcePropertiesPrototype.from_dict(_dict.get('properties'))
+            raise ValueError(
+                "Required property 'type' not present in TriggerSourcePrototype JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = TriggerSourcePropertiesPrototype.from_dict(
+                _dict.get("properties")
+            )
         else:
-            raise ValueError('Required property \'properties\' not present in TriggerSourcePrototype JSON')
+            raise ValueError(
+                "Required property 'properties' not present in TriggerSourcePrototype JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -5335,13 +5533,13 @@ class TriggerSourcePrototype:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "properties") and self.properties is not None:
             if isinstance(self.properties, dict):
-                _dict['properties'] = self.properties
+                _dict["properties"] = self.properties
             else:
-                _dict['properties'] = self.properties.to_dict()
+                _dict["properties"] = self.properties.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -5352,13 +5550,13 @@ class TriggerSourcePrototype:
         """Return a `str` version of this TriggerSourcePrototype object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerSourcePrototype') -> bool:
+    def __eq__(self, other: "TriggerSourcePrototype") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerSourcePrototype') -> bool:
+    def __ne__(self, other: "TriggerSourcePrototype") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5372,7 +5570,7 @@ class TriggersCollection:
 
     def __init__(
         self,
-        triggers: List['Trigger'],
+        triggers: List["Trigger"],
     ) -> None:
         """
         Initialize a TriggersCollection object.
@@ -5382,13 +5580,15 @@ class TriggersCollection:
         self.triggers = triggers
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggersCollection':
+    def from_dict(cls, _dict: Dict) -> "TriggersCollection":
         """Initialize a TriggersCollection object from a json dictionary."""
         args = {}
-        if 'triggers' in _dict:
-            args['triggers'] = _dict.get('triggers')
+        if "triggers" in _dict:
+            args["triggers"] = _dict.get("triggers")
         else:
-            raise ValueError('Required property \'triggers\' not present in TriggersCollection JSON')
+            raise ValueError(
+                "Required property 'triggers' not present in TriggersCollection JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -5399,14 +5599,14 @@ class TriggersCollection:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'triggers') and self.triggers is not None:
+        if hasattr(self, "triggers") and self.triggers is not None:
             triggers_list = []
             for v in self.triggers:
                 if isinstance(v, dict):
                     triggers_list.append(v)
                 else:
                     triggers_list.append(v.to_dict())
-            _dict['triggers'] = triggers_list
+            _dict["triggers"] = triggers_list
         return _dict
 
     def _to_dict(self):
@@ -5417,13 +5617,13 @@ class TriggersCollection:
         """Return a `str` version of this TriggersCollection object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggersCollection') -> bool:
+    def __eq__(self, other: "TriggersCollection") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggersCollection') -> bool:
+    def __ne__(self, other: "TriggersCollection") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5452,17 +5652,17 @@ class UserInfo:
         self.sub = sub
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'UserInfo':
+    def from_dict(cls, _dict: Dict) -> "UserInfo":
         """Initialize a UserInfo object from a json dictionary."""
         args = {}
-        if 'iam_id' in _dict:
-            args['iam_id'] = _dict.get('iam_id')
+        if "iam_id" in _dict:
+            args["iam_id"] = _dict.get("iam_id")
         else:
-            raise ValueError('Required property \'iam_id\' not present in UserInfo JSON')
-        if 'sub' in _dict:
-            args['sub'] = _dict.get('sub')
+            raise ValueError("Required property 'iam_id' not present in UserInfo JSON")
+        if "sub" in _dict:
+            args["sub"] = _dict.get("sub")
         else:
-            raise ValueError('Required property \'sub\' not present in UserInfo JSON')
+            raise ValueError("Required property 'sub' not present in UserInfo JSON")
         return cls(**args)
 
     @classmethod
@@ -5473,10 +5673,10 @@ class UserInfo:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'iam_id') and self.iam_id is not None:
-            _dict['iam_id'] = self.iam_id
-        if hasattr(self, 'sub') and self.sub is not None:
-            _dict['sub'] = self.sub
+        if hasattr(self, "iam_id") and self.iam_id is not None:
+            _dict["iam_id"] = self.iam_id
+        if hasattr(self, "sub") and self.sub is not None:
+            _dict["sub"] = self.sub
         return _dict
 
     def _to_dict(self):
@@ -5487,13 +5687,13 @@ class UserInfo:
         """Return a `str` version of this UserInfo object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'UserInfo') -> bool:
+    def __eq__(self, other: "UserInfo") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'UserInfo') -> bool:
+    def __ne__(self, other: "UserInfo") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5528,17 +5728,17 @@ class Worker:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'Worker':
+    def from_dict(cls, _dict: Dict) -> "Worker":
         """Initialize a Worker object from a json dictionary."""
         args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in Worker JSON')
+            raise ValueError("Required property 'id' not present in Worker JSON")
         return cls(**args)
 
     @classmethod
@@ -5549,12 +5749,12 @@ class Worker:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -5565,13 +5765,13 @@ class Worker:
         """Return a `str` version of this Worker object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'Worker') -> bool:
+    def __eq__(self, other: "Worker") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'Worker') -> bool:
+    def __ne__(self, other: "Worker") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5597,13 +5797,15 @@ class WorkerIdentity:
         self.id = id
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'WorkerIdentity':
+    def from_dict(cls, _dict: Dict) -> "WorkerIdentity":
         """Initialize a WorkerIdentity object from a json dictionary."""
         args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in WorkerIdentity JSON')
+            raise ValueError(
+                "Required property 'id' not present in WorkerIdentity JSON"
+            )
         return cls(**args)
 
     @classmethod
@@ -5614,8 +5816,8 @@ class WorkerIdentity:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
         return _dict
 
     def _to_dict(self):
@@ -5626,13 +5828,13 @@ class WorkerIdentity:
         """Return a `str` version of this WorkerIdentity object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'WorkerIdentity') -> bool:
+    def __eq__(self, other: "WorkerIdentity") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'WorkerIdentity') -> bool:
+    def __ne__(self, other: "WorkerIdentity") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5675,12 +5877,12 @@ class TriggerGenericTrigger(Trigger):
         enabled: bool,
         *,
         href: str = None,
-        properties: List['TriggerProperty'] = None,
+        properties: List["TriggerProperty"] = None,
         tags: List[str] = None,
-        worker: 'Worker' = None,
+        worker: "Worker" = None,
         max_concurrent_runs: int = None,
         favorite: bool = None,
-        secret: 'GenericSecret' = None,
+        secret: "GenericSecret" = None,
         webhook_url: str = None,
     ) -> None:
         """
@@ -5726,45 +5928,57 @@ class TriggerGenericTrigger(Trigger):
         self.webhook_url = webhook_url
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerGenericTrigger':
+    def from_dict(cls, _dict: Dict) -> "TriggerGenericTrigger":
         """Initialize a TriggerGenericTrigger object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerGenericTrigger JSON')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+            raise ValueError(
+                "Required property 'type' not present in TriggerGenericTrigger JSON"
+            )
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TriggerGenericTrigger JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'event_listener' in _dict:
-            args['event_listener'] = _dict.get('event_listener')
+            raise ValueError(
+                "Required property 'name' not present in TriggerGenericTrigger JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "event_listener" in _dict:
+            args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError('Required property \'event_listener\' not present in TriggerGenericTrigger JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'event_listener' not present in TriggerGenericTrigger JSON"
+            )
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in TriggerGenericTrigger JSON')
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
-        if 'max_concurrent_runs' in _dict:
-            args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
+            raise ValueError(
+                "Required property 'id' not present in TriggerGenericTrigger JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = [
+                TriggerProperty.from_dict(v) for v in _dict.get("properties")
+            ]
+        if "tags" in _dict:
+            args["tags"] = _dict.get("tags")
+        if "worker" in _dict:
+            args["worker"] = Worker.from_dict(_dict.get("worker"))
+        if "max_concurrent_runs" in _dict:
+            args["max_concurrent_runs"] = _dict.get("max_concurrent_runs")
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError('Required property \'enabled\' not present in TriggerGenericTrigger JSON')
-        if 'favorite' in _dict:
-            args['favorite'] = _dict.get('favorite')
-        if 'secret' in _dict:
-            args['secret'] = GenericSecret.from_dict(_dict.get('secret'))
-        if 'webhook_url' in _dict:
-            args['webhook_url'] = _dict.get('webhook_url')
+            raise ValueError(
+                "Required property 'enabled' not present in TriggerGenericTrigger JSON"
+            )
+        if "favorite" in _dict:
+            args["favorite"] = _dict.get("favorite")
+        if "secret" in _dict:
+            args["secret"] = GenericSecret.from_dict(_dict.get("secret"))
+        if "webhook_url" in _dict:
+            args["webhook_url"] = _dict.get("webhook_url")
         return cls(**args)
 
     @classmethod
@@ -5775,44 +5989,47 @@ class TriggerGenericTrigger(Trigger):
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'event_listener') and self.event_listener is not None:
-            _dict['event_listener'] = self.event_listener
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "event_listener") and self.event_listener is not None:
+            _dict["event_listener"] = self.event_listener
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
-        if hasattr(self, 'worker') and self.worker is not None:
+            _dict["properties"] = properties_list
+        if hasattr(self, "tags") and self.tags is not None:
+            _dict["tags"] = self.tags
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
-            _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
-        if hasattr(self, 'favorite') and self.favorite is not None:
-            _dict['favorite'] = self.favorite
-        if hasattr(self, 'secret') and self.secret is not None:
+                _dict["worker"] = self.worker.to_dict()
+        if (
+            hasattr(self, "max_concurrent_runs")
+            and self.max_concurrent_runs is not None
+        ):
+            _dict["max_concurrent_runs"] = self.max_concurrent_runs
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
+        if hasattr(self, "favorite") and self.favorite is not None:
+            _dict["favorite"] = self.favorite
+        if hasattr(self, "secret") and self.secret is not None:
             if isinstance(self.secret, dict):
-                _dict['secret'] = self.secret
+                _dict["secret"] = self.secret
             else:
-                _dict['secret'] = self.secret.to_dict()
-        if hasattr(self, 'webhook_url') and self.webhook_url is not None:
-            _dict['webhook_url'] = self.webhook_url
+                _dict["secret"] = self.secret.to_dict()
+        if hasattr(self, "webhook_url") and self.webhook_url is not None:
+            _dict["webhook_url"] = self.webhook_url
         return _dict
 
     def _to_dict(self):
@@ -5823,13 +6040,13 @@ class TriggerGenericTrigger(Trigger):
         """Return a `str` version of this TriggerGenericTrigger object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerGenericTrigger') -> bool:
+    def __eq__(self, other: "TriggerGenericTrigger") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerGenericTrigger') -> bool:
+    def __ne__(self, other: "TriggerGenericTrigger") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -5867,9 +6084,9 @@ class TriggerManualTrigger(Trigger):
         enabled: bool,
         *,
         href: str = None,
-        properties: List['TriggerProperty'] = None,
+        properties: List["TriggerProperty"] = None,
         tags: List[str] = None,
-        worker: 'Worker' = None,
+        worker: "Worker" = None,
         max_concurrent_runs: int = None,
         favorite: bool = None,
     ) -> None:
@@ -5910,41 +6127,53 @@ class TriggerManualTrigger(Trigger):
         self.favorite = favorite
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerManualTrigger':
+    def from_dict(cls, _dict: Dict) -> "TriggerManualTrigger":
         """Initialize a TriggerManualTrigger object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerManualTrigger JSON')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+            raise ValueError(
+                "Required property 'type' not present in TriggerManualTrigger JSON"
+            )
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TriggerManualTrigger JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'event_listener' in _dict:
-            args['event_listener'] = _dict.get('event_listener')
+            raise ValueError(
+                "Required property 'name' not present in TriggerManualTrigger JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "event_listener" in _dict:
+            args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError('Required property \'event_listener\' not present in TriggerManualTrigger JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'event_listener' not present in TriggerManualTrigger JSON"
+            )
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in TriggerManualTrigger JSON')
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
-        if 'max_concurrent_runs' in _dict:
-            args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
+            raise ValueError(
+                "Required property 'id' not present in TriggerManualTrigger JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = [
+                TriggerProperty.from_dict(v) for v in _dict.get("properties")
+            ]
+        if "tags" in _dict:
+            args["tags"] = _dict.get("tags")
+        if "worker" in _dict:
+            args["worker"] = Worker.from_dict(_dict.get("worker"))
+        if "max_concurrent_runs" in _dict:
+            args["max_concurrent_runs"] = _dict.get("max_concurrent_runs")
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError('Required property \'enabled\' not present in TriggerManualTrigger JSON')
-        if 'favorite' in _dict:
-            args['favorite'] = _dict.get('favorite')
+            raise ValueError(
+                "Required property 'enabled' not present in TriggerManualTrigger JSON"
+            )
+        if "favorite" in _dict:
+            args["favorite"] = _dict.get("favorite")
         return cls(**args)
 
     @classmethod
@@ -5955,37 +6184,40 @@ class TriggerManualTrigger(Trigger):
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'event_listener') and self.event_listener is not None:
-            _dict['event_listener'] = self.event_listener
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "event_listener") and self.event_listener is not None:
+            _dict["event_listener"] = self.event_listener
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
-        if hasattr(self, 'worker') and self.worker is not None:
+            _dict["properties"] = properties_list
+        if hasattr(self, "tags") and self.tags is not None:
+            _dict["tags"] = self.tags
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
-            _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
-        if hasattr(self, 'favorite') and self.favorite is not None:
-            _dict['favorite'] = self.favorite
+                _dict["worker"] = self.worker.to_dict()
+        if (
+            hasattr(self, "max_concurrent_runs")
+            and self.max_concurrent_runs is not None
+        ):
+            _dict["max_concurrent_runs"] = self.max_concurrent_runs
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
+        if hasattr(self, "favorite") and self.favorite is not None:
+            _dict["favorite"] = self.favorite
         return _dict
 
     def _to_dict(self):
@@ -5996,13 +6228,13 @@ class TriggerManualTrigger(Trigger):
         """Return a `str` version of this TriggerManualTrigger object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerManualTrigger') -> bool:
+    def __eq__(self, other: "TriggerManualTrigger") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerManualTrigger') -> bool:
+    def __ne__(self, other: "TriggerManualTrigger") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -6050,12 +6282,12 @@ class TriggerScmTrigger(Trigger):
         enabled: bool,
         *,
         href: str = None,
-        properties: List['TriggerProperty'] = None,
+        properties: List["TriggerProperty"] = None,
         tags: List[str] = None,
-        worker: 'Worker' = None,
+        worker: "Worker" = None,
         max_concurrent_runs: int = None,
         favorite: bool = None,
-        source: 'TriggerSource' = None,
+        source: "TriggerSource" = None,
         events: List[str] = None,
     ) -> None:
         """
@@ -6107,45 +6339,57 @@ class TriggerScmTrigger(Trigger):
         self.events = events
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerScmTrigger':
+    def from_dict(cls, _dict: Dict) -> "TriggerScmTrigger":
         """Initialize a TriggerScmTrigger object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerScmTrigger JSON')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+            raise ValueError(
+                "Required property 'type' not present in TriggerScmTrigger JSON"
+            )
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TriggerScmTrigger JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'event_listener' in _dict:
-            args['event_listener'] = _dict.get('event_listener')
+            raise ValueError(
+                "Required property 'name' not present in TriggerScmTrigger JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "event_listener" in _dict:
+            args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError('Required property \'event_listener\' not present in TriggerScmTrigger JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'event_listener' not present in TriggerScmTrigger JSON"
+            )
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in TriggerScmTrigger JSON')
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
-        if 'max_concurrent_runs' in _dict:
-            args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
+            raise ValueError(
+                "Required property 'id' not present in TriggerScmTrigger JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = [
+                TriggerProperty.from_dict(v) for v in _dict.get("properties")
+            ]
+        if "tags" in _dict:
+            args["tags"] = _dict.get("tags")
+        if "worker" in _dict:
+            args["worker"] = Worker.from_dict(_dict.get("worker"))
+        if "max_concurrent_runs" in _dict:
+            args["max_concurrent_runs"] = _dict.get("max_concurrent_runs")
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError('Required property \'enabled\' not present in TriggerScmTrigger JSON')
-        if 'favorite' in _dict:
-            args['favorite'] = _dict.get('favorite')
-        if 'source' in _dict:
-            args['source'] = TriggerSource.from_dict(_dict.get('source'))
-        if 'events' in _dict:
-            args['events'] = _dict.get('events')
+            raise ValueError(
+                "Required property 'enabled' not present in TriggerScmTrigger JSON"
+            )
+        if "favorite" in _dict:
+            args["favorite"] = _dict.get("favorite")
+        if "source" in _dict:
+            args["source"] = TriggerSource.from_dict(_dict.get("source"))
+        if "events" in _dict:
+            args["events"] = _dict.get("events")
         return cls(**args)
 
     @classmethod
@@ -6156,44 +6400,47 @@ class TriggerScmTrigger(Trigger):
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'event_listener') and self.event_listener is not None:
-            _dict['event_listener'] = self.event_listener
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "event_listener") and self.event_listener is not None:
+            _dict["event_listener"] = self.event_listener
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
-        if hasattr(self, 'worker') and self.worker is not None:
+            _dict["properties"] = properties_list
+        if hasattr(self, "tags") and self.tags is not None:
+            _dict["tags"] = self.tags
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
-            _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
-        if hasattr(self, 'favorite') and self.favorite is not None:
-            _dict['favorite'] = self.favorite
-        if hasattr(self, 'source') and self.source is not None:
+                _dict["worker"] = self.worker.to_dict()
+        if (
+            hasattr(self, "max_concurrent_runs")
+            and self.max_concurrent_runs is not None
+        ):
+            _dict["max_concurrent_runs"] = self.max_concurrent_runs
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
+        if hasattr(self, "favorite") and self.favorite is not None:
+            _dict["favorite"] = self.favorite
+        if hasattr(self, "source") and self.source is not None:
             if isinstance(self.source, dict):
-                _dict['source'] = self.source
+                _dict["source"] = self.source
             else:
-                _dict['source'] = self.source.to_dict()
-        if hasattr(self, 'events') and self.events is not None:
-            _dict['events'] = self.events
+                _dict["source"] = self.source.to_dict()
+        if hasattr(self, "events") and self.events is not None:
+            _dict["events"] = self.events
         return _dict
 
     def _to_dict(self):
@@ -6204,13 +6451,13 @@ class TriggerScmTrigger(Trigger):
         """Return a `str` version of this TriggerScmTrigger object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerScmTrigger') -> bool:
+    def __eq__(self, other: "TriggerScmTrigger") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerScmTrigger') -> bool:
+    def __ne__(self, other: "TriggerScmTrigger") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -6221,10 +6468,9 @@ class TriggerScmTrigger(Trigger):
         request' or 'update pull request' Git webhook events.
         """
 
-        PUSH = 'push'
-        PULL_REQUEST = 'pull_request'
-        PULL_REQUEST_CLOSED = 'pull_request_closed'
-
+        PUSH = "push"
+        PULL_REQUEST = "pull_request"
+        PULL_REQUEST_CLOSED = "pull_request_closed"
 
 
 class TriggerTimerTrigger(Trigger):
@@ -6270,9 +6516,9 @@ class TriggerTimerTrigger(Trigger):
         enabled: bool,
         *,
         href: str = None,
-        properties: List['TriggerProperty'] = None,
+        properties: List["TriggerProperty"] = None,
         tags: List[str] = None,
-        worker: 'Worker' = None,
+        worker: "Worker" = None,
         max_concurrent_runs: int = None,
         favorite: bool = None,
         cron: str = None,
@@ -6326,45 +6572,57 @@ class TriggerTimerTrigger(Trigger):
         self.timezone = timezone
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'TriggerTimerTrigger':
+    def from_dict(cls, _dict: Dict) -> "TriggerTimerTrigger":
         """Initialize a TriggerTimerTrigger object from a json dictionary."""
         args = {}
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
+        if "type" in _dict:
+            args["type"] = _dict.get("type")
         else:
-            raise ValueError('Required property \'type\' not present in TriggerTimerTrigger JSON')
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
+            raise ValueError(
+                "Required property 'type' not present in TriggerTimerTrigger JSON"
+            )
+        if "name" in _dict:
+            args["name"] = _dict.get("name")
         else:
-            raise ValueError('Required property \'name\' not present in TriggerTimerTrigger JSON')
-        if 'href' in _dict:
-            args['href'] = _dict.get('href')
-        if 'event_listener' in _dict:
-            args['event_listener'] = _dict.get('event_listener')
+            raise ValueError(
+                "Required property 'name' not present in TriggerTimerTrigger JSON"
+            )
+        if "href" in _dict:
+            args["href"] = _dict.get("href")
+        if "event_listener" in _dict:
+            args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError('Required property \'event_listener\' not present in TriggerTimerTrigger JSON')
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
+            raise ValueError(
+                "Required property 'event_listener' not present in TriggerTimerTrigger JSON"
+            )
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
         else:
-            raise ValueError('Required property \'id\' not present in TriggerTimerTrigger JSON')
-        if 'properties' in _dict:
-            args['properties'] = [TriggerProperty.from_dict(v) for v in _dict.get('properties')]
-        if 'tags' in _dict:
-            args['tags'] = _dict.get('tags')
-        if 'worker' in _dict:
-            args['worker'] = Worker.from_dict(_dict.get('worker'))
-        if 'max_concurrent_runs' in _dict:
-            args['max_concurrent_runs'] = _dict.get('max_concurrent_runs')
-        if 'enabled' in _dict:
-            args['enabled'] = _dict.get('enabled')
+            raise ValueError(
+                "Required property 'id' not present in TriggerTimerTrigger JSON"
+            )
+        if "properties" in _dict:
+            args["properties"] = [
+                TriggerProperty.from_dict(v) for v in _dict.get("properties")
+            ]
+        if "tags" in _dict:
+            args["tags"] = _dict.get("tags")
+        if "worker" in _dict:
+            args["worker"] = Worker.from_dict(_dict.get("worker"))
+        if "max_concurrent_runs" in _dict:
+            args["max_concurrent_runs"] = _dict.get("max_concurrent_runs")
+        if "enabled" in _dict:
+            args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError('Required property \'enabled\' not present in TriggerTimerTrigger JSON')
-        if 'favorite' in _dict:
-            args['favorite'] = _dict.get('favorite')
-        if 'cron' in _dict:
-            args['cron'] = _dict.get('cron')
-        if 'timezone' in _dict:
-            args['timezone'] = _dict.get('timezone')
+            raise ValueError(
+                "Required property 'enabled' not present in TriggerTimerTrigger JSON"
+            )
+        if "favorite" in _dict:
+            args["favorite"] = _dict.get("favorite")
+        if "cron" in _dict:
+            args["cron"] = _dict.get("cron")
+        if "timezone" in _dict:
+            args["timezone"] = _dict.get("timezone")
         return cls(**args)
 
     @classmethod
@@ -6375,41 +6633,44 @@ class TriggerTimerTrigger(Trigger):
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        if hasattr(self, 'event_listener') and self.event_listener is not None:
-            _dict['event_listener'] = self.event_listener
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'properties') and self.properties is not None:
+        if hasattr(self, "type") and self.type is not None:
+            _dict["type"] = self.type
+        if hasattr(self, "name") and self.name is not None:
+            _dict["name"] = self.name
+        if hasattr(self, "href") and self.href is not None:
+            _dict["href"] = self.href
+        if hasattr(self, "event_listener") and self.event_listener is not None:
+            _dict["event_listener"] = self.event_listener
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        if hasattr(self, "properties") and self.properties is not None:
             properties_list = []
             for v in self.properties:
                 if isinstance(v, dict):
                     properties_list.append(v)
                 else:
                     properties_list.append(v.to_dict())
-            _dict['properties'] = properties_list
-        if hasattr(self, 'tags') and self.tags is not None:
-            _dict['tags'] = self.tags
-        if hasattr(self, 'worker') and self.worker is not None:
+            _dict["properties"] = properties_list
+        if hasattr(self, "tags") and self.tags is not None:
+            _dict["tags"] = self.tags
+        if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
-                _dict['worker'] = self.worker
+                _dict["worker"] = self.worker
             else:
-                _dict['worker'] = self.worker.to_dict()
-        if hasattr(self, 'max_concurrent_runs') and self.max_concurrent_runs is not None:
-            _dict['max_concurrent_runs'] = self.max_concurrent_runs
-        if hasattr(self, 'enabled') and self.enabled is not None:
-            _dict['enabled'] = self.enabled
-        if hasattr(self, 'favorite') and self.favorite is not None:
-            _dict['favorite'] = self.favorite
-        if hasattr(self, 'cron') and self.cron is not None:
-            _dict['cron'] = self.cron
-        if hasattr(self, 'timezone') and self.timezone is not None:
-            _dict['timezone'] = self.timezone
+                _dict["worker"] = self.worker.to_dict()
+        if (
+            hasattr(self, "max_concurrent_runs")
+            and self.max_concurrent_runs is not None
+        ):
+            _dict["max_concurrent_runs"] = self.max_concurrent_runs
+        if hasattr(self, "enabled") and self.enabled is not None:
+            _dict["enabled"] = self.enabled
+        if hasattr(self, "favorite") and self.favorite is not None:
+            _dict["favorite"] = self.favorite
+        if hasattr(self, "cron") and self.cron is not None:
+            _dict["cron"] = self.cron
+        if hasattr(self, "timezone") and self.timezone is not None:
+            _dict["timezone"] = self.timezone
         return _dict
 
     def _to_dict(self):
@@ -6420,15 +6681,16 @@ class TriggerTimerTrigger(Trigger):
         """Return a `str` version of this TriggerTimerTrigger object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'TriggerTimerTrigger') -> bool:
+    def __eq__(self, other: "TriggerTimerTrigger") -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'TriggerTimerTrigger') -> bool:
+    def __ne__(self, other: "TriggerTimerTrigger") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
 
 ##############################################################################
 # Pagers
@@ -6461,7 +6723,7 @@ class TektonPipelineRunsPager:
         """
         self._has_next = True
         self._client = client
-        self._page_context = {'next': None}
+        self._page_context = {"next": None}
         self._pipeline_id = pipeline_id
         self._limit = limit
         self._status = status
@@ -6480,25 +6742,25 @@ class TektonPipelineRunsPager:
         :rtype: List[dict]
         """
         if not self.has_next():
-            raise StopIteration(message='No more results available')
+            raise StopIteration(message="No more results available")
 
         result = self._client.list_tekton_pipeline_runs(
             pipeline_id=self._pipeline_id,
             limit=self._limit,
             status=self._status,
             trigger_name=self._trigger_name,
-            start=self._page_context.get('next'),
+            start=self._page_context.get("next"),
         ).get_result()
 
         next = None
-        next_page_link = result.get('next')
+        next_page_link = result.get("next")
         if next_page_link is not None:
-            next = get_query_param(next_page_link.get('href'), 'start')
-        self._page_context['next'] = next
+            next = get_query_param(next_page_link.get("href"), "start")
+        self._page_context["next"] = next
         if next is None:
             self._has_next = False
 
-        return result.get('pipeline_runs')
+        return result.get("pipeline_runs")
 
     def get_all(self) -> List[dict]:
         """

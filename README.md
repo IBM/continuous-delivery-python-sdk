@@ -8,7 +8,7 @@
 The Python client library to interact with the [IBM Cloud Continuous Delivery Toolchain and Tekton Pipeline APIs](https://cloud.ibm.com/docs?tab=api-docs&category=devops).
 
 # Python Version
-The current minimum Python version supported is 3.7.
+The current minimum Python version supported is 3.8.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ The current minimum Python version supported is 3.7.
 
 <!-- toc -->
 
-- [IBM Cloud Continuous Delivery Python SDK v1.3.1](#ibm-cloud-continuous-delivery-python-sdk-v037)
+- [IBM Cloud Continuous Delivery Python SDK v1.3.1](#ibm-cloud-continuous-delivery-python-sdk-v131)
 - [Python Version](#python-version)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
@@ -62,7 +62,7 @@ Service Name | Module Name | Imported Class Name
 To install, use `pip`:
 
 ```bash
-pip install --upgrade ibm-continuous-delivery
+python -m pip install --upgrade ibm-continuous-delivery
 ```
 
 ## Using the SDK
