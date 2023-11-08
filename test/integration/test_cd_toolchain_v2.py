@@ -23,7 +23,7 @@ import pytest
 from ibm_continuous_delivery.cd_toolchain_v2 import *
 
 # Config file name
-config_file = "cd_toolchain_v2.env"
+config_file = 'cd_toolchain_v2.env'
 
 # Variables to hold link values
 tool_id_link = None
@@ -38,9 +38,10 @@ class TestCdToolchainV2:
     @classmethod
     def setup_class(cls):
         if os.path.exists(config_file):
-            os.environ["IBM_CREDENTIALS_FILE"] = config_file
+            os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.cd_toolchain_service = CdToolchainV2.new_instance()
+            cls.cd_toolchain_service = CdToolchainV2.new_instance(
+            )
             assert cls.cd_toolchain_service is not None
 
             cls.config = read_external_sources(CdToolchainV2.DEFAULT_SERVICE_NAME)
@@ -48,11 +49,10 @@ class TestCdToolchainV2:
 
             cls.cd_toolchain_service.enable_retries()
 
-        print("Setup complete.")
+        print('Setup complete.')
 
     needscredentials = pytest.mark.skipif(
-        not os.path.exists(config_file),
-        reason="External configuration not available, skipping...",
+        not os.path.exists(config_file), reason="External configuration not available, skipping..."
     )
 
     @needscredentials
@@ -60,16 +60,16 @@ class TestCdToolchainV2:
         global toolchain_id_link
 
         response = self.cd_toolchain_service.create_toolchain(
-            name="TestToolchainV2",
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
-            description="A sample toolchain to test the API",
+            name='TestToolchainV2',
+            resource_group_id='6a9a01f2cff54a7f966f803d92877123',
+            description='A sample toolchain to test the API',
         )
 
         assert response.get_status_code() == 201
         toolchain_post = response.get_result()
         assert toolchain_post is not None
 
-        toolchain_id_link = toolchain_post["id"]
+        toolchain_id_link = toolchain_post['id']
 
     @needscredentials
     def test_create_tool(self):
@@ -77,24 +77,24 @@ class TestCdToolchainV2:
 
         response = self.cd_toolchain_service.create_tool(
             toolchain_id=toolchain_id_link,
-            tool_type_id="draservicebroker",
-            name="testString",
-            parameters={"anyKey": "anyValue"},
+            tool_type_id='draservicebroker',
+            name='testString',
+            parameters={'anyKey': 'anyValue'},
         )
 
         assert response.get_status_code() == 201
         toolchain_tool_post = response.get_result()
         assert toolchain_tool_post is not None
 
-        tool_id_link = toolchain_tool_post["id"]
+        tool_id_link = toolchain_tool_post['id']
 
     @needscredentials
     def test_list_toolchains(self):
         response = self.cd_toolchain_service.list_toolchains(
             resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=20,
-            start="testString",
-            name="TestToolchainV2",
+            start='testString',
+            name='TestToolchainV2',
         )
 
         assert response.get_status_code() == 200
@@ -110,7 +110,7 @@ class TestCdToolchainV2:
             client=self.cd_toolchain_service,
             resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
-            name="TestToolchainV2",
+            name='TestToolchainV2',
         )
         while pager.has_next():
             next_page = pager.get_next()
@@ -122,7 +122,7 @@ class TestCdToolchainV2:
             client=self.cd_toolchain_service,
             resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
-            name="TestToolchainV2",
+            name='TestToolchainV2',
         )
         all_items = pager.get_all()
         assert all_items is not None
@@ -144,8 +144,8 @@ class TestCdToolchainV2:
     def test_update_toolchain(self):
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {
-            "name": "newToolchainName",
-            "description": "New toolchain description",
+            'name': 'newToolchainName',
+            'description': 'New toolchain description',
         }
 
         response = self.cd_toolchain_service.update_toolchain(
@@ -190,7 +190,7 @@ class TestCdToolchainV2:
         response = self.cd_toolchain_service.list_tools(
             toolchain_id=toolchain_id_link,
             limit=20,
-            start="testString",
+            start='testString',
         )
 
         assert response.get_status_code() == 200
@@ -239,9 +239,9 @@ class TestCdToolchainV2:
     def test_update_tool(self):
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {
-            "name": "MyTool",
-            "tool_type_id": "draservicebroker",
-            "parameters": {"anyKey": "anyValue"},
+            'name': 'MyTool',
+            'tool_type_id': 'draservicebroker',
+            'parameters': {'anyKey': 'anyValue'},
         }
 
         response = self.cd_toolchain_service.update_tool(
