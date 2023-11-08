@@ -31,11 +31,9 @@ import urllib
 from ibm_continuous_delivery.cd_toolchain_v2 import *
 
 
-_service = CdToolchainV2(
-    authenticator=NoAuthAuthenticator()
-)
+_service = CdToolchainV2(authenticator=NoAuthAuthenticator())
 
-_base_url = 'https://api.us-south.devops.cloud.ibm.com/toolchain/v2'
+_base_url = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2"
 _service.set_service_url(_base_url)
 
 
@@ -52,7 +50,7 @@ def preprocess_url(operation_path: str):
 
     # Next, quote the path using urllib so that we approximate what will
     # happen during request processing.
-    operation_path = urllib.parse.quote(operation_path, safe='/')
+    operation_path = urllib.parse.quote(operation_path, safe="/")
 
     # Finally, form the request URL from the base URL and operation path.
     request_url = _base_url + operation_path
@@ -62,7 +60,7 @@ def preprocess_url(operation_path: str):
     if not request_url.endswith("/"):
         return request_url
     else:
-        return re.compile(request_url.rstrip('/') + '/+')
+        return re.compile(request_url.rstrip("/") + "/+")
 
 
 def test_get_service_url_for_region():
@@ -101,10 +99,10 @@ class TestNewInstance:
         """
         new_instance()
         """
-        os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
+        os.environ["TEST_SERVICE_AUTH_TYPE"] = "noAuth"
 
         service = CdToolchainV2.new_instance(
-            service_name='TEST_SERVICE',
+            service_name="TEST_SERVICE",
         )
 
         assert service is not None
@@ -114,9 +112,9 @@ class TestNewInstance:
         """
         new_instance_without_authenticator()
         """
-        with pytest.raises(ValueError, match='authenticator must be provided'):
+        with pytest.raises(ValueError, match="authenticator must be provided"):
             service = CdToolchainV2.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
+                service_name="TEST_SERVICE_NOT_FOUND",
             )
 
 
@@ -137,15 +135,15 @@ class TestListToolchains:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
         resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
         limit = 20
-        start = 'testString'
-        name = 'TestToolchainV2'
+        start = "testString"
+        name = "TestToolchainV2"
 
         # Invoke method
         response = _service.list_toolchains(
@@ -160,12 +158,12 @@ class TestListToolchains:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = responses.calls[0].request.url.split("?", 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert 'resource_group_id={}'.format(resource_group_id) in query_string
-        assert 'limit={}'.format(limit) in query_string
-        assert 'start={}'.format(start) in query_string
-        assert 'name={}'.format(name) in query_string
+        assert "resource_group_id={}".format(resource_group_id) in query_string
+        assert "limit={}".format(limit) in query_string
+        assert "start={}".format(start) in query_string
+        assert "name={}".format(name) in query_string
 
     def test_list_toolchains_all_params_with_retries(self):
         # Enable retries and run test_list_toolchains_all_params.
@@ -188,7 +186,7 @@ class TestListToolchains:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
@@ -205,9 +203,9 @@ class TestListToolchains:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = responses.calls[0].request.url.split("?", 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert 'resource_group_id={}'.format(resource_group_id) in query_string
+        assert "resource_group_id={}".format(resource_group_id) in query_string
 
     def test_list_toolchains_required_params_with_retries(self):
         # Enable retries and run test_list_toolchains_required_params.
@@ -230,7 +228,7 @@ class TestListToolchains:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
@@ -242,7 +240,10 @@ class TestListToolchains:
             "resource_group_id": resource_group_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.list_toolchains(**req_copy)
 
@@ -268,14 +269,14 @@ class TestListToolchains:
             responses.GET,
             url,
             body=mock_response1,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
@@ -285,7 +286,7 @@ class TestListToolchains:
             client=_service,
             resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
-            name='TestToolchainV2',
+            name="TestToolchainV2",
         )
         while pager.has_next():
             next_page = pager.get_next()
@@ -306,14 +307,14 @@ class TestListToolchains:
             responses.GET,
             url,
             body=mock_response1,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
@@ -322,7 +323,7 @@ class TestListToolchains:
             client=_service,
             resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
-            name='TestToolchainV2',
+            name="TestToolchainV2",
         )
         all_results = pager.get_all()
         assert all_results is not None
@@ -346,14 +347,14 @@ class TestCreateToolchain:
             responses.POST,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=201,
         )
 
         # Set up parameter values
-        name = 'TestToolchainV2'
-        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
-        description = 'A sample toolchain to test the API'
+        name = "TestToolchainV2"
+        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
+        description = "A sample toolchain to test the API"
 
         # Invoke method
         response = _service.create_toolchain(
@@ -367,10 +368,10 @@ class TestCreateToolchain:
         assert len(responses.calls) == 1
         assert response.status_code == 201
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['name'] == 'TestToolchainV2'
-        assert req_body['resource_group_id'] == '6a9a01f2cff54a7f966f803d92877123'
-        assert req_body['description'] == 'A sample toolchain to test the API'
+        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
+        assert req_body["name"] == "TestToolchainV2"
+        assert req_body["resource_group_id"] == "6a9a01f2cff54a7f966f803d92877123"
+        assert req_body["description"] == "A sample toolchain to test the API"
 
     def test_create_toolchain_all_params_with_retries(self):
         # Enable retries and run test_create_toolchain_all_params.
@@ -393,14 +394,14 @@ class TestCreateToolchain:
             responses.POST,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=201,
         )
 
         # Set up parameter values
-        name = 'TestToolchainV2'
-        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
-        description = 'A sample toolchain to test the API'
+        name = "TestToolchainV2"
+        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
+        description = "A sample toolchain to test the API"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -408,7 +409,10 @@ class TestCreateToolchain:
             "resource_group_id": resource_group_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.create_toolchain(**req_copy)
 
@@ -439,12 +443,12 @@ class TestGetToolchainById:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Invoke method
         response = _service.get_toolchain_by_id(
@@ -477,19 +481,22 @@ class TestGetToolchainById:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.get_toolchain_by_id(**req_copy)
 
@@ -514,7 +521,7 @@ class TestDeleteToolchain:
         delete_toolchain()
         """
         # Set up mock
-        url = preprocess_url('/toolchains/testString')
+        url = preprocess_url("/toolchains/testString")
         responses.add(
             responses.DELETE,
             url,
@@ -522,7 +529,7 @@ class TestDeleteToolchain:
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Invoke method
         response = _service.delete_toolchain(
@@ -549,7 +556,7 @@ class TestDeleteToolchain:
         test_delete_toolchain_value_error()
         """
         # Set up mock
-        url = preprocess_url('/toolchains/testString')
+        url = preprocess_url("/toolchains/testString")
         responses.add(
             responses.DELETE,
             url,
@@ -557,14 +564,17 @@ class TestDeleteToolchain:
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.delete_toolchain(**req_copy)
 
@@ -595,17 +605,17 @@ class TestUpdateToolchain:
             responses.PATCH,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {}
-        toolchain_prototype_patch_model['name'] = 'newToolchainName'
-        toolchain_prototype_patch_model['description'] = 'New toolchain description'
+        toolchain_prototype_patch_model["name"] = "newToolchainName"
+        toolchain_prototype_patch_model["description"] = "New toolchain description"
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
         toolchain_prototype_patch = toolchain_prototype_patch_model
 
         # Invoke method
@@ -619,7 +629,7 @@ class TestUpdateToolchain:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
         assert req_body == toolchain_prototype_patch
 
     def test_update_toolchain_all_params_with_retries(self):
@@ -643,17 +653,17 @@ class TestUpdateToolchain:
             responses.PATCH,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {}
-        toolchain_prototype_patch_model['name'] = 'newToolchainName'
-        toolchain_prototype_patch_model['description'] = 'New toolchain description'
+        toolchain_prototype_patch_model["name"] = "newToolchainName"
+        toolchain_prototype_patch_model["description"] = "New toolchain description"
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
         toolchain_prototype_patch = toolchain_prototype_patch_model
 
         # Pass in all but one required param and check for a ValueError
@@ -662,7 +672,10 @@ class TestUpdateToolchain:
             "toolchain_prototype_patch": toolchain_prototype_patch,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.update_toolchain(**req_copy)
 
@@ -816,10 +829,10 @@ class TestNewInstance:
         """
         new_instance()
         """
-        os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
+        os.environ["TEST_SERVICE_AUTH_TYPE"] = "noAuth"
 
         service = CdToolchainV2.new_instance(
-            service_name='TEST_SERVICE',
+            service_name="TEST_SERVICE",
         )
 
         assert service is not None
@@ -829,9 +842,9 @@ class TestNewInstance:
         """
         new_instance_without_authenticator()
         """
-        with pytest.raises(ValueError, match='authenticator must be provided'):
+        with pytest.raises(ValueError, match="authenticator must be provided"):
             service = CdToolchainV2.new_instance(
-                service_name='TEST_SERVICE_NOT_FOUND',
+                service_name="TEST_SERVICE_NOT_FOUND",
             )
 
 
@@ -852,14 +865,14 @@ class TestListTools:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
         limit = 20
-        start = 'testString'
+        start = "testString"
 
         # Invoke method
         response = _service.list_tools(
@@ -873,10 +886,10 @@ class TestListTools:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split('?', 1)[1]
+        query_string = responses.calls[0].request.url.split("?", 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert 'limit={}'.format(limit) in query_string
-        assert 'start={}'.format(start) in query_string
+        assert "limit={}".format(limit) in query_string
+        assert "start={}".format(start) in query_string
 
     def test_list_tools_all_params_with_retries(self):
         # Enable retries and run test_list_tools_all_params.
@@ -899,12 +912,12 @@ class TestListTools:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Invoke method
         response = _service.list_tools(
@@ -937,19 +950,22 @@ class TestListTools:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
+        toolchain_id = "testString"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.list_tools(**req_copy)
 
@@ -975,14 +991,14 @@ class TestListTools:
             responses.GET,
             url,
             body=mock_response1,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
@@ -990,7 +1006,7 @@ class TestListTools:
         all_results = []
         pager = ToolsPager(
             client=_service,
-            toolchain_id='testString',
+            toolchain_id="testString",
             limit=10,
         )
         while pager.has_next():
@@ -1012,21 +1028,21 @@ class TestListTools:
             responses.GET,
             url,
             body=mock_response1,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Exercise the pager class for this operation
         pager = ToolsPager(
             client=_service,
-            toolchain_id='testString',
+            toolchain_id="testString",
             limit=10,
         )
         all_results = pager.get_all()
@@ -1051,15 +1067,15 @@ class TestCreateTool:
             responses.POST,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=201,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_type_id = 'draservicebroker'
-        name = 'testString'
-        parameters = {'anyKey': 'anyValue'}
+        toolchain_id = "testString"
+        tool_type_id = "draservicebroker"
+        name = "testString"
+        parameters = {"anyKey": "anyValue"}
 
         # Invoke method
         response = _service.create_tool(
@@ -1074,10 +1090,10 @@ class TestCreateTool:
         assert len(responses.calls) == 1
         assert response.status_code == 201
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['tool_type_id'] == 'draservicebroker'
-        assert req_body['name'] == 'testString'
-        assert req_body['parameters'] == {'anyKey': 'anyValue'}
+        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
+        assert req_body["tool_type_id"] == "draservicebroker"
+        assert req_body["name"] == "testString"
+        assert req_body["parameters"] == {"anyKey": "anyValue"}
 
     def test_create_tool_all_params_with_retries(self):
         # Enable retries and run test_create_tool_all_params.
@@ -1100,15 +1116,15 @@ class TestCreateTool:
             responses.POST,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=201,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_type_id = 'draservicebroker'
-        name = 'testString'
-        parameters = {'anyKey': 'anyValue'}
+        toolchain_id = "testString"
+        tool_type_id = "draservicebroker"
+        name = "testString"
+        parameters = {"anyKey": "anyValue"}
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1116,7 +1132,10 @@ class TestCreateTool:
             "tool_type_id": tool_type_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.create_tool(**req_copy)
 
@@ -1147,13 +1166,13 @@ class TestGetToolById:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
 
         # Invoke method
         response = _service.get_tool_by_id(
@@ -1187,13 +1206,13 @@ class TestGetToolById:
             responses.GET,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1201,7 +1220,10 @@ class TestGetToolById:
             "tool_id": tool_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.get_tool_by_id(**req_copy)
 
@@ -1226,7 +1248,7 @@ class TestDeleteTool:
         delete_tool()
         """
         # Set up mock
-        url = preprocess_url('/toolchains/testString/tools/testString')
+        url = preprocess_url("/toolchains/testString/tools/testString")
         responses.add(
             responses.DELETE,
             url,
@@ -1234,8 +1256,8 @@ class TestDeleteTool:
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
 
         # Invoke method
         response = _service.delete_tool(
@@ -1263,7 +1285,7 @@ class TestDeleteTool:
         test_delete_tool_value_error()
         """
         # Set up mock
-        url = preprocess_url('/toolchains/testString/tools/testString')
+        url = preprocess_url("/toolchains/testString/tools/testString")
         responses.add(
             responses.DELETE,
             url,
@@ -1271,8 +1293,8 @@ class TestDeleteTool:
         )
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1280,7 +1302,10 @@ class TestDeleteTool:
             "tool_id": tool_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.delete_tool(**req_copy)
 
@@ -1311,19 +1336,19 @@ class TestUpdateTool:
             responses.PATCH,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
-        toolchain_tool_prototype_patch_model['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model["name"] = "MyTool"
+        toolchain_tool_prototype_patch_model["tool_type_id"] = "draservicebroker"
+        toolchain_tool_prototype_patch_model["parameters"] = {"anyKey": "anyValue"}
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
         toolchain_tool_prototype_patch = toolchain_tool_prototype_patch_model
 
         # Invoke method
@@ -1338,7 +1363,7 @@ class TestUpdateTool:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
         assert req_body == toolchain_tool_prototype_patch
 
     def test_update_tool_all_params_with_retries(self):
@@ -1362,19 +1387,19 @@ class TestUpdateTool:
             responses.PATCH,
             url,
             body=mock_response,
-            content_type='application/json',
+            content_type="application/json",
             status=200,
         )
 
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
-        toolchain_tool_prototype_patch_model['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model["name"] = "MyTool"
+        toolchain_tool_prototype_patch_model["tool_type_id"] = "draservicebroker"
+        toolchain_tool_prototype_patch_model["parameters"] = {"anyKey": "anyValue"}
 
         # Set up parameter values
-        toolchain_id = 'testString'
-        tool_id = 'testString'
+        toolchain_id = "testString"
+        tool_id = "testString"
         toolchain_tool_prototype_patch = toolchain_tool_prototype_patch_model
 
         # Pass in all but one required param and check for a ValueError
@@ -1384,7 +1409,10 @@ class TestUpdateTool:
             "toolchain_tool_prototype_patch": toolchain_tool_prototype_patch,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.update_tool(**req_copy)
 
@@ -1469,15 +1497,19 @@ class TestModel_ToolModelReferent:
 
         # Construct a json representation of a ToolModelReferent model
         tool_model_referent_model_json = {}
-        tool_model_referent_model_json['ui_href'] = 'testString'
-        tool_model_referent_model_json['api_href'] = 'testString'
+        tool_model_referent_model_json["ui_href"] = "testString"
+        tool_model_referent_model_json["api_href"] = "testString"
 
         # Construct a model instance of ToolModelReferent by calling from_dict on the json representation
-        tool_model_referent_model = ToolModelReferent.from_dict(tool_model_referent_model_json)
+        tool_model_referent_model = ToolModelReferent.from_dict(
+            tool_model_referent_model_json
+        )
         assert tool_model_referent_model != False
 
         # Construct a model instance of ToolModelReferent by calling from_dict on the json representation
-        tool_model_referent_model_dict = ToolModelReferent.from_dict(tool_model_referent_model_json).__dict__
+        tool_model_referent_model_dict = ToolModelReferent.from_dict(
+            tool_model_referent_model_json
+        ).__dict__
         tool_model_referent_model2 = ToolModelReferent(**tool_model_referent_model_dict)
 
         # Verify the model instances are equivalent
@@ -1599,12 +1631,18 @@ class TestModel_ToolchainCollection:
         toolchain_collection_model_json["toolchains"] = [toolchain_model_model]
 
         # Construct a model instance of ToolchainCollection by calling from_dict on the json representation
-        toolchain_collection_model = ToolchainCollection.from_dict(toolchain_collection_model_json)
+        toolchain_collection_model = ToolchainCollection.from_dict(
+            toolchain_collection_model_json
+        )
         assert toolchain_collection_model != False
 
         # Construct a model instance of ToolchainCollection by calling from_dict on the json representation
-        toolchain_collection_model_dict = ToolchainCollection.from_dict(toolchain_collection_model_json).__dict__
-        toolchain_collection_model2 = ToolchainCollection(**toolchain_collection_model_dict)
+        toolchain_collection_model_dict = ToolchainCollection.from_dict(
+            toolchain_collection_model_json
+        ).__dict__
+        toolchain_collection_model2 = ToolchainCollection(
+            **toolchain_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert toolchain_collection_model == toolchain_collection_model2
@@ -1626,10 +1664,12 @@ class TestModel_ToolchainCollectionFirst:
 
         # Construct a json representation of a ToolchainCollectionFirst model
         toolchain_collection_first_model_json = {}
-        toolchain_collection_first_model_json['href'] = 'testString'
+        toolchain_collection_first_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionFirst by calling from_dict on the json representation
-        toolchain_collection_first_model = ToolchainCollectionFirst.from_dict(toolchain_collection_first_model_json)
+        toolchain_collection_first_model = ToolchainCollectionFirst.from_dict(
+            toolchain_collection_first_model_json
+        )
         assert toolchain_collection_first_model != False
 
         # Construct a model instance of ToolchainCollectionFirst by calling from_dict on the json representation
@@ -1642,8 +1682,13 @@ class TestModel_ToolchainCollectionFirst:
         assert toolchain_collection_first_model == toolchain_collection_first_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_first_model_json2 = toolchain_collection_first_model.to_dict()
-        assert toolchain_collection_first_model_json2 == toolchain_collection_first_model_json
+        toolchain_collection_first_model_json2 = (
+            toolchain_collection_first_model.to_dict()
+        )
+        assert (
+            toolchain_collection_first_model_json2
+            == toolchain_collection_first_model_json
+        )
 
 
 class TestModel_ToolchainCollectionLast:
@@ -1658,11 +1703,13 @@ class TestModel_ToolchainCollectionLast:
 
         # Construct a json representation of a ToolchainCollectionLast model
         toolchain_collection_last_model_json = {}
-        toolchain_collection_last_model_json['start'] = 'testString'
-        toolchain_collection_last_model_json['href'] = 'testString'
+        toolchain_collection_last_model_json["start"] = "testString"
+        toolchain_collection_last_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionLast by calling from_dict on the json representation
-        toolchain_collection_last_model = ToolchainCollectionLast.from_dict(toolchain_collection_last_model_json)
+        toolchain_collection_last_model = ToolchainCollectionLast.from_dict(
+            toolchain_collection_last_model_json
+        )
         assert toolchain_collection_last_model != False
 
         # Construct a model instance of ToolchainCollectionLast by calling from_dict on the json representation
@@ -1675,8 +1722,13 @@ class TestModel_ToolchainCollectionLast:
         assert toolchain_collection_last_model == toolchain_collection_last_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_last_model_json2 = toolchain_collection_last_model.to_dict()
-        assert toolchain_collection_last_model_json2 == toolchain_collection_last_model_json
+        toolchain_collection_last_model_json2 = (
+            toolchain_collection_last_model.to_dict()
+        )
+        assert (
+            toolchain_collection_last_model_json2
+            == toolchain_collection_last_model_json
+        )
 
 
 class TestModel_ToolchainCollectionNext:
@@ -1691,11 +1743,13 @@ class TestModel_ToolchainCollectionNext:
 
         # Construct a json representation of a ToolchainCollectionNext model
         toolchain_collection_next_model_json = {}
-        toolchain_collection_next_model_json['start'] = 'testString'
-        toolchain_collection_next_model_json['href'] = 'testString'
+        toolchain_collection_next_model_json["start"] = "testString"
+        toolchain_collection_next_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionNext by calling from_dict on the json representation
-        toolchain_collection_next_model = ToolchainCollectionNext.from_dict(toolchain_collection_next_model_json)
+        toolchain_collection_next_model = ToolchainCollectionNext.from_dict(
+            toolchain_collection_next_model_json
+        )
         assert toolchain_collection_next_model != False
 
         # Construct a model instance of ToolchainCollectionNext by calling from_dict on the json representation
@@ -1708,8 +1762,13 @@ class TestModel_ToolchainCollectionNext:
         assert toolchain_collection_next_model == toolchain_collection_next_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_next_model_json2 = toolchain_collection_next_model.to_dict()
-        assert toolchain_collection_next_model_json2 == toolchain_collection_next_model_json
+        toolchain_collection_next_model_json2 = (
+            toolchain_collection_next_model.to_dict()
+        )
+        assert (
+            toolchain_collection_next_model_json2
+            == toolchain_collection_next_model_json
+        )
 
 
 class TestModel_ToolchainCollectionPrevious:
@@ -1724,11 +1783,13 @@ class TestModel_ToolchainCollectionPrevious:
 
         # Construct a json representation of a ToolchainCollectionPrevious model
         toolchain_collection_previous_model_json = {}
-        toolchain_collection_previous_model_json['start'] = 'testString'
-        toolchain_collection_previous_model_json['href'] = 'testString'
+        toolchain_collection_previous_model_json["start"] = "testString"
+        toolchain_collection_previous_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionPrevious by calling from_dict on the json representation
-        toolchain_collection_previous_model = ToolchainCollectionPrevious.from_dict(toolchain_collection_previous_model_json)
+        toolchain_collection_previous_model = ToolchainCollectionPrevious.from_dict(
+            toolchain_collection_previous_model_json
+        )
         assert toolchain_collection_previous_model != False
 
         # Construct a model instance of ToolchainCollectionPrevious by calling from_dict on the json representation
@@ -1738,11 +1799,18 @@ class TestModel_ToolchainCollectionPrevious:
         toolchain_collection_previous_model2 = ToolchainCollectionPrevious(**toolchain_collection_previous_model_dict)
 
         # Verify the model instances are equivalent
-        assert toolchain_collection_previous_model == toolchain_collection_previous_model2
+        assert (
+            toolchain_collection_previous_model == toolchain_collection_previous_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_previous_model_json2 = toolchain_collection_previous_model.to_dict()
-        assert toolchain_collection_previous_model_json2 == toolchain_collection_previous_model_json
+        toolchain_collection_previous_model_json2 = (
+            toolchain_collection_previous_model.to_dict()
+        )
+        assert (
+            toolchain_collection_previous_model_json2
+            == toolchain_collection_previous_model_json
+        )
 
 
 class TestModel_ToolchainEventPost:
@@ -1893,7 +1961,9 @@ class TestModel_ToolchainModel:
         assert toolchain_model_model != False
 
         # Construct a model instance of ToolchainModel by calling from_dict on the json representation
-        toolchain_model_model_dict = ToolchainModel.from_dict(toolchain_model_model_json).__dict__
+        toolchain_model_model_dict = ToolchainModel.from_dict(
+            toolchain_model_model_json
+        ).__dict__
         toolchain_model_model2 = ToolchainModel(**toolchain_model_model_dict)
 
         # Verify the model instances are equivalent
@@ -1934,7 +2004,9 @@ class TestModel_ToolchainPatch:
         assert toolchain_patch_model != False
 
         # Construct a model instance of ToolchainPatch by calling from_dict on the json representation
-        toolchain_patch_model_dict = ToolchainPatch.from_dict(toolchain_patch_model_json).__dict__
+        toolchain_patch_model_dict = ToolchainPatch.from_dict(
+            toolchain_patch_model_json
+        ).__dict__
         toolchain_patch_model2 = ToolchainPatch(**toolchain_patch_model_dict)
 
         # Verify the model instances are equivalent
@@ -1975,7 +2047,9 @@ class TestModel_ToolchainPost:
         assert toolchain_post_model != False
 
         # Construct a model instance of ToolchainPost by calling from_dict on the json representation
-        toolchain_post_model_dict = ToolchainPost.from_dict(toolchain_post_model_json).__dict__
+        toolchain_post_model_dict = ToolchainPost.from_dict(
+            toolchain_post_model_json
+        ).__dict__
         toolchain_post_model2 = ToolchainPost(**toolchain_post_model_dict)
 
         # Verify the model instances are equivalent
@@ -2002,7 +2076,9 @@ class TestModel_ToolchainPrototypePatch:
         toolchain_prototype_patch_model_json["description"] = "New toolchain description"
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
-        toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(toolchain_prototype_patch_model_json)
+        toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(
+            toolchain_prototype_patch_model_json
+        )
         assert toolchain_prototype_patch_model != False
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
@@ -2015,8 +2091,13 @@ class TestModel_ToolchainPrototypePatch:
         assert toolchain_prototype_patch_model == toolchain_prototype_patch_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_prototype_patch_model_json2 = toolchain_prototype_patch_model.to_dict()
-        assert toolchain_prototype_patch_model_json2 == toolchain_prototype_patch_model_json
+        toolchain_prototype_patch_model_json2 = (
+            toolchain_prototype_patch_model.to_dict()
+        )
+        assert (
+            toolchain_prototype_patch_model_json2
+            == toolchain_prototype_patch_model_json
+        )
 
 
 class TestModel_ToolchainTool:
@@ -2055,7 +2136,9 @@ class TestModel_ToolchainTool:
         assert toolchain_tool_model != False
 
         # Construct a model instance of ToolchainTool by calling from_dict on the json representation
-        toolchain_tool_model_dict = ToolchainTool.from_dict(toolchain_tool_model_json).__dict__
+        toolchain_tool_model_dict = ToolchainTool.from_dict(
+            toolchain_tool_model_json
+        ).__dict__
         toolchain_tool_model2 = ToolchainTool(**toolchain_tool_model_dict)
 
         # Verify the model instances are equivalent
@@ -2142,7 +2225,9 @@ class TestModel_ToolchainToolCollection:
         toolchain_tool_collection_model_json["tools"] = [tool_model_model]
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
-        toolchain_tool_collection_model = ToolchainToolCollection.from_dict(toolchain_tool_collection_model_json)
+        toolchain_tool_collection_model = ToolchainToolCollection.from_dict(
+            toolchain_tool_collection_model_json
+        )
         assert toolchain_tool_collection_model != False
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
@@ -2155,8 +2240,13 @@ class TestModel_ToolchainToolCollection:
         assert toolchain_tool_collection_model == toolchain_tool_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_model_json2 = toolchain_tool_collection_model.to_dict()
-        assert toolchain_tool_collection_model_json2 == toolchain_tool_collection_model_json
+        toolchain_tool_collection_model_json2 = (
+            toolchain_tool_collection_model.to_dict()
+        )
+        assert (
+            toolchain_tool_collection_model_json2
+            == toolchain_tool_collection_model_json
+        )
 
 
 class TestModel_ToolchainToolCollectionFirst:
@@ -2171,10 +2261,12 @@ class TestModel_ToolchainToolCollectionFirst:
 
         # Construct a json representation of a ToolchainToolCollectionFirst model
         toolchain_tool_collection_first_model_json = {}
-        toolchain_tool_collection_first_model_json['href'] = 'testString'
+        toolchain_tool_collection_first_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainToolCollectionFirst by calling from_dict on the json representation
-        toolchain_tool_collection_first_model = ToolchainToolCollectionFirst.from_dict(toolchain_tool_collection_first_model_json)
+        toolchain_tool_collection_first_model = ToolchainToolCollectionFirst.from_dict(
+            toolchain_tool_collection_first_model_json
+        )
         assert toolchain_tool_collection_first_model != False
 
         # Construct a model instance of ToolchainToolCollectionFirst by calling from_dict on the json representation
@@ -2186,11 +2278,19 @@ class TestModel_ToolchainToolCollectionFirst:
         )
 
         # Verify the model instances are equivalent
-        assert toolchain_tool_collection_first_model == toolchain_tool_collection_first_model2
+        assert (
+            toolchain_tool_collection_first_model
+            == toolchain_tool_collection_first_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_first_model_json2 = toolchain_tool_collection_first_model.to_dict()
-        assert toolchain_tool_collection_first_model_json2 == toolchain_tool_collection_first_model_json
+        toolchain_tool_collection_first_model_json2 = (
+            toolchain_tool_collection_first_model.to_dict()
+        )
+        assert (
+            toolchain_tool_collection_first_model_json2
+            == toolchain_tool_collection_first_model_json
+        )
 
 
 class TestModel_ToolchainToolCollectionLast:
@@ -2205,11 +2305,13 @@ class TestModel_ToolchainToolCollectionLast:
 
         # Construct a json representation of a ToolchainToolCollectionLast model
         toolchain_tool_collection_last_model_json = {}
-        toolchain_tool_collection_last_model_json['start'] = 'testString'
-        toolchain_tool_collection_last_model_json['href'] = 'testString'
+        toolchain_tool_collection_last_model_json["start"] = "testString"
+        toolchain_tool_collection_last_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainToolCollectionLast by calling from_dict on the json representation
-        toolchain_tool_collection_last_model = ToolchainToolCollectionLast.from_dict(toolchain_tool_collection_last_model_json)
+        toolchain_tool_collection_last_model = ToolchainToolCollectionLast.from_dict(
+            toolchain_tool_collection_last_model_json
+        )
         assert toolchain_tool_collection_last_model != False
 
         # Construct a model instance of ToolchainToolCollectionLast by calling from_dict on the json representation
@@ -2219,11 +2321,19 @@ class TestModel_ToolchainToolCollectionLast:
         toolchain_tool_collection_last_model2 = ToolchainToolCollectionLast(**toolchain_tool_collection_last_model_dict)
 
         # Verify the model instances are equivalent
-        assert toolchain_tool_collection_last_model == toolchain_tool_collection_last_model2
+        assert (
+            toolchain_tool_collection_last_model
+            == toolchain_tool_collection_last_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_last_model_json2 = toolchain_tool_collection_last_model.to_dict()
-        assert toolchain_tool_collection_last_model_json2 == toolchain_tool_collection_last_model_json
+        toolchain_tool_collection_last_model_json2 = (
+            toolchain_tool_collection_last_model.to_dict()
+        )
+        assert (
+            toolchain_tool_collection_last_model_json2
+            == toolchain_tool_collection_last_model_json
+        )
 
 
 class TestModel_ToolchainToolCollectionNext:
@@ -2238,11 +2348,13 @@ class TestModel_ToolchainToolCollectionNext:
 
         # Construct a json representation of a ToolchainToolCollectionNext model
         toolchain_tool_collection_next_model_json = {}
-        toolchain_tool_collection_next_model_json['start'] = 'testString'
-        toolchain_tool_collection_next_model_json['href'] = 'testString'
+        toolchain_tool_collection_next_model_json["start"] = "testString"
+        toolchain_tool_collection_next_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainToolCollectionNext by calling from_dict on the json representation
-        toolchain_tool_collection_next_model = ToolchainToolCollectionNext.from_dict(toolchain_tool_collection_next_model_json)
+        toolchain_tool_collection_next_model = ToolchainToolCollectionNext.from_dict(
+            toolchain_tool_collection_next_model_json
+        )
         assert toolchain_tool_collection_next_model != False
 
         # Construct a model instance of ToolchainToolCollectionNext by calling from_dict on the json representation
@@ -2252,11 +2364,19 @@ class TestModel_ToolchainToolCollectionNext:
         toolchain_tool_collection_next_model2 = ToolchainToolCollectionNext(**toolchain_tool_collection_next_model_dict)
 
         # Verify the model instances are equivalent
-        assert toolchain_tool_collection_next_model == toolchain_tool_collection_next_model2
+        assert (
+            toolchain_tool_collection_next_model
+            == toolchain_tool_collection_next_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_next_model_json2 = toolchain_tool_collection_next_model.to_dict()
-        assert toolchain_tool_collection_next_model_json2 == toolchain_tool_collection_next_model_json
+        toolchain_tool_collection_next_model_json2 = (
+            toolchain_tool_collection_next_model.to_dict()
+        )
+        assert (
+            toolchain_tool_collection_next_model_json2
+            == toolchain_tool_collection_next_model_json
+        )
 
 
 class TestModel_ToolchainToolCollectionPrevious:
@@ -2271,8 +2391,8 @@ class TestModel_ToolchainToolCollectionPrevious:
 
         # Construct a json representation of a ToolchainToolCollectionPrevious model
         toolchain_tool_collection_previous_model_json = {}
-        toolchain_tool_collection_previous_model_json['start'] = 'testString'
-        toolchain_tool_collection_previous_model_json['href'] = 'testString'
+        toolchain_tool_collection_previous_model_json["start"] = "testString"
+        toolchain_tool_collection_previous_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainToolCollectionPrevious by calling from_dict on the json representation
         toolchain_tool_collection_previous_model = ToolchainToolCollectionPrevious.from_dict(
@@ -2289,11 +2409,19 @@ class TestModel_ToolchainToolCollectionPrevious:
         )
 
         # Verify the model instances are equivalent
-        assert toolchain_tool_collection_previous_model == toolchain_tool_collection_previous_model2
+        assert (
+            toolchain_tool_collection_previous_model
+            == toolchain_tool_collection_previous_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_previous_model_json2 = toolchain_tool_collection_previous_model.to_dict()
-        assert toolchain_tool_collection_previous_model_json2 == toolchain_tool_collection_previous_model_json
+        toolchain_tool_collection_previous_model_json2 = (
+            toolchain_tool_collection_previous_model.to_dict()
+        )
+        assert (
+            toolchain_tool_collection_previous_model_json2
+            == toolchain_tool_collection_previous_model_json
+        )
 
 
 class TestModel_ToolchainToolPatch:
@@ -2328,12 +2456,18 @@ class TestModel_ToolchainToolPatch:
         toolchain_tool_patch_model_json["state"] = "configured"
 
         # Construct a model instance of ToolchainToolPatch by calling from_dict on the json representation
-        toolchain_tool_patch_model = ToolchainToolPatch.from_dict(toolchain_tool_patch_model_json)
+        toolchain_tool_patch_model = ToolchainToolPatch.from_dict(
+            toolchain_tool_patch_model_json
+        )
         assert toolchain_tool_patch_model != False
 
         # Construct a model instance of ToolchainToolPatch by calling from_dict on the json representation
-        toolchain_tool_patch_model_dict = ToolchainToolPatch.from_dict(toolchain_tool_patch_model_json).__dict__
-        toolchain_tool_patch_model2 = ToolchainToolPatch(**toolchain_tool_patch_model_dict)
+        toolchain_tool_patch_model_dict = ToolchainToolPatch.from_dict(
+            toolchain_tool_patch_model_json
+        ).__dict__
+        toolchain_tool_patch_model2 = ToolchainToolPatch(
+            **toolchain_tool_patch_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert toolchain_tool_patch_model == toolchain_tool_patch_model2
@@ -2375,11 +2509,15 @@ class TestModel_ToolchainToolPost:
         toolchain_tool_post_model_json["state"] = "configured"
 
         # Construct a model instance of ToolchainToolPost by calling from_dict on the json representation
-        toolchain_tool_post_model = ToolchainToolPost.from_dict(toolchain_tool_post_model_json)
+        toolchain_tool_post_model = ToolchainToolPost.from_dict(
+            toolchain_tool_post_model_json
+        )
         assert toolchain_tool_post_model != False
 
         # Construct a model instance of ToolchainToolPost by calling from_dict on the json representation
-        toolchain_tool_post_model_dict = ToolchainToolPost.from_dict(toolchain_tool_post_model_json).__dict__
+        toolchain_tool_post_model_dict = ToolchainToolPost.from_dict(
+            toolchain_tool_post_model_json
+        ).__dict__
         toolchain_tool_post_model2 = ToolchainToolPost(**toolchain_tool_post_model_dict)
 
         # Verify the model instances are equivalent
@@ -2402,12 +2540,14 @@ class TestModel_ToolchainToolPrototypePatch:
 
         # Construct a json representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model_json = {}
-        toolchain_tool_prototype_patch_model_json['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model_json['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model_json['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model_json["name"] = "MyTool"
+        toolchain_tool_prototype_patch_model_json["tool_type_id"] = "draservicebroker"
+        toolchain_tool_prototype_patch_model_json["parameters"] = {"anyKey": "anyValue"}
 
         # Construct a model instance of ToolchainToolPrototypePatch by calling from_dict on the json representation
-        toolchain_tool_prototype_patch_model = ToolchainToolPrototypePatch.from_dict(toolchain_tool_prototype_patch_model_json)
+        toolchain_tool_prototype_patch_model = ToolchainToolPrototypePatch.from_dict(
+            toolchain_tool_prototype_patch_model_json
+        )
         assert toolchain_tool_prototype_patch_model != False
 
         # Construct a model instance of ToolchainToolPrototypePatch by calling from_dict on the json representation
@@ -2417,11 +2557,19 @@ class TestModel_ToolchainToolPrototypePatch:
         toolchain_tool_prototype_patch_model2 = ToolchainToolPrototypePatch(**toolchain_tool_prototype_patch_model_dict)
 
         # Verify the model instances are equivalent
-        assert toolchain_tool_prototype_patch_model == toolchain_tool_prototype_patch_model2
+        assert (
+            toolchain_tool_prototype_patch_model
+            == toolchain_tool_prototype_patch_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_prototype_patch_model_json2 = toolchain_tool_prototype_patch_model.to_dict()
-        assert toolchain_tool_prototype_patch_model_json2 == toolchain_tool_prototype_patch_model_json
+        toolchain_tool_prototype_patch_model_json2 = (
+            toolchain_tool_prototype_patch_model.to_dict()
+        )
+        assert (
+            toolchain_tool_prototype_patch_model_json2
+            == toolchain_tool_prototype_patch_model_json
+        )
 
 
 # endregion
