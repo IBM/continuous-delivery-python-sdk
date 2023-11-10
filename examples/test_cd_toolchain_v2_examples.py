@@ -138,7 +138,7 @@ class TestCdToolchainV2Examples:
             all_results = []
             pager = ToolchainsPager(
                 client=cd_toolchain_service,
-                resource_group_id="testString",
+                resource_group_id="6a9a01f2cff54a7f966f803d92877123",
                 limit=10,
                 name="TestToolchainV2",
             )

@@ -104,6 +104,10 @@ def test_get_service_url_for_region():
         CdToolchainV2.get_service_url_for_region("br-sao")
         == "https://api.br-sao.devops.cloud.ibm.com/toolchain/v2"
     )
+    assert (
+        CdToolchainV2.get_service_url_for_region("eu-es")
+        == "https://api.eu-es.devops.cloud.ibm.com/toolchain/v2"
+    )
 
 
 ##############################################################################
@@ -152,7 +156,7 @@ class TestListToolchains:
         """
         # Set up mock
         url = preprocess_url("/toolchains")
-        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
+        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
@@ -162,7 +166,7 @@ class TestListToolchains:
         )
 
         # Set up parameter values
-        resource_group_id = "testString"
+        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
         limit = 20
         start = "testString"
         name = "TestToolchainV2"
@@ -203,7 +207,7 @@ class TestListToolchains:
         """
         # Set up mock
         url = preprocess_url("/toolchains")
-        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
+        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
@@ -213,7 +217,7 @@ class TestListToolchains:
         )
 
         # Set up parameter values
-        resource_group_id = "testString"
+        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
 
         # Invoke method
         response = _service.list_toolchains(
@@ -245,7 +249,7 @@ class TestListToolchains:
         """
         # Set up mock
         url = preprocess_url("/toolchains")
-        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
+        mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
@@ -255,7 +259,7 @@ class TestListToolchains:
         )
 
         # Set up parameter values
-        resource_group_id = "testString"
+        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -285,8 +289,8 @@ class TestListToolchains:
         """
         # Set up a two-page mock response
         url = preprocess_url("/toolchains")
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"name","description":"description","account_id":"account_id","location":"location","resource_group_id":"resource_group_id","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
-        mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"name","description":"description","account_id":"account_id","location":"location","resource_group_id":"resource_group_id","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
+        mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -306,7 +310,7 @@ class TestListToolchains:
         all_results = []
         pager = ToolchainsPager(
             client=_service,
-            resource_group_id="testString",
+            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
             name="TestToolchainV2",
         )
@@ -323,8 +327,8 @@ class TestListToolchains:
         """
         # Set up a two-page mock response
         url = preprocess_url("/toolchains")
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"name","description":"description","account_id":"account_id","location":"location","resource_group_id":"resource_group_id","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
-        mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"name","description":"description","account_id":"account_id","location":"location","resource_group_id":"resource_group_id","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
+        mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -343,7 +347,7 @@ class TestListToolchains:
         # Exercise the pager class for this operation
         pager = ToolchainsPager(
             client=_service,
-            resource_group_id="testString",
+            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
             name="TestToolchainV2",
         )
@@ -364,7 +368,7 @@ class TestCreateToolchain:
         """
         # Set up mock
         url = preprocess_url("/toolchains")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.POST,
             url,
@@ -411,7 +415,7 @@ class TestCreateToolchain:
         """
         # Set up mock
         url = preprocess_url("/toolchains")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.POST,
             url,
@@ -460,7 +464,7 @@ class TestGetToolchainById:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.GET,
             url,
@@ -498,7 +502,7 @@ class TestGetToolchainById:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.GET,
             url,
@@ -622,7 +626,7 @@ class TestUpdateToolchain:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.PATCH,
             url,
@@ -670,7 +674,7 @@ class TestUpdateToolchain:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString")
-        mock_response = '{"id": "id", "name": "name", "description": "description", "account_id": "account_id", "location": "location", "resource_group_id": "resource_group_id", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
+        mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.PATCH,
             url,
@@ -762,7 +766,7 @@ class TestListTools:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
+        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
@@ -809,7 +813,7 @@ class TestListTools:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
+        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
@@ -847,7 +851,7 @@ class TestListTools:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
+        mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
@@ -887,8 +891,8 @@ class TestListTools:
         """
         # Set up a two-page mock response
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"name","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"name","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         responses.add(
             responses.GET,
             url,
@@ -924,8 +928,8 @@ class TestListTools:
         """
         # Set up a two-page mock response
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"name","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
-        mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"name","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
+        mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
+        mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         responses.add(
             responses.GET,
             url,
@@ -964,7 +968,7 @@ class TestCreateTool:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.POST,
             url,
@@ -1013,7 +1017,7 @@ class TestCreateTool:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.POST,
             url,
@@ -1063,7 +1067,7 @@ class TestGetToolById:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools/testString")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.GET,
             url,
@@ -1103,7 +1107,7 @@ class TestGetToolById:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools/testString")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.GET,
             url,
@@ -1233,7 +1237,7 @@ class TestUpdateTool:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools/testString")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.PATCH,
             url,
@@ -1284,7 +1288,7 @@ class TestUpdateTool:
         """
         # Set up mock
         url = preprocess_url("/toolchains/testString/tools/testString")
-        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "name", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
+        mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.PATCH,
             url,
@@ -1368,7 +1372,7 @@ class TestModel_ToolModel:
         tool_model_model_json["toolchain_crn"] = "testString"
         tool_model_model_json["href"] = "testString"
         tool_model_model_json["referent"] = tool_model_referent_model
-        tool_model_model_json["name"] = "testString"
+        tool_model_model_json["name"] = "MyTool"
         tool_model_model_json["updated_at"] = "2019-01-01T12:00:00Z"
         tool_model_model_json["parameters"] = {"anyKey": "anyValue"}
         tool_model_model_json["state"] = "configured"
@@ -1437,11 +1441,11 @@ class TestModel_Toolchain:
         # Construct a json representation of a Toolchain model
         toolchain_model_json = {}
         toolchain_model_json["id"] = "testString"
-        toolchain_model_json["name"] = "testString"
-        toolchain_model_json["description"] = "testString"
+        toolchain_model_json["name"] = "TestToolchainV2"
+        toolchain_model_json["description"] = "A sample toolchain to test the API"
         toolchain_model_json["account_id"] = "testString"
         toolchain_model_json["location"] = "testString"
-        toolchain_model_json["resource_group_id"] = "testString"
+        toolchain_model_json["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
         toolchain_model_json["crn"] = "testString"
         toolchain_model_json["href"] = "testString"
         toolchain_model_json["ui_href"] = "testString"
@@ -1742,11 +1746,13 @@ class TestModel_ToolchainModel:
         # Construct a json representation of a ToolchainModel model
         toolchain_model_model_json = {}
         toolchain_model_model_json["id"] = "testString"
-        toolchain_model_model_json["name"] = "testString"
-        toolchain_model_model_json["description"] = "testString"
+        toolchain_model_model_json["name"] = "TestToolchainV2"
+        toolchain_model_model_json["description"] = "A sample toolchain to test the API"
         toolchain_model_model_json["account_id"] = "testString"
         toolchain_model_model_json["location"] = "testString"
-        toolchain_model_model_json["resource_group_id"] = "testString"
+        toolchain_model_model_json[
+            "resource_group_id"
+        ] = "6a9a01f2cff54a7f966f803d92877123"
         toolchain_model_model_json["crn"] = "testString"
         toolchain_model_model_json["href"] = "testString"
         toolchain_model_model_json["ui_href"] = "testString"
@@ -1785,11 +1791,13 @@ class TestModel_ToolchainPatch:
         # Construct a json representation of a ToolchainPatch model
         toolchain_patch_model_json = {}
         toolchain_patch_model_json["id"] = "testString"
-        toolchain_patch_model_json["name"] = "testString"
-        toolchain_patch_model_json["description"] = "testString"
+        toolchain_patch_model_json["name"] = "TestToolchainV2"
+        toolchain_patch_model_json["description"] = "A sample toolchain to test the API"
         toolchain_patch_model_json["account_id"] = "testString"
         toolchain_patch_model_json["location"] = "testString"
-        toolchain_patch_model_json["resource_group_id"] = "testString"
+        toolchain_patch_model_json[
+            "resource_group_id"
+        ] = "6a9a01f2cff54a7f966f803d92877123"
         toolchain_patch_model_json["crn"] = "testString"
         toolchain_patch_model_json["href"] = "testString"
         toolchain_patch_model_json["ui_href"] = "testString"
@@ -1828,11 +1836,13 @@ class TestModel_ToolchainPost:
         # Construct a json representation of a ToolchainPost model
         toolchain_post_model_json = {}
         toolchain_post_model_json["id"] = "testString"
-        toolchain_post_model_json["name"] = "testString"
-        toolchain_post_model_json["description"] = "testString"
+        toolchain_post_model_json["name"] = "TestToolchainV2"
+        toolchain_post_model_json["description"] = "A sample toolchain to test the API"
         toolchain_post_model_json["account_id"] = "testString"
         toolchain_post_model_json["location"] = "testString"
-        toolchain_post_model_json["resource_group_id"] = "testString"
+        toolchain_post_model_json[
+            "resource_group_id"
+        ] = "6a9a01f2cff54a7f966f803d92877123"
         toolchain_post_model_json["crn"] = "testString"
         toolchain_post_model_json["href"] = "testString"
         toolchain_post_model_json["ui_href"] = "testString"
@@ -1930,7 +1940,7 @@ class TestModel_ToolchainTool:
         toolchain_tool_model_json["toolchain_crn"] = "testString"
         toolchain_tool_model_json["href"] = "testString"
         toolchain_tool_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_model_json["name"] = "testString"
+        toolchain_tool_model_json["name"] = "MyTool"
         toolchain_tool_model_json["updated_at"] = "2019-01-01T12:00:00Z"
         toolchain_tool_model_json["parameters"] = {"anyKey": "anyValue"}
         toolchain_tool_model_json["state"] = "configured"
@@ -2282,7 +2292,7 @@ class TestModel_ToolchainToolPatch:
         toolchain_tool_patch_model_json["toolchain_crn"] = "testString"
         toolchain_tool_patch_model_json["href"] = "testString"
         toolchain_tool_patch_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_patch_model_json["name"] = "testString"
+        toolchain_tool_patch_model_json["name"] = "MyTool"
         toolchain_tool_patch_model_json["updated_at"] = "2019-01-01T12:00:00Z"
         toolchain_tool_patch_model_json["parameters"] = {"anyKey": "anyValue"}
         toolchain_tool_patch_model_json["state"] = "configured"
@@ -2337,7 +2347,7 @@ class TestModel_ToolchainToolPost:
         toolchain_tool_post_model_json["toolchain_crn"] = "testString"
         toolchain_tool_post_model_json["href"] = "testString"
         toolchain_tool_post_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_post_model_json["name"] = "testString"
+        toolchain_tool_post_model_json["name"] = "MyTool"
         toolchain_tool_post_model_json["updated_at"] = "2019-01-01T12:00:00Z"
         toolchain_tool_post_model_json["parameters"] = {"anyKey": "anyValue"}
         toolchain_tool_post_model_json["state"] = "configured"
