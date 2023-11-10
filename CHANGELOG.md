@@ -1,3 +1,16 @@
+# [1.4.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.3.1...v1.4.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* dir fix to Makefile ([22f0f55](https://github.com/IBM/continuous-delivery-python-sdk/commit/22f0f55275f3b3f798f13d27431ee9c196e590c6))
+
+
+### Features
+
+* bump SDK version ([#38](https://github.com/IBM/continuous-delivery-python-sdk/issues/38)) ([347f6fb](https://github.com/IBM/continuous-delivery-python-sdk/commit/347f6fb983cca4f782a35608dc0121b65061e9e9))
+* support eu-es region ([#37](https://github.com/IBM/continuous-delivery-python-sdk/issues/37)) ([b79698d](https://github.com/IBM/continuous-delivery-python-sdk/commit/b79698da2b98fac78f04800970be673c007b2cbb)), closes [#35](https://github.com/IBM/continuous-delivery-python-sdk/issues/35)
+
 ## [1.3.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.3.0...v1.3.1) (2023-10-27)
 
 
