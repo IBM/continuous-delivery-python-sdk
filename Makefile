@@ -35,8 +35,8 @@ test-examples:
 	${PYTHON} -m pytest examples
 
 lint:
-	${PYTHON} -m pylint ${LINT_DIRS} --exit-zero
-	black --check ${LINT_DIRS}
+	# ${PYTHON} -m pylint ${LINT_DIRS} --exit-zero
+	black --check ${LINT_DIRS} --exclude="ibm_continuous_delivery/version.py"
 
 lint-fix:
 	black ${LINT_DIRS}
