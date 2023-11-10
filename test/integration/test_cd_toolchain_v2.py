@@ -91,7 +91,7 @@ class TestCdToolchainV2:
     @needscredentials
     def test_list_toolchains(self):
         response = self.cd_toolchain_service.list_toolchains(
-            resource_group_id="testString",
+            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=20,
             start="testString",
             name="TestToolchainV2",
@@ -108,7 +108,7 @@ class TestCdToolchainV2:
         # Test get_next().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id="testString",
+            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
             name="TestToolchainV2",
         )
@@ -120,7 +120,7 @@ class TestCdToolchainV2:
         # Test get_all().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id="testString",
+            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
             limit=10,
             name="TestToolchainV2",
         )

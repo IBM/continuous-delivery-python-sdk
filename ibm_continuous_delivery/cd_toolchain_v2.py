@@ -65,6 +65,7 @@ class CdToolchainV2(BaseService):
         "au-syd": "https://api.au-syd.devops.cloud.ibm.com/toolchain/v2",  # The toolchain API endpoint in the au-syd region
         "ca-tor": "https://api.ca-tor.devops.cloud.ibm.com/toolchain/v2",  # The toolchain API endpoint in the ca-tor region
         "br-sao": "https://api.br-sao.devops.cloud.ibm.com/toolchain/v2",  # The toolchain API endpoint in the br-sao region
+        "eu-es": "https://api.eu-es.devops.cloud.ibm.com/toolchain/v2",  # The toolchain API endpoint in the eu-es region
     }
 
     @classmethod
@@ -133,7 +134,8 @@ class CdToolchainV2(BaseService):
                exist.
         :param int limit: (optional) Limit the number of results.
         :param str start: (optional) Pagination token.
-        :param str name: (optional) Name of toolchain to look up.
+        :param str name: (optional) Exact name of toolchain to look up. This
+               parameter is case sensitive.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ToolchainCollection` object
@@ -682,7 +684,7 @@ class ToolModel:
     :attr str href: URI representing the tool.
     :attr ToolModelReferent referent: Information on URIs to access this resource
           through the UI or API.
-    :attr str name: (optional) Tool name.
+    :attr str name: (optional) Name of the tool.
     :attr datetime updated_at: Latest tool update timestamp.
     :attr dict parameters: Unique key-value pairs representing parameters to be used
           to create the tool. A list of parameters for each tool integration can be found
@@ -731,7 +733,7 @@ class ToolModel:
                href="https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-integrations">Configuring
                tool integrations page</a>.
         :param str state: Current configuration state of the tool.
-        :param str name: (optional) Tool name.
+        :param str name: (optional) Name of the tool.
         """
         self.id = id
         self.resource_group_id = resource_group_id
@@ -952,7 +954,7 @@ class Toolchain:
 
     :attr str id: Toolchain ID.
     :attr str name: Toolchain name.
-    :attr str description: Toolchain description.
+    :attr str description: Describes the toolchain.
     :attr str account_id: Account ID where toolchain can be found.
     :attr str location: Toolchain region.
     :attr str resource_group_id: Resource group where the toolchain is located.
@@ -984,7 +986,7 @@ class Toolchain:
 
         :param str id: Toolchain ID.
         :param str name: Toolchain name.
-        :param str description: Toolchain description.
+        :param str description: Describes the toolchain.
         :param str account_id: Account ID where toolchain can be found.
         :param str location: Toolchain region.
         :param str resource_group_id: Resource group where the toolchain is
@@ -1574,7 +1576,7 @@ class ToolchainModel:
 
     :attr str id: Toolchain ID.
     :attr str name: Toolchain name.
-    :attr str description: Toolchain description.
+    :attr str description: Describes the toolchain.
     :attr str account_id: Account ID where toolchain can be found.
     :attr str location: Toolchain region.
     :attr str resource_group_id: Resource group where the toolchain is located.
@@ -1606,7 +1608,7 @@ class ToolchainModel:
 
         :param str id: Toolchain ID.
         :param str name: Toolchain name.
-        :param str description: Toolchain description.
+        :param str description: Describes the toolchain.
         :param str account_id: Account ID where toolchain can be found.
         :param str location: Toolchain region.
         :param str resource_group_id: Resource group where the toolchain is
@@ -1768,7 +1770,7 @@ class ToolchainPatch:
 
     :attr str id: Toolchain ID.
     :attr str name: Toolchain name.
-    :attr str description: Toolchain description.
+    :attr str description: Describes the toolchain.
     :attr str account_id: Account ID where toolchain can be found.
     :attr str location: Toolchain region.
     :attr str resource_group_id: Resource group where the toolchain is located.
@@ -1800,7 +1802,7 @@ class ToolchainPatch:
 
         :param str id: Toolchain ID.
         :param str name: Toolchain name.
-        :param str description: Toolchain description.
+        :param str description: Describes the toolchain.
         :param str account_id: Account ID where toolchain can be found.
         :param str location: Toolchain region.
         :param str resource_group_id: Resource group where the toolchain is
@@ -1962,7 +1964,7 @@ class ToolchainPost:
 
     :attr str id: Toolchain ID.
     :attr str name: Toolchain name.
-    :attr str description: Toolchain description.
+    :attr str description: Describes the toolchain.
     :attr str account_id: Account ID where toolchain can be found.
     :attr str location: Toolchain region.
     :attr str resource_group_id: Resource group where the toolchain is located.
@@ -1994,7 +1996,7 @@ class ToolchainPost:
 
         :param str id: Toolchain ID.
         :param str name: Toolchain name.
-        :param str description: Toolchain description.
+        :param str description: Describes the toolchain.
         :param str account_id: Account ID where toolchain can be found.
         :param str location: Toolchain region.
         :param str resource_group_id: Resource group where the toolchain is
@@ -2231,7 +2233,7 @@ class ToolchainTool:
     :attr str href: URI representing the tool.
     :attr ToolModelReferent referent: Information on URIs to access this resource
           through the UI or API.
-    :attr str name: (optional) Tool name.
+    :attr str name: (optional) Name of the tool.
     :attr datetime updated_at: Latest tool update timestamp.
     :attr dict parameters: Unique key-value pairs representing parameters to be used
           to create the tool. A list of parameters for each tool integration can be found
@@ -2280,7 +2282,7 @@ class ToolchainTool:
                href="https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-integrations">Configuring
                tool integrations page</a>.
         :param str state: Current configuration state of the tool.
-        :param str name: (optional) Tool name.
+        :param str name: (optional) Name of the tool.
         """
         self.id = id
         self.resource_group_id = resource_group_id
@@ -2886,7 +2888,7 @@ class ToolchainToolPatch:
     :attr str href: URI representing the tool.
     :attr ToolModelReferent referent: Information on URIs to access this resource
           through the UI or API.
-    :attr str name: (optional) Tool name.
+    :attr str name: (optional) Name of the tool.
     :attr datetime updated_at: Latest tool update timestamp.
     :attr dict parameters: Unique key-value pairs representing parameters to be used
           to create the tool. A list of parameters for each tool integration can be found
@@ -2935,7 +2937,7 @@ class ToolchainToolPatch:
                href="https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-integrations">Configuring
                tool integrations page</a>.
         :param str state: Current configuration state of the tool.
-        :param str name: (optional) Tool name.
+        :param str name: (optional) Name of the tool.
         """
         self.id = id
         self.resource_group_id = resource_group_id
@@ -3107,7 +3109,7 @@ class ToolchainToolPost:
     :attr str href: URI representing the tool.
     :attr ToolModelReferent referent: Information on URIs to access this resource
           through the UI or API.
-    :attr str name: (optional) Tool name.
+    :attr str name: (optional) Name of the tool.
     :attr datetime updated_at: Latest tool update timestamp.
     :attr dict parameters: Unique key-value pairs representing parameters to be used
           to create the tool. A list of parameters for each tool integration can be found
@@ -3156,7 +3158,7 @@ class ToolchainToolPost:
                href="https://cloud.ibm.com/docs/ContinuousDelivery?topic=ContinuousDelivery-integrations">Configuring
                tool integrations page</a>.
         :param str state: Current configuration state of the tool.
-        :param str name: (optional) Tool name.
+        :param str name: (optional) Name of the tool.
         """
         self.id = id
         self.resource_group_id = resource_group_id
@@ -3424,7 +3426,8 @@ class ToolchainsPager:
         :param str resource_group_id: The resource group ID where the toolchains
                exist.
         :param int limit: (optional) Limit the number of results.
-        :param str name: (optional) Name of toolchain to look up.
+        :param str name: (optional) Exact name of toolchain to look up. This
+               parameter is case sensitive.
         """
         self._has_next = True
         self._client = client
