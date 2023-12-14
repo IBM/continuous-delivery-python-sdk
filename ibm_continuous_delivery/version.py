@@ -17,4 +17,8 @@
 """
 Version of ibm_continuous_delivery
 """
+<<<<<<< HEAD
 __version__ = '1.3.1'
+=======
+__version__ = '1.4.0'
+>>>>>>> 544609a53d02dcbbfab74be64035ed437609a568

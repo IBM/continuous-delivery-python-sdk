@@ -34,7 +34,7 @@ from ibm_continuous_delivery.cd_toolchain_v2 import *
 # in a configuration file and then:
 # export IBM_CREDENTIALS_FILE=<name of configuration file>
 #
-config_file = "cd_toolchain_v2.env"
+config_file = 'cd_toolchain_v2.env'
 
 cd_toolchain_service = None
 
@@ -58,11 +58,12 @@ class TestCdToolchainV2Examples:
     def setup_class(cls):
         global cd_toolchain_service
         if os.path.exists(config_file):
-            os.environ["IBM_CREDENTIALS_FILE"] = config_file
+            os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
             # begin-common
 
-            cd_toolchain_service = CdToolchainV2.new_instance()
+            cd_toolchain_service = CdToolchainV2.new_instance(
+            )
 
             # end-common
             assert cd_toolchain_service is not None
@@ -71,11 +72,10 @@ class TestCdToolchainV2Examples:
             global config
             config = read_external_sources(CdToolchainV2.DEFAULT_SERVICE_NAME)
 
-        print("Setup complete.")
+        print('Setup complete.')
 
     needscredentials = pytest.mark.skipif(
-        not os.path.exists(config_file),
-        reason="External configuration not available, skipping...",
+        not os.path.exists(config_file), reason="External configuration not available, skipping..."
     )
 
     @needscredentials
@@ -85,12 +85,12 @@ class TestCdToolchainV2Examples:
         """
         try:
             global toolchain_id_link
-            print("\ncreate_toolchain() result:")
+            print('\ncreate_toolchain() result:')
             # begin-create_toolchain
 
             response = cd_toolchain_service.create_toolchain(
-                name="TestToolchainV2",
-                resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+                name='TestToolchainV2',
+                resource_group_id='6a9a01f2cff54a7f966f803d92877123',
             )
             toolchain_post = response.get_result()
 
@@ -98,7 +98,7 @@ class TestCdToolchainV2Examples:
 
             # end-create_toolchain
 
-            toolchain_id_link = toolchain_post["id"]
+            toolchain_id_link = toolchain_post['id']
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -109,12 +109,12 @@ class TestCdToolchainV2Examples:
         """
         try:
             global tool_id_link
-            print("\ncreate_tool() result:")
+            print('\ncreate_tool() result:')
             # begin-create_tool
 
             response = cd_toolchain_service.create_tool(
                 toolchain_id=toolchain_id_link,
-                tool_type_id="draservicebroker",
+                tool_type_id='draservicebroker',
             )
             toolchain_tool_post = response.get_result()
 
@@ -122,7 +122,7 @@ class TestCdToolchainV2Examples:
 
             # end-create_tool
 
-            tool_id_link = toolchain_tool_post["id"]
+            tool_id_link = toolchain_tool_post['id']
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -132,15 +132,15 @@ class TestCdToolchainV2Examples:
         list_toolchains request example
         """
         try:
-            print("\nlist_toolchains() result:")
+            print('\nlist_toolchains() result:')
             # begin-list_toolchains
 
             all_results = []
             pager = ToolchainsPager(
                 client=cd_toolchain_service,
-                resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+                resource_group_id='6a9a01f2cff54a7f966f803d92877123',
                 limit=10,
-                name="TestToolchainV2",
+                name='TestToolchainV2',
             )
             while pager.has_next():
                 next_page = pager.get_next()
@@ -159,7 +159,7 @@ class TestCdToolchainV2Examples:
         get_toolchain_by_id request example
         """
         try:
-            print("\nget_toolchain_by_id() result:")
+            print('\nget_toolchain_by_id() result:')
             # begin-get_toolchain_by_id
 
             response = cd_toolchain_service.get_toolchain_by_id(
@@ -180,10 +180,11 @@ class TestCdToolchainV2Examples:
         update_toolchain request example
         """
         try:
-            print("\nupdate_toolchain() result:")
+            print('\nupdate_toolchain() result:')
             # begin-update_toolchain
 
-            toolchain_prototype_patch_model = {}
+            toolchain_prototype_patch_model = {
+            }
 
             response = cd_toolchain_service.update_toolchain(
                 toolchain_id=toolchain_id_link,
@@ -199,12 +200,36 @@ class TestCdToolchainV2Examples:
             pytest.fail(str(e))
 
     @needscredentials
+    def test_create_toolchain_event_example(self):
+        """
+        create_toolchain_event request example
+        """
+        try:
+            print('\ncreate_toolchain_event() result:')
+            # begin-create_toolchain_event
+
+            response = cd_toolchain_service.create_toolchain_event(
+                toolchain_id=toolchain_id_link,
+                title='My-custom-event',
+                description='This is my custom event',
+                content_type='application/json',
+            )
+            toolchain_event_post = response.get_result()
+
+            print(json.dumps(toolchain_event_post, indent=2))
+
+            # end-create_toolchain_event
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
     def test_list_tools_example(self):
         """
         list_tools request example
         """
         try:
-            print("\nlist_tools() result:")
+            print('\nlist_tools() result:')
             # begin-list_tools
 
             all_results = []
@@ -230,7 +255,7 @@ class TestCdToolchainV2Examples:
         get_tool_by_id request example
         """
         try:
-            print("\nget_tool_by_id() result:")
+            print('\nget_tool_by_id() result:')
             # begin-get_tool_by_id
 
             response = cd_toolchain_service.get_tool_by_id(
@@ -252,10 +277,11 @@ class TestCdToolchainV2Examples:
         update_tool request example
         """
         try:
-            print("\nupdate_tool() result:")
+            print('\nupdate_tool() result:')
             # begin-update_tool
 
-            toolchain_tool_prototype_patch_model = {}
+            toolchain_tool_prototype_patch_model = {
+            }
 
             response = cd_toolchain_service.update_tool(
                 toolchain_id=toolchain_id_link,
@@ -285,7 +311,7 @@ class TestCdToolchainV2Examples:
             )
 
             # end-delete_tool
-            print("\ndelete_tool() response status code: ", response.get_status_code())
+            print('\ndelete_tool() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -303,10 +329,7 @@ class TestCdToolchainV2Examples:
             )
 
             # end-delete_toolchain
-            print(
-                "\ndelete_toolchain() response status code: ",
-                response.get_status_code(),
-            )
+            print('\ndelete_toolchain() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
