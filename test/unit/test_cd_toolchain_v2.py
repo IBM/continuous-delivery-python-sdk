@@ -795,7 +795,10 @@ class TestCreateToolchainEvent:
             "content_type": content_type,
         }
         for param in req_param_dict.keys():
-            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
             with pytest.raises(ValueError):
                 _service.create_toolchain_event(**req_copy)
 
@@ -1828,12 +1831,18 @@ class TestModel_ToolchainEventPost:
         toolchain_event_post_model_json["id"] = "testString"
 
         # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
-        toolchain_event_post_model = ToolchainEventPost.from_dict(toolchain_event_post_model_json)
+        toolchain_event_post_model = ToolchainEventPost.from_dict(
+            toolchain_event_post_model_json
+        )
         assert toolchain_event_post_model != False
 
         # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
-        toolchain_event_post_model_dict = ToolchainEventPost.from_dict(toolchain_event_post_model_json).__dict__
-        toolchain_event_post_model2 = ToolchainEventPost(**toolchain_event_post_model_dict)
+        toolchain_event_post_model_dict = ToolchainEventPost.from_dict(
+            toolchain_event_post_model_json
+        ).__dict__
+        toolchain_event_post_model2 = ToolchainEventPost(
+            **toolchain_event_post_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert toolchain_event_post_model == toolchain_event_post_model2
@@ -1878,11 +1887,19 @@ class TestModel_ToolchainEventPrototypeData:
         toolchain_event_prototype_data_model2 = ToolchainEventPrototypeData(**toolchain_event_prototype_data_model_dict)
 
         # Verify the model instances are equivalent
-        assert toolchain_event_prototype_data_model == toolchain_event_prototype_data_model2
+        assert (
+            toolchain_event_prototype_data_model
+            == toolchain_event_prototype_data_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_event_prototype_data_model_json2 = toolchain_event_prototype_data_model.to_dict()
-        assert toolchain_event_prototype_data_model_json2 == toolchain_event_prototype_data_model_json
+        toolchain_event_prototype_data_model_json2 = (
+            toolchain_event_prototype_data_model.to_dict()
+        )
+        assert (
+            toolchain_event_prototype_data_model_json2
+            == toolchain_event_prototype_data_model_json
+        )
 
 
 class TestModel_ToolchainEventPrototypeDataApplicationJson:
