@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.4.0...v1.5.0) (2023-12-15)
+
+
+### Features
+
+* **toolchain:** add function to create toolchain event ([#39](https://github.com/IBM/continuous-delivery-python-sdk/issues/39)) ([4ff7032](https://github.com/IBM/continuous-delivery-python-sdk/commit/4ff7032c71aa8235f12daa856b748b0dfcf6d5da))
+
 # [1.4.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.3.1...v1.4.0) (2023-11-10)
 
 
