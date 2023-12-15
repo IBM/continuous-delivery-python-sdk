@@ -374,6 +374,82 @@ class CdToolchainV2(BaseService):
         response = self.send(request, **kwargs)
         return response
 
+    def create_toolchain_event(
+        self,
+        toolchain_id: str,
+        title: str,
+        description: str,
+        content_type: str,
+        *,
+        data: "ToolchainEventPrototypeData" = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Create a toolchain event.
+
+        Creates and sends a custom event to Event Notifications. This requires an Event
+        Notification tool. This method is BETA and subject to change.
+
+        :param str toolchain_id: ID of the toolchain to send events from.
+        :param str title: Event title.
+        :param str description: Describes the event.
+        :param str content_type: The content type of the attached data. Supported
+               values are `text/plain`, `application/json`, and `none`.
+        :param ToolchainEventPrototypeData data: (optional) Additional data to be
+               added with the event. The format must correspond to the value of
+               `content_type`.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `ToolchainEventPost` object
+        """
+
+        if not toolchain_id:
+            raise ValueError("toolchain_id must be provided")
+        if title is None:
+            raise ValueError("title must be provided")
+        if description is None:
+            raise ValueError("description must be provided")
+        if content_type is None:
+            raise ValueError("content_type must be provided")
+        if data is not None:
+            data = convert_model(data)
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version="V2",
+            operation_id="create_toolchain_event",
+        )
+        headers.update(sdk_headers)
+
+        data = {
+            "title": title,
+            "description": description,
+            "content_type": content_type,
+            "data": data,
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers["content-type"] = "application/json"
+
+        if "headers" in kwargs:
+            headers.update(kwargs.get("headers"))
+            del kwargs["headers"]
+        headers["Accept"] = "application/json"
+
+        path_param_keys = ["toolchain_id"]
+        path_param_values = self.encode_path_vars(toolchain_id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = "/toolchains/{toolchain_id}/events".format(**path_param_dict)
+        request = self.prepare_request(
+            method="POST",
+            url=url,
+            headers=headers,
+            data=data,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
     #########################
     # Tools
     #########################
@@ -1566,6 +1642,211 @@ class ToolchainCollectionPrevious:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: "ToolchainCollectionPrevious") -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ToolchainEventPost:
+    """
+    Response structure for POST toolchain event.
+
+    :attr str id: Event ID.
+    """
+
+    def __init__(
+        self,
+        id: str,
+    ) -> None:
+        """
+        Initialize a ToolchainEventPost object.
+
+        :param str id: Event ID.
+        """
+        self.id = id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> "ToolchainEventPost":
+        """Initialize a ToolchainEventPost object from a json dictionary."""
+        args = {}
+        if "id" in _dict:
+            args["id"] = _dict.get("id")
+        else:
+            raise ValueError(
+                "Required property 'id' not present in ToolchainEventPost JSON"
+            )
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ToolchainEventPost object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, "id") and self.id is not None:
+            _dict["id"] = self.id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ToolchainEventPost object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: "ToolchainEventPost") -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: "ToolchainEventPost") -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ToolchainEventPrototypeData:
+    """
+    Additional data to be added with the event. The format must correspond to the value of
+    `content_type`.
+
+    :attr ToolchainEventPrototypeDataApplicationJson application_json: (optional)
+          Contains JSON data to be added with the event. `content_type` must be set to
+          `application/json`.
+    :attr str text_plain: (optional) Contains text data to be added with the event.
+          `content_type` must be set to `text/plain`.
+    """
+
+    def __init__(
+        self,
+        *,
+        application_json: "ToolchainEventPrototypeDataApplicationJson" = None,
+        text_plain: str = None,
+    ) -> None:
+        """
+        Initialize a ToolchainEventPrototypeData object.
+
+        :param ToolchainEventPrototypeDataApplicationJson application_json:
+               (optional) Contains JSON data to be added with the event. `content_type`
+               must be set to `application/json`.
+        :param str text_plain: (optional) Contains text data to be added with the
+               event. `content_type` must be set to `text/plain`.
+        """
+        self.application_json = application_json
+        self.text_plain = text_plain
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> "ToolchainEventPrototypeData":
+        """Initialize a ToolchainEventPrototypeData object from a json dictionary."""
+        args = {}
+        if "application_json" in _dict:
+            args[
+                "application_json"
+            ] = ToolchainEventPrototypeDataApplicationJson.from_dict(
+                _dict.get("application_json")
+            )
+        if "text_plain" in _dict:
+            args["text_plain"] = _dict.get("text_plain")
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ToolchainEventPrototypeData object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, "application_json") and self.application_json is not None:
+            if isinstance(self.application_json, dict):
+                _dict["application_json"] = self.application_json
+            else:
+                _dict["application_json"] = self.application_json.to_dict()
+        if hasattr(self, "text_plain") and self.text_plain is not None:
+            _dict["text_plain"] = self.text_plain
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ToolchainEventPrototypeData object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: "ToolchainEventPrototypeData") -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: "ToolchainEventPrototypeData") -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ToolchainEventPrototypeDataApplicationJson:
+    """
+    Contains JSON data to be added with the event. `content_type` must be set to
+    `application/json`.
+
+    :attr dict content: JSON-formatted key-value pairs representing any additional
+          information to be included with the event.
+    """
+
+    def __init__(
+        self,
+        content: dict,
+    ) -> None:
+        """
+        Initialize a ToolchainEventPrototypeDataApplicationJson object.
+
+        :param dict content: JSON-formatted key-value pairs representing any
+               additional information to be included with the event.
+        """
+        self.content = content
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> "ToolchainEventPrototypeDataApplicationJson":
+        """Initialize a ToolchainEventPrototypeDataApplicationJson object from a json dictionary."""
+        args = {}
+        if "content" in _dict:
+            args["content"] = _dict.get("content")
+        else:
+            raise ValueError(
+                "Required property 'content' not present in ToolchainEventPrototypeDataApplicationJson JSON"
+            )
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ToolchainEventPrototypeDataApplicationJson object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, "content") and self.content is not None:
+            _dict["content"] = self.content
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ToolchainEventPrototypeDataApplicationJson object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: "ToolchainEventPrototypeDataApplicationJson") -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: "ToolchainEventPrototypeDataApplicationJson") -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 

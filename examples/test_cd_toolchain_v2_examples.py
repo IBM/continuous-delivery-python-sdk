@@ -199,6 +199,30 @@ class TestCdToolchainV2Examples:
             pytest.fail(str(e))
 
     @needscredentials
+    def test_create_toolchain_event_example(self):
+        """
+        create_toolchain_event request example
+        """
+        try:
+            print("\ncreate_toolchain_event() result:")
+            # begin-create_toolchain_event
+
+            response = cd_toolchain_service.create_toolchain_event(
+                toolchain_id=toolchain_id_link,
+                title="My-custom-event",
+                description="This is my custom event",
+                content_type="application/json",
+            )
+            toolchain_event_post = response.get_result()
+
+            print(json.dumps(toolchain_event_post, indent=2))
+
+            # end-create_toolchain_event
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
     def test_list_tools_example(self):
         """
         list_tools request example

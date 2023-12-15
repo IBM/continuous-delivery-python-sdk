@@ -160,6 +160,34 @@ class TestCdToolchainV2:
         assert toolchain_patch is not None
 
     @needscredentials
+    def test_create_toolchain_event(self):
+        # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
+        toolchain_event_prototype_data_application_json_model = {
+            "content": {
+                "customKey1": "myCustomData",
+                "customKey2": 123,
+                "customKey3": {"nestedKey": "moreData"},
+            },
+        }
+        # Construct a dict representation of a ToolchainEventPrototypeData model
+        toolchain_event_prototype_data_model = {
+            "application_json": toolchain_event_prototype_data_application_json_model,
+            "text_plain": "This event is dispatched because the pipeline failed",
+        }
+
+        response = self.cd_toolchain_service.create_toolchain_event(
+            toolchain_id=toolchain_id_link,
+            title="My-custom-event",
+            description="This is my custom event",
+            content_type="application/json",
+            data=toolchain_event_prototype_data_model,
+        )
+
+        assert response.get_status_code() == 200
+        toolchain_event_post = response.get_result()
+        assert toolchain_event_post is not None
+
+    @needscredentials
     def test_list_tools(self):
         response = self.cd_toolchain_service.list_tools(
             toolchain_id=toolchain_id_link,

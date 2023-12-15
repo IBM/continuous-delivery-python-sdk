@@ -715,6 +715,141 @@ class TestUpdateToolchain:
         self.test_update_toolchain_value_error()
 
 
+class TestCreateToolchainEvent:
+    """
+    Test Class for create_toolchain_event
+    """
+
+    @responses.activate
+    def test_create_toolchain_event_all_params(self):
+        """
+        create_toolchain_event()
+        """
+        # Set up mock
+        url = preprocess_url("/toolchains/testString/events")
+        mock_response = '{"id": "id"}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type="application/json",
+            status=200,
+        )
+
+        # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
+        toolchain_event_prototype_data_application_json_model = {}
+        toolchain_event_prototype_data_application_json_model["content"] = {
+            "anyKey": "anyValue"
+        }
+
+        # Construct a dict representation of a ToolchainEventPrototypeData model
+        toolchain_event_prototype_data_model = {}
+        toolchain_event_prototype_data_model[
+            "application_json"
+        ] = toolchain_event_prototype_data_application_json_model
+        toolchain_event_prototype_data_model[
+            "text_plain"
+        ] = "This event is dispatched because the pipeline failed"
+
+        # Set up parameter values
+        toolchain_id = "testString"
+        title = "My-custom-event"
+        description = "This is my custom event"
+        content_type = "application/json"
+        data = toolchain_event_prototype_data_model
+
+        # Invoke method
+        response = _service.create_toolchain_event(
+            toolchain_id,
+            title,
+            description,
+            content_type,
+            data=data,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
+        assert req_body["title"] == "My-custom-event"
+        assert req_body["description"] == "This is my custom event"
+        assert req_body["content_type"] == "application/json"
+        assert req_body["data"] == toolchain_event_prototype_data_model
+
+    def test_create_toolchain_event_all_params_with_retries(self):
+        # Enable retries and run test_create_toolchain_event_all_params.
+        _service.enable_retries()
+        self.test_create_toolchain_event_all_params()
+
+        # Disable retries and run test_create_toolchain_event_all_params.
+        _service.disable_retries()
+        self.test_create_toolchain_event_all_params()
+
+    @responses.activate
+    def test_create_toolchain_event_value_error(self):
+        """
+        test_create_toolchain_event_value_error()
+        """
+        # Set up mock
+        url = preprocess_url("/toolchains/testString/events")
+        mock_response = '{"id": "id"}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type="application/json",
+            status=200,
+        )
+
+        # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
+        toolchain_event_prototype_data_application_json_model = {}
+        toolchain_event_prototype_data_application_json_model["content"] = {
+            "anyKey": "anyValue"
+        }
+
+        # Construct a dict representation of a ToolchainEventPrototypeData model
+        toolchain_event_prototype_data_model = {}
+        toolchain_event_prototype_data_model[
+            "application_json"
+        ] = toolchain_event_prototype_data_application_json_model
+        toolchain_event_prototype_data_model[
+            "text_plain"
+        ] = "This event is dispatched because the pipeline failed"
+
+        # Set up parameter values
+        toolchain_id = "testString"
+        title = "My-custom-event"
+        description = "This is my custom event"
+        content_type = "application/json"
+        data = toolchain_event_prototype_data_model
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "toolchain_id": toolchain_id,
+            "title": title,
+            "description": description,
+            "content_type": content_type,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {
+                key: val if key is not param else None
+                for (key, val) in req_param_dict.items()
+            }
+            with pytest.raises(ValueError):
+                _service.create_toolchain_event(**req_copy)
+
+    def test_create_toolchain_event_value_error_with_retries(self):
+        # Enable retries and run test_create_toolchain_event_value_error.
+        _service.enable_retries()
+        self.test_create_toolchain_event_value_error()
+
+        # Disable retries and run test_create_toolchain_event_value_error.
+        _service.disable_retries()
+        self.test_create_toolchain_event_value_error()
+
+
 # endregion
 ##############################################################################
 # End of Service: Toolchains
@@ -1730,6 +1865,154 @@ class TestModel_ToolchainCollectionPrevious:
         assert (
             toolchain_collection_previous_model_json2
             == toolchain_collection_previous_model_json
+        )
+
+
+class TestModel_ToolchainEventPost:
+    """
+    Test Class for ToolchainEventPost
+    """
+
+    def test_toolchain_event_post_serialization(self):
+        """
+        Test serialization/deserialization for ToolchainEventPost
+        """
+
+        # Construct a json representation of a ToolchainEventPost model
+        toolchain_event_post_model_json = {}
+        toolchain_event_post_model_json["id"] = "testString"
+
+        # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
+        toolchain_event_post_model = ToolchainEventPost.from_dict(
+            toolchain_event_post_model_json
+        )
+        assert toolchain_event_post_model != False
+
+        # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
+        toolchain_event_post_model_dict = ToolchainEventPost.from_dict(
+            toolchain_event_post_model_json
+        ).__dict__
+        toolchain_event_post_model2 = ToolchainEventPost(
+            **toolchain_event_post_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert toolchain_event_post_model == toolchain_event_post_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        toolchain_event_post_model_json2 = toolchain_event_post_model.to_dict()
+        assert toolchain_event_post_model_json2 == toolchain_event_post_model_json
+
+
+class TestModel_ToolchainEventPrototypeData:
+    """
+    Test Class for ToolchainEventPrototypeData
+    """
+
+    def test_toolchain_event_prototype_data_serialization(self):
+        """
+        Test serialization/deserialization for ToolchainEventPrototypeData
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        toolchain_event_prototype_data_application_json_model = (
+            {}
+        )  # ToolchainEventPrototypeDataApplicationJson
+        toolchain_event_prototype_data_application_json_model["content"] = {
+            "anyKey": "anyValue"
+        }
+
+        # Construct a json representation of a ToolchainEventPrototypeData model
+        toolchain_event_prototype_data_model_json = {}
+        toolchain_event_prototype_data_model_json[
+            "application_json"
+        ] = toolchain_event_prototype_data_application_json_model
+        toolchain_event_prototype_data_model_json[
+            "text_plain"
+        ] = "This event is dispatched because the pipeline failed"
+
+        # Construct a model instance of ToolchainEventPrototypeData by calling from_dict on the json representation
+        toolchain_event_prototype_data_model = ToolchainEventPrototypeData.from_dict(
+            toolchain_event_prototype_data_model_json
+        )
+        assert toolchain_event_prototype_data_model != False
+
+        # Construct a model instance of ToolchainEventPrototypeData by calling from_dict on the json representation
+        toolchain_event_prototype_data_model_dict = (
+            ToolchainEventPrototypeData.from_dict(
+                toolchain_event_prototype_data_model_json
+            ).__dict__
+        )
+        toolchain_event_prototype_data_model2 = ToolchainEventPrototypeData(
+            **toolchain_event_prototype_data_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            toolchain_event_prototype_data_model
+            == toolchain_event_prototype_data_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        toolchain_event_prototype_data_model_json2 = (
+            toolchain_event_prototype_data_model.to_dict()
+        )
+        assert (
+            toolchain_event_prototype_data_model_json2
+            == toolchain_event_prototype_data_model_json
+        )
+
+
+class TestModel_ToolchainEventPrototypeDataApplicationJson:
+    """
+    Test Class for ToolchainEventPrototypeDataApplicationJson
+    """
+
+    def test_toolchain_event_prototype_data_application_json_serialization(self):
+        """
+        Test serialization/deserialization for ToolchainEventPrototypeDataApplicationJson
+        """
+
+        # Construct a json representation of a ToolchainEventPrototypeDataApplicationJson model
+        toolchain_event_prototype_data_application_json_model_json = {}
+        toolchain_event_prototype_data_application_json_model_json["content"] = {
+            "anyKey": "anyValue"
+        }
+
+        # Construct a model instance of ToolchainEventPrototypeDataApplicationJson by calling from_dict on the json representation
+        toolchain_event_prototype_data_application_json_model = (
+            ToolchainEventPrototypeDataApplicationJson.from_dict(
+                toolchain_event_prototype_data_application_json_model_json
+            )
+        )
+        assert toolchain_event_prototype_data_application_json_model != False
+
+        # Construct a model instance of ToolchainEventPrototypeDataApplicationJson by calling from_dict on the json representation
+        toolchain_event_prototype_data_application_json_model_dict = (
+            ToolchainEventPrototypeDataApplicationJson.from_dict(
+                toolchain_event_prototype_data_application_json_model_json
+            ).__dict__
+        )
+        toolchain_event_prototype_data_application_json_model2 = (
+            ToolchainEventPrototypeDataApplicationJson(
+                **toolchain_event_prototype_data_application_json_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            toolchain_event_prototype_data_application_json_model
+            == toolchain_event_prototype_data_application_json_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        toolchain_event_prototype_data_application_json_model_json2 = (
+            toolchain_event_prototype_data_application_json_model.to_dict()
+        )
+        assert (
+            toolchain_event_prototype_data_application_json_model_json2
+            == toolchain_event_prototype_data_application_json_model_json
         )
 
 
