@@ -1742,10 +1742,10 @@ class ToolchainEventPrototypeData:
         """Initialize a ToolchainEventPrototypeData object from a json dictionary."""
         args = {}
         if "application_json" in _dict:
-            args[
-                "application_json"
-            ] = ToolchainEventPrototypeDataApplicationJson.from_dict(
-                _dict.get("application_json")
+            args["application_json"] = (
+                ToolchainEventPrototypeDataApplicationJson.from_dict(
+                    _dict.get("application_json")
+                )
             )
         if "text_plain" in _dict:
             args["text_plain"] = _dict.get("text_plain")

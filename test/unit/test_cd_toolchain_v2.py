@@ -744,12 +744,12 @@ class TestCreateToolchainEvent:
 
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {}
-        toolchain_event_prototype_data_model[
-            "application_json"
-        ] = toolchain_event_prototype_data_application_json_model
-        toolchain_event_prototype_data_model[
-            "text_plain"
-        ] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model["application_json"] = (
+            toolchain_event_prototype_data_application_json_model
+        )
+        toolchain_event_prototype_data_model["text_plain"] = (
+            "This event is dispatched because the pipeline failed"
+        )
 
         # Set up parameter values
         toolchain_id = "testString"
@@ -811,12 +811,12 @@ class TestCreateToolchainEvent:
 
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {}
-        toolchain_event_prototype_data_model[
-            "application_json"
-        ] = toolchain_event_prototype_data_application_json_model
-        toolchain_event_prototype_data_model[
-            "text_plain"
-        ] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model["application_json"] = (
+            toolchain_event_prototype_data_application_json_model
+        )
+        toolchain_event_prototype_data_model["text_plain"] = (
+            "This event is dispatched because the pipeline failed"
+        )
 
         # Set up parameter values
         toolchain_id = "testString"
@@ -1492,9 +1492,9 @@ class TestModel_ToolModel:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model[
-            "ui_href"
-        ] = "https://my-team.slack.com/messages/my-channel"
+        tool_model_referent_model["ui_href"] = (
+            "https://my-team.slack.com/messages/my-channel"
+        )
         tool_model_referent_model["api_href"] = "testString"
 
         # Construct a json representation of a ToolModel model
@@ -1617,33 +1617,33 @@ class TestModel_ToolchainCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         toolchain_collection_first_model = {}  # ToolchainCollectionFirst
-        toolchain_collection_first_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3"
+        toolchain_collection_first_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3"
+        )
 
         toolchain_collection_previous_model = {}  # ToolchainCollectionPrevious
-        toolchain_collection_previous_model[
-            "start"
-        ] = "eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
-        toolchain_collection_previous_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
+        toolchain_collection_previous_model["start"] = (
+            "eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
+        )
+        toolchain_collection_previous_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
+        )
 
         toolchain_collection_next_model = {}  # ToolchainCollectionNext
-        toolchain_collection_next_model[
-            "start"
-        ] = "eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
-        toolchain_collection_next_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
+        toolchain_collection_next_model["start"] = (
+            "eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
+        )
+        toolchain_collection_next_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
+        )
 
         toolchain_collection_last_model = {}  # ToolchainCollectionLast
-        toolchain_collection_last_model[
-            "start"
-        ] = "eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
-        toolchain_collection_last_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
+        toolchain_collection_last_model["start"] = (
+            "eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
+        )
+        toolchain_collection_last_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
+        )
 
         toolchain_model_model = {}  # ToolchainModel
         toolchain_model_model["id"] = "62935028-0202-48fe-b877-7e99c817b856"
@@ -1652,12 +1652,12 @@ class TestModel_ToolchainCollection:
         toolchain_model_model["account_id"] = "f2337426699b4041bc50f1d45042f777"
         toolchain_model_model["location"] = "us-south"
         toolchain_model_model["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_model_model[
-            "crn"
-        ] = "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:62935028-0202-48fe-b877-7e99c817b856::"
-        toolchain_model_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/62935028-0202-48fe-b877-7e99c817b856"
+        toolchain_model_model["crn"] = (
+            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:62935028-0202-48fe-b877-7e99c817b856::"
+        )
+        toolchain_model_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/62935028-0202-48fe-b877-7e99c817b856"
+        )
         toolchain_model_model["ui_href"] = "testString"
         toolchain_model_model["created_at"] = "2021-05-05T17:07:09.354000Z"
         toolchain_model_model["updated_at"] = "2022-01-01T13:13:07.968000Z"
@@ -1668,9 +1668,9 @@ class TestModel_ToolchainCollection:
         toolchain_collection_model_json["total_count"] = 38
         toolchain_collection_model_json["limit"] = 38
         toolchain_collection_model_json["first"] = toolchain_collection_first_model
-        toolchain_collection_model_json[
-            "previous"
-        ] = toolchain_collection_previous_model
+        toolchain_collection_model_json["previous"] = (
+            toolchain_collection_previous_model
+        )
         toolchain_collection_model_json["next"] = toolchain_collection_next_model
         toolchain_collection_model_json["last"] = toolchain_collection_last_model
         toolchain_collection_model_json["toolchains"] = [toolchain_model_model]
@@ -1925,12 +1925,12 @@ class TestModel_ToolchainEventPrototypeData:
 
         # Construct a json representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model_json = {}
-        toolchain_event_prototype_data_model_json[
-            "application_json"
-        ] = toolchain_event_prototype_data_application_json_model
-        toolchain_event_prototype_data_model_json[
-            "text_plain"
-        ] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model_json["application_json"] = (
+            toolchain_event_prototype_data_application_json_model
+        )
+        toolchain_event_prototype_data_model_json["text_plain"] = (
+            "This event is dispatched because the pipeline failed"
+        )
 
         # Construct a model instance of ToolchainEventPrototypeData by calling from_dict on the json representation
         toolchain_event_prototype_data_model = ToolchainEventPrototypeData.from_dict(
@@ -2033,9 +2033,9 @@ class TestModel_ToolchainModel:
         toolchain_model_model_json["description"] = "A sample toolchain to test the API"
         toolchain_model_model_json["account_id"] = "testString"
         toolchain_model_model_json["location"] = "testString"
-        toolchain_model_model_json[
-            "resource_group_id"
-        ] = "6a9a01f2cff54a7f966f803d92877123"
+        toolchain_model_model_json["resource_group_id"] = (
+            "6a9a01f2cff54a7f966f803d92877123"
+        )
         toolchain_model_model_json["crn"] = "testString"
         toolchain_model_model_json["href"] = "testString"
         toolchain_model_model_json["ui_href"] = "testString"
@@ -2078,9 +2078,9 @@ class TestModel_ToolchainPatch:
         toolchain_patch_model_json["description"] = "A sample toolchain to test the API"
         toolchain_patch_model_json["account_id"] = "testString"
         toolchain_patch_model_json["location"] = "testString"
-        toolchain_patch_model_json[
-            "resource_group_id"
-        ] = "6a9a01f2cff54a7f966f803d92877123"
+        toolchain_patch_model_json["resource_group_id"] = (
+            "6a9a01f2cff54a7f966f803d92877123"
+        )
         toolchain_patch_model_json["crn"] = "testString"
         toolchain_patch_model_json["href"] = "testString"
         toolchain_patch_model_json["ui_href"] = "testString"
@@ -2123,9 +2123,9 @@ class TestModel_ToolchainPost:
         toolchain_post_model_json["description"] = "A sample toolchain to test the API"
         toolchain_post_model_json["account_id"] = "testString"
         toolchain_post_model_json["location"] = "testString"
-        toolchain_post_model_json[
-            "resource_group_id"
-        ] = "6a9a01f2cff54a7f966f803d92877123"
+        toolchain_post_model_json["resource_group_id"] = (
+            "6a9a01f2cff54a7f966f803d92877123"
+        )
         toolchain_post_model_json["crn"] = "testString"
         toolchain_post_model_json["href"] = "testString"
         toolchain_post_model_json["ui_href"] = "testString"
@@ -2164,9 +2164,9 @@ class TestModel_ToolchainPrototypePatch:
         # Construct a json representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model_json = {}
         toolchain_prototype_patch_model_json["name"] = "newToolchainName"
-        toolchain_prototype_patch_model_json[
-            "description"
-        ] = "New toolchain description"
+        toolchain_prototype_patch_model_json["description"] = (
+            "New toolchain description"
+        )
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
         toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(
@@ -2208,9 +2208,9 @@ class TestModel_ToolchainTool:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model[
-            "ui_href"
-        ] = "https://my-team.slack.com/messages/my-channel"
+        tool_model_referent_model["ui_href"] = (
+            "https://my-team.slack.com/messages/my-channel"
+        )
         tool_model_referent_model["api_href"] = "testString"
 
         # Construct a json representation of a ToolchainTool model
@@ -2259,54 +2259,54 @@ class TestModel_ToolchainToolCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         toolchain_tool_collection_first_model = {}  # ToolchainToolCollectionFirst
-        toolchain_tool_collection_first_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3"
+        toolchain_tool_collection_first_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3"
+        )
 
         toolchain_tool_collection_previous_model = {}  # ToolchainToolCollectionPrevious
-        toolchain_tool_collection_previous_model[
-            "start"
-        ] = "eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
-        toolchain_tool_collection_previous_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
+        toolchain_tool_collection_previous_model["start"] = (
+            "eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
+        )
+        toolchain_tool_collection_previous_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
+        )
 
         toolchain_tool_collection_next_model = {}  # ToolchainToolCollectionNext
-        toolchain_tool_collection_next_model[
-            "start"
-        ] = "eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
-        toolchain_tool_collection_next_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
+        toolchain_tool_collection_next_model["start"] = (
+            "eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
+        )
+        toolchain_tool_collection_next_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
+        )
 
         toolchain_tool_collection_last_model = {}  # ToolchainToolCollectionLast
-        toolchain_tool_collection_last_model[
-            "start"
-        ] = "eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
-        toolchain_tool_collection_last_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
+        toolchain_tool_collection_last_model["start"] = (
+            "eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
+        )
+        toolchain_tool_collection_last_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
+        )
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model[
-            "ui_href"
-        ] = "https://team-one.slack.com/messages/channel-one"
+        tool_model_referent_model["ui_href"] = (
+            "https://team-one.slack.com/messages/channel-one"
+        )
         tool_model_referent_model["api_href"] = "testString"
 
         tool_model_model = {}  # ToolModel
         tool_model_model["id"] = "2983b160-fc37-4c45-8a8f-e616ad7e470b"
         tool_model_model["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        tool_model_model[
-            "crn"
-        ] = "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e:tool:2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        tool_model_model["crn"] = (
+            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e:tool:2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        )
         tool_model_model["tool_type_id"] = "slack"
         tool_model_model["toolchain_id"] = "d02d29f1-e7bb-4977-8a6f-26d7b7bb893e"
-        tool_model_model[
-            "toolchain_crn"
-        ] = "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e::"
-        tool_model_model[
-            "href"
-        ] = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools/2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        tool_model_model["toolchain_crn"] = (
+            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e::"
+        )
+        tool_model_model["href"] = (
+            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools/2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        )
         tool_model_model["referent"] = tool_model_referent_model
         tool_model_model["name"] = "MyTool-1"
         tool_model_model["updated_at"] = "2022-01-01T13:13:07.968000Z"
@@ -2317,18 +2317,18 @@ class TestModel_ToolchainToolCollection:
         toolchain_tool_collection_model_json = {}
         toolchain_tool_collection_model_json["limit"] = 38
         toolchain_tool_collection_model_json["total_count"] = 38
-        toolchain_tool_collection_model_json[
-            "first"
-        ] = toolchain_tool_collection_first_model
-        toolchain_tool_collection_model_json[
-            "previous"
-        ] = toolchain_tool_collection_previous_model
-        toolchain_tool_collection_model_json[
-            "next"
-        ] = toolchain_tool_collection_next_model
-        toolchain_tool_collection_model_json[
-            "last"
-        ] = toolchain_tool_collection_last_model
+        toolchain_tool_collection_model_json["first"] = (
+            toolchain_tool_collection_first_model
+        )
+        toolchain_tool_collection_model_json["previous"] = (
+            toolchain_tool_collection_previous_model
+        )
+        toolchain_tool_collection_model_json["next"] = (
+            toolchain_tool_collection_next_model
+        )
+        toolchain_tool_collection_model_json["last"] = (
+            toolchain_tool_collection_last_model
+        )
         toolchain_tool_collection_model_json["tools"] = [tool_model_model]
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
@@ -2560,9 +2560,9 @@ class TestModel_ToolchainToolPatch:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model[
-            "ui_href"
-        ] = "https://my-team.slack.com/messages/my-channel"
+        tool_model_referent_model["ui_href"] = (
+            "https://my-team.slack.com/messages/my-channel"
+        )
         tool_model_referent_model["api_href"] = "testString"
 
         # Construct a json representation of a ToolchainToolPatch model
@@ -2615,9 +2615,9 @@ class TestModel_ToolchainToolPost:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model[
-            "ui_href"
-        ] = "https://my-team.slack.com/messages/my-channel"
+        tool_model_referent_model["ui_href"] = (
+            "https://my-team.slack.com/messages/my-channel"
+        )
         tool_model_referent_model["api_href"] = "testString"
 
         # Construct a json representation of a ToolchainToolPost model

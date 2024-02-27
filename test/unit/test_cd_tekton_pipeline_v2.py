@@ -1747,9 +1747,9 @@ class TestCreateTektonPipelineDefinition:
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
-        definition_source_properties_model[
-            "url"
-        ] = "https://github.com/open-toolchain/hello-tekton.git"
+        definition_source_properties_model["url"] = (
+            "https://github.com/open-toolchain/hello-tekton.git"
+        )
         definition_source_properties_model["branch"] = "master"
         definition_source_properties_model["tag"] = "testString"
         definition_source_properties_model["path"] = ".tekton"
@@ -1811,9 +1811,9 @@ class TestCreateTektonPipelineDefinition:
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
-        definition_source_properties_model[
-            "url"
-        ] = "https://github.com/open-toolchain/hello-tekton.git"
+        definition_source_properties_model["url"] = (
+            "https://github.com/open-toolchain/hello-tekton.git"
+        )
         definition_source_properties_model["branch"] = "master"
         definition_source_properties_model["tag"] = "testString"
         definition_source_properties_model["path"] = ".tekton"
@@ -2982,9 +2982,9 @@ class TestCreateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model[
-            "properties"
-        ] = trigger_source_properties_prototype_model
+        trigger_source_prototype_model["properties"] = (
+            trigger_source_properties_prototype_model
+        )
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
@@ -3088,9 +3088,9 @@ class TestCreateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model[
-            "properties"
-        ] = trigger_source_properties_prototype_model
+        trigger_source_prototype_model["properties"] = (
+            trigger_source_properties_prototype_model
+        )
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
@@ -3269,9 +3269,9 @@ class TestUpdateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model[
-            "properties"
-        ] = trigger_source_properties_prototype_model
+        trigger_source_prototype_model["properties"] = (
+            trigger_source_properties_prototype_model
+        )
 
         # Construct a dict representation of a TriggerPatch model
         trigger_patch_model = {}
@@ -3284,9 +3284,9 @@ class TestUpdateTektonPipelineTrigger:
         trigger_patch_model["enabled"] = True
         trigger_patch_model["secret"] = generic_secret_model
         trigger_patch_model["cron"] = "testString"
-        trigger_patch_model[
-            "timezone"
-        ] = "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        trigger_patch_model["timezone"] = (
+            "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        )
         trigger_patch_model["source"] = trigger_source_prototype_model
         trigger_patch_model["events"] = ["push", "pull_request"]
         trigger_patch_model["favorite"] = False
@@ -5148,9 +5148,9 @@ class TestModel_TektonPipeline:
 
         toolchain_reference_model = {}  # ToolchainReference
         toolchain_reference_model["id"] = "testString"
-        toolchain_reference_model[
-            "crn"
-        ] = "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"
+        toolchain_reference_model["crn"] = (
+            "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"
+        )
 
         tool_model = {}  # Tool
         tool_model["id"] = "testString"
@@ -5331,9 +5331,9 @@ class TestModel_ToolchainReference:
         # Construct a json representation of a ToolchainReference model
         toolchain_reference_model_json = {}
         toolchain_reference_model_json["id"] = "testString"
-        toolchain_reference_model_json[
-            "crn"
-        ] = "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"
+        toolchain_reference_model_json["crn"] = (
+            "crn:v1:staging:public:toolchain:us-south:a/0ba224679d6c697f9baee5e14ade83ac:bf5fa00f-ddef-4298-b87b-aa8b6da0e1a6::"
+        )
 
         # Construct a model instance of ToolchainReference by calling from_dict on the json representation
         toolchain_reference_model = ToolchainReference.from_dict(
@@ -5388,9 +5388,9 @@ class TestModel_TriggerPatch:
 
         trigger_source_prototype_model = {}  # TriggerSourcePrototype
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model[
-            "properties"
-        ] = trigger_source_properties_prototype_model
+        trigger_source_prototype_model["properties"] = (
+            trigger_source_properties_prototype_model
+        )
 
         # Construct a json representation of a TriggerPatch model
         trigger_patch_model_json = {}
@@ -5403,9 +5403,9 @@ class TestModel_TriggerPatch:
         trigger_patch_model_json["enabled"] = True
         trigger_patch_model_json["secret"] = generic_secret_model
         trigger_patch_model_json["cron"] = "testString"
-        trigger_patch_model_json[
-            "timezone"
-        ] = "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        trigger_patch_model_json["timezone"] = (
+            "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        )
         trigger_patch_model_json["source"] = trigger_source_prototype_model
         trigger_patch_model_json["events"] = ["push", "pull_request"]
         trigger_patch_model_json["favorite"] = False
@@ -5691,9 +5691,9 @@ class TestModel_TriggerSourcePrototype:
         # Construct a json representation of a TriggerSourcePrototype model
         trigger_source_prototype_model_json = {}
         trigger_source_prototype_model_json["type"] = "testString"
-        trigger_source_prototype_model_json[
-            "properties"
-        ] = trigger_source_properties_prototype_model
+        trigger_source_prototype_model_json["properties"] = (
+            trigger_source_properties_prototype_model
+        )
 
         # Construct a model instance of TriggerSourcePrototype by calling from_dict on the json representation
         trigger_source_prototype_model = TriggerSourcePrototype.from_dict(
@@ -6124,9 +6124,9 @@ class TestModel_TriggerTimerTrigger:
         trigger_timer_trigger_model_json["enabled"] = True
         trigger_timer_trigger_model_json["favorite"] = False
         trigger_timer_trigger_model_json["cron"] = "testString"
-        trigger_timer_trigger_model_json[
-            "timezone"
-        ] = "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        trigger_timer_trigger_model_json["timezone"] = (
+            "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
+        )
 
         # Construct a model instance of TriggerTimerTrigger by calling from_dict on the json representation
         trigger_timer_trigger_model = TriggerTimerTrigger.from_dict(
