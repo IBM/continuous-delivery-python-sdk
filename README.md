@@ -1,4 +1,4 @@
-[![Build Status](https://v3.travis.ibm.com/CloudEngineering/python-sdk-template.svg?token=Z799xXryYYPor3yyJxEs&branch=main)](https://v3.travis.ibm.com/CloudEngineering/python-sdk-template)
+[![Build Status](https://app.travis-ci.com/IBM/continuous-delivery-python-sdk.svg?branch=main)](https://app.travis-ci.com/github/IBM/continuous-delivery-python-sdk)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/ibm-continuous-delivery)](https://pypi.org/project/ibm-continuous-delivery/)
 [![Latest Stable Version](https://img.shields.io/pypi/v/ibm-continuous-delivery.svg)](https://pypi.python.org/pypi/ibm-continuous-delivery)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
