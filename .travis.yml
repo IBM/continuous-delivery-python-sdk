@@ -1,6 +1,6 @@
 dist: focal
 
-group: focal
+group: stable
 
 language: python
 
