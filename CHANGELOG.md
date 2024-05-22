@@ -1,3 +1,16 @@
+# [1.6.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.5.0...v1.6.0) (2024-05-22)
+
+
+### Bug Fixes
+
+* **build:** fix travis builds ([746e6af](https://github.com/IBM/continuous-delivery-python-sdk/commit/746e6afc2f4f7e8a3056a20cead4effd007ba1d0))
+* **build:** fix version.py ([4f70202](https://github.com/IBM/continuous-delivery-python-sdk/commit/4f70202cd165c84813fc00c0c3c12f78bc88d830))
+
+
+### Features
+
+* **tekton:** locked property support ([5aefc0e](https://github.com/IBM/continuous-delivery-python-sdk/commit/5aefc0e946b1bb9266521359fde571a903c1d40c))
+
 # [1.5.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.4.0...v1.5.0) (2023-12-15)
 
 
