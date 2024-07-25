@@ -57,9 +57,10 @@ def preprocess_url(operation_path: str):
 
     # If the request url does NOT end with a /, then just return it as-is.
     # Otherwise, return a regular expression that matches one or more trailing /.
-    if not request_url.endswith("/"):
+    if re.fullmatch(".*/+", request_url) is None:
         return request_url
-    return re.compile(request_url.rstrip("/") + "/+")
+    else:
+        return re.compile(request_url.rstrip("/") + "/+")
 
 
 def test_get_service_url_for_region():
@@ -841,24 +842,18 @@ class TestCreateTektonPipelineRun:
         # Construct a dict representation of a PipelineRunTrigger model
         pipeline_run_trigger_model = {}
         pipeline_run_trigger_model["name"] = "Manual Trigger 1"
-        pipeline_run_trigger_model["properties"] = {"pipeline-debug": "false"}
-        pipeline_run_trigger_model["secure_properties"] = {
-            "secure-property-key": "secure value"
-        }
-        pipeline_run_trigger_model["headers"] = {"source": "api"}
-        pipeline_run_trigger_model["body"] = {
-            "message": "hello world",
-            "enable": "true",
-            "detail": {"name": "example"},
-        }
+        pipeline_run_trigger_model["properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model["secure_properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model["headers"] = {"foo": "bar"}
+        pipeline_run_trigger_model["body"] = {"foo": "bar"}
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
         trigger_name = "testString"
-        trigger_properties = {"anyKey": "anyValue"}
-        secure_trigger_properties = {"anyKey": "anyValue"}
-        trigger_headers = {"anyKey": "anyValue"}
-        trigger_body = {"anyKey": "anyValue"}
+        trigger_properties = {"foo": "bar"}
+        secure_trigger_properties = {"foo": "bar"}
+        trigger_headers = {"foo": "bar"}
+        trigger_body = {"foo": "bar"}
         trigger = pipeline_run_trigger_model
 
         # Invoke method
@@ -879,10 +874,10 @@ class TestCreateTektonPipelineRun:
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
         assert req_body["trigger_name"] == "testString"
-        assert req_body["trigger_properties"] == {"anyKey": "anyValue"}
-        assert req_body["secure_trigger_properties"] == {"anyKey": "anyValue"}
-        assert req_body["trigger_headers"] == {"anyKey": "anyValue"}
-        assert req_body["trigger_body"] == {"anyKey": "anyValue"}
+        assert req_body["trigger_properties"] == {"foo": "bar"}
+        assert req_body["secure_trigger_properties"] == {"foo": "bar"}
+        assert req_body["trigger_headers"] == {"foo": "bar"}
+        assert req_body["trigger_body"] == {"foo": "bar"}
         assert req_body["trigger"] == pipeline_run_trigger_model
 
     def test_create_tekton_pipeline_run_all_params_with_retries(self):
@@ -915,24 +910,18 @@ class TestCreateTektonPipelineRun:
         # Construct a dict representation of a PipelineRunTrigger model
         pipeline_run_trigger_model = {}
         pipeline_run_trigger_model["name"] = "Manual Trigger 1"
-        pipeline_run_trigger_model["properties"] = {"pipeline-debug": "false"}
-        pipeline_run_trigger_model["secure_properties"] = {
-            "secure-property-key": "secure value"
-        }
-        pipeline_run_trigger_model["headers"] = {"source": "api"}
-        pipeline_run_trigger_model["body"] = {
-            "message": "hello world",
-            "enable": "true",
-            "detail": {"name": "example"},
-        }
+        pipeline_run_trigger_model["properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model["secure_properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model["headers"] = {"foo": "bar"}
+        pipeline_run_trigger_model["body"] = {"foo": "bar"}
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
         trigger_name = "testString"
-        trigger_properties = {"anyKey": "anyValue"}
-        secure_trigger_properties = {"anyKey": "anyValue"}
-        trigger_headers = {"anyKey": "anyValue"}
-        trigger_body = {"anyKey": "anyValue"}
+        trigger_properties = {"foo": "bar"}
+        secure_trigger_properties = {"foo": "bar"}
+        trigger_headers = {"foo": "bar"}
+        trigger_body = {"foo": "bar"}
         trigger = pipeline_run_trigger_model
 
         # Pass in all but one required param and check for a ValueError
@@ -3019,6 +3008,7 @@ class TestCreateTektonPipelineTrigger:
         timezone = "testString"
         source = trigger_source_prototype_model
         events = ["push"]
+        filter = "testString"
         favorite = False
 
         # Invoke method
@@ -3036,6 +3026,7 @@ class TestCreateTektonPipelineTrigger:
             timezone=timezone,
             source=source,
             events=events,
+            filter=filter,
             favorite=favorite,
             headers={},
         )
@@ -3057,6 +3048,7 @@ class TestCreateTektonPipelineTrigger:
         assert req_body["timezone"] == "testString"
         assert req_body["source"] == trigger_source_prototype_model
         assert req_body["events"] == ["push"]
+        assert req_body["filter"] == "testString"
         assert req_body["favorite"] == False
 
     def test_create_tekton_pipeline_trigger_all_params_with_retries(self):
@@ -3125,6 +3117,7 @@ class TestCreateTektonPipelineTrigger:
         timezone = "testString"
         source = trigger_source_prototype_model
         events = ["push"]
+        filter = "testString"
         favorite = False
 
         # Pass in all but one required param and check for a ValueError
@@ -3308,6 +3301,9 @@ class TestUpdateTektonPipelineTrigger:
         )
         trigger_patch_model["source"] = trigger_source_prototype_model
         trigger_patch_model["events"] = ["push", "pull_request"]
+        trigger_patch_model["filter"] = (
+            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
+        )
         trigger_patch_model["favorite"] = False
 
         # Set up parameter values
@@ -4663,10 +4659,10 @@ class TestModel_PipelineRunTrigger:
         # Construct a json representation of a PipelineRunTrigger model
         pipeline_run_trigger_model_json = {}
         pipeline_run_trigger_model_json["name"] = "start-deploy"
-        pipeline_run_trigger_model_json["properties"] = {"anyKey": "anyValue"}
-        pipeline_run_trigger_model_json["secure_properties"] = {"anyKey": "anyValue"}
-        pipeline_run_trigger_model_json["headers"] = {"anyKey": "anyValue"}
-        pipeline_run_trigger_model_json["body"] = {"anyKey": "anyValue"}
+        pipeline_run_trigger_model_json["properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model_json["secure_properties"] = {"foo": "bar"}
+        pipeline_run_trigger_model_json["headers"] = {"foo": "bar"}
+        pipeline_run_trigger_model_json["body"] = {"foo": "bar"}
 
         # Construct a model instance of PipelineRunTrigger by calling from_dict on the json representation
         pipeline_run_trigger_model = PipelineRunTrigger.from_dict(
@@ -5443,6 +5439,9 @@ class TestModel_TriggerPatch:
         )
         trigger_patch_model_json["source"] = trigger_source_prototype_model
         trigger_patch_model_json["events"] = ["push", "pull_request"]
+        trigger_patch_model_json["filter"] = (
+            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
+        )
         trigger_patch_model_json["favorite"] = False
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
@@ -5964,6 +5963,9 @@ class TestModel_TriggerGenericTrigger:
         trigger_generic_trigger_model_json["favorite"] = False
         trigger_generic_trigger_model_json["secret"] = generic_secret_model
         trigger_generic_trigger_model_json["webhook_url"] = "testString"
+        trigger_generic_trigger_model_json["filter"] = (
+            "event.type == 'message' && event.text.contains('urgent')"
+        )
 
         # Construct a model instance of TriggerGenericTrigger by calling from_dict on the json representation
         trigger_generic_trigger_model = TriggerGenericTrigger.from_dict(
@@ -6105,6 +6107,9 @@ class TestModel_TriggerScmTrigger:
         trigger_scm_trigger_model_json["favorite"] = False
         trigger_scm_trigger_model_json["source"] = trigger_source_model
         trigger_scm_trigger_model_json["events"] = ["push", "pull_request"]
+        trigger_scm_trigger_model_json["filter"] = (
+            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
+        )
 
         # Construct a model instance of TriggerScmTrigger by calling from_dict on the json representation
         trigger_scm_trigger_model = TriggerScmTrigger.from_dict(
