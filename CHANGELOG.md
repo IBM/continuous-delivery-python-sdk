@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.6.0...v1.7.0) (2024-07-29)
+
+
+### Bug Fixes
+
+* update sdk core and bump tooling ([9b7307d](https://github.com/IBM/continuous-delivery-python-sdk/commit/9b7307de197fbf76f6100a39bef2178005072a4c))
+
+
+### Features
+
+* **tekton:** Add support for CEL filtering ([d6a809a](https://github.com/IBM/continuous-delivery-python-sdk/commit/d6a809a41d7159c5cad3a761493eadd5bf28daad))
+
 # [1.6.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.5.0...v1.6.0) (2024-05-22)
 
 
