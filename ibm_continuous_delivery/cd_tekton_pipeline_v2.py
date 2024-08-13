@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.76.0-ad3e6f96-20230724-172814
+# IBM OpenAPI SDK Code Generator Version: 3.72.0-5d70f2bb-20230511-203609
 
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
@@ -139,18 +139,18 @@ class CdTektonPipelineV2(BaseService):
         :param int next_build_number: (optional) Specify the build number that will
                be used for the next pipeline run. Build numbers can be any positive whole
                number between 0 and 100000000000000.
-        :param bool enable_notifications: (optional) Flag whether to enable
-               notifications for this pipeline. When enabled, pipeline run events are
-               published on all slack integration specified channels in the parent
-               toolchain.
-        :param bool enable_partial_cloning: (optional) Flag whether to enable
-               partial cloning for this pipeline. When partial clone is enabled, only the
-               files contained within the paths specified in definition repositories are
-               read and cloned, this means that symbolic links might not work.
-        :param WorkerIdentity worker: (optional) Specify the worker used to run the
-               trigger, as a worker object containing the worker ID only. If omitted, or
-               specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
-               used.
+        :param bool enable_notifications: (optional) Flag to enable notifications
+               for this pipeline. If enabled, the Tekton pipeline run events will be
+               published to all the destinations specified by the Slack and Event
+               Notifications integrations in the parent toolchain.
+        :param bool enable_partial_cloning: (optional) Flag to enable partial
+               cloning for this pipeline. When partial clone is enabled, only the files
+               contained within the paths specified in definition repositories are read
+               and cloned, this means that symbolic links might not work.
+        :param WorkerIdentity worker: (optional) Specify the worker that is to be
+               used to run the trigger, indicated by a worker object with only the worker
+               ID. If not specified or set as `worker: { id: 'public' }`, the IBM Managed
+               shared workers are used.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TektonPipeline` object
@@ -427,17 +427,17 @@ class CdTektonPipelineV2(BaseService):
         """
         Trigger a pipeline run.
 
-        Trigger a new pipeline run with the named manual or timer trigger, using the
-        provided additional or override properties.
+        Trigger a new pipeline run using either the manual or the timed trigger,
+        specifying the additional properties or overriding existing ones as needed.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str trigger_name: (optional) Trigger name.
         :param dict trigger_properties: (optional) An object containing string
-               values only that provides additional `text` properties, or overrides
-               existing pipeline/trigger properties, to use for the created run.
+               values only. It provides additional 'text' properties or overrides existing
+               pipeline/trigger properties that can be used in the created run.
         :param dict secure_trigger_properties: (optional) An object containing
-               string values only that provides additional `secure` properties, or
-               overrides existing `secure` pipeline/trigger properties, to use for the
+               string values only. It provides additional `secure` properties or overrides
+               existing `secure` pipeline/trigger properties that can be used in the
                created run.
         :param dict trigger_headers: (optional) An object containing string values
                only that provides the request headers. Use `$(header.header_key_name)` to
@@ -622,7 +622,8 @@ class CdTektonPipelineV2(BaseService):
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str id: ID of current instance.
-        :param bool force: (optional) Flag whether force cancel.
+        :param bool force: (optional) Flag indicating whether the pipeline
+               cancellation action is forced or not.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `PipelineRun` object
@@ -954,7 +955,7 @@ class CdTektonPipelineV2(BaseService):
         Retrieve a single definition entry.
 
         This request fetches a single definition entry, which consists of the definition
-        repository URL, branch/tag and path.
+        repository URL, a repository path, and a branch or tag.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str definition_id: The definition ID.
@@ -1124,7 +1125,7 @@ class CdTektonPipelineV2(BaseService):
         """
         List the pipeline's environment properties.
 
-        This request lists the environment properties the pipeline identified by
+        This request lists the environment properties of the pipeline identified by
         `{pipeline_id}`.
 
         :param str pipeline_id: The Tekton pipeline ID.
@@ -1182,6 +1183,7 @@ class CdTektonPipelineV2(BaseService):
         *,
         value: str = None,
         enum: List[str] = None,
+        locked: bool = None,
         path: str = None,
         **kwargs,
     ) -> DetailedResponse:
@@ -1196,6 +1198,9 @@ class CdTektonPipelineV2(BaseService):
         :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden by a trigger property or at runtime. Attempting to override it
+               will result in run requests being rejected. The default is false.
         :param str path: (optional) A dot notation path for `integration` type
                properties only, to select a value from the tool integration. If left blank
                the full tool integration data will be used.
@@ -1223,6 +1228,7 @@ class CdTektonPipelineV2(BaseService):
             "type": type,
             "value": value,
             "enum": enum,
+            "locked": locked,
             "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
@@ -1308,6 +1314,7 @@ class CdTektonPipelineV2(BaseService):
         *,
         value: str = None,
         enum: List[str] = None,
+        locked: bool = None,
         path: str = None,
         **kwargs,
     ) -> DetailedResponse:
@@ -1315,7 +1322,7 @@ class CdTektonPipelineV2(BaseService):
         Replace the value of an environment property.
 
         This request updates the value of an environment property identified by
-        `{property_name}`, its type or name are immutable.
+        `{property_name}`, its type and name are immutable.
 
         :param str pipeline_id: The Tekton pipeline ID.
         :param str property_name: The property name.
@@ -1324,6 +1331,9 @@ class CdTektonPipelineV2(BaseService):
         :param str value: (optional) Property value. Any string value is valid.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden by a trigger property or at runtime. Attempting to override it
+               will result in run requests being rejected. The default is false.
         :param str path: (optional) A dot notation path for `integration` type
                properties only, to select a value from the tool integration. If left blank
                the full tool integration data will be used.
@@ -1353,6 +1363,7 @@ class CdTektonPipelineV2(BaseService):
             "type": type,
             "value": value,
             "enum": enum,
+            "locked": locked,
             "path": path,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
@@ -1529,6 +1540,7 @@ class CdTektonPipelineV2(BaseService):
         timezone: str = None,
         source: "TriggerSourcePrototype" = None,
         events: List[str] = None,
+        filter: str = None,
         favorite: bool = None,
         **kwargs,
     ) -> DetailedResponse:
@@ -1545,21 +1557,23 @@ class CdTektonPipelineV2(BaseService):
                defined in the definition repositories of the Tekton pipeline.
         :param List[str] tags: (optional) Trigger tags array.
         :param WorkerIdentity worker: (optional) Specify the worker used to run the
-               trigger. Use `worker: { id: 'public' }` to use the IBM Managed workers. Use
-               `worker: { id: 'inherit' }` to inherit the worker used by the pipeline.
+               trigger. Use `worker: { id: 'public' }` to use the IBM Managed workers. The
+               default is to inherit the worker set in the pipeline settings, which can
+               also be explicitly set using `worker: { id: 'inherit' }`.
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
-        :param bool enabled: (optional) Flag whether the trigger is enabled. If
+        :param bool enabled: (optional) Flag to check if the trigger is enabled. If
                omitted the trigger is enabled by default.
-        :param GenericSecret secret: (optional) Only needed for generic webhook
-               trigger type. Secret used to start generic webhook trigger.
-        :param str cron: (optional) Only needed for timer triggers. Cron expression
+        :param GenericSecret secret: (optional) Only needed for Generic Webhook
+               trigger type. The secret is used to start the Generic Webhook trigger.
+        :param str cron: (optional) Only needed for timer triggers. CRON expression
                that indicates when this trigger will activate. Maximum frequency is every
                5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
-               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+               month, month, day of week. Example: The CRON expression 0 */2 * * * -
+               translates to - every 2 hours.
         :param str timezone: (optional) Only used for timer triggers. Specify the
-               timezone used for this timer trigger, which will ensure the cron activates
+               timezone used for this timer trigger, which will ensure the CRON activates
                this trigger relative to the specified timezone. If no timezone is
                specified, the default timezone used is UTC. Valid timezones are those
                listed in the IANA timezone database, https://www.iana.org/time-zones.
@@ -1568,11 +1582,14 @@ class CdTektonPipelineV2(BaseService):
                must match the URL of a repository tool integration in the parent
                toolchain. Obtain the list of integrations from the toolchain API
                https://cloud.ibm.com/apidocs/toolchain#list-tools.
-        :param List[str] events: (optional) Only needed for Git triggers. List of
-               events to which a Git trigger listens. Choose one or more from: 'push',
-               'pull_request' and 'pull_request_closed'. For SCM repositories that use
-               'merge request' events, such events map to the equivalent 'pull request'
-               events.
+        :param List[str] events: (optional) Either 'events' or 'filter' is required
+               specifically for Git triggers. Stores a list of events that a Git trigger
+               listens to. Choose one or more from 'push', 'pull_request', and
+               'pull_request_closed'. If SCM repositories use the 'merge request' term,
+               they correspond to the generic term i.e. 'pull request'.
+        :param str filter: (optional) Either 'events' or 'filter' can be used.
+               Stores the CEL (Common Expression Language) expression value which is used
+               for event filtering against the Git webhook payloads.
         :param bool favorite: (optional) Mark the trigger as a favorite.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
@@ -1614,6 +1631,7 @@ class CdTektonPipelineV2(BaseService):
             "timezone": timezone,
             "source": source,
             "events": events,
+            "filter": filter,
             "favorite": favorite,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
@@ -1943,6 +1961,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
+        locked: bool = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -1960,6 +1979,9 @@ class CdTektonPipelineV2(BaseService):
         :param str path: (optional) A dot notation path for `integration` type
                properties only, to select a value from the tool integration. If left blank
                the full tool integration data will be used.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden at runtime. Attempting to override it will result in run
+               requests being rejected. The default is false.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TriggerProperty` object
@@ -1987,6 +2009,7 @@ class CdTektonPipelineV2(BaseService):
             "value": value,
             "enum": enum,
             "path": path,
+            "locked": locked,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -2080,6 +2103,7 @@ class CdTektonPipelineV2(BaseService):
         value: str = None,
         enum: List[str] = None,
         path: str = None,
+        locked: bool = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -2098,6 +2122,9 @@ class CdTektonPipelineV2(BaseService):
         :param str path: (optional) A dot notation path for `integration` type
                properties only, to select a value from the tool integration. If left blank
                the full tool integration data will be used.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden at runtime. Attempting to override it will result in run
+               requests being rejected. The default is false.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `TriggerProperty` object
@@ -2127,6 +2154,7 @@ class CdTektonPipelineV2(BaseService):
             "value": value,
             "enum": enum,
             "path": path,
+            "locked": locked,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -2226,7 +2254,6 @@ class ListTektonPipelineRunsEnums:
         QUEUED = "queued"
         RUNNING = "running"
         CANCELLED = "cancelled"
-        CANCELLING = "cancelling"
         FAILED = "failed"
         ERROR = "error"
         SUCCEEDED = "succeeded"
@@ -2549,7 +2576,7 @@ class DefinitionSourceProperties:
 class DefinitionsCollection:
     """
     Pipeline definitions is a collection of individual definition entries, each entry
-    consists of a repository URL, branch/tag and path.
+    consists of a repository URL, a repository path, and a branch or tag.
 
     :attr List[Definition] definitions: The list of all definitions in the pipeline.
     """
@@ -2619,8 +2646,8 @@ class DefinitionsCollection:
 
 class GenericSecret:
     """
-    Only needed for generic webhook trigger type. Secret used to start generic webhook
-    trigger.
+    Only needed for Generic Webhook trigger type. The secret is used to start the Generic
+    Webhook trigger.
 
     :attr str type: (optional) Secret type.
     :attr str value: (optional) Secret value, not needed if secret type is
@@ -3185,7 +3212,6 @@ class PipelineRun:
         QUEUED = "queued"
         RUNNING = "running"
         CANCELLED = "cancelled"
-        CANCELLING = "cancelling"
         FAILED = "failed"
         ERROR = "error"
         SUCCEEDED = "succeeded"
@@ -3196,12 +3222,12 @@ class PipelineRunTrigger:
     Trigger details passed when triggering a Tekton pipeline run.
 
     :attr str name: Trigger name.
-    :attr dict properties: (optional) An object containing string values only that
-          provides additional `text` properties, or overrides existing pipeline/trigger
-          properties, to use for the created run.
-    :attr dict secure_properties: (optional) An object containing string values only
-          that provides additional `secure` properties, or overrides existing `secure`
-          pipeline/trigger properties, to use for the created run.
+    :attr dict properties: (optional) An object containing string values only. It
+          provides additional 'text' properties or overrides existing pipeline/trigger
+          properties that can be used in the created run.
+    :attr dict secure_properties: (optional) An object containing string values
+          only. It provides additional `secure` properties or overrides existing `secure`
+          pipeline/trigger properties that can be used in the created run.
     :attr dict headers_: (optional) An object containing string values only that
           provides the request headers. Use `$(header.header_key_name)` to access it in a
           TriggerBinding. Most commonly used as part of a Generic Webhook to provide a
@@ -3225,12 +3251,13 @@ class PipelineRunTrigger:
         Initialize a PipelineRunTrigger object.
 
         :param str name: Trigger name.
-        :param dict properties: (optional) An object containing string values only
-               that provides additional `text` properties, or overrides existing
-               pipeline/trigger properties, to use for the created run.
+        :param dict properties: (optional) An object containing string values only.
+               It provides additional 'text' properties or overrides existing
+               pipeline/trigger properties that can be used in the created run.
         :param dict secure_properties: (optional) An object containing string
-               values only that provides additional `secure` properties, or overrides
-               existing `secure` pipeline/trigger properties, to use for the created run.
+               values only. It provides additional `secure` properties or overrides
+               existing `secure` pipeline/trigger properties that can be used in the
+               created run.
         :param dict headers_: (optional) An object containing string values only
                that provides the request headers. Use `$(header.header_key_name)` to
                access it in a TriggerBinding. Most commonly used as part of a Generic
@@ -3603,6 +3630,9 @@ class Property:
     :attr List[str] enum: (optional) Options for `single_select` property type. Only
           needed when using `single_select` property type.
     :attr str type: Property type.
+    :attr bool locked: (optional) When true, this property cannot be overridden by a
+          trigger property or at runtime. Attempting to override it will result in run
+          requests being rejected. The default is false.
     :attr str path: (optional) A dot notation path for `integration` type properties
           only, that selects a value from the tool integration. If left blank the full
           tool integration data will be used.
@@ -3616,6 +3646,7 @@ class Property:
         value: str = None,
         href: str = None,
         enum: List[str] = None,
+        locked: bool = None,
         path: str = None,
     ) -> None:
         """
@@ -3627,6 +3658,9 @@ class Property:
         :param str href: (optional) API URL for interacting with the property.
         :param List[str] enum: (optional) Options for `single_select` property
                type. Only needed when using `single_select` property type.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden by a trigger property or at runtime. Attempting to override it
+               will result in run requests being rejected. The default is false.
         :param str path: (optional) A dot notation path for `integration` type
                properties only, that selects a value from the tool integration. If left
                blank the full tool integration data will be used.
@@ -3636,6 +3670,7 @@ class Property:
         self.href = href
         self.enum = enum
         self.type = type
+        self.locked = locked
         self.path = path
 
     @classmethod
@@ -3656,6 +3691,8 @@ class Property:
             args["type"] = _dict.get("type")
         else:
             raise ValueError("Required property 'type' not present in Property JSON")
+        if "locked" in _dict:
+            args["locked"] = _dict.get("locked")
         if "path" in _dict:
             args["path"] = _dict.get("path")
         return cls(**args)
@@ -3678,6 +3715,8 @@ class Property:
             _dict["enum"] = self.enum
         if hasattr(self, "type") and self.type is not None:
             _dict["type"] = self.type
+        if hasattr(self, "locked") and self.locked is not None:
+            _dict["locked"] = self.locked
         if hasattr(self, "path") and self.path is not None:
             _dict["path"] = self.path
         return _dict
@@ -4166,16 +4205,15 @@ class TektonPipeline:
           is absent, the pipeline hasn't had any pipeline runs.
     :attr int next_build_number: (optional) The build number that will be used for
           the next pipeline run.
-    :attr bool enable_notifications: Flag whether to enable notifications for this
-          pipeline. When enabled, pipeline run events will be published on all slack
-          integration specified channels in the parent toolchain. If omitted, this feature
-          is disabled by default.
-    :attr bool enable_partial_cloning: Flag whether to enable partial cloning for
-          this pipeline. When partial clone is enabled, only the files contained within
-          the paths specified in definition repositories are read and cloned, this means
-          that symbolic links might not work. If omitted, this feature is disabled by
-          default.
-    :attr bool enabled: Flag whether this pipeline is enabled.
+    :attr bool enable_notifications: Flag to enable notifications for this pipeline.
+          If enabled, the Tekton pipeline run events will be published to all the
+          destinations specified by the Slack and Event Notifications integrations in the
+          parent toolchain. If omitted, this feature is disabled by default.
+    :attr bool enable_partial_cloning: Flag to enable partial cloning for this
+          pipeline. When partial clone is enabled, only the files contained within the
+          paths specified in definition repositories are read and cloned, this means that
+          symbolic links might not work. If omitted, this feature is disabled by default.
+    :attr bool enabled: Flag to check if the trigger is enabled.
     """
 
     def __init__(
@@ -4220,16 +4258,17 @@ class TektonPipeline:
                runs.
         :param int build_number: The latest pipeline run build number. If this
                property is absent, the pipeline hasn't had any pipeline runs.
-        :param bool enable_notifications: Flag whether to enable notifications for
-               this pipeline. When enabled, pipeline run events will be published on all
-               slack integration specified channels in the parent toolchain. If omitted,
-               this feature is disabled by default.
-        :param bool enable_partial_cloning: Flag whether to enable partial cloning
-               for this pipeline. When partial clone is enabled, only the files contained
-               within the paths specified in definition repositories are read and cloned,
-               this means that symbolic links might not work. If omitted, this feature is
+        :param bool enable_notifications: Flag to enable notifications for this
+               pipeline. If enabled, the Tekton pipeline run events will be published to
+               all the destinations specified by the Slack and Event Notifications
+               integrations in the parent toolchain. If omitted, this feature is disabled
+               by default.
+        :param bool enable_partial_cloning: Flag to enable partial cloning for this
+               pipeline. When partial clone is enabled, only the files contained within
+               the paths specified in definition repositories are read and cloned, this
+               means that symbolic links might not work. If omitted, this feature is
                disabled by default.
-        :param bool enabled: Flag whether this pipeline is enabled.
+        :param bool enabled: Flag to check if the trigger is enabled.
         :param str href: (optional) API URL for interacting with the pipeline.
         :param int next_build_number: (optional) The build number that will be used
                for the next pipeline run.
@@ -4478,17 +4517,18 @@ class TektonPipelinePatch:
     :attr int next_build_number: (optional) Specify the build number that will be
           used for the next pipeline run. Build numbers can be any positive whole number
           between 0 and 100000000000000.
-    :attr bool enable_notifications: (optional) Flag whether to enable notifications
-          for this pipeline. When enabled, pipeline run events are published on all slack
-          integration specified channels in the parent toolchain.
-    :attr bool enable_partial_cloning: (optional) Flag whether to enable partial
-          cloning for this pipeline. When partial clone is enabled, only the files
-          contained within the paths specified in definition repositories are read and
-          cloned, this means that symbolic links might not work.
-    :attr WorkerIdentity worker: (optional) Specify the worker used to run the
-          trigger, as a worker object containing the worker ID only. If omitted, or
-          specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
-          used.
+    :attr bool enable_notifications: (optional) Flag to enable notifications for
+          this pipeline. If enabled, the Tekton pipeline run events will be published to
+          all the destinations specified by the Slack and Event Notifications integrations
+          in the parent toolchain.
+    :attr bool enable_partial_cloning: (optional) Flag to enable partial cloning for
+          this pipeline. When partial clone is enabled, only the files contained within
+          the paths specified in definition repositories are read and cloned, this means
+          that symbolic links might not work.
+    :attr WorkerIdentity worker: (optional) Specify the worker that is to be used to
+          run the trigger, indicated by a worker object with only the worker ID. If not
+          specified or set as `worker: { id: 'public' }`, the IBM Managed shared workers
+          are used.
     """
 
     def __init__(
@@ -4505,18 +4545,18 @@ class TektonPipelinePatch:
         :param int next_build_number: (optional) Specify the build number that will
                be used for the next pipeline run. Build numbers can be any positive whole
                number between 0 and 100000000000000.
-        :param bool enable_notifications: (optional) Flag whether to enable
-               notifications for this pipeline. When enabled, pipeline run events are
-               published on all slack integration specified channels in the parent
-               toolchain.
-        :param bool enable_partial_cloning: (optional) Flag whether to enable
-               partial cloning for this pipeline. When partial clone is enabled, only the
-               files contained within the paths specified in definition repositories are
-               read and cloned, this means that symbolic links might not work.
-        :param WorkerIdentity worker: (optional) Specify the worker used to run the
-               trigger, as a worker object containing the worker ID only. If omitted, or
-               specified as `worker: { id: 'public' }`, the IBM Managed shared workers are
-               used.
+        :param bool enable_notifications: (optional) Flag to enable notifications
+               for this pipeline. If enabled, the Tekton pipeline run events will be
+               published to all the destinations specified by the Slack and Event
+               Notifications integrations in the parent toolchain.
+        :param bool enable_partial_cloning: (optional) Flag to enable partial
+               cloning for this pipeline. When partial clone is enabled, only the files
+               contained within the paths specified in definition repositories are read
+               and cloned, this means that symbolic links might not work.
+        :param WorkerIdentity worker: (optional) Specify the worker that is to be
+               used to run the trigger, indicated by a worker object with only the worker
+               ID. If not specified or set as `worker: { id: 'public' }`, the IBM Managed
+               shared workers are used.
         """
         self.next_build_number = next_build_number
         self.enable_notifications = enable_notifications
@@ -4760,14 +4800,15 @@ class TriggerPatch:
           concurrent runs for this trigger. If set to 0 then the custom concurrency limit
           is disabled for this trigger.
     :attr bool enabled: (optional) Defines if this trigger is enabled.
-    :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
-          type. Secret used to start generic webhook trigger.
-    :attr str cron: (optional) Only needed for timer triggers. Cron expression that
+    :attr GenericSecret secret: (optional) Only needed for Generic Webhook trigger
+          type. The secret is used to start the Generic Webhook trigger.
+    :attr str cron: (optional) Only needed for timer triggers. CRON expression that
           indicates when this trigger will activate. Maximum frequency is every 5 minutes.
           The string is based on UNIX crontab syntax: minute, hour, day of month, month,
-          day of week. Example: 0 */2 * * * - every 2 hours.
+          day of week. Example: The CRON expression 0 */2 * * * - translates to - every 2
+          hours.
     :attr str timezone: (optional) Only used for timer triggers. Specify the
-          timezone used for this timer trigger, which will ensure the cron activates this
+          timezone used for this timer trigger, which will ensure the CRON activates this
           trigger relative to the specified timezone. If no timezone is specified, the
           default timezone used is UTC. Valid timezones are those listed in the IANA
           timezone database, https://www.iana.org/time-zones.
@@ -4776,10 +4817,14 @@ class TriggerPatch:
           match the URL of a repository tool integration in the parent toolchain. Obtain
           the list of integrations from the toolchain API
           https://cloud.ibm.com/apidocs/toolchain#list-tools.
-    :attr List[str] events: (optional) Only needed for Git triggers. List of events
-          to which a Git trigger listens. Choose one or more from: 'push', 'pull_request'
-          and 'pull_request_closed'. For SCM repositories that use 'merge request' events,
-          such events map to the equivalent 'pull request' events.
+    :attr List[str] events: (optional) Either 'events' or 'filter' is required
+          specifically for Git triggers. Stores a list of events that a Git trigger
+          listens to. Choose one or more from 'push', 'pull_request', and
+          'pull_request_closed'. If SCM repositories use the 'merge request' term, they
+          correspond to the generic term i.e. 'pull request'.
+    :attr str filter: (optional) Either 'events' or 'filter' can be used. Stores the
+          CEL (Common Expression Language) expression value which is used for event
+          filtering against the Git webhook payloads.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
     """
 
@@ -4798,6 +4843,7 @@ class TriggerPatch:
         timezone: str = None,
         source: "TriggerSourcePrototype" = None,
         events: List[str] = None,
+        filter: str = None,
         favorite: bool = None,
     ) -> None:
         """
@@ -4817,14 +4863,15 @@ class TriggerPatch:
                concurrent runs for this trigger. If set to 0 then the custom concurrency
                limit is disabled for this trigger.
         :param bool enabled: (optional) Defines if this trigger is enabled.
-        :param GenericSecret secret: (optional) Only needed for generic webhook
-               trigger type. Secret used to start generic webhook trigger.
-        :param str cron: (optional) Only needed for timer triggers. Cron expression
+        :param GenericSecret secret: (optional) Only needed for Generic Webhook
+               trigger type. The secret is used to start the Generic Webhook trigger.
+        :param str cron: (optional) Only needed for timer triggers. CRON expression
                that indicates when this trigger will activate. Maximum frequency is every
                5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
-               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+               month, month, day of week. Example: The CRON expression 0 */2 * * * -
+               translates to - every 2 hours.
         :param str timezone: (optional) Only used for timer triggers. Specify the
-               timezone used for this timer trigger, which will ensure the cron activates
+               timezone used for this timer trigger, which will ensure the CRON activates
                this trigger relative to the specified timezone. If no timezone is
                specified, the default timezone used is UTC. Valid timezones are those
                listed in the IANA timezone database, https://www.iana.org/time-zones.
@@ -4833,11 +4880,14 @@ class TriggerPatch:
                must match the URL of a repository tool integration in the parent
                toolchain. Obtain the list of integrations from the toolchain API
                https://cloud.ibm.com/apidocs/toolchain#list-tools.
-        :param List[str] events: (optional) Only needed for Git triggers. List of
-               events to which a Git trigger listens. Choose one or more from: 'push',
-               'pull_request' and 'pull_request_closed'. For SCM repositories that use
-               'merge request' events, such events map to the equivalent 'pull request'
-               events.
+        :param List[str] events: (optional) Either 'events' or 'filter' is required
+               specifically for Git triggers. Stores a list of events that a Git trigger
+               listens to. Choose one or more from 'push', 'pull_request', and
+               'pull_request_closed'. If SCM repositories use the 'merge request' term,
+               they correspond to the generic term i.e. 'pull request'.
+        :param str filter: (optional) Either 'events' or 'filter' can be used.
+               Stores the CEL (Common Expression Language) expression value which is used
+               for event filtering against the Git webhook payloads.
         :param bool favorite: (optional) Mark the trigger as a favorite.
         """
         self.type = type
@@ -4852,6 +4902,7 @@ class TriggerPatch:
         self.timezone = timezone
         self.source = source
         self.events = events
+        self.filter = filter
         self.favorite = favorite
 
     @classmethod
@@ -4882,6 +4933,8 @@ class TriggerPatch:
             args["source"] = TriggerSourcePrototype.from_dict(_dict.get("source"))
         if "events" in _dict:
             args["events"] = _dict.get("events")
+        if "filter" in _dict:
+            args["filter"] = _dict.get("filter")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
         return cls(**args)
@@ -4930,6 +4983,8 @@ class TriggerPatch:
                 _dict["source"] = self.source.to_dict()
         if hasattr(self, "events") and self.events is not None:
             _dict["events"] = self.events
+        if hasattr(self, "filter") and self.filter is not None:
+            _dict["filter"] = self.filter
         if hasattr(self, "favorite") and self.favorite is not None:
             _dict["favorite"] = self.favorite
         return _dict
@@ -5056,6 +5111,9 @@ class TriggerProperty:
     :attr str path: (optional) A dot notation path for `integration` type properties
           only, that selects a value from the tool integration. If left blank the full
           tool integration data will be used.
+    :attr bool locked: (optional) When true, this property cannot be overridden at
+          runtime. Attempting to override it will result in run requests being rejected.
+          The default is false.
     """
 
     def __init__(
@@ -5067,6 +5125,7 @@ class TriggerProperty:
         href: str = None,
         enum: List[str] = None,
         path: str = None,
+        locked: bool = None,
     ) -> None:
         """
         Initialize a TriggerProperty object.
@@ -5081,6 +5140,9 @@ class TriggerProperty:
         :param str path: (optional) A dot notation path for `integration` type
                properties only, that selects a value from the tool integration. If left
                blank the full tool integration data will be used.
+        :param bool locked: (optional) When true, this property cannot be
+               overridden at runtime. Attempting to override it will result in run
+               requests being rejected. The default is false.
         """
         self.name = name
         self.value = value
@@ -5088,6 +5150,7 @@ class TriggerProperty:
         self.enum = enum
         self.type = type
         self.path = path
+        self.locked = locked
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> "TriggerProperty":
@@ -5113,6 +5176,8 @@ class TriggerProperty:
             )
         if "path" in _dict:
             args["path"] = _dict.get("path")
+        if "locked" in _dict:
+            args["locked"] = _dict.get("locked")
         return cls(**args)
 
     @classmethod
@@ -5135,6 +5200,8 @@ class TriggerProperty:
             _dict["type"] = self.type
         if hasattr(self, "path") and self.path is not None:
             _dict["path"] = self.path
+        if hasattr(self, "locked") and self.locked is not None:
+            _dict["locked"] = self.locked
         return _dict
 
     def _to_dict(self):
@@ -5258,19 +5325,19 @@ class TriggerSourceProperties:
     pattern.
 
     :attr str url: URL of the repository to which the trigger is listening.
-    :attr str branch: (optional) Name of a branch from the repo. One of branch or
-          pattern must be specified, but only one or the other.
-    :attr str pattern: (optional) The pattern of Git branch or tag to which to
-          listen. You can specify a glob pattern such as '!test' or '*master' to match
-          against multiple tags/branches in the repository. The glob pattern used must
-          conform to Bash 4.3 specifications, see bash documentation for more info:
-          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
-          branch or pattern must be specified, but only one or the other.
+    :attr str branch: (optional) Name of a branch from the repo. Only one of branch,
+          pattern, or filter should be specified.
+    :attr str pattern: (optional) The pattern of Git branch or tag. You can specify
+          a glob pattern such as '!test' or '*master' to match against multiple tags or
+          branches in the repository.The glob pattern used must conform to Bash 4.3
+          specifications, see bash documentation for more info:
+          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only one of
+          branch, pattern, or filter should be specified.
     :attr bool blind_connection: True if the repository server is not addressable on
           the public internet. IBM Cloud will not be able to validate the connection
           details you provide.
-    :attr str hook_id: (optional) ID of the webhook from the repo. Computed upon
-          creation of the trigger.
+    :attr str hook_id: (optional) Repository webhook ID. It is generated upon
+          trigger creation.
     :attr Tool tool: Reference to the repository tool in the parent toolchain.
     """
 
@@ -5292,17 +5359,16 @@ class TriggerSourceProperties:
                addressable on the public internet. IBM Cloud will not be able to validate
                the connection details you provide.
         :param Tool tool: Reference to the repository tool in the parent toolchain.
-        :param str branch: (optional) Name of a branch from the repo. One of branch
-               or pattern must be specified, but only one or the other.
-        :param str pattern: (optional) The pattern of Git branch or tag to which to
-               listen. You can specify a glob pattern such as '!test' or '*master' to
-               match against multiple tags/branches in the repository. The glob pattern
-               used must conform to Bash 4.3 specifications, see bash documentation for
-               more info:
-               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
-               branch or pattern must be specified, but only one or the other.
-        :param str hook_id: (optional) ID of the webhook from the repo. Computed
-               upon creation of the trigger.
+        :param str branch: (optional) Name of a branch from the repo. Only one of
+               branch, pattern, or filter should be specified.
+        :param str pattern: (optional) The pattern of Git branch or tag. You can
+               specify a glob pattern such as '!test' or '*master' to match against
+               multiple tags or branches in the repository.The glob pattern used must
+               conform to Bash 4.3 specifications, see bash documentation for more info:
+               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only
+               one of branch, pattern, or filter should be specified.
+        :param str hook_id: (optional) Repository webhook ID. It is generated upon
+               trigger creation.
         """
         self.url = url
         self.branch = branch
@@ -5391,14 +5457,14 @@ class TriggerSourcePropertiesPrototype:
     pattern.
 
     :attr str url: URL of the repository to which the trigger is listening.
-    :attr str branch: (optional) Name of a branch from the repo. One of branch or
-          pattern must be specified, but only one or the other.
-    :attr str pattern: (optional) The pattern of Git branch or tag to which to
-          listen. You can specify a glob pattern such as '!test' or '*master' to match
-          against multiple tags/branches in the repository. The glob pattern used must
-          conform to Bash 4.3 specifications, see bash documentation for more info:
-          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
-          branch or pattern must be specified, but only one or the other.
+    :attr str branch: (optional) Name of a branch from the repo. Only one of branch,
+          pattern, or filter should be specified.
+    :attr str pattern: (optional) The pattern of Git branch or tag. You can specify
+          a glob pattern such as '!test' or '*master' to match against multiple tags or
+          branches in the repository.The glob pattern used must conform to Bash 4.3
+          specifications, see bash documentation for more info:
+          https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only one of
+          branch, pattern, or filter should be specified.
     """
 
     def __init__(
@@ -5412,15 +5478,14 @@ class TriggerSourcePropertiesPrototype:
         Initialize a TriggerSourcePropertiesPrototype object.
 
         :param str url: URL of the repository to which the trigger is listening.
-        :param str branch: (optional) Name of a branch from the repo. One of branch
-               or pattern must be specified, but only one or the other.
-        :param str pattern: (optional) The pattern of Git branch or tag to which to
-               listen. You can specify a glob pattern such as '!test' or '*master' to
-               match against multiple tags/branches in the repository. The glob pattern
-               used must conform to Bash 4.3 specifications, see bash documentation for
-               more info:
-               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. One of
-               branch or pattern must be specified, but only one or the other.
+        :param str branch: (optional) Name of a branch from the repo. Only one of
+               branch, pattern, or filter should be specified.
+        :param str pattern: (optional) The pattern of Git branch or tag. You can
+               specify a glob pattern such as '!test' or '*master' to match against
+               multiple tags or branches in the repository.The glob pattern used must
+               conform to Bash 4.3 specifications, see bash documentation for more info:
+               https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only
+               one of branch, pattern, or filter should be specified.
         """
         self.url = url
         self.branch = branch
@@ -5779,9 +5844,9 @@ class Worker:
 
 class WorkerIdentity:
     """
-    Specify the worker used to run the trigger, as a worker object containing the worker
-    ID only. If omitted, or specified as `worker: { id: 'public' }`, the IBM Managed
-    shared workers are used.
+    Specify the worker that is to be used to run the trigger, indicated by a worker object
+    with only the worker ID. If not specified or set as `worker: { id: 'public' }`, the
+    IBM Managed shared workers are used.
 
     :attr str id: ID of the worker.
     """
@@ -5854,19 +5919,21 @@ class TriggerGenericTrigger(Trigger):
           definition repositories of the Tekton pipeline.
     :attr str id: The Trigger ID.
     :attr List[TriggerProperty] properties: (optional) Optional trigger properties
-          used to override or supplement the pipeline properties when triggering a
+          are used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
-    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool enabled: Flag to check if the trigger is enabled.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
-    :attr GenericSecret secret: (optional) Only needed for generic webhook trigger
-          type. Secret used to start generic webhook trigger.
+    :attr GenericSecret secret: (optional) Only needed for Generic Webhook trigger
+          type. The secret is used to start the Generic Webhook trigger.
     :attr str webhook_url: (optional) Webhook URL that can be used to trigger
           pipeline runs.
+    :attr str filter: (optional) Stores the CEL (Common Expression Language)
+          expression value which is used for event filtering against the webhook payloads.
     """
 
     def __init__(
@@ -5885,6 +5952,7 @@ class TriggerGenericTrigger(Trigger):
         favorite: bool = None,
         secret: "GenericSecret" = None,
         webhook_url: str = None,
+        filter: str = None,
     ) -> None:
         """
         Initialize a TriggerGenericTrigger object.
@@ -5895,11 +5963,11 @@ class TriggerGenericTrigger(Trigger):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param str id: The Trigger ID.
-        :param bool enabled: Flag whether the trigger is enabled.
+        :param bool enabled: Flag to check if the trigger is enabled.
         :param str href: (optional) API URL for interacting with the trigger. Only
                included when fetching the list of pipeline triggers.
         :param List[TriggerProperty] properties: (optional) Optional trigger
-               properties used to override or supplement the pipeline properties when
+               properties are used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Details of the worker used to run the
@@ -5908,10 +5976,13 @@ class TriggerGenericTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
-        :param GenericSecret secret: (optional) Only needed for generic webhook
-               trigger type. Secret used to start generic webhook trigger.
+        :param GenericSecret secret: (optional) Only needed for Generic Webhook
+               trigger type. The secret is used to start the Generic Webhook trigger.
         :param str webhook_url: (optional) Webhook URL that can be used to trigger
                pipeline runs.
+        :param str filter: (optional) Stores the CEL (Common Expression Language)
+               expression value which is used for event filtering against the webhook
+               payloads.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -5927,6 +5998,7 @@ class TriggerGenericTrigger(Trigger):
         self.favorite = favorite
         self.secret = secret
         self.webhook_url = webhook_url
+        self.filter = filter
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> "TriggerGenericTrigger":
@@ -5980,6 +6052,8 @@ class TriggerGenericTrigger(Trigger):
             args["secret"] = GenericSecret.from_dict(_dict.get("secret"))
         if "webhook_url" in _dict:
             args["webhook_url"] = _dict.get("webhook_url")
+        if "filter" in _dict:
+            args["filter"] = _dict.get("filter")
         return cls(**args)
 
     @classmethod
@@ -6031,6 +6105,8 @@ class TriggerGenericTrigger(Trigger):
                 _dict["secret"] = self.secret.to_dict()
         if hasattr(self, "webhook_url") and self.webhook_url is not None:
             _dict["webhook_url"] = self.webhook_url
+        if hasattr(self, "filter") and self.filter is not None:
+            _dict["filter"] = self.filter
         return _dict
 
     def _to_dict(self):
@@ -6065,14 +6141,14 @@ class TriggerManualTrigger(Trigger):
           definition repositories of the Tekton pipeline.
     :attr str id: The Trigger ID.
     :attr List[TriggerProperty] properties: (optional) Optional trigger properties
-          used to override or supplement the pipeline properties when triggering a
+          are used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
-    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool enabled: Flag to check if the trigger is enabled.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
     """
 
@@ -6100,11 +6176,11 @@ class TriggerManualTrigger(Trigger):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param str id: The Trigger ID.
-        :param bool enabled: Flag whether the trigger is enabled.
+        :param bool enabled: Flag to check if the trigger is enabled.
         :param str href: (optional) API URL for interacting with the trigger. Only
                included when fetching the list of pipeline triggers.
         :param List[TriggerProperty] properties: (optional) Optional trigger
-               properties used to override or supplement the pipeline properties when
+               properties are used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Details of the worker used to run the
@@ -6242,7 +6318,7 @@ class TriggerManualTrigger(Trigger):
 
 class TriggerScmTrigger(Trigger):
     """
-    Git type trigger, which automatically triggers a pipeline run when the Tekton Pipeline
+    Git trigger type. It automatically triggers a pipeline run when the Tekton Pipeline
     Service receives a corresponding Git webhook event.
 
     :attr str type: Trigger type.
@@ -6254,24 +6330,28 @@ class TriggerScmTrigger(Trigger):
           definition repositories of the Tekton pipeline.
     :attr str id: The Trigger ID.
     :attr List[TriggerProperty] properties: (optional) Optional trigger properties
-          used to override or supplement the pipeline properties when triggering a
+          are used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
-    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool enabled: Flag to check if the trigger is enabled.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
     :attr TriggerSource source: (optional) Source repository for a Git trigger. Only
           required for Git triggers. The referenced repository URL must match the URL of a
           repository tool integration in the parent toolchain. Obtain the list of
           integrations from the toolchain API
           https://cloud.ibm.com/apidocs/toolchain#list-tools.
-    :attr List[str] events: (optional) Only needed for Git triggers. List of events
-          to which a Git trigger listens. Choose one or more from: 'push', 'pull_request'
-          and 'pull_request_closed'. For SCM repositories that use 'merge request' events,
-          such events map to the equivalent 'pull request' events.
+    :attr List[str] events: (optional) Either 'events' or 'filter' is required
+          specifically for Git triggers. Stores a list of events that a Git trigger
+          listens to. Choose one or more from 'push', 'pull_request', and
+          'pull_request_closed'. If SCM repositories use the 'merge request' term, they
+          correspond to the generic term i.e. 'pull request'.
+    :attr str filter: (optional) Either 'events' or 'filter' can be used. Stores the
+          CEL (Common Expression Language) expression value which is used for event
+          filtering against the Git webhook payloads.
     """
 
     def __init__(
@@ -6290,6 +6370,7 @@ class TriggerScmTrigger(Trigger):
         favorite: bool = None,
         source: "TriggerSource" = None,
         events: List[str] = None,
+        filter: str = None,
     ) -> None:
         """
         Initialize a TriggerScmTrigger object.
@@ -6300,11 +6381,11 @@ class TriggerScmTrigger(Trigger):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param str id: The Trigger ID.
-        :param bool enabled: Flag whether the trigger is enabled.
+        :param bool enabled: Flag to check if the trigger is enabled.
         :param str href: (optional) API URL for interacting with the trigger. Only
                included when fetching the list of pipeline triggers.
         :param List[TriggerProperty] properties: (optional) Optional trigger
-               properties used to override or supplement the pipeline properties when
+               properties are used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Details of the worker used to run the
@@ -6318,11 +6399,14 @@ class TriggerScmTrigger(Trigger):
                match the URL of a repository tool integration in the parent toolchain.
                Obtain the list of integrations from the toolchain API
                https://cloud.ibm.com/apidocs/toolchain#list-tools.
-        :param List[str] events: (optional) Only needed for Git triggers. List of
-               events to which a Git trigger listens. Choose one or more from: 'push',
-               'pull_request' and 'pull_request_closed'. For SCM repositories that use
-               'merge request' events, such events map to the equivalent 'pull request'
-               events.
+        :param List[str] events: (optional) Either 'events' or 'filter' is required
+               specifically for Git triggers. Stores a list of events that a Git trigger
+               listens to. Choose one or more from 'push', 'pull_request', and
+               'pull_request_closed'. If SCM repositories use the 'merge request' term,
+               they correspond to the generic term i.e. 'pull request'.
+        :param str filter: (optional) Either 'events' or 'filter' can be used.
+               Stores the CEL (Common Expression Language) expression value which is used
+               for event filtering against the Git webhook payloads.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -6338,6 +6422,7 @@ class TriggerScmTrigger(Trigger):
         self.favorite = favorite
         self.source = source
         self.events = events
+        self.filter = filter
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> "TriggerScmTrigger":
@@ -6391,6 +6476,8 @@ class TriggerScmTrigger(Trigger):
             args["source"] = TriggerSource.from_dict(_dict.get("source"))
         if "events" in _dict:
             args["events"] = _dict.get("events")
+        if "filter" in _dict:
+            args["filter"] = _dict.get("filter")
         return cls(**args)
 
     @classmethod
@@ -6442,6 +6529,8 @@ class TriggerScmTrigger(Trigger):
                 _dict["source"] = self.source.to_dict()
         if hasattr(self, "events") and self.events is not None:
             _dict["events"] = self.events
+        if hasattr(self, "filter") and self.filter is not None:
+            _dict["filter"] = self.filter
         return _dict
 
     def _to_dict(self):
@@ -6476,7 +6565,7 @@ class TriggerScmTrigger(Trigger):
 
 class TriggerTimerTrigger(Trigger):
     """
-    Timer trigger, which triggers pipeline runs according to the provided cron value and
+    Timer trigger, which triggers pipeline runs according to the provided CRON value and
     timezone.
 
     :attr str type: Trigger type.
@@ -6488,21 +6577,22 @@ class TriggerTimerTrigger(Trigger):
           definition repositories of the Tekton pipeline.
     :attr str id: The Trigger ID.
     :attr List[TriggerProperty] properties: (optional) Optional trigger properties
-          used to override or supplement the pipeline properties when triggering a
+          are used to override or supplement the pipeline properties when triggering a
           pipeline run.
     :attr List[str] tags: (optional) Optional trigger tags array.
     :attr Worker worker: (optional) Details of the worker used to run the trigger.
     :attr int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If omitted then the concurrency limit is
           disabled for this trigger.
-    :attr bool enabled: Flag whether the trigger is enabled.
+    :attr bool enabled: Flag to check if the trigger is enabled.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
-    :attr str cron: (optional) Only needed for timer triggers. Cron expression that
+    :attr str cron: (optional) Only needed for timer triggers. CRON expression that
           indicates when this trigger will activate. Maximum frequency is every 5 minutes.
           The string is based on UNIX crontab syntax: minute, hour, day of month, month,
-          day of week. Example: 0 */2 * * * - every 2 hours.
+          day of week. Example: The CRON expression 0 */2 * * * - translates to - every 2
+          hours.
     :attr str timezone: (optional) Only used for timer triggers. Specify the
-          timezone used for this timer trigger, which will ensure the cron activates this
+          timezone used for this timer trigger, which will ensure the CRON activates this
           trigger relative to the specified timezone. If no timezone is specified, the
           default timezone used is UTC. Valid timezones are those listed in the IANA
           timezone database, https://www.iana.org/time-zones.
@@ -6534,11 +6624,11 @@ class TriggerTimerTrigger(Trigger):
                listener to which the trigger is associated. The event listeners are
                defined in the definition repositories of the Tekton pipeline.
         :param str id: The Trigger ID.
-        :param bool enabled: Flag whether the trigger is enabled.
+        :param bool enabled: Flag to check if the trigger is enabled.
         :param str href: (optional) API URL for interacting with the trigger. Only
                included when fetching the list of pipeline triggers.
         :param List[TriggerProperty] properties: (optional) Optional trigger
-               properties used to override or supplement the pipeline properties when
+               properties are used to override or supplement the pipeline properties when
                triggering a pipeline run.
         :param List[str] tags: (optional) Optional trigger tags array.
         :param Worker worker: (optional) Details of the worker used to run the
@@ -6547,12 +6637,13 @@ class TriggerTimerTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
-        :param str cron: (optional) Only needed for timer triggers. Cron expression
+        :param str cron: (optional) Only needed for timer triggers. CRON expression
                that indicates when this trigger will activate. Maximum frequency is every
                5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
-               month, month, day of week. Example: 0 */2 * * * - every 2 hours.
+               month, month, day of week. Example: The CRON expression 0 */2 * * * -
+               translates to - every 2 hours.
         :param str timezone: (optional) Only used for timer triggers. Specify the
-               timezone used for this timer trigger, which will ensure the cron activates
+               timezone used for this timer trigger, which will ensure the CRON activates
                this trigger relative to the specified timezone. If no timezone is
                specified, the default timezone used is UTC. Valid timezones are those
                listed in the IANA timezone database, https://www.iana.org/time-zones.

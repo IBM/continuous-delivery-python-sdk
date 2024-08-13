@@ -1,6 +1,6 @@
 dist: focal
 
-group: focal
+group: stable
 
 language: python
 
@@ -31,7 +31,7 @@ before_deploy:
   - node --version
   - npm --version
   - npm install
-  - pip install bump2version
+  - pip install bump-my-version
 
 deploy:
   - provider: script
