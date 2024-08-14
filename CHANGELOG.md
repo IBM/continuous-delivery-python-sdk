@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.7.0...v1.7.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* bump python core and update build files ([#45](https://github.com/IBM/continuous-delivery-python-sdk/issues/45)) ([256b6d2](https://github.com/IBM/continuous-delivery-python-sdk/commit/256b6d2796127ea03976601b939397fb3ac8ed6d))
+
 # [1.7.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.6.0...v1.7.0) (2024-07-29)
 
 
