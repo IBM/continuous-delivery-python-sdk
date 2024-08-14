@@ -106,9 +106,7 @@ class CdTektonPipelineV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(
-            self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator
-        )
+        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
 
     #########################
     # Pipeline
@@ -263,9 +261,7 @@ class CdTektonPipelineV2(BaseService):
 
         if not id:
             raise ValueError("id must be provided")
-        if tekton_pipeline_patch is not None and isinstance(
-            tekton_pipeline_patch, TektonPipelinePatch
-        ):
+        if tekton_pipeline_patch is not None and isinstance(tekton_pipeline_patch, TektonPipelinePatch):
             tekton_pipeline_patch = convert_model(tekton_pipeline_patch)
         headers = {}
         sdk_headers = get_sdk_headers(
@@ -544,9 +540,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -594,9 +588,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}".format(**path_param_dict)
         request = self.prepare_request(
             method="DELETE",
             url=url,
@@ -656,9 +648,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/cancel".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/cancel".format(**path_param_dict)
         request = self.prepare_request(
             method="POST",
             url=url,
@@ -708,9 +698,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/rerun".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/rerun".format(**path_param_dict)
         request = self.prepare_request(
             method="POST",
             url=url,
@@ -759,9 +747,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/logs".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{id}/logs".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -815,9 +801,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "pipeline_run_id", "id"]
         path_param_values = self.encode_path_vars(pipeline_id, pipeline_run_id, id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{pipeline_run_id}/logs/{id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/pipeline_runs/{pipeline_run_id}/logs/{id}".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -984,9 +968,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -1047,9 +1029,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="PUT",
             url=url,
@@ -1097,9 +1077,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "definition_id"]
         path_param_values = self.encode_path_vars(pipeline_id, definition_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/definitions/{definition_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="DELETE",
             url=url,
@@ -1293,9 +1271,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -1378,9 +1354,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(**path_param_dict)
         request = self.prepare_request(
             method="PUT",
             url=url,
@@ -1428,9 +1402,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "property_name"]
         path_param_values = self.encode_path_vars(pipeline_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/properties/{property_name}".format(**path_param_dict)
         request = self.prepare_request(
             method="DELETE",
             url=url,
@@ -1695,9 +1667,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -1755,9 +1725,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="PATCH",
             url=url,
@@ -1805,9 +1773,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}".format(**path_param_dict)
         request = self.prepare_request(
             method="DELETE",
             url=url,
@@ -1867,9 +1833,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "source_trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, source_trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{source_trigger_id}/duplicate".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{source_trigger_id}/duplicate".format(**path_param_dict)
         request = self.prepare_request(
             method="POST",
             url=url,
@@ -1938,9 +1902,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(**path_param_dict)
         request = self.prepare_request(
             method="GET",
             url=url,
@@ -2023,9 +1985,7 @@ class CdTektonPipelineV2(BaseService):
         path_param_keys = ["pipeline_id", "trigger_id"]
         path_param_values = self.encode_path_vars(pipeline_id, trigger_id)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
-        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(
-            **path_param_dict
-        )
+        url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties".format(**path_param_dict)
         request = self.prepare_request(
             method="POST",
             url=url,
@@ -2076,9 +2036,7 @@ class CdTektonPipelineV2(BaseService):
         headers["Accept"] = "application/json"
 
         path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
-        path_param_values = self.encode_path_vars(
-            pipeline_id, trigger_id, property_name
-        )
+        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
             **path_param_dict
@@ -2166,9 +2124,7 @@ class CdTektonPipelineV2(BaseService):
         headers["Accept"] = "application/json"
 
         path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
-        path_param_values = self.encode_path_vars(
-            pipeline_id, trigger_id, property_name
-        )
+        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
             **path_param_dict
@@ -2222,9 +2178,7 @@ class CdTektonPipelineV2(BaseService):
             del kwargs["headers"]
 
         path_param_keys = ["pipeline_id", "trigger_id", "property_name"]
-        path_param_values = self.encode_path_vars(
-            pipeline_id, trigger_id, property_name
-        )
+        path_param_values = self.encode_path_vars(pipeline_id, trigger_id, property_name)
         path_param_dict = dict(zip(path_param_keys, path_param_values))
         url = "/tekton_pipelines/{pipeline_id}/triggers/{trigger_id}/properties/{property_name}".format(
             **path_param_dict
@@ -2335,9 +2289,7 @@ class Definition:
         if "source" in _dict:
             args["source"] = DefinitionSource.from_dict(_dict.get("source"))
         else:
-            raise ValueError(
-                "Required property 'source' not present in Definition JSON"
-            )
+            raise ValueError("Required property 'source' not present in Definition JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "id" in _dict:
@@ -2417,17 +2369,11 @@ class DefinitionSource:
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in DefinitionSource JSON"
-            )
+            raise ValueError("Required property 'type' not present in DefinitionSource JSON")
         if "properties" in _dict:
-            args["properties"] = DefinitionSourceProperties.from_dict(
-                _dict.get("properties")
-            )
+            args["properties"] = DefinitionSourceProperties.from_dict(_dict.get("properties"))
         else:
-            raise ValueError(
-                "Required property 'properties' not present in DefinitionSource JSON"
-            )
+            raise ValueError("Required property 'properties' not present in DefinitionSource JSON")
         return cls(**args)
 
     @classmethod
@@ -2514,9 +2460,7 @@ class DefinitionSourceProperties:
         if "url" in _dict:
             args["url"] = _dict.get("url")
         else:
-            raise ValueError(
-                "Required property 'url' not present in DefinitionSourceProperties JSON"
-            )
+            raise ValueError("Required property 'url' not present in DefinitionSourceProperties JSON")
         if "branch" in _dict:
             args["branch"] = _dict.get("branch")
         if "tag" in _dict:
@@ -2524,9 +2468,7 @@ class DefinitionSourceProperties:
         if "path" in _dict:
             args["path"] = _dict.get("path")
         else:
-            raise ValueError(
-                "Required property 'path' not present in DefinitionSourceProperties JSON"
-            )
+            raise ValueError("Required property 'path' not present in DefinitionSourceProperties JSON")
         if "tool" in _dict:
             args["tool"] = Tool.from_dict(_dict.get("tool"))
         return cls(**args)
@@ -2598,13 +2540,9 @@ class DefinitionsCollection:
         """Initialize a DefinitionsCollection object from a json dictionary."""
         args = {}
         if "definitions" in _dict:
-            args["definitions"] = [
-                Definition.from_dict(v) for v in _dict.get("definitions")
-            ]
+            args["definitions"] = [Definition.from_dict(v) for v in _dict.get("definitions")]
         else:
-            raise ValueError(
-                "Required property 'definitions' not present in DefinitionsCollection JSON"
-            )
+            raise ValueError("Required property 'definitions' not present in DefinitionsCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -2880,9 +2818,7 @@ class LogsCollection:
         if "logs" in _dict:
             args["logs"] = [Log.from_dict(v) for v in _dict.get("logs")]
         else:
-            raise ValueError(
-                "Required property 'logs' not present in LogsCollection JSON"
-            )
+            raise ValueError("Required property 'logs' not present in LogsCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -3050,69 +2986,49 @@ class PipelineRun:
         if "status" in _dict:
             args["status"] = _dict.get("status")
         else:
-            raise ValueError(
-                "Required property 'status' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'status' not present in PipelineRun JSON")
         if "definition_id" in _dict:
             args["definition_id"] = _dict.get("definition_id")
         else:
-            raise ValueError(
-                "Required property 'definition_id' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'definition_id' not present in PipelineRun JSON")
         if "definition" in _dict:
             args["definition"] = RunDefinition.from_dict(_dict.get("definition"))
         if "worker" in _dict:
             args["worker"] = PipelineRunWorker.from_dict(_dict.get("worker"))
         else:
-            raise ValueError(
-                "Required property 'worker' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'worker' not present in PipelineRun JSON")
         if "pipeline_id" in _dict:
             args["pipeline_id"] = _dict.get("pipeline_id")
         else:
-            raise ValueError(
-                "Required property 'pipeline_id' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'pipeline_id' not present in PipelineRun JSON")
         if "pipeline" in _dict:
             args["pipeline"] = RunPipeline.from_dict(_dict.get("pipeline"))
         if "listener_name" in _dict:
             args["listener_name"] = _dict.get("listener_name")
         else:
-            raise ValueError(
-                "Required property 'listener_name' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'listener_name' not present in PipelineRun JSON")
         if "trigger" in _dict:
             args["trigger"] = _dict.get("trigger")
         else:
-            raise ValueError(
-                "Required property 'trigger' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'trigger' not present in PipelineRun JSON")
         if "event_params_blob" in _dict:
             args["event_params_blob"] = _dict.get("event_params_blob")
         else:
-            raise ValueError(
-                "Required property 'event_params_blob' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'event_params_blob' not present in PipelineRun JSON")
         if "trigger_headers" in _dict:
             args["trigger_headers"] = _dict.get("trigger_headers")
         if "properties" in _dict:
-            args["properties"] = [
-                Property.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [Property.from_dict(v) for v in _dict.get("properties")]
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in PipelineRun JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         if "run_url" in _dict:
             args["run_url"] = _dict.get("run_url")
         else:
-            raise ValueError(
-                "Required property 'run_url' not present in PipelineRun JSON"
-            )
+            raise ValueError("Required property 'run_url' not present in PipelineRun JSON")
         if "error_message" in _dict:
             args["error_message"] = _dict.get("error_message")
         return cls(**args)
@@ -3281,9 +3197,7 @@ class PipelineRunTrigger:
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in PipelineRunTrigger JSON"
-            )
+            raise ValueError("Required property 'name' not present in PipelineRunTrigger JSON")
         if "properties" in _dict:
             args["properties"] = _dict.get("properties")
         if "secure_properties" in _dict:
@@ -3382,9 +3296,7 @@ class PipelineRunWorker:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in PipelineRunWorker JSON"
-            )
+            raise ValueError("Required property 'id' not present in PipelineRunWorker JSON")
         return cls(**args)
 
     @classmethod
@@ -3472,25 +3384,17 @@ class PipelineRunsCollection:
         """Initialize a PipelineRunsCollection object from a json dictionary."""
         args = {}
         if "pipeline_runs" in _dict:
-            args["pipeline_runs"] = [
-                PipelineRun.from_dict(v) for v in _dict.get("pipeline_runs")
-            ]
+            args["pipeline_runs"] = [PipelineRun.from_dict(v) for v in _dict.get("pipeline_runs")]
         else:
-            raise ValueError(
-                "Required property 'pipeline_runs' not present in PipelineRunsCollection JSON"
-            )
+            raise ValueError("Required property 'pipeline_runs' not present in PipelineRunsCollection JSON")
         if "limit" in _dict:
             args["limit"] = _dict.get("limit")
         else:
-            raise ValueError(
-                "Required property 'limit' not present in PipelineRunsCollection JSON"
-            )
+            raise ValueError("Required property 'limit' not present in PipelineRunsCollection JSON")
         if "first" in _dict:
             args["first"] = RunsFirstPage.from_dict(_dict.get("first"))
         else:
-            raise ValueError(
-                "Required property 'first' not present in PipelineRunsCollection JSON"
-            )
+            raise ValueError("Required property 'first' not present in PipelineRunsCollection JSON")
         if "next" in _dict:
             args["next"] = RunsNextPage.from_dict(_dict.get("next"))
         if "last" in _dict:
@@ -3574,13 +3478,9 @@ class PropertiesCollection:
         """Initialize a PropertiesCollection object from a json dictionary."""
         args = {}
         if "properties" in _dict:
-            args["properties"] = [
-                Property.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [Property.from_dict(v) for v in _dict.get("properties")]
         else:
-            raise ValueError(
-                "Required property 'properties' not present in PropertiesCollection JSON"
-            )
+            raise ValueError("Required property 'properties' not present in PropertiesCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -3951,9 +3851,7 @@ class RunsFirstPage:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in RunsFirstPage JSON"
-            )
+            raise ValueError("Required property 'href' not present in RunsFirstPage JSON")
         return cls(**args)
 
     @classmethod
@@ -4013,9 +3911,7 @@ class RunsLastPage:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in RunsLastPage JSON"
-            )
+            raise ValueError("Required property 'href' not present in RunsLastPage JSON")
         return cls(**args)
 
     @classmethod
@@ -4075,9 +3971,7 @@ class RunsNextPage:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in RunsNextPage JSON"
-            )
+            raise ValueError("Required property 'href' not present in RunsNextPage JSON")
         return cls(**args)
 
     @classmethod
@@ -4299,109 +4193,71 @@ class TektonPipeline:
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'name' not present in TektonPipeline JSON")
         if "status" in _dict:
             args["status"] = _dict.get("status")
         else:
-            raise ValueError(
-                "Required property 'status' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'status' not present in TektonPipeline JSON")
         if "resource_group" in _dict:
-            args["resource_group"] = ResourceGroupReference.from_dict(
-                _dict.get("resource_group")
-            )
+            args["resource_group"] = ResourceGroupReference.from_dict(_dict.get("resource_group"))
         else:
-            raise ValueError(
-                "Required property 'resource_group' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'resource_group' not present in TektonPipeline JSON")
         if "toolchain" in _dict:
             args["toolchain"] = ToolchainReference.from_dict(_dict.get("toolchain"))
         else:
-            raise ValueError(
-                "Required property 'toolchain' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'toolchain' not present in TektonPipeline JSON")
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'id' not present in TektonPipeline JSON")
         if "definitions" in _dict:
-            args["definitions"] = [
-                Definition.from_dict(v) for v in _dict.get("definitions")
-            ]
+            args["definitions"] = [Definition.from_dict(v) for v in _dict.get("definitions")]
         else:
-            raise ValueError(
-                "Required property 'definitions' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'definitions' not present in TektonPipeline JSON")
         if "properties" in _dict:
-            args["properties"] = [
-                Property.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [Property.from_dict(v) for v in _dict.get("properties")]
         else:
-            raise ValueError(
-                "Required property 'properties' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'properties' not present in TektonPipeline JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in TektonPipeline JSON")
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in TektonPipeline JSON")
         if "triggers" in _dict:
             args["triggers"] = _dict.get("triggers")
         else:
-            raise ValueError(
-                "Required property 'triggers' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'triggers' not present in TektonPipeline JSON")
         if "worker" in _dict:
             args["worker"] = Worker.from_dict(_dict.get("worker"))
         else:
-            raise ValueError(
-                "Required property 'worker' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'worker' not present in TektonPipeline JSON")
         if "runs_url" in _dict:
             args["runs_url"] = _dict.get("runs_url")
         else:
-            raise ValueError(
-                "Required property 'runs_url' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'runs_url' not present in TektonPipeline JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "build_number" in _dict:
             args["build_number"] = _dict.get("build_number")
         else:
-            raise ValueError(
-                "Required property 'build_number' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'build_number' not present in TektonPipeline JSON")
         if "next_build_number" in _dict:
             args["next_build_number"] = _dict.get("next_build_number")
         if "enable_notifications" in _dict:
             args["enable_notifications"] = _dict.get("enable_notifications")
         else:
-            raise ValueError(
-                "Required property 'enable_notifications' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'enable_notifications' not present in TektonPipeline JSON")
         if "enable_partial_cloning" in _dict:
             args["enable_partial_cloning"] = _dict.get("enable_partial_cloning")
         else:
-            raise ValueError(
-                "Required property 'enable_partial_cloning' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'enable_partial_cloning' not present in TektonPipeline JSON")
         if "enabled" in _dict:
             args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError(
-                "Required property 'enabled' not present in TektonPipeline JSON"
-            )
+            raise ValueError("Required property 'enabled' not present in TektonPipeline JSON")
         return cls(**args)
 
     @classmethod
@@ -4469,15 +4325,9 @@ class TektonPipeline:
             _dict["build_number"] = self.build_number
         if hasattr(self, "next_build_number") and self.next_build_number is not None:
             _dict["next_build_number"] = self.next_build_number
-        if (
-            hasattr(self, "enable_notifications")
-            and self.enable_notifications is not None
-        ):
+        if hasattr(self, "enable_notifications") and self.enable_notifications is not None:
             _dict["enable_notifications"] = self.enable_notifications
-        if (
-            hasattr(self, "enable_partial_cloning")
-            and self.enable_partial_cloning is not None
-        ):
+        if hasattr(self, "enable_partial_cloning") and self.enable_partial_cloning is not None:
             _dict["enable_partial_cloning"] = self.enable_partial_cloning
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled
@@ -4587,15 +4437,9 @@ class TektonPipelinePatch:
         _dict = {}
         if hasattr(self, "next_build_number") and self.next_build_number is not None:
             _dict["next_build_number"] = self.next_build_number
-        if (
-            hasattr(self, "enable_notifications")
-            and self.enable_notifications is not None
-        ):
+        if hasattr(self, "enable_notifications") and self.enable_notifications is not None:
             _dict["enable_notifications"] = self.enable_notifications
-        if (
-            hasattr(self, "enable_partial_cloning")
-            and self.enable_partial_cloning is not None
-        ):
+        if hasattr(self, "enable_partial_cloning") and self.enable_partial_cloning is not None:
             _dict["enable_partial_cloning"] = self.enable_partial_cloning
         if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
@@ -4712,15 +4556,11 @@ class ToolchainReference:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainReference JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainReference JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainReference JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainReference JSON")
         return cls(**args)
 
     @classmethod
@@ -4960,10 +4800,7 @@ class TriggerPatch:
                 _dict["worker"] = self.worker
             else:
                 _dict["worker"] = self.worker.to_dict()
-        if (
-            hasattr(self, "max_concurrent_runs")
-            and self.max_concurrent_runs is not None
-        ):
+        if hasattr(self, "max_concurrent_runs") and self.max_concurrent_runs is not None:
             _dict["max_concurrent_runs"] = self.max_concurrent_runs
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled
@@ -5052,13 +4889,9 @@ class TriggerPropertiesCollection:
         """Initialize a TriggerPropertiesCollection object from a json dictionary."""
         args = {}
         if "properties" in _dict:
-            args["properties"] = [
-                TriggerProperty.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [TriggerProperty.from_dict(v) for v in _dict.get("properties")]
         else:
-            raise ValueError(
-                "Required property 'properties' not present in TriggerPropertiesCollection JSON"
-            )
+            raise ValueError("Required property 'properties' not present in TriggerPropertiesCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -5159,9 +4992,7 @@ class TriggerProperty:
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TriggerProperty JSON"
-            )
+            raise ValueError("Required property 'name' not present in TriggerProperty JSON")
         if "value" in _dict:
             args["value"] = _dict.get("value")
         if "href" in _dict:
@@ -5171,9 +5002,7 @@ class TriggerProperty:
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerProperty JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerProperty JSON")
         if "path" in _dict:
             args["path"] = _dict.get("path")
         if "locked" in _dict:
@@ -5270,17 +5099,11 @@ class TriggerSource:
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerSource JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerSource JSON")
         if "properties" in _dict:
-            args["properties"] = TriggerSourceProperties.from_dict(
-                _dict.get("properties")
-            )
+            args["properties"] = TriggerSourceProperties.from_dict(_dict.get("properties"))
         else:
-            raise ValueError(
-                "Required property 'properties' not present in TriggerSource JSON"
-            )
+            raise ValueError("Required property 'properties' not present in TriggerSource JSON")
         return cls(**args)
 
     @classmethod
@@ -5384,9 +5207,7 @@ class TriggerSourceProperties:
         if "url" in _dict:
             args["url"] = _dict.get("url")
         else:
-            raise ValueError(
-                "Required property 'url' not present in TriggerSourceProperties JSON"
-            )
+            raise ValueError("Required property 'url' not present in TriggerSourceProperties JSON")
         if "branch" in _dict:
             args["branch"] = _dict.get("branch")
         if "pattern" in _dict:
@@ -5394,17 +5215,13 @@ class TriggerSourceProperties:
         if "blind_connection" in _dict:
             args["blind_connection"] = _dict.get("blind_connection")
         else:
-            raise ValueError(
-                "Required property 'blind_connection' not present in TriggerSourceProperties JSON"
-            )
+            raise ValueError("Required property 'blind_connection' not present in TriggerSourceProperties JSON")
         if "hook_id" in _dict:
             args["hook_id"] = _dict.get("hook_id")
         if "tool" in _dict:
             args["tool"] = Tool.from_dict(_dict.get("tool"))
         else:
-            raise ValueError(
-                "Required property 'tool' not present in TriggerSourceProperties JSON"
-            )
+            raise ValueError("Required property 'tool' not present in TriggerSourceProperties JSON")
         return cls(**args)
 
     @classmethod
@@ -5498,9 +5315,7 @@ class TriggerSourcePropertiesPrototype:
         if "url" in _dict:
             args["url"] = _dict.get("url")
         else:
-            raise ValueError(
-                "Required property 'url' not present in TriggerSourcePropertiesPrototype JSON"
-            )
+            raise ValueError("Required property 'url' not present in TriggerSourcePropertiesPrototype JSON")
         if "branch" in _dict:
             args["branch"] = _dict.get("branch")
         if "pattern" in _dict:
@@ -5578,17 +5393,11 @@ class TriggerSourcePrototype:
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerSourcePrototype JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerSourcePrototype JSON")
         if "properties" in _dict:
-            args["properties"] = TriggerSourcePropertiesPrototype.from_dict(
-                _dict.get("properties")
-            )
+            args["properties"] = TriggerSourcePropertiesPrototype.from_dict(_dict.get("properties"))
         else:
-            raise ValueError(
-                "Required property 'properties' not present in TriggerSourcePrototype JSON"
-            )
+            raise ValueError("Required property 'properties' not present in TriggerSourcePrototype JSON")
         return cls(**args)
 
     @classmethod
@@ -5652,9 +5461,7 @@ class TriggersCollection:
         if "triggers" in _dict:
             args["triggers"] = _dict.get("triggers")
         else:
-            raise ValueError(
-                "Required property 'triggers' not present in TriggersCollection JSON"
-            )
+            raise ValueError("Required property 'triggers' not present in TriggersCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -5869,9 +5676,7 @@ class WorkerIdentity:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in WorkerIdentity JSON"
-            )
+            raise ValueError("Required property 'id' not present in WorkerIdentity JSON")
         return cls(**args)
 
     @classmethod
@@ -6007,33 +5812,23 @@ class TriggerGenericTrigger(Trigger):
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerGenericTrigger JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerGenericTrigger JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TriggerGenericTrigger JSON"
-            )
+            raise ValueError("Required property 'name' not present in TriggerGenericTrigger JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "event_listener" in _dict:
             args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError(
-                "Required property 'event_listener' not present in TriggerGenericTrigger JSON"
-            )
+            raise ValueError("Required property 'event_listener' not present in TriggerGenericTrigger JSON")
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in TriggerGenericTrigger JSON"
-            )
+            raise ValueError("Required property 'id' not present in TriggerGenericTrigger JSON")
         if "properties" in _dict:
-            args["properties"] = [
-                TriggerProperty.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [TriggerProperty.from_dict(v) for v in _dict.get("properties")]
         if "tags" in _dict:
             args["tags"] = _dict.get("tags")
         if "worker" in _dict:
@@ -6043,9 +5838,7 @@ class TriggerGenericTrigger(Trigger):
         if "enabled" in _dict:
             args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError(
-                "Required property 'enabled' not present in TriggerGenericTrigger JSON"
-            )
+            raise ValueError("Required property 'enabled' not present in TriggerGenericTrigger JSON")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
         if "secret" in _dict:
@@ -6089,10 +5882,7 @@ class TriggerGenericTrigger(Trigger):
                 _dict["worker"] = self.worker
             else:
                 _dict["worker"] = self.worker.to_dict()
-        if (
-            hasattr(self, "max_concurrent_runs")
-            and self.max_concurrent_runs is not None
-        ):
+        if hasattr(self, "max_concurrent_runs") and self.max_concurrent_runs is not None:
             _dict["max_concurrent_runs"] = self.max_concurrent_runs
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled
@@ -6210,33 +6000,23 @@ class TriggerManualTrigger(Trigger):
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerManualTrigger JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerManualTrigger JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TriggerManualTrigger JSON"
-            )
+            raise ValueError("Required property 'name' not present in TriggerManualTrigger JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "event_listener" in _dict:
             args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError(
-                "Required property 'event_listener' not present in TriggerManualTrigger JSON"
-            )
+            raise ValueError("Required property 'event_listener' not present in TriggerManualTrigger JSON")
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in TriggerManualTrigger JSON"
-            )
+            raise ValueError("Required property 'id' not present in TriggerManualTrigger JSON")
         if "properties" in _dict:
-            args["properties"] = [
-                TriggerProperty.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [TriggerProperty.from_dict(v) for v in _dict.get("properties")]
         if "tags" in _dict:
             args["tags"] = _dict.get("tags")
         if "worker" in _dict:
@@ -6246,9 +6026,7 @@ class TriggerManualTrigger(Trigger):
         if "enabled" in _dict:
             args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError(
-                "Required property 'enabled' not present in TriggerManualTrigger JSON"
-            )
+            raise ValueError("Required property 'enabled' not present in TriggerManualTrigger JSON")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
         return cls(**args)
@@ -6286,10 +6064,7 @@ class TriggerManualTrigger(Trigger):
                 _dict["worker"] = self.worker
             else:
                 _dict["worker"] = self.worker.to_dict()
-        if (
-            hasattr(self, "max_concurrent_runs")
-            and self.max_concurrent_runs is not None
-        ):
+        if hasattr(self, "max_concurrent_runs") and self.max_concurrent_runs is not None:
             _dict["max_concurrent_runs"] = self.max_concurrent_runs
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled
@@ -6431,33 +6206,23 @@ class TriggerScmTrigger(Trigger):
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerScmTrigger JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerScmTrigger JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TriggerScmTrigger JSON"
-            )
+            raise ValueError("Required property 'name' not present in TriggerScmTrigger JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "event_listener" in _dict:
             args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError(
-                "Required property 'event_listener' not present in TriggerScmTrigger JSON"
-            )
+            raise ValueError("Required property 'event_listener' not present in TriggerScmTrigger JSON")
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in TriggerScmTrigger JSON"
-            )
+            raise ValueError("Required property 'id' not present in TriggerScmTrigger JSON")
         if "properties" in _dict:
-            args["properties"] = [
-                TriggerProperty.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [TriggerProperty.from_dict(v) for v in _dict.get("properties")]
         if "tags" in _dict:
             args["tags"] = _dict.get("tags")
         if "worker" in _dict:
@@ -6467,9 +6232,7 @@ class TriggerScmTrigger(Trigger):
         if "enabled" in _dict:
             args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError(
-                "Required property 'enabled' not present in TriggerScmTrigger JSON"
-            )
+            raise ValueError("Required property 'enabled' not present in TriggerScmTrigger JSON")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
         if "source" in _dict:
@@ -6513,10 +6276,7 @@ class TriggerScmTrigger(Trigger):
                 _dict["worker"] = self.worker
             else:
                 _dict["worker"] = self.worker.to_dict()
-        if (
-            hasattr(self, "max_concurrent_runs")
-            and self.max_concurrent_runs is not None
-        ):
+        if hasattr(self, "max_concurrent_runs") and self.max_concurrent_runs is not None:
             _dict["max_concurrent_runs"] = self.max_concurrent_runs
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled
@@ -6670,33 +6430,23 @@ class TriggerTimerTrigger(Trigger):
         if "type" in _dict:
             args["type"] = _dict.get("type")
         else:
-            raise ValueError(
-                "Required property 'type' not present in TriggerTimerTrigger JSON"
-            )
+            raise ValueError("Required property 'type' not present in TriggerTimerTrigger JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in TriggerTimerTrigger JSON"
-            )
+            raise ValueError("Required property 'name' not present in TriggerTimerTrigger JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         if "event_listener" in _dict:
             args["event_listener"] = _dict.get("event_listener")
         else:
-            raise ValueError(
-                "Required property 'event_listener' not present in TriggerTimerTrigger JSON"
-            )
+            raise ValueError("Required property 'event_listener' not present in TriggerTimerTrigger JSON")
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in TriggerTimerTrigger JSON"
-            )
+            raise ValueError("Required property 'id' not present in TriggerTimerTrigger JSON")
         if "properties" in _dict:
-            args["properties"] = [
-                TriggerProperty.from_dict(v) for v in _dict.get("properties")
-            ]
+            args["properties"] = [TriggerProperty.from_dict(v) for v in _dict.get("properties")]
         if "tags" in _dict:
             args["tags"] = _dict.get("tags")
         if "worker" in _dict:
@@ -6706,9 +6456,7 @@ class TriggerTimerTrigger(Trigger):
         if "enabled" in _dict:
             args["enabled"] = _dict.get("enabled")
         else:
-            raise ValueError(
-                "Required property 'enabled' not present in TriggerTimerTrigger JSON"
-            )
+            raise ValueError("Required property 'enabled' not present in TriggerTimerTrigger JSON")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
         if "cron" in _dict:
@@ -6750,10 +6498,7 @@ class TriggerTimerTrigger(Trigger):
                 _dict["worker"] = self.worker
             else:
                 _dict["worker"] = self.worker.to_dict()
-        if (
-            hasattr(self, "max_concurrent_runs")
-            and self.max_concurrent_runs is not None
-        ):
+        if hasattr(self, "max_concurrent_runs") and self.max_concurrent_runs is not None:
             _dict["max_concurrent_runs"] = self.max_concurrent_runs
         if hasattr(self, "enabled") and self.enabled is not None:
             _dict["enabled"] = self.enabled

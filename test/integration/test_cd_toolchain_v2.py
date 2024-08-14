@@ -128,9 +128,7 @@ class TestCdToolchainV2:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(
-            f"\nlist_toolchains() returned a total of {len(all_results)} items(s) using ToolchainsPager."
-        )
+        print(f"\nlist_toolchains() returned a total of {len(all_results)} items(s) using ToolchainsPager.")
 
     @needscredentials
     def test_get_toolchain_by_id(self):
@@ -224,9 +222,7 @@ class TestCdToolchainV2:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(
-            f"\nlist_tools() returned a total of {len(all_results)} items(s) using ToolsPager."
-        )
+        print(f"\nlist_tools() returned a total of {len(all_results)} items(s) using ToolsPager.")
 
     @needscredentials
     def test_get_tool_by_id(self):

@@ -691,14 +691,12 @@ class TestCdTektonPipelineV2Examples:
 
             # begin-list_tekton_pipeline_trigger_properties
 
-            response = (
-                cd_tekton_pipeline_service.list_tekton_pipeline_trigger_properties(
-                    pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
-                    trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
-                    name="prod",
-                    type="secure,text",
-                    sort="name",
-                )
+            response = cd_tekton_pipeline_service.list_tekton_pipeline_trigger_properties(
+                pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
+                trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
+                name="prod",
+                type="secure,text",
+                sort="name",
             )
             trigger_properties_collection = response.get_result()
 
@@ -719,14 +717,12 @@ class TestCdTektonPipelineV2Examples:
 
             # begin-create_tekton_pipeline_trigger_properties
 
-            response = (
-                cd_tekton_pipeline_service.create_tekton_pipeline_trigger_properties(
-                    pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
-                    trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
-                    name="prop1",
-                    type="text",
-                    value="https://github.com/open-toolchain/hello-tekton.git",
-                )
+            response = cd_tekton_pipeline_service.create_tekton_pipeline_trigger_properties(
+                pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
+                trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
+                name="prop1",
+                type="text",
+                value="https://github.com/open-toolchain/hello-tekton.git",
             )
             trigger_property = response.get_result()
 
@@ -771,15 +767,13 @@ class TestCdTektonPipelineV2Examples:
 
             # begin-replace_tekton_pipeline_trigger_property
 
-            response = (
-                cd_tekton_pipeline_service.replace_tekton_pipeline_trigger_property(
-                    pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
-                    trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
-                    property_name="debug-pipeline",
-                    name="prop1",
-                    type="text",
-                    value="https://github.com/open-toolchain/hello-tekton.git",
-                )
+            response = cd_tekton_pipeline_service.replace_tekton_pipeline_trigger_property(
+                pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
+                trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
+                property_name="debug-pipeline",
+                name="prop1",
+                type="text",
+                value="https://github.com/open-toolchain/hello-tekton.git",
             )
             trigger_property = response.get_result()
 
@@ -907,12 +901,10 @@ class TestCdTektonPipelineV2Examples:
         try:
             # begin-delete_tekton_pipeline_trigger_property
 
-            response = (
-                cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
-                    pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
-                    trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
-                    property_name="debug-pipeline",
-                )
+            response = cd_tekton_pipeline_service.delete_tekton_pipeline_trigger_property(
+                pipeline_id="94619026-912b-4d92-8f51-6c74f0692d90",
+                trigger_id="1bb892a1-2e04-4768-a369-b1159eace147",
+                property_name="debug-pipeline",
             )
 
             # end-delete_tekton_pipeline_trigger_property

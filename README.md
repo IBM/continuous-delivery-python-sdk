@@ -24,7 +24,7 @@ The current minimum Python version supported is 3.8.
 
 <!-- toc -->
 
-- [IBM Cloud Continuous Delivery Python SDK v1.7.0](#ibm-cloud-continuous-delivery-python-sdk-v160)
+- [IBM Cloud Continuous Delivery Python SDK v1.7.0](#ibm-cloud-continuous-delivery-python-sdk-v170)
 - [Python Version](#python-version)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)

@@ -107,9 +107,7 @@ class CdToolchainV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(
-            self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator
-        )
+        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
 
     #########################
     # Toolchains
@@ -704,9 +702,7 @@ class CdToolchainV2(BaseService):
         if toolchain_tool_prototype_patch is None:
             raise ValueError("toolchain_tool_prototype_patch must be provided")
         if isinstance(toolchain_tool_prototype_patch, ToolchainToolPrototypePatch):
-            toolchain_tool_prototype_patch = convert_model(
-                toolchain_tool_prototype_patch
-            )
+            toolchain_tool_prototype_patch = convert_model(toolchain_tool_prototype_patch)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
@@ -835,9 +831,7 @@ class ToolModel:
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolModel JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
@@ -845,21 +839,15 @@ class ToolModel:
         if "tool_type_id" in _dict:
             args["tool_type_id"] = _dict.get("tool_type_id")
         else:
-            raise ValueError(
-                "Required property 'tool_type_id' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'tool_type_id' not present in ToolModel JSON")
         if "toolchain_id" in _dict:
             args["toolchain_id"] = _dict.get("toolchain_id")
         else:
-            raise ValueError(
-                "Required property 'toolchain_id' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'toolchain_id' not present in ToolModel JSON")
         if "toolchain_crn" in _dict:
             args["toolchain_crn"] = _dict.get("toolchain_crn")
         else:
-            raise ValueError(
-                "Required property 'toolchain_crn' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'toolchain_crn' not present in ToolModel JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
@@ -867,23 +855,17 @@ class ToolModel:
         if "referent" in _dict:
             args["referent"] = ToolModelReferent.from_dict(_dict.get("referent"))
         else:
-            raise ValueError(
-                "Required property 'referent' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'referent' not present in ToolModel JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolModel JSON")
         if "parameters" in _dict:
             args["parameters"] = _dict.get("parameters")
         else:
-            raise ValueError(
-                "Required property 'parameters' not present in ToolModel JSON"
-            )
+            raise ValueError("Required property 'parameters' not present in ToolModel JSON")
         if "state" in _dict:
             args["state"] = _dict.get("state")
         else:
@@ -1102,27 +1084,19 @@ class Toolchain:
         if "description" in _dict:
             args["description"] = _dict.get("description")
         else:
-            raise ValueError(
-                "Required property 'description' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'description' not present in Toolchain JSON")
         if "account_id" in _dict:
             args["account_id"] = _dict.get("account_id")
         else:
-            raise ValueError(
-                "Required property 'account_id' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'account_id' not present in Toolchain JSON")
         if "location" in _dict:
             args["location"] = _dict.get("location")
         else:
-            raise ValueError(
-                "Required property 'location' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'location' not present in Toolchain JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in Toolchain JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
@@ -1134,27 +1108,19 @@ class Toolchain:
         if "ui_href" in _dict:
             args["ui_href"] = _dict.get("ui_href")
         else:
-            raise ValueError(
-                "Required property 'ui_href' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'ui_href' not present in Toolchain JSON")
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in Toolchain JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in Toolchain JSON")
         if "created_by" in _dict:
             args["created_by"] = _dict.get("created_by")
         else:
-            raise ValueError(
-                "Required property 'created_by' not present in Toolchain JSON"
-            )
+            raise ValueError("Required property 'created_by' not present in Toolchain JSON")
         return cls(**args)
 
     @classmethod
@@ -1270,37 +1236,25 @@ class ToolchainCollection:
         if "total_count" in _dict:
             args["total_count"] = _dict.get("total_count")
         else:
-            raise ValueError(
-                "Required property 'total_count' not present in ToolchainCollection JSON"
-            )
+            raise ValueError("Required property 'total_count' not present in ToolchainCollection JSON")
         if "limit" in _dict:
             args["limit"] = _dict.get("limit")
         else:
-            raise ValueError(
-                "Required property 'limit' not present in ToolchainCollection JSON"
-            )
+            raise ValueError("Required property 'limit' not present in ToolchainCollection JSON")
         if "first" in _dict:
             args["first"] = ToolchainCollectionFirst.from_dict(_dict.get("first"))
         else:
-            raise ValueError(
-                "Required property 'first' not present in ToolchainCollection JSON"
-            )
+            raise ValueError("Required property 'first' not present in ToolchainCollection JSON")
         if "previous" in _dict:
-            args["previous"] = ToolchainCollectionPrevious.from_dict(
-                _dict.get("previous")
-            )
+            args["previous"] = ToolchainCollectionPrevious.from_dict(_dict.get("previous"))
         if "next" in _dict:
             args["next"] = ToolchainCollectionNext.from_dict(_dict.get("next"))
         if "last" in _dict:
             args["last"] = ToolchainCollectionLast.from_dict(_dict.get("last"))
         else:
-            raise ValueError(
-                "Required property 'last' not present in ToolchainCollection JSON"
-            )
+            raise ValueError("Required property 'last' not present in ToolchainCollection JSON")
         if "toolchains" in _dict:
-            args["toolchains"] = [
-                ToolchainModel.from_dict(v) for v in _dict.get("toolchains")
-            ]
+            args["toolchains"] = [ToolchainModel.from_dict(v) for v in _dict.get("toolchains")]
         return cls(**args)
 
     @classmethod
@@ -1390,9 +1344,7 @@ class ToolchainCollectionFirst:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainCollectionFirst JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainCollectionFirst JSON")
         return cls(**args)
 
     @classmethod
@@ -1461,9 +1413,7 @@ class ToolchainCollectionLast:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainCollectionLast JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainCollectionLast JSON")
         return cls(**args)
 
     @classmethod
@@ -1534,9 +1484,7 @@ class ToolchainCollectionNext:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainCollectionNext JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainCollectionNext JSON")
         return cls(**args)
 
     @classmethod
@@ -1608,9 +1556,7 @@ class ToolchainCollectionPrevious:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainCollectionPrevious JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainCollectionPrevious JSON")
         return cls(**args)
 
     @classmethod
@@ -1671,9 +1617,7 @@ class ToolchainEventPost:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainEventPost JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainEventPost JSON")
         return cls(**args)
 
     @classmethod
@@ -1742,10 +1686,8 @@ class ToolchainEventPrototypeData:
         """Initialize a ToolchainEventPrototypeData object from a json dictionary."""
         args = {}
         if "application_json" in _dict:
-            args["application_json"] = (
-                ToolchainEventPrototypeDataApplicationJson.from_dict(
-                    _dict.get("application_json")
-                )
+            args["application_json"] = ToolchainEventPrototypeDataApplicationJson.from_dict(
+                _dict.get("application_json")
             )
         if "text_plain" in _dict:
             args["text_plain"] = _dict.get("text_plain")
@@ -1921,75 +1863,51 @@ class ToolchainModel:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainModel JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'name' not present in ToolchainModel JSON")
         if "description" in _dict:
             args["description"] = _dict.get("description")
         else:
-            raise ValueError(
-                "Required property 'description' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'description' not present in ToolchainModel JSON")
         if "account_id" in _dict:
             args["account_id"] = _dict.get("account_id")
         else:
-            raise ValueError(
-                "Required property 'account_id' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'account_id' not present in ToolchainModel JSON")
         if "location" in _dict:
             args["location"] = _dict.get("location")
         else:
-            raise ValueError(
-                "Required property 'location' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'location' not present in ToolchainModel JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainModel JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainModel JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainModel JSON")
         if "ui_href" in _dict:
             args["ui_href"] = _dict.get("ui_href")
         else:
-            raise ValueError(
-                "Required property 'ui_href' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'ui_href' not present in ToolchainModel JSON")
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in ToolchainModel JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainModel JSON")
         if "created_by" in _dict:
             args["created_by"] = _dict.get("created_by")
         else:
-            raise ValueError(
-                "Required property 'created_by' not present in ToolchainModel JSON"
-            )
+            raise ValueError("Required property 'created_by' not present in ToolchainModel JSON")
         return cls(**args)
 
     @classmethod
@@ -2115,75 +2033,51 @@ class ToolchainPatch:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainPatch JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'name' not present in ToolchainPatch JSON")
         if "description" in _dict:
             args["description"] = _dict.get("description")
         else:
-            raise ValueError(
-                "Required property 'description' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'description' not present in ToolchainPatch JSON")
         if "account_id" in _dict:
             args["account_id"] = _dict.get("account_id")
         else:
-            raise ValueError(
-                "Required property 'account_id' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'account_id' not present in ToolchainPatch JSON")
         if "location" in _dict:
             args["location"] = _dict.get("location")
         else:
-            raise ValueError(
-                "Required property 'location' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'location' not present in ToolchainPatch JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainPatch JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainPatch JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainPatch JSON")
         if "ui_href" in _dict:
             args["ui_href"] = _dict.get("ui_href")
         else:
-            raise ValueError(
-                "Required property 'ui_href' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'ui_href' not present in ToolchainPatch JSON")
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in ToolchainPatch JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainPatch JSON")
         if "created_by" in _dict:
             args["created_by"] = _dict.get("created_by")
         else:
-            raise ValueError(
-                "Required property 'created_by' not present in ToolchainPatch JSON"
-            )
+            raise ValueError("Required property 'created_by' not present in ToolchainPatch JSON")
         return cls(**args)
 
     @classmethod
@@ -2313,69 +2207,47 @@ class ToolchainPost:
         if "name" in _dict:
             args["name"] = _dict.get("name")
         else:
-            raise ValueError(
-                "Required property 'name' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'name' not present in ToolchainPost JSON")
         if "description" in _dict:
             args["description"] = _dict.get("description")
         else:
-            raise ValueError(
-                "Required property 'description' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'description' not present in ToolchainPost JSON")
         if "account_id" in _dict:
             args["account_id"] = _dict.get("account_id")
         else:
-            raise ValueError(
-                "Required property 'account_id' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'account_id' not present in ToolchainPost JSON")
         if "location" in _dict:
             args["location"] = _dict.get("location")
         else:
-            raise ValueError(
-                "Required property 'location' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'location' not present in ToolchainPost JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainPost JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainPost JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainPost JSON")
         if "ui_href" in _dict:
             args["ui_href"] = _dict.get("ui_href")
         else:
-            raise ValueError(
-                "Required property 'ui_href' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'ui_href' not present in ToolchainPost JSON")
         if "created_at" in _dict:
             args["created_at"] = string_to_datetime(_dict.get("created_at"))
         else:
-            raise ValueError(
-                "Required property 'created_at' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'created_at' not present in ToolchainPost JSON")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainPost JSON")
         if "created_by" in _dict:
             args["created_by"] = _dict.get("created_by")
         else:
-            raise ValueError(
-                "Required property 'created_by' not present in ToolchainPost JSON"
-            )
+            raise ValueError("Required property 'created_by' not present in ToolchainPost JSON")
         return cls(**args)
 
     @classmethod
@@ -2589,65 +2461,45 @@ class ToolchainTool:
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainTool JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainTool JSON")
         if "tool_type_id" in _dict:
             args["tool_type_id"] = _dict.get("tool_type_id")
         else:
-            raise ValueError(
-                "Required property 'tool_type_id' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'tool_type_id' not present in ToolchainTool JSON")
         if "toolchain_id" in _dict:
             args["toolchain_id"] = _dict.get("toolchain_id")
         else:
-            raise ValueError(
-                "Required property 'toolchain_id' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'toolchain_id' not present in ToolchainTool JSON")
         if "toolchain_crn" in _dict:
             args["toolchain_crn"] = _dict.get("toolchain_crn")
         else:
-            raise ValueError(
-                "Required property 'toolchain_crn' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'toolchain_crn' not present in ToolchainTool JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainTool JSON")
         if "referent" in _dict:
             args["referent"] = ToolModelReferent.from_dict(_dict.get("referent"))
         else:
-            raise ValueError(
-                "Required property 'referent' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'referent' not present in ToolchainTool JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainTool JSON")
         if "parameters" in _dict:
             args["parameters"] = _dict.get("parameters")
         else:
-            raise ValueError(
-                "Required property 'parameters' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'parameters' not present in ToolchainTool JSON")
         if "state" in _dict:
             args["state"] = _dict.get("state")
         else:
-            raise ValueError(
-                "Required property 'state' not present in ToolchainTool JSON"
-            )
+            raise ValueError("Required property 'state' not present in ToolchainTool JSON")
         return cls(**args)
 
     @classmethod
@@ -2774,39 +2626,27 @@ class ToolchainToolCollection:
         if "limit" in _dict:
             args["limit"] = _dict.get("limit")
         else:
-            raise ValueError(
-                "Required property 'limit' not present in ToolchainToolCollection JSON"
-            )
+            raise ValueError("Required property 'limit' not present in ToolchainToolCollection JSON")
         if "total_count" in _dict:
             args["total_count"] = _dict.get("total_count")
         else:
-            raise ValueError(
-                "Required property 'total_count' not present in ToolchainToolCollection JSON"
-            )
+            raise ValueError("Required property 'total_count' not present in ToolchainToolCollection JSON")
         if "first" in _dict:
             args["first"] = ToolchainToolCollectionFirst.from_dict(_dict.get("first"))
         else:
-            raise ValueError(
-                "Required property 'first' not present in ToolchainToolCollection JSON"
-            )
+            raise ValueError("Required property 'first' not present in ToolchainToolCollection JSON")
         if "previous" in _dict:
-            args["previous"] = ToolchainToolCollectionPrevious.from_dict(
-                _dict.get("previous")
-            )
+            args["previous"] = ToolchainToolCollectionPrevious.from_dict(_dict.get("previous"))
         if "next" in _dict:
             args["next"] = ToolchainToolCollectionNext.from_dict(_dict.get("next"))
         if "last" in _dict:
             args["last"] = ToolchainToolCollectionLast.from_dict(_dict.get("last"))
         else:
-            raise ValueError(
-                "Required property 'last' not present in ToolchainToolCollection JSON"
-            )
+            raise ValueError("Required property 'last' not present in ToolchainToolCollection JSON")
         if "tools" in _dict:
             args["tools"] = [ToolModel.from_dict(v) for v in _dict.get("tools")]
         else:
-            raise ValueError(
-                "Required property 'tools' not present in ToolchainToolCollection JSON"
-            )
+            raise ValueError("Required property 'tools' not present in ToolchainToolCollection JSON")
         return cls(**args)
 
     @classmethod
@@ -2896,9 +2736,7 @@ class ToolchainToolCollectionFirst:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolCollectionFirst JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolCollectionFirst JSON")
         return cls(**args)
 
     @classmethod
@@ -2967,9 +2805,7 @@ class ToolchainToolCollectionLast:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolCollectionLast JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolCollectionLast JSON")
         return cls(**args)
 
     @classmethod
@@ -3040,9 +2876,7 @@ class ToolchainToolCollectionNext:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolCollectionNext JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolCollectionNext JSON")
         return cls(**args)
 
     @classmethod
@@ -3114,9 +2948,7 @@ class ToolchainToolCollectionPrevious:
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolCollectionPrevious JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolCollectionPrevious JSON")
         return cls(**args)
 
     @classmethod
@@ -3240,71 +3072,49 @@ class ToolchainToolPatch:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainToolPatch JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainToolPatch JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainToolPatch JSON")
         if "tool_type_id" in _dict:
             args["tool_type_id"] = _dict.get("tool_type_id")
         else:
-            raise ValueError(
-                "Required property 'tool_type_id' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'tool_type_id' not present in ToolchainToolPatch JSON")
         if "toolchain_id" in _dict:
             args["toolchain_id"] = _dict.get("toolchain_id")
         else:
-            raise ValueError(
-                "Required property 'toolchain_id' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'toolchain_id' not present in ToolchainToolPatch JSON")
         if "toolchain_crn" in _dict:
             args["toolchain_crn"] = _dict.get("toolchain_crn")
         else:
-            raise ValueError(
-                "Required property 'toolchain_crn' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'toolchain_crn' not present in ToolchainToolPatch JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolPatch JSON")
         if "referent" in _dict:
             args["referent"] = ToolModelReferent.from_dict(_dict.get("referent"))
         else:
-            raise ValueError(
-                "Required property 'referent' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'referent' not present in ToolchainToolPatch JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainToolPatch JSON")
         if "parameters" in _dict:
             args["parameters"] = _dict.get("parameters")
         else:
-            raise ValueError(
-                "Required property 'parameters' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'parameters' not present in ToolchainToolPatch JSON")
         if "state" in _dict:
             args["state"] = _dict.get("state")
         else:
-            raise ValueError(
-                "Required property 'state' not present in ToolchainToolPatch JSON"
-            )
+            raise ValueError("Required property 'state' not present in ToolchainToolPatch JSON")
         return cls(**args)
 
     @classmethod
@@ -3461,71 +3271,49 @@ class ToolchainToolPost:
         if "id" in _dict:
             args["id"] = _dict.get("id")
         else:
-            raise ValueError(
-                "Required property 'id' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'id' not present in ToolchainToolPost JSON")
         if "resource_group_id" in _dict:
             args["resource_group_id"] = _dict.get("resource_group_id")
         else:
-            raise ValueError(
-                "Required property 'resource_group_id' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'resource_group_id' not present in ToolchainToolPost JSON")
         if "crn" in _dict:
             args["crn"] = _dict.get("crn")
         else:
-            raise ValueError(
-                "Required property 'crn' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'crn' not present in ToolchainToolPost JSON")
         if "tool_type_id" in _dict:
             args["tool_type_id"] = _dict.get("tool_type_id")
         else:
-            raise ValueError(
-                "Required property 'tool_type_id' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'tool_type_id' not present in ToolchainToolPost JSON")
         if "toolchain_id" in _dict:
             args["toolchain_id"] = _dict.get("toolchain_id")
         else:
-            raise ValueError(
-                "Required property 'toolchain_id' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'toolchain_id' not present in ToolchainToolPost JSON")
         if "toolchain_crn" in _dict:
             args["toolchain_crn"] = _dict.get("toolchain_crn")
         else:
-            raise ValueError(
-                "Required property 'toolchain_crn' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'toolchain_crn' not present in ToolchainToolPost JSON")
         if "href" in _dict:
             args["href"] = _dict.get("href")
         else:
-            raise ValueError(
-                "Required property 'href' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'href' not present in ToolchainToolPost JSON")
         if "referent" in _dict:
             args["referent"] = ToolModelReferent.from_dict(_dict.get("referent"))
         else:
-            raise ValueError(
-                "Required property 'referent' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'referent' not present in ToolchainToolPost JSON")
         if "name" in _dict:
             args["name"] = _dict.get("name")
         if "updated_at" in _dict:
             args["updated_at"] = string_to_datetime(_dict.get("updated_at"))
         else:
-            raise ValueError(
-                "Required property 'updated_at' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'updated_at' not present in ToolchainToolPost JSON")
         if "parameters" in _dict:
             args["parameters"] = _dict.get("parameters")
         else:
-            raise ValueError(
-                "Required property 'parameters' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'parameters' not present in ToolchainToolPost JSON")
         if "state" in _dict:
             args["state"] = _dict.get("state")
         else:
-            raise ValueError(
-                "Required property 'state' not present in ToolchainToolPost JSON"
-            )
+            raise ValueError("Required property 'state' not present in ToolchainToolPost JSON")
         return cls(**args)
 
     @classmethod
