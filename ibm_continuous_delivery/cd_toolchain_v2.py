@@ -107,9 +107,7 @@ class CdToolchainV2(BaseService):
                Get up to date information from https://github.com/IBM/python-sdk-core/blob/main/README.md
                about initializing the authenticator of your choice.
         """
-        BaseService.__init__(
-            self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator
-        )
+        BaseService.__init__(self, service_url=self.DEFAULT_SERVICE_URL, authenticator=authenticator)
 
     #########################
     # Toolchains
@@ -704,9 +702,7 @@ class CdToolchainV2(BaseService):
         if toolchain_tool_prototype_patch is None:
             raise ValueError("toolchain_tool_prototype_patch must be provided")
         if isinstance(toolchain_tool_prototype_patch, ToolchainToolPrototypePatch):
-            toolchain_tool_prototype_patch = convert_model(
-                toolchain_tool_prototype_patch
-            )
+            toolchain_tool_prototype_patch = convert_model(toolchain_tool_prototype_patch)
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
