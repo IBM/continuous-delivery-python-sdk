@@ -240,10 +240,7 @@ class TestListToolchains:
             "resource_group_id": resource_group_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_toolchains(**req_copy)
 
@@ -409,10 +406,7 @@ class TestCreateToolchain:
             "resource_group_id": resource_group_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_toolchain(**req_copy)
 
@@ -493,10 +487,7 @@ class TestGetToolchainById:
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_toolchain_by_id(**req_copy)
 
@@ -571,10 +562,7 @@ class TestDeleteToolchain:
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_toolchain(**req_copy)
 
@@ -672,10 +660,7 @@ class TestUpdateToolchain:
             "toolchain_prototype_patch": toolchain_prototype_patch,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.update_toolchain(**req_copy)
 
@@ -795,10 +780,7 @@ class TestCreateToolchainEvent:
             "content_type": content_type,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_toolchain_event(**req_copy)
 
@@ -965,10 +947,7 @@ class TestListTools:
             "toolchain_id": toolchain_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tools(**req_copy)
 
@@ -1135,10 +1114,7 @@ class TestCreateTool:
             "tool_type_id": tool_type_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tool(**req_copy)
 
@@ -1223,10 +1199,7 @@ class TestGetToolById:
             "tool_id": tool_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tool_by_id(**req_copy)
 
@@ -1305,10 +1278,7 @@ class TestDeleteTool:
             "tool_id": tool_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tool(**req_copy)
 
@@ -1412,10 +1382,7 @@ class TestUpdateTool:
             "toolchain_tool_prototype_patch": toolchain_tool_prototype_patch,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.update_tool(**req_copy)
 
@@ -1504,15 +1471,11 @@ class TestModel_ToolModelReferent:
         tool_model_referent_model_json["api_href"] = "testString"
 
         # Construct a model instance of ToolModelReferent by calling from_dict on the json representation
-        tool_model_referent_model = ToolModelReferent.from_dict(
-            tool_model_referent_model_json
-        )
+        tool_model_referent_model = ToolModelReferent.from_dict(tool_model_referent_model_json)
         assert tool_model_referent_model != False
 
         # Construct a model instance of ToolModelReferent by calling from_dict on the json representation
-        tool_model_referent_model_dict = ToolModelReferent.from_dict(
-            tool_model_referent_model_json
-        ).__dict__
+        tool_model_referent_model_dict = ToolModelReferent.from_dict(tool_model_referent_model_json).__dict__
         tool_model_referent_model2 = ToolModelReferent(**tool_model_referent_model_dict)
 
         # Verify the model instances are equivalent
@@ -1634,18 +1597,12 @@ class TestModel_ToolchainCollection:
         toolchain_collection_model_json["toolchains"] = [toolchain_model_model]
 
         # Construct a model instance of ToolchainCollection by calling from_dict on the json representation
-        toolchain_collection_model = ToolchainCollection.from_dict(
-            toolchain_collection_model_json
-        )
+        toolchain_collection_model = ToolchainCollection.from_dict(toolchain_collection_model_json)
         assert toolchain_collection_model != False
 
         # Construct a model instance of ToolchainCollection by calling from_dict on the json representation
-        toolchain_collection_model_dict = ToolchainCollection.from_dict(
-            toolchain_collection_model_json
-        ).__dict__
-        toolchain_collection_model2 = ToolchainCollection(
-            **toolchain_collection_model_dict
-        )
+        toolchain_collection_model_dict = ToolchainCollection.from_dict(toolchain_collection_model_json).__dict__
+        toolchain_collection_model2 = ToolchainCollection(**toolchain_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert toolchain_collection_model == toolchain_collection_model2
@@ -1670,9 +1627,7 @@ class TestModel_ToolchainCollectionFirst:
         toolchain_collection_first_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionFirst by calling from_dict on the json representation
-        toolchain_collection_first_model = ToolchainCollectionFirst.from_dict(
-            toolchain_collection_first_model_json
-        )
+        toolchain_collection_first_model = ToolchainCollectionFirst.from_dict(toolchain_collection_first_model_json)
         assert toolchain_collection_first_model != False
 
         # Construct a model instance of ToolchainCollectionFirst by calling from_dict on the json representation
@@ -1685,13 +1640,8 @@ class TestModel_ToolchainCollectionFirst:
         assert toolchain_collection_first_model == toolchain_collection_first_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_first_model_json2 = (
-            toolchain_collection_first_model.to_dict()
-        )
-        assert (
-            toolchain_collection_first_model_json2
-            == toolchain_collection_first_model_json
-        )
+        toolchain_collection_first_model_json2 = toolchain_collection_first_model.to_dict()
+        assert toolchain_collection_first_model_json2 == toolchain_collection_first_model_json
 
 
 class TestModel_ToolchainCollectionLast:
@@ -1710,9 +1660,7 @@ class TestModel_ToolchainCollectionLast:
         toolchain_collection_last_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionLast by calling from_dict on the json representation
-        toolchain_collection_last_model = ToolchainCollectionLast.from_dict(
-            toolchain_collection_last_model_json
-        )
+        toolchain_collection_last_model = ToolchainCollectionLast.from_dict(toolchain_collection_last_model_json)
         assert toolchain_collection_last_model != False
 
         # Construct a model instance of ToolchainCollectionLast by calling from_dict on the json representation
@@ -1725,13 +1673,8 @@ class TestModel_ToolchainCollectionLast:
         assert toolchain_collection_last_model == toolchain_collection_last_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_last_model_json2 = (
-            toolchain_collection_last_model.to_dict()
-        )
-        assert (
-            toolchain_collection_last_model_json2
-            == toolchain_collection_last_model_json
-        )
+        toolchain_collection_last_model_json2 = toolchain_collection_last_model.to_dict()
+        assert toolchain_collection_last_model_json2 == toolchain_collection_last_model_json
 
 
 class TestModel_ToolchainCollectionNext:
@@ -1750,9 +1693,7 @@ class TestModel_ToolchainCollectionNext:
         toolchain_collection_next_model_json["href"] = "testString"
 
         # Construct a model instance of ToolchainCollectionNext by calling from_dict on the json representation
-        toolchain_collection_next_model = ToolchainCollectionNext.from_dict(
-            toolchain_collection_next_model_json
-        )
+        toolchain_collection_next_model = ToolchainCollectionNext.from_dict(toolchain_collection_next_model_json)
         assert toolchain_collection_next_model != False
 
         # Construct a model instance of ToolchainCollectionNext by calling from_dict on the json representation
@@ -1765,13 +1706,8 @@ class TestModel_ToolchainCollectionNext:
         assert toolchain_collection_next_model == toolchain_collection_next_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_next_model_json2 = (
-            toolchain_collection_next_model.to_dict()
-        )
-        assert (
-            toolchain_collection_next_model_json2
-            == toolchain_collection_next_model_json
-        )
+        toolchain_collection_next_model_json2 = toolchain_collection_next_model.to_dict()
+        assert toolchain_collection_next_model_json2 == toolchain_collection_next_model_json
 
 
 class TestModel_ToolchainCollectionPrevious:
@@ -1802,18 +1738,11 @@ class TestModel_ToolchainCollectionPrevious:
         toolchain_collection_previous_model2 = ToolchainCollectionPrevious(**toolchain_collection_previous_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_collection_previous_model == toolchain_collection_previous_model2
-        )
+        assert toolchain_collection_previous_model == toolchain_collection_previous_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_collection_previous_model_json2 = (
-            toolchain_collection_previous_model.to_dict()
-        )
-        assert (
-            toolchain_collection_previous_model_json2
-            == toolchain_collection_previous_model_json
-        )
+        toolchain_collection_previous_model_json2 = toolchain_collection_previous_model.to_dict()
+        assert toolchain_collection_previous_model_json2 == toolchain_collection_previous_model_json
 
 
 class TestModel_ToolchainEventPost:
@@ -1831,18 +1760,12 @@ class TestModel_ToolchainEventPost:
         toolchain_event_post_model_json["id"] = "testString"
 
         # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
-        toolchain_event_post_model = ToolchainEventPost.from_dict(
-            toolchain_event_post_model_json
-        )
+        toolchain_event_post_model = ToolchainEventPost.from_dict(toolchain_event_post_model_json)
         assert toolchain_event_post_model != False
 
         # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
-        toolchain_event_post_model_dict = ToolchainEventPost.from_dict(
-            toolchain_event_post_model_json
-        ).__dict__
-        toolchain_event_post_model2 = ToolchainEventPost(
-            **toolchain_event_post_model_dict
-        )
+        toolchain_event_post_model_dict = ToolchainEventPost.from_dict(toolchain_event_post_model_json).__dict__
+        toolchain_event_post_model2 = ToolchainEventPost(**toolchain_event_post_model_dict)
 
         # Verify the model instances are equivalent
         assert toolchain_event_post_model == toolchain_event_post_model2
@@ -1887,19 +1810,11 @@ class TestModel_ToolchainEventPrototypeData:
         toolchain_event_prototype_data_model2 = ToolchainEventPrototypeData(**toolchain_event_prototype_data_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_event_prototype_data_model
-            == toolchain_event_prototype_data_model2
-        )
+        assert toolchain_event_prototype_data_model == toolchain_event_prototype_data_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_event_prototype_data_model_json2 = (
-            toolchain_event_prototype_data_model.to_dict()
-        )
-        assert (
-            toolchain_event_prototype_data_model_json2
-            == toolchain_event_prototype_data_model_json
-        )
+        toolchain_event_prototype_data_model_json2 = toolchain_event_prototype_data_model.to_dict()
+        assert toolchain_event_prototype_data_model_json2 == toolchain_event_prototype_data_model_json
 
 
 class TestModel_ToolchainEventPrototypeDataApplicationJson:
@@ -1978,9 +1893,7 @@ class TestModel_ToolchainModel:
         assert toolchain_model_model != False
 
         # Construct a model instance of ToolchainModel by calling from_dict on the json representation
-        toolchain_model_model_dict = ToolchainModel.from_dict(
-            toolchain_model_model_json
-        ).__dict__
+        toolchain_model_model_dict = ToolchainModel.from_dict(toolchain_model_model_json).__dict__
         toolchain_model_model2 = ToolchainModel(**toolchain_model_model_dict)
 
         # Verify the model instances are equivalent
@@ -2021,9 +1934,7 @@ class TestModel_ToolchainPatch:
         assert toolchain_patch_model != False
 
         # Construct a model instance of ToolchainPatch by calling from_dict on the json representation
-        toolchain_patch_model_dict = ToolchainPatch.from_dict(
-            toolchain_patch_model_json
-        ).__dict__
+        toolchain_patch_model_dict = ToolchainPatch.from_dict(toolchain_patch_model_json).__dict__
         toolchain_patch_model2 = ToolchainPatch(**toolchain_patch_model_dict)
 
         # Verify the model instances are equivalent
@@ -2064,9 +1975,7 @@ class TestModel_ToolchainPost:
         assert toolchain_post_model != False
 
         # Construct a model instance of ToolchainPost by calling from_dict on the json representation
-        toolchain_post_model_dict = ToolchainPost.from_dict(
-            toolchain_post_model_json
-        ).__dict__
+        toolchain_post_model_dict = ToolchainPost.from_dict(toolchain_post_model_json).__dict__
         toolchain_post_model2 = ToolchainPost(**toolchain_post_model_dict)
 
         # Verify the model instances are equivalent
@@ -2093,9 +2002,7 @@ class TestModel_ToolchainPrototypePatch:
         toolchain_prototype_patch_model_json["description"] = "New toolchain description"
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
-        toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(
-            toolchain_prototype_patch_model_json
-        )
+        toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(toolchain_prototype_patch_model_json)
         assert toolchain_prototype_patch_model != False
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
@@ -2108,13 +2015,8 @@ class TestModel_ToolchainPrototypePatch:
         assert toolchain_prototype_patch_model == toolchain_prototype_patch_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_prototype_patch_model_json2 = (
-            toolchain_prototype_patch_model.to_dict()
-        )
-        assert (
-            toolchain_prototype_patch_model_json2
-            == toolchain_prototype_patch_model_json
-        )
+        toolchain_prototype_patch_model_json2 = toolchain_prototype_patch_model.to_dict()
+        assert toolchain_prototype_patch_model_json2 == toolchain_prototype_patch_model_json
 
 
 class TestModel_ToolchainTool:
@@ -2153,9 +2055,7 @@ class TestModel_ToolchainTool:
         assert toolchain_tool_model != False
 
         # Construct a model instance of ToolchainTool by calling from_dict on the json representation
-        toolchain_tool_model_dict = ToolchainTool.from_dict(
-            toolchain_tool_model_json
-        ).__dict__
+        toolchain_tool_model_dict = ToolchainTool.from_dict(toolchain_tool_model_json).__dict__
         toolchain_tool_model2 = ToolchainTool(**toolchain_tool_model_dict)
 
         # Verify the model instances are equivalent
@@ -2242,9 +2142,7 @@ class TestModel_ToolchainToolCollection:
         toolchain_tool_collection_model_json["tools"] = [tool_model_model]
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
-        toolchain_tool_collection_model = ToolchainToolCollection.from_dict(
-            toolchain_tool_collection_model_json
-        )
+        toolchain_tool_collection_model = ToolchainToolCollection.from_dict(toolchain_tool_collection_model_json)
         assert toolchain_tool_collection_model != False
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
@@ -2257,13 +2155,8 @@ class TestModel_ToolchainToolCollection:
         assert toolchain_tool_collection_model == toolchain_tool_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_model_json2 = (
-            toolchain_tool_collection_model.to_dict()
-        )
-        assert (
-            toolchain_tool_collection_model_json2
-            == toolchain_tool_collection_model_json
-        )
+        toolchain_tool_collection_model_json2 = toolchain_tool_collection_model.to_dict()
+        assert toolchain_tool_collection_model_json2 == toolchain_tool_collection_model_json
 
 
 class TestModel_ToolchainToolCollectionFirst:
@@ -2295,19 +2188,11 @@ class TestModel_ToolchainToolCollectionFirst:
         )
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_tool_collection_first_model
-            == toolchain_tool_collection_first_model2
-        )
+        assert toolchain_tool_collection_first_model == toolchain_tool_collection_first_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_first_model_json2 = (
-            toolchain_tool_collection_first_model.to_dict()
-        )
-        assert (
-            toolchain_tool_collection_first_model_json2
-            == toolchain_tool_collection_first_model_json
-        )
+        toolchain_tool_collection_first_model_json2 = toolchain_tool_collection_first_model.to_dict()
+        assert toolchain_tool_collection_first_model_json2 == toolchain_tool_collection_first_model_json
 
 
 class TestModel_ToolchainToolCollectionLast:
@@ -2338,19 +2223,11 @@ class TestModel_ToolchainToolCollectionLast:
         toolchain_tool_collection_last_model2 = ToolchainToolCollectionLast(**toolchain_tool_collection_last_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_tool_collection_last_model
-            == toolchain_tool_collection_last_model2
-        )
+        assert toolchain_tool_collection_last_model == toolchain_tool_collection_last_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_last_model_json2 = (
-            toolchain_tool_collection_last_model.to_dict()
-        )
-        assert (
-            toolchain_tool_collection_last_model_json2
-            == toolchain_tool_collection_last_model_json
-        )
+        toolchain_tool_collection_last_model_json2 = toolchain_tool_collection_last_model.to_dict()
+        assert toolchain_tool_collection_last_model_json2 == toolchain_tool_collection_last_model_json
 
 
 class TestModel_ToolchainToolCollectionNext:
@@ -2381,19 +2258,11 @@ class TestModel_ToolchainToolCollectionNext:
         toolchain_tool_collection_next_model2 = ToolchainToolCollectionNext(**toolchain_tool_collection_next_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_tool_collection_next_model
-            == toolchain_tool_collection_next_model2
-        )
+        assert toolchain_tool_collection_next_model == toolchain_tool_collection_next_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_next_model_json2 = (
-            toolchain_tool_collection_next_model.to_dict()
-        )
-        assert (
-            toolchain_tool_collection_next_model_json2
-            == toolchain_tool_collection_next_model_json
-        )
+        toolchain_tool_collection_next_model_json2 = toolchain_tool_collection_next_model.to_dict()
+        assert toolchain_tool_collection_next_model_json2 == toolchain_tool_collection_next_model_json
 
 
 class TestModel_ToolchainToolCollectionPrevious:
@@ -2426,19 +2295,11 @@ class TestModel_ToolchainToolCollectionPrevious:
         )
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_tool_collection_previous_model
-            == toolchain_tool_collection_previous_model2
-        )
+        assert toolchain_tool_collection_previous_model == toolchain_tool_collection_previous_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_collection_previous_model_json2 = (
-            toolchain_tool_collection_previous_model.to_dict()
-        )
-        assert (
-            toolchain_tool_collection_previous_model_json2
-            == toolchain_tool_collection_previous_model_json
-        )
+        toolchain_tool_collection_previous_model_json2 = toolchain_tool_collection_previous_model.to_dict()
+        assert toolchain_tool_collection_previous_model_json2 == toolchain_tool_collection_previous_model_json
 
 
 class TestModel_ToolchainToolPatch:
@@ -2473,18 +2334,12 @@ class TestModel_ToolchainToolPatch:
         toolchain_tool_patch_model_json["state"] = "configured"
 
         # Construct a model instance of ToolchainToolPatch by calling from_dict on the json representation
-        toolchain_tool_patch_model = ToolchainToolPatch.from_dict(
-            toolchain_tool_patch_model_json
-        )
+        toolchain_tool_patch_model = ToolchainToolPatch.from_dict(toolchain_tool_patch_model_json)
         assert toolchain_tool_patch_model != False
 
         # Construct a model instance of ToolchainToolPatch by calling from_dict on the json representation
-        toolchain_tool_patch_model_dict = ToolchainToolPatch.from_dict(
-            toolchain_tool_patch_model_json
-        ).__dict__
-        toolchain_tool_patch_model2 = ToolchainToolPatch(
-            **toolchain_tool_patch_model_dict
-        )
+        toolchain_tool_patch_model_dict = ToolchainToolPatch.from_dict(toolchain_tool_patch_model_json).__dict__
+        toolchain_tool_patch_model2 = ToolchainToolPatch(**toolchain_tool_patch_model_dict)
 
         # Verify the model instances are equivalent
         assert toolchain_tool_patch_model == toolchain_tool_patch_model2
@@ -2526,15 +2381,11 @@ class TestModel_ToolchainToolPost:
         toolchain_tool_post_model_json["state"] = "configured"
 
         # Construct a model instance of ToolchainToolPost by calling from_dict on the json representation
-        toolchain_tool_post_model = ToolchainToolPost.from_dict(
-            toolchain_tool_post_model_json
-        )
+        toolchain_tool_post_model = ToolchainToolPost.from_dict(toolchain_tool_post_model_json)
         assert toolchain_tool_post_model != False
 
         # Construct a model instance of ToolchainToolPost by calling from_dict on the json representation
-        toolchain_tool_post_model_dict = ToolchainToolPost.from_dict(
-            toolchain_tool_post_model_json
-        ).__dict__
+        toolchain_tool_post_model_dict = ToolchainToolPost.from_dict(toolchain_tool_post_model_json).__dict__
         toolchain_tool_post_model2 = ToolchainToolPost(**toolchain_tool_post_model_dict)
 
         # Verify the model instances are equivalent
@@ -2574,19 +2425,11 @@ class TestModel_ToolchainToolPrototypePatch:
         toolchain_tool_prototype_patch_model2 = ToolchainToolPrototypePatch(**toolchain_tool_prototype_patch_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            toolchain_tool_prototype_patch_model
-            == toolchain_tool_prototype_patch_model2
-        )
+        assert toolchain_tool_prototype_patch_model == toolchain_tool_prototype_patch_model2
 
         # Convert model instance back to dict and verify no loss of data
-        toolchain_tool_prototype_patch_model_json2 = (
-            toolchain_tool_prototype_patch_model.to_dict()
-        )
-        assert (
-            toolchain_tool_prototype_patch_model_json2
-            == toolchain_tool_prototype_patch_model_json
-        )
+        toolchain_tool_prototype_patch_model_json2 = toolchain_tool_prototype_patch_model.to_dict()
+        assert toolchain_tool_prototype_patch_model_json2 == toolchain_tool_prototype_patch_model_json
 
 
 # endregion
