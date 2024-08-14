@@ -3,12 +3,12 @@ language: python
 dist: jammy
 
 stages:
- - name: Build-Test
-   if: tag IS blank
- - name: Semantic-Release
-   if: (branch = main) AND (type IN (push, api)) AND (fork = false)
- - name: Publish-Release
-   if: (tag IS present) AND (fork = false)
+  - name: Build-Test
+    if: tag IS blank
+  - name: Semantic-Release
+    if: (branch = main) AND (type IN (push, api)) AND (fork = false)
+  - name: Publish-Release
+    if: (tag IS present) AND (fork = false)
 
 install: true
 
@@ -23,19 +23,19 @@ jobs:
     - python: '3.11'
     - python: '3.12'
 
-   - stage: Semantic-Release
-     language: node_js
-     node_js: 22
-     install:
-       - npm install
-       - pip install --user bump-my-version
-     script:
-       - npm run semantic-release
+    - stage: Semantic-Release
+      language: node_js
+      node_js: 22
+      install:
+        - npm install
+        - pip install --user bump-my-version
+      script:
+        - npm run semantic-release
 
-   - stage: Publish-Release
-     python: "3.8"
-     name: Publish-To-PyPi
-     script:
-       - make ci
-       - make publish-deps
-       - make publish-release
+    - stage: Publish-Release
+      python: "3.8"
+      name: Publish-To-PyPi
+      script:
+        - make ci
+        - make publish-deps
+        - make publish-release
