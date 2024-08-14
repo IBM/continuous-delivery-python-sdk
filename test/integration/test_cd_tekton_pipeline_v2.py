@@ -139,9 +139,7 @@ class TestCdTektonPipelineV2:
     @needscredentials
     def test_get_tekton_pipeline(self):
         print("\n Get Tekton Pipeline.", flush=True)
-        response = self.cd_pipeline_service.get_tekton_pipeline(
-            id=pipeline_tool_id_link
-        )
+        response = self.cd_pipeline_service.get_tekton_pipeline(id=pipeline_tool_id_link)
         assert response.get_status_code() == 200
         tekton_pipeline = response.get_result()
         assert tekton_pipeline is not None
@@ -188,10 +186,7 @@ class TestCdTektonPipelineV2:
         assert definition["source"]["properties"] is not None
         assert definition["source"]["properties"]["tool"] is not None
         assert definition["source"]["properties"]["path"] == ".tekton"
-        assert (
-            definition["source"]["properties"]["url"]
-            == "https://github.com/open-toolchain/hello-tekton.git"
-        )
+        assert definition["source"]["properties"]["url"] == "https://github.com/open-toolchain/hello-tekton.git"
         assert definition["source"]["properties"]["branch"] == "master"
         assert definition["id"] is not None
         definition_id_link = definition["id"]
@@ -210,9 +205,7 @@ class TestCdTektonPipelineV2:
     @needscredentials
     def test_list_tekton_pipeline_definitions(self):
         print("\n List definitions.", flush=True)
-        response = self.cd_pipeline_service.list_tekton_pipeline_definitions(
-            pipeline_id=pipeline_tool_id_link
-        )
+        response = self.cd_pipeline_service.list_tekton_pipeline_definitions(pipeline_id=pipeline_tool_id_link)
         assert response.get_status_code() == 200
         definitions_collection = response.get_result()
         assert definitions_collection is not None
@@ -220,25 +213,14 @@ class TestCdTektonPipelineV2:
         assert definitions_collection["definitions"][0]["source"] is not None
         assert definitions_collection["definitions"][0]["href"] is not None
         assert definitions_collection["definitions"][0]["source"]["type"] == "git"
-        assert (
-            definitions_collection["definitions"][0]["source"]["properties"] is not None
-        )
-        assert (
-            definitions_collection["definitions"][0]["source"]["properties"]["tool"]
-            is not None
-        )
-        assert (
-            definitions_collection["definitions"][0]["source"]["properties"]["path"]
-            == ".tekton"
-        )
+        assert definitions_collection["definitions"][0]["source"]["properties"] is not None
+        assert definitions_collection["definitions"][0]["source"]["properties"]["tool"] is not None
+        assert definitions_collection["definitions"][0]["source"]["properties"]["path"] == ".tekton"
         assert (
             definitions_collection["definitions"][0]["source"]["properties"]["url"]
             == "https://github.com/open-toolchain/hello-tekton.git"
         )
-        assert (
-            definitions_collection["definitions"][0]["source"]["properties"]["branch"]
-            == "master"
-        )
+        assert definitions_collection["definitions"][0]["source"]["properties"]["branch"] == "master"
         assert definitions_collection["definitions"][0]["id"] is not None
 
     @needscredentials
@@ -563,9 +545,7 @@ class TestCdTektonPipelineV2:
     @needscredentials
     def test_list_tekton_pipeline_runs(self):
         print("\n List PipelineRuns.", flush=True)
-        response = self.cd_pipeline_service.list_tekton_pipeline_runs(
-            pipeline_id=pipeline_tool_id_link, limit=5
-        )
+        response = self.cd_pipeline_service.list_tekton_pipeline_runs(pipeline_id=pipeline_tool_id_link, limit=5)
         assert response.get_status_code() == 200
         pipeline_runs_collection = response.get_result()
         assert pipeline_runs_collection is not None
@@ -674,18 +654,14 @@ class TestCdTektonPipelineV2:
     @needscredentials
     def test_delete_tekton_pipeline(self):
         print("\n Delete tekton pipeline.", flush=True)
-        response = self.cd_pipeline_service.delete_tekton_pipeline(
-            id=pipeline_tool_id_link
-        )
+        response = self.cd_pipeline_service.delete_tekton_pipeline(id=pipeline_tool_id_link)
         assert response.get_status_code() == 204
         print(f"\n pipeline deleted")
 
     @needscredentials
     def test_delete_toolchain(self):
         print("\n Delete toolchain.", flush=True)
-        response = self.cd_toolchain_service.delete_toolchain(
-            toolchain_id=toolchain_id_link
-        )
+        response = self.cd_toolchain_service.delete_toolchain(toolchain_id=toolchain_id_link)
         assert response.get_status_code() == 204
         print(f"\n toolchain deleted")
         print(f"\n All tests complete")

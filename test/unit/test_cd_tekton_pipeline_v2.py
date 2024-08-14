@@ -77,36 +77,28 @@ def test_get_service_url_for_region():
         == "https://api.us-east.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("eu-de")
-        == "https://api.eu-de.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("eu-de") == "https://api.eu-de.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("eu-gb")
-        == "https://api.eu-gb.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("eu-gb") == "https://api.eu-gb.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("eu-es")
-        == "https://api.eu-es.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("eu-es") == "https://api.eu-es.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("jp-osa")
-        == "https://api.jp-osa.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("jp-osa") == "https://api.jp-osa.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("jp-tok")
-        == "https://api.jp-tok.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("jp-tok") == "https://api.jp-tok.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("au-syd")
-        == "https://api.au-syd.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("au-syd") == "https://api.au-syd.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("ca-tor")
-        == "https://api.ca-tor.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("ca-tor") == "https://api.ca-tor.devops.cloud.ibm.com/pipeline/v2"
     )
     assert (
-        CdTektonPipelineV2.get_service_url_for_region("br-sao")
-        == "https://api.br-sao.devops.cloud.ibm.com/pipeline/v2"
+        CdTektonPipelineV2.get_service_url_for_region("br-sao") == "https://api.br-sao.devops.cloud.ibm.com/pipeline/v2"
     )
 
 
@@ -238,10 +230,7 @@ class TestCreateTektonPipeline:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline(**req_copy)
 
@@ -322,10 +311,7 @@ class TestGetTektonPipeline:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline(**req_copy)
 
@@ -460,10 +446,7 @@ class TestUpdateTektonPipeline:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.update_tekton_pipeline(**req_copy)
 
@@ -538,10 +521,7 @@ class TestDeleteTektonPipeline:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline(**req_copy)
 
@@ -605,9 +585,7 @@ class TestListTektonPipelineRuns:
         list_tekton_pipeline_runs()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "error_message": "error_message"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(
             responses.GET,
@@ -660,9 +638,7 @@ class TestListTektonPipelineRuns:
         test_list_tekton_pipeline_runs_required_params()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "error_message": "error_message"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(
             responses.GET,
@@ -700,9 +676,7 @@ class TestListTektonPipelineRuns:
         test_list_tekton_pipeline_runs_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response = '{"pipeline_runs": [{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "error_message": "error_message"}], "limit": 20, "first": {"href": "href"}, "next": {"href": "href"}, "last": {"href": "href"}}'
         responses.add(
             responses.GET,
@@ -720,10 +694,7 @@ class TestListTektonPipelineRuns:
             "pipeline_id": pipeline_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_runs(**req_copy)
 
@@ -742,9 +713,7 @@ class TestListTektonPipelineRuns:
         test_list_tekton_pipeline_runs_with_pager_get_next()
         """
         # Set up a two-page mock response
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path","locked":true}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true,"favorite":false},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","locked":true,"path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","error_message":"error_message"}]}'
         mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path","locked":true}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true,"favorite":false},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","locked":true,"path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","error_message":"error_message"}]}'
         responses.add(
@@ -783,9 +752,7 @@ class TestListTektonPipelineRuns:
         test_list_tekton_pipeline_runs_with_pager_get_all()
         """
         # Set up a two-page mock response
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path","locked":true}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true,"favorite":false},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","locked":true,"path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","error_message":"error_message"}]}'
         mock_response2 = '{"total_count":2,"limit":1,"pipeline_runs":[{"id":"id","href":"href","user_info":{"iam_id":"iam_id","sub":"sub"},"status":"pending","definition_id":"definition_id","definition":{"id":"id"},"worker":{"name":"name","agent_id":"agent_id","service_id":"service_id","id":"id"},"pipeline_id":"pipeline_id","pipeline":{"id":"id"},"listener_name":"listener_name","trigger":{"type":"type","name":"start-deploy","href":"href","event_listener":"event_listener","id":"id","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","path":"path","locked":true}],"tags":["tags"],"worker":{"name":"name","type":"type","id":"id"},"max_concurrent_runs":4,"enabled":true,"favorite":false},"event_params_blob":"event_params_blob","trigger_headers":"trigger_headers","properties":[{"name":"name","value":"value","href":"href","enum":["enum"],"type":"secure","locked":true,"path":"path"}],"created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","run_url":"run_url","error_message":"error_message"}]}'
         responses.add(
@@ -827,9 +794,7 @@ class TestCreateTektonPipelineRun:
         create_tekton_pipeline_run()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "error_message": "error_message"}'
         responses.add(
             responses.POST,
@@ -895,9 +860,7 @@ class TestCreateTektonPipelineRun:
         test_create_tekton_pipeline_run_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/pipeline_runs")
         mock_response = '{"id": "id", "href": "href", "user_info": {"iam_id": "iam_id", "sub": "sub"}, "status": "pending", "definition_id": "definition_id", "definition": {"id": "id"}, "worker": {"name": "name", "agent_id": "agent_id", "service_id": "service_id", "id": "id"}, "pipeline_id": "pipeline_id", "pipeline": {"id": "id"}, "listener_name": "listener_name", "trigger": {"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}, "event_params_blob": "event_params_blob", "trigger_headers": "trigger_headers", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}], "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "run_url": "run_url", "error_message": "error_message"}'
         responses.add(
             responses.POST,
@@ -929,10 +892,7 @@ class TestCreateTektonPipelineRun:
             "pipeline_id": pipeline_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_run(**req_copy)
 
@@ -1069,10 +1029,7 @@ class TestGetTektonPipelineRun:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run(**req_copy)
 
@@ -1155,10 +1112,7 @@ class TestDeleteTektonPipelineRun:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_run(**req_copy)
 
@@ -1294,10 +1248,7 @@ class TestCancelTektonPipelineRun:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.cancel_tekton_pipeline_run(**req_copy)
 
@@ -1386,10 +1337,7 @@ class TestRerunTektonPipelineRun:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.rerun_tekton_pipeline_run(**req_copy)
 
@@ -1478,10 +1426,7 @@ class TestGetTektonPipelineRunLogs:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run_logs(**req_copy)
 
@@ -1574,10 +1519,7 @@ class TestGetTektonPipelineRunLogContent:
             "id": id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_run_log_content(**req_copy)
 
@@ -1641,9 +1583,7 @@ class TestListTektonPipelineDefinitions:
         list_tekton_pipeline_definitions()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions")
         mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}]}'
         responses.add(
             responses.GET,
@@ -1681,9 +1621,7 @@ class TestListTektonPipelineDefinitions:
         test_list_tekton_pipeline_definitions_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions")
         mock_response = '{"definitions": [{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}]}'
         responses.add(
             responses.GET,
@@ -1701,10 +1639,7 @@ class TestListTektonPipelineDefinitions:
             "pipeline_id": pipeline_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_definitions(**req_copy)
 
@@ -1729,9 +1664,7 @@ class TestCreateTektonPipelineDefinition:
         create_tekton_pipeline_definition()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions")
         mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(
             responses.POST,
@@ -1747,9 +1680,7 @@ class TestCreateTektonPipelineDefinition:
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
-        definition_source_properties_model["url"] = (
-            "https://github.com/open-toolchain/hello-tekton.git"
-        )
+        definition_source_properties_model["url"] = "https://github.com/open-toolchain/hello-tekton.git"
         definition_source_properties_model["branch"] = "master"
         definition_source_properties_model["tag"] = "testString"
         definition_source_properties_model["path"] = ".tekton"
@@ -1793,9 +1724,7 @@ class TestCreateTektonPipelineDefinition:
         test_create_tekton_pipeline_definition_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/definitions")
         mock_response = '{"source": {"type": "type", "properties": {"url": "url", "branch": "branch", "tag": "tag", "path": "path", "tool": {"id": "id"}}}, "href": "href", "id": "id"}'
         responses.add(
             responses.POST,
@@ -1811,9 +1740,7 @@ class TestCreateTektonPipelineDefinition:
 
         # Construct a dict representation of a DefinitionSourceProperties model
         definition_source_properties_model = {}
-        definition_source_properties_model["url"] = (
-            "https://github.com/open-toolchain/hello-tekton.git"
-        )
+        definition_source_properties_model["url"] = "https://github.com/open-toolchain/hello-tekton.git"
         definition_source_properties_model["branch"] = "master"
         definition_source_properties_model["tag"] = "testString"
         definition_source_properties_model["path"] = ".tekton"
@@ -1834,10 +1761,7 @@ class TestCreateTektonPipelineDefinition:
             "source": source,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_definition(**req_copy)
 
@@ -1926,10 +1850,7 @@ class TestGetTektonPipelineDefinition:
             "definition_id": definition_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_definition(**req_copy)
 
@@ -2059,10 +1980,7 @@ class TestReplaceTektonPipelineDefinition:
             "source": source,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_definition(**req_copy)
 
@@ -2145,10 +2063,7 @@ class TestDeleteTektonPipelineDefinition:
             "definition_id": definition_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_definition(**req_copy)
 
@@ -2212,9 +2127,7 @@ class TestListTektonPipelineProperties:
         list_tekton_pipeline_properties()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties")
         mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}]}'
         responses.add(
             responses.GET,
@@ -2264,9 +2177,7 @@ class TestListTektonPipelineProperties:
         test_list_tekton_pipeline_properties_required_params()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties")
         mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}]}'
         responses.add(
             responses.GET,
@@ -2304,9 +2215,7 @@ class TestListTektonPipelineProperties:
         test_list_tekton_pipeline_properties_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties")
         mock_response = '{"properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}]}'
         responses.add(
             responses.GET,
@@ -2324,10 +2233,7 @@ class TestListTektonPipelineProperties:
             "pipeline_id": pipeline_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_properties(**req_copy)
 
@@ -2352,9 +2258,7 @@ class TestCreateTektonPipelineProperties:
         create_tekton_pipeline_properties()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.POST,
@@ -2412,9 +2316,7 @@ class TestCreateTektonPipelineProperties:
         test_create_tekton_pipeline_properties_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.POST,
@@ -2440,10 +2342,7 @@ class TestCreateTektonPipelineProperties:
             "type": type,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_properties(**req_copy)
 
@@ -2468,9 +2367,7 @@ class TestGetTektonPipelineProperty:
         get_tekton_pipeline_property()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.GET,
@@ -2510,9 +2407,7 @@ class TestGetTektonPipelineProperty:
         test_get_tekton_pipeline_property_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.GET,
@@ -2532,10 +2427,7 @@ class TestGetTektonPipelineProperty:
             "property_name": property_name,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_property(**req_copy)
 
@@ -2560,9 +2452,7 @@ class TestReplaceTektonPipelineProperty:
         replace_tekton_pipeline_property()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.PUT,
@@ -2622,9 +2512,7 @@ class TestReplaceTektonPipelineProperty:
         test_replace_tekton_pipeline_property_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         mock_response = '{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "locked": true, "path": "path"}'
         responses.add(
             responses.PUT,
@@ -2652,10 +2540,7 @@ class TestReplaceTektonPipelineProperty:
             "type": type,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_property(**req_copy)
 
@@ -2680,9 +2565,7 @@ class TestDeleteTektonPipelineProperty:
         delete_tekton_pipeline_property()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         responses.add(
             responses.DELETE,
             url,
@@ -2719,9 +2602,7 @@ class TestDeleteTektonPipelineProperty:
         test_delete_tekton_pipeline_property_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/properties/debug-pipeline")
         responses.add(
             responses.DELETE,
             url,
@@ -2738,10 +2619,7 @@ class TestDeleteTektonPipelineProperty:
             "property_name": property_name,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_property(**req_copy)
 
@@ -2805,9 +2683,7 @@ class TestListTektonPipelineTriggers:
         list_tekton_pipeline_triggers()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers")
         mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}]}'
         responses.add(
             responses.GET,
@@ -2869,9 +2745,7 @@ class TestListTektonPipelineTriggers:
         test_list_tekton_pipeline_triggers_required_params()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers")
         mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}]}'
         responses.add(
             responses.GET,
@@ -2909,9 +2783,7 @@ class TestListTektonPipelineTriggers:
         test_list_tekton_pipeline_triggers_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers")
         mock_response = '{"triggers": [{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}]}'
         responses.add(
             responses.GET,
@@ -2929,10 +2801,7 @@ class TestListTektonPipelineTriggers:
             "pipeline_id": pipeline_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_triggers(**req_copy)
 
@@ -2957,9 +2826,7 @@ class TestCreateTektonPipelineTrigger:
         create_tekton_pipeline_trigger()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers")
         mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}'
         responses.add(
             responses.POST,
@@ -2990,9 +2857,7 @@ class TestCreateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model["properties"] = (
-            trigger_source_properties_prototype_model
-        )
+        trigger_source_prototype_model["properties"] = trigger_source_properties_prototype_model
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
@@ -3066,9 +2931,7 @@ class TestCreateTektonPipelineTrigger:
         test_create_tekton_pipeline_trigger_value_error()
         """
         # Set up mock
-        url = preprocess_url(
-            "/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers"
-        )
+        url = preprocess_url("/tekton_pipelines/94619026-912b-4d92-8f51-6c74f0692d90/triggers")
         mock_response = '{"type": "type", "name": "start-deploy", "href": "href", "event_listener": "event_listener", "id": "id", "properties": [{"name": "name", "value": "value", "href": "href", "enum": ["enum"], "type": "secure", "path": "path", "locked": true}], "tags": ["tags"], "worker": {"name": "name", "type": "type", "id": "id"}, "max_concurrent_runs": 4, "enabled": true, "favorite": false}'
         responses.add(
             responses.POST,
@@ -3099,9 +2962,7 @@ class TestCreateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model["properties"] = (
-            trigger_source_properties_prototype_model
-        )
+        trigger_source_prototype_model["properties"] = trigger_source_properties_prototype_model
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
@@ -3128,10 +2989,7 @@ class TestCreateTektonPipelineTrigger:
             "event_listener": event_listener,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_trigger(**req_copy)
 
@@ -3220,10 +3078,7 @@ class TestGetTektonPipelineTrigger:
             "trigger_id": trigger_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_trigger(**req_copy)
 
@@ -3281,9 +3136,7 @@ class TestUpdateTektonPipelineTrigger:
         # Construct a dict representation of a TriggerSourcePrototype model
         trigger_source_prototype_model = {}
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model["properties"] = (
-            trigger_source_properties_prototype_model
-        )
+        trigger_source_prototype_model["properties"] = trigger_source_properties_prototype_model
 
         # Construct a dict representation of a TriggerPatch model
         trigger_patch_model = {}
@@ -3296,14 +3149,10 @@ class TestUpdateTektonPipelineTrigger:
         trigger_patch_model["enabled"] = True
         trigger_patch_model["secret"] = generic_secret_model
         trigger_patch_model["cron"] = "testString"
-        trigger_patch_model["timezone"] = (
-            "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
-        )
+        trigger_patch_model["timezone"] = "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
         trigger_patch_model["source"] = trigger_source_prototype_model
         trigger_patch_model["events"] = ["push", "pull_request"]
-        trigger_patch_model["filter"] = (
-            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
-        )
+        trigger_patch_model["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
         trigger_patch_model["favorite"] = False
 
         # Set up parameter values
@@ -3405,10 +3254,7 @@ class TestUpdateTektonPipelineTrigger:
             "trigger_id": trigger_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.update_tekton_pipeline_trigger(**req_copy)
 
@@ -3491,10 +3337,7 @@ class TestDeleteTektonPipelineTrigger:
             "trigger_id": trigger_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_trigger(**req_copy)
 
@@ -3590,10 +3433,7 @@ class TestDuplicateTektonPipelineTrigger:
             "name": name,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.duplicate_tekton_pipeline_trigger(**req_copy)
 
@@ -3775,10 +3615,7 @@ class TestListTektonPipelineTriggerProperties:
             "trigger_id": trigger_id,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.list_tekton_pipeline_trigger_properties(**req_copy)
 
@@ -3895,10 +3732,7 @@ class TestCreateTektonPipelineTriggerProperties:
             "type": type,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.create_tekton_pipeline_trigger_properties(**req_copy)
 
@@ -3991,10 +3825,7 @@ class TestGetTektonPipelineTriggerProperty:
             "property_name": property_name,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.get_tekton_pipeline_trigger_property(**req_copy)
 
@@ -4115,10 +3946,7 @@ class TestReplaceTektonPipelineTriggerProperty:
             "type": type,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.replace_tekton_pipeline_trigger_property(**req_copy)
 
@@ -4205,10 +4033,7 @@ class TestDeleteTektonPipelineTriggerProperty:
             "property_name": property_name,
         }
         for param in req_param_dict.keys():
-            req_copy = {
-                key: val if key is not param else None
-                for (key, val) in req_param_dict.items()
-            }
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
             with pytest.raises(ValueError):
                 _service.delete_tekton_pipeline_trigger_property(**req_copy)
 
@@ -4310,15 +4135,11 @@ class TestModel_DefinitionSource:
         definition_source_model_json["properties"] = definition_source_properties_model
 
         # Construct a model instance of DefinitionSource by calling from_dict on the json representation
-        definition_source_model = DefinitionSource.from_dict(
-            definition_source_model_json
-        )
+        definition_source_model = DefinitionSource.from_dict(definition_source_model_json)
         assert definition_source_model != False
 
         # Construct a model instance of DefinitionSource by calling from_dict on the json representation
-        definition_source_model_dict = DefinitionSource.from_dict(
-            definition_source_model_json
-        ).__dict__
+        definition_source_model_dict = DefinitionSource.from_dict(definition_source_model_json).__dict__
         definition_source_model2 = DefinitionSource(**definition_source_model_dict)
 
         # Verify the model instances are equivalent
@@ -4362,21 +4183,14 @@ class TestModel_DefinitionSourceProperties:
         definition_source_properties_model_dict = DefinitionSourceProperties.from_dict(
             definition_source_properties_model_json
         ).__dict__
-        definition_source_properties_model2 = DefinitionSourceProperties(
-            **definition_source_properties_model_dict
-        )
+        definition_source_properties_model2 = DefinitionSourceProperties(**definition_source_properties_model_dict)
 
         # Verify the model instances are equivalent
         assert definition_source_properties_model == definition_source_properties_model2
 
         # Convert model instance back to dict and verify no loss of data
-        definition_source_properties_model_json2 = (
-            definition_source_properties_model.to_dict()
-        )
-        assert (
-            definition_source_properties_model_json2
-            == definition_source_properties_model_json
-        )
+        definition_source_properties_model_json2 = definition_source_properties_model.to_dict()
+        assert definition_source_properties_model_json2 == definition_source_properties_model_json
 
 
 class TestModel_DefinitionsCollection:
@@ -4415,18 +4229,12 @@ class TestModel_DefinitionsCollection:
         definitions_collection_model_json["definitions"] = [definition_model]
 
         # Construct a model instance of DefinitionsCollection by calling from_dict on the json representation
-        definitions_collection_model = DefinitionsCollection.from_dict(
-            definitions_collection_model_json
-        )
+        definitions_collection_model = DefinitionsCollection.from_dict(definitions_collection_model_json)
         assert definitions_collection_model != False
 
         # Construct a model instance of DefinitionsCollection by calling from_dict on the json representation
-        definitions_collection_model_dict = DefinitionsCollection.from_dict(
-            definitions_collection_model_json
-        ).__dict__
-        definitions_collection_model2 = DefinitionsCollection(
-            **definitions_collection_model_dict
-        )
+        definitions_collection_model_dict = DefinitionsCollection.from_dict(definitions_collection_model_json).__dict__
+        definitions_collection_model2 = DefinitionsCollection(**definitions_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert definitions_collection_model == definitions_collection_model2
@@ -4459,9 +4267,7 @@ class TestModel_GenericSecret:
         assert generic_secret_model != False
 
         # Construct a model instance of GenericSecret by calling from_dict on the json representation
-        generic_secret_model_dict = GenericSecret.from_dict(
-            generic_secret_model_json
-        ).__dict__
+        generic_secret_model_dict = GenericSecret.from_dict(generic_secret_model_json).__dict__
         generic_secret_model2 = GenericSecret(**generic_secret_model_dict)
 
         # Verify the model instances are equivalent
@@ -4530,9 +4336,7 @@ class TestModel_LogsCollection:
         assert logs_collection_model != False
 
         # Construct a model instance of LogsCollection by calling from_dict on the json representation
-        logs_collection_model_dict = LogsCollection.from_dict(
-            logs_collection_model_json
-        ).__dict__
+        logs_collection_model_dict = LogsCollection.from_dict(logs_collection_model_json).__dict__
         logs_collection_model2 = LogsCollection(**logs_collection_model_dict)
 
         # Verify the model instances are equivalent
@@ -4633,9 +4437,7 @@ class TestModel_PipelineRun:
         assert pipeline_run_model != False
 
         # Construct a model instance of PipelineRun by calling from_dict on the json representation
-        pipeline_run_model_dict = PipelineRun.from_dict(
-            pipeline_run_model_json
-        ).__dict__
+        pipeline_run_model_dict = PipelineRun.from_dict(pipeline_run_model_json).__dict__
         pipeline_run_model2 = PipelineRun(**pipeline_run_model_dict)
 
         # Verify the model instances are equivalent
@@ -4665,18 +4467,12 @@ class TestModel_PipelineRunTrigger:
         pipeline_run_trigger_model_json["body"] = {"foo": "bar"}
 
         # Construct a model instance of PipelineRunTrigger by calling from_dict on the json representation
-        pipeline_run_trigger_model = PipelineRunTrigger.from_dict(
-            pipeline_run_trigger_model_json
-        )
+        pipeline_run_trigger_model = PipelineRunTrigger.from_dict(pipeline_run_trigger_model_json)
         assert pipeline_run_trigger_model != False
 
         # Construct a model instance of PipelineRunTrigger by calling from_dict on the json representation
-        pipeline_run_trigger_model_dict = PipelineRunTrigger.from_dict(
-            pipeline_run_trigger_model_json
-        ).__dict__
-        pipeline_run_trigger_model2 = PipelineRunTrigger(
-            **pipeline_run_trigger_model_dict
-        )
+        pipeline_run_trigger_model_dict = PipelineRunTrigger.from_dict(pipeline_run_trigger_model_json).__dict__
+        pipeline_run_trigger_model2 = PipelineRunTrigger(**pipeline_run_trigger_model_dict)
 
         # Verify the model instances are equivalent
         assert pipeline_run_trigger_model == pipeline_run_trigger_model2
@@ -4704,15 +4500,11 @@ class TestModel_PipelineRunWorker:
         pipeline_run_worker_model_json["id"] = "testString"
 
         # Construct a model instance of PipelineRunWorker by calling from_dict on the json representation
-        pipeline_run_worker_model = PipelineRunWorker.from_dict(
-            pipeline_run_worker_model_json
-        )
+        pipeline_run_worker_model = PipelineRunWorker.from_dict(pipeline_run_worker_model_json)
         assert pipeline_run_worker_model != False
 
         # Construct a model instance of PipelineRunWorker by calling from_dict on the json representation
-        pipeline_run_worker_model_dict = PipelineRunWorker.from_dict(
-            pipeline_run_worker_model_json
-        ).__dict__
+        pipeline_run_worker_model_dict = PipelineRunWorker.from_dict(pipeline_run_worker_model_json).__dict__
         pipeline_run_worker_model2 = PipelineRunWorker(**pipeline_run_worker_model_dict)
 
         # Verify the model instances are equivalent
@@ -4825,27 +4617,21 @@ class TestModel_PipelineRunsCollection:
         pipeline_runs_collection_model_json["last"] = runs_last_page_model
 
         # Construct a model instance of PipelineRunsCollection by calling from_dict on the json representation
-        pipeline_runs_collection_model = PipelineRunsCollection.from_dict(
-            pipeline_runs_collection_model_json
-        )
+        pipeline_runs_collection_model = PipelineRunsCollection.from_dict(pipeline_runs_collection_model_json)
         assert pipeline_runs_collection_model != False
 
         # Construct a model instance of PipelineRunsCollection by calling from_dict on the json representation
         pipeline_runs_collection_model_dict = PipelineRunsCollection.from_dict(
             pipeline_runs_collection_model_json
         ).__dict__
-        pipeline_runs_collection_model2 = PipelineRunsCollection(
-            **pipeline_runs_collection_model_dict
-        )
+        pipeline_runs_collection_model2 = PipelineRunsCollection(**pipeline_runs_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert pipeline_runs_collection_model == pipeline_runs_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
         pipeline_runs_collection_model_json2 = pipeline_runs_collection_model.to_dict()
-        assert (
-            pipeline_runs_collection_model_json2 == pipeline_runs_collection_model_json
-        )
+        assert pipeline_runs_collection_model_json2 == pipeline_runs_collection_model_json
 
 
 class TestModel_PropertiesCollection:
@@ -4874,18 +4660,12 @@ class TestModel_PropertiesCollection:
         properties_collection_model_json["properties"] = [property_model]
 
         # Construct a model instance of PropertiesCollection by calling from_dict on the json representation
-        properties_collection_model = PropertiesCollection.from_dict(
-            properties_collection_model_json
-        )
+        properties_collection_model = PropertiesCollection.from_dict(properties_collection_model_json)
         assert properties_collection_model != False
 
         # Construct a model instance of PropertiesCollection by calling from_dict on the json representation
-        properties_collection_model_dict = PropertiesCollection.from_dict(
-            properties_collection_model_json
-        ).__dict__
-        properties_collection_model2 = PropertiesCollection(
-            **properties_collection_model_dict
-        )
+        properties_collection_model_dict = PropertiesCollection.from_dict(properties_collection_model_json).__dict__
+        properties_collection_model2 = PropertiesCollection(**properties_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert properties_collection_model == properties_collection_model2
@@ -4946,27 +4726,21 @@ class TestModel_ResourceGroupReference:
         resource_group_reference_model_json["id"] = "testString"
 
         # Construct a model instance of ResourceGroupReference by calling from_dict on the json representation
-        resource_group_reference_model = ResourceGroupReference.from_dict(
-            resource_group_reference_model_json
-        )
+        resource_group_reference_model = ResourceGroupReference.from_dict(resource_group_reference_model_json)
         assert resource_group_reference_model != False
 
         # Construct a model instance of ResourceGroupReference by calling from_dict on the json representation
         resource_group_reference_model_dict = ResourceGroupReference.from_dict(
             resource_group_reference_model_json
         ).__dict__
-        resource_group_reference_model2 = ResourceGroupReference(
-            **resource_group_reference_model_dict
-        )
+        resource_group_reference_model2 = ResourceGroupReference(**resource_group_reference_model_dict)
 
         # Verify the model instances are equivalent
         assert resource_group_reference_model == resource_group_reference_model2
 
         # Convert model instance back to dict and verify no loss of data
         resource_group_reference_model_json2 = resource_group_reference_model.to_dict()
-        assert (
-            resource_group_reference_model_json2 == resource_group_reference_model_json
-        )
+        assert resource_group_reference_model_json2 == resource_group_reference_model_json
 
 
 class TestModel_RunDefinition:
@@ -4988,9 +4762,7 @@ class TestModel_RunDefinition:
         assert run_definition_model != False
 
         # Construct a model instance of RunDefinition by calling from_dict on the json representation
-        run_definition_model_dict = RunDefinition.from_dict(
-            run_definition_model_json
-        ).__dict__
+        run_definition_model_dict = RunDefinition.from_dict(run_definition_model_json).__dict__
         run_definition_model2 = RunDefinition(**run_definition_model_dict)
 
         # Verify the model instances are equivalent
@@ -5020,9 +4792,7 @@ class TestModel_RunPipeline:
         assert run_pipeline_model != False
 
         # Construct a model instance of RunPipeline by calling from_dict on the json representation
-        run_pipeline_model_dict = RunPipeline.from_dict(
-            run_pipeline_model_json
-        ).__dict__
+        run_pipeline_model_dict = RunPipeline.from_dict(run_pipeline_model_json).__dict__
         run_pipeline_model2 = RunPipeline(**run_pipeline_model_dict)
 
         # Verify the model instances are equivalent
@@ -5052,9 +4822,7 @@ class TestModel_RunsFirstPage:
         assert runs_first_page_model != False
 
         # Construct a model instance of RunsFirstPage by calling from_dict on the json representation
-        runs_first_page_model_dict = RunsFirstPage.from_dict(
-            runs_first_page_model_json
-        ).__dict__
+        runs_first_page_model_dict = RunsFirstPage.from_dict(runs_first_page_model_json).__dict__
         runs_first_page_model2 = RunsFirstPage(**runs_first_page_model_dict)
 
         # Verify the model instances are equivalent
@@ -5084,9 +4852,7 @@ class TestModel_RunsLastPage:
         assert runs_last_page_model != False
 
         # Construct a model instance of RunsLastPage by calling from_dict on the json representation
-        runs_last_page_model_dict = RunsLastPage.from_dict(
-            runs_last_page_model_json
-        ).__dict__
+        runs_last_page_model_dict = RunsLastPage.from_dict(runs_last_page_model_json).__dict__
         runs_last_page_model2 = RunsLastPage(**runs_last_page_model_dict)
 
         # Verify the model instances are equivalent
@@ -5116,9 +4882,7 @@ class TestModel_RunsNextPage:
         assert runs_next_page_model != False
 
         # Construct a model instance of RunsNextPage by calling from_dict on the json representation
-        runs_next_page_model_dict = RunsNextPage.from_dict(
-            runs_next_page_model_json
-        ).__dict__
+        runs_next_page_model_dict = RunsNextPage.from_dict(runs_next_page_model_json).__dict__
         runs_next_page_model2 = RunsNextPage(**runs_next_page_model_dict)
 
         # Verify the model instances are equivalent
@@ -5262,9 +5026,7 @@ class TestModel_TektonPipeline:
         assert tekton_pipeline_model != False
 
         # Construct a model instance of TektonPipeline by calling from_dict on the json representation
-        tekton_pipeline_model_dict = TektonPipeline.from_dict(
-            tekton_pipeline_model_json
-        ).__dict__
+        tekton_pipeline_model_dict = TektonPipeline.from_dict(tekton_pipeline_model_json).__dict__
         tekton_pipeline_model2 = TektonPipeline(**tekton_pipeline_model_dict)
 
         # Verify the model instances are equivalent
@@ -5298,18 +5060,12 @@ class TestModel_TektonPipelinePatch:
         tekton_pipeline_patch_model_json["worker"] = worker_identity_model
 
         # Construct a model instance of TektonPipelinePatch by calling from_dict on the json representation
-        tekton_pipeline_patch_model = TektonPipelinePatch.from_dict(
-            tekton_pipeline_patch_model_json
-        )
+        tekton_pipeline_patch_model = TektonPipelinePatch.from_dict(tekton_pipeline_patch_model_json)
         assert tekton_pipeline_patch_model != False
 
         # Construct a model instance of TektonPipelinePatch by calling from_dict on the json representation
-        tekton_pipeline_patch_model_dict = TektonPipelinePatch.from_dict(
-            tekton_pipeline_patch_model_json
-        ).__dict__
-        tekton_pipeline_patch_model2 = TektonPipelinePatch(
-            **tekton_pipeline_patch_model_dict
-        )
+        tekton_pipeline_patch_model_dict = TektonPipelinePatch.from_dict(tekton_pipeline_patch_model_json).__dict__
+        tekton_pipeline_patch_model2 = TektonPipelinePatch(**tekton_pipeline_patch_model_dict)
 
         # Verify the model instances are equivalent
         assert tekton_pipeline_patch_model == tekton_pipeline_patch_model2
@@ -5367,18 +5123,12 @@ class TestModel_ToolchainReference:
         )
 
         # Construct a model instance of ToolchainReference by calling from_dict on the json representation
-        toolchain_reference_model = ToolchainReference.from_dict(
-            toolchain_reference_model_json
-        )
+        toolchain_reference_model = ToolchainReference.from_dict(toolchain_reference_model_json)
         assert toolchain_reference_model != False
 
         # Construct a model instance of ToolchainReference by calling from_dict on the json representation
-        toolchain_reference_model_dict = ToolchainReference.from_dict(
-            toolchain_reference_model_json
-        ).__dict__
-        toolchain_reference_model2 = ToolchainReference(
-            **toolchain_reference_model_dict
-        )
+        toolchain_reference_model_dict = ToolchainReference.from_dict(toolchain_reference_model_json).__dict__
+        toolchain_reference_model2 = ToolchainReference(**toolchain_reference_model_dict)
 
         # Verify the model instances are equivalent
         assert toolchain_reference_model == toolchain_reference_model2
@@ -5410,18 +5160,14 @@ class TestModel_TriggerPatch:
         generic_secret_model["key_name"] = "testString"
         generic_secret_model["algorithm"] = "md4"
 
-        trigger_source_properties_prototype_model = (
-            {}
-        )  # TriggerSourcePropertiesPrototype
+        trigger_source_properties_prototype_model = {}  # TriggerSourcePropertiesPrototype
         trigger_source_properties_prototype_model["url"] = "testString"
         trigger_source_properties_prototype_model["branch"] = "testString"
         trigger_source_properties_prototype_model["pattern"] = "testString"
 
         trigger_source_prototype_model = {}  # TriggerSourcePrototype
         trigger_source_prototype_model["type"] = "testString"
-        trigger_source_prototype_model["properties"] = (
-            trigger_source_properties_prototype_model
-        )
+        trigger_source_prototype_model["properties"] = trigger_source_properties_prototype_model
 
         # Construct a json representation of a TriggerPatch model
         trigger_patch_model_json = {}
@@ -5434,14 +5180,10 @@ class TestModel_TriggerPatch:
         trigger_patch_model_json["enabled"] = True
         trigger_patch_model_json["secret"] = generic_secret_model
         trigger_patch_model_json["cron"] = "testString"
-        trigger_patch_model_json["timezone"] = (
-            "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
-        )
+        trigger_patch_model_json["timezone"] = "America/Los_Angeles, CET, Europe/London, GMT, US/Eastern, or UTC"
         trigger_patch_model_json["source"] = trigger_source_prototype_model
         trigger_patch_model_json["events"] = ["push", "pull_request"]
-        trigger_patch_model_json["filter"] = (
-            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
-        )
+        trigger_patch_model_json["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
         trigger_patch_model_json["favorite"] = False
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
@@ -5449,9 +5191,7 @@ class TestModel_TriggerPatch:
         assert trigger_patch_model != False
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
-        trigger_patch_model_dict = TriggerPatch.from_dict(
-            trigger_patch_model_json
-        ).__dict__
+        trigger_patch_model_dict = TriggerPatch.from_dict(trigger_patch_model_json).__dict__
         trigger_patch_model2 = TriggerPatch(**trigger_patch_model_dict)
 
         # Verify the model instances are equivalent
@@ -5485,9 +5225,7 @@ class TestModel_TriggerPropertiesCollection:
 
         # Construct a json representation of a TriggerPropertiesCollection model
         trigger_properties_collection_model_json = {}
-        trigger_properties_collection_model_json["properties"] = [
-            trigger_property_model
-        ]
+        trigger_properties_collection_model_json["properties"] = [trigger_property_model]
 
         # Construct a model instance of TriggerPropertiesCollection by calling from_dict on the json representation
         trigger_properties_collection_model = TriggerPropertiesCollection.from_dict(
@@ -5496,28 +5234,17 @@ class TestModel_TriggerPropertiesCollection:
         assert trigger_properties_collection_model != False
 
         # Construct a model instance of TriggerPropertiesCollection by calling from_dict on the json representation
-        trigger_properties_collection_model_dict = (
-            TriggerPropertiesCollection.from_dict(
-                trigger_properties_collection_model_json
-            ).__dict__
-        )
-        trigger_properties_collection_model2 = TriggerPropertiesCollection(
-            **trigger_properties_collection_model_dict
-        )
+        trigger_properties_collection_model_dict = TriggerPropertiesCollection.from_dict(
+            trigger_properties_collection_model_json
+        ).__dict__
+        trigger_properties_collection_model2 = TriggerPropertiesCollection(**trigger_properties_collection_model_dict)
 
         # Verify the model instances are equivalent
-        assert (
-            trigger_properties_collection_model == trigger_properties_collection_model2
-        )
+        assert trigger_properties_collection_model == trigger_properties_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        trigger_properties_collection_model_json2 = (
-            trigger_properties_collection_model.to_dict()
-        )
-        assert (
-            trigger_properties_collection_model_json2
-            == trigger_properties_collection_model_json
-        )
+        trigger_properties_collection_model_json2 = trigger_properties_collection_model.to_dict()
+        assert trigger_properties_collection_model_json2 == trigger_properties_collection_model_json
 
 
 class TestModel_TriggerProperty:
@@ -5545,9 +5272,7 @@ class TestModel_TriggerProperty:
         assert trigger_property_model != False
 
         # Construct a model instance of TriggerProperty by calling from_dict on the json representation
-        trigger_property_model_dict = TriggerProperty.from_dict(
-            trigger_property_model_json
-        ).__dict__
+        trigger_property_model_dict = TriggerProperty.from_dict(trigger_property_model_json).__dict__
         trigger_property_model2 = TriggerProperty(**trigger_property_model_dict)
 
         # Verify the model instances are equivalent
@@ -5591,9 +5316,7 @@ class TestModel_TriggerSource:
         assert trigger_source_model != False
 
         # Construct a model instance of TriggerSource by calling from_dict on the json representation
-        trigger_source_model_dict = TriggerSource.from_dict(
-            trigger_source_model_json
-        ).__dict__
+        trigger_source_model_dict = TriggerSource.from_dict(trigger_source_model_json).__dict__
         trigger_source_model2 = TriggerSource(**trigger_source_model_dict)
 
         # Verify the model instances are equivalent
@@ -5629,30 +5352,21 @@ class TestModel_TriggerSourceProperties:
         trigger_source_properties_model_json["tool"] = tool_model
 
         # Construct a model instance of TriggerSourceProperties by calling from_dict on the json representation
-        trigger_source_properties_model = TriggerSourceProperties.from_dict(
-            trigger_source_properties_model_json
-        )
+        trigger_source_properties_model = TriggerSourceProperties.from_dict(trigger_source_properties_model_json)
         assert trigger_source_properties_model != False
 
         # Construct a model instance of TriggerSourceProperties by calling from_dict on the json representation
         trigger_source_properties_model_dict = TriggerSourceProperties.from_dict(
             trigger_source_properties_model_json
         ).__dict__
-        trigger_source_properties_model2 = TriggerSourceProperties(
-            **trigger_source_properties_model_dict
-        )
+        trigger_source_properties_model2 = TriggerSourceProperties(**trigger_source_properties_model_dict)
 
         # Verify the model instances are equivalent
         assert trigger_source_properties_model == trigger_source_properties_model2
 
         # Convert model instance back to dict and verify no loss of data
-        trigger_source_properties_model_json2 = (
-            trigger_source_properties_model.to_dict()
-        )
-        assert (
-            trigger_source_properties_model_json2
-            == trigger_source_properties_model_json
-        )
+        trigger_source_properties_model_json2 = trigger_source_properties_model.to_dict()
+        assert trigger_source_properties_model_json2 == trigger_source_properties_model_json
 
 
 class TestModel_TriggerSourcePropertiesPrototype:
@@ -5672,37 +5386,25 @@ class TestModel_TriggerSourcePropertiesPrototype:
         trigger_source_properties_prototype_model_json["pattern"] = "testString"
 
         # Construct a model instance of TriggerSourcePropertiesPrototype by calling from_dict on the json representation
-        trigger_source_properties_prototype_model = (
-            TriggerSourcePropertiesPrototype.from_dict(
-                trigger_source_properties_prototype_model_json
-            )
+        trigger_source_properties_prototype_model = TriggerSourcePropertiesPrototype.from_dict(
+            trigger_source_properties_prototype_model_json
         )
         assert trigger_source_properties_prototype_model != False
 
         # Construct a model instance of TriggerSourcePropertiesPrototype by calling from_dict on the json representation
-        trigger_source_properties_prototype_model_dict = (
-            TriggerSourcePropertiesPrototype.from_dict(
-                trigger_source_properties_prototype_model_json
-            ).__dict__
-        )
+        trigger_source_properties_prototype_model_dict = TriggerSourcePropertiesPrototype.from_dict(
+            trigger_source_properties_prototype_model_json
+        ).__dict__
         trigger_source_properties_prototype_model2 = TriggerSourcePropertiesPrototype(
             **trigger_source_properties_prototype_model_dict
         )
 
         # Verify the model instances are equivalent
-        assert (
-            trigger_source_properties_prototype_model
-            == trigger_source_properties_prototype_model2
-        )
+        assert trigger_source_properties_prototype_model == trigger_source_properties_prototype_model2
 
         # Convert model instance back to dict and verify no loss of data
-        trigger_source_properties_prototype_model_json2 = (
-            trigger_source_properties_prototype_model.to_dict()
-        )
-        assert (
-            trigger_source_properties_prototype_model_json2
-            == trigger_source_properties_prototype_model_json
-        )
+        trigger_source_properties_prototype_model_json2 = trigger_source_properties_prototype_model.to_dict()
+        assert trigger_source_properties_prototype_model_json2 == trigger_source_properties_prototype_model_json
 
 
 class TestModel_TriggerSourcePrototype:
@@ -5717,9 +5419,7 @@ class TestModel_TriggerSourcePrototype:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        trigger_source_properties_prototype_model = (
-            {}
-        )  # TriggerSourcePropertiesPrototype
+        trigger_source_properties_prototype_model = {}  # TriggerSourcePropertiesPrototype
         trigger_source_properties_prototype_model["url"] = "testString"
         trigger_source_properties_prototype_model["branch"] = "testString"
         trigger_source_properties_prototype_model["pattern"] = "testString"
@@ -5727,32 +5427,24 @@ class TestModel_TriggerSourcePrototype:
         # Construct a json representation of a TriggerSourcePrototype model
         trigger_source_prototype_model_json = {}
         trigger_source_prototype_model_json["type"] = "testString"
-        trigger_source_prototype_model_json["properties"] = (
-            trigger_source_properties_prototype_model
-        )
+        trigger_source_prototype_model_json["properties"] = trigger_source_properties_prototype_model
 
         # Construct a model instance of TriggerSourcePrototype by calling from_dict on the json representation
-        trigger_source_prototype_model = TriggerSourcePrototype.from_dict(
-            trigger_source_prototype_model_json
-        )
+        trigger_source_prototype_model = TriggerSourcePrototype.from_dict(trigger_source_prototype_model_json)
         assert trigger_source_prototype_model != False
 
         # Construct a model instance of TriggerSourcePrototype by calling from_dict on the json representation
         trigger_source_prototype_model_dict = TriggerSourcePrototype.from_dict(
             trigger_source_prototype_model_json
         ).__dict__
-        trigger_source_prototype_model2 = TriggerSourcePrototype(
-            **trigger_source_prototype_model_dict
-        )
+        trigger_source_prototype_model2 = TriggerSourcePrototype(**trigger_source_prototype_model_dict)
 
         # Verify the model instances are equivalent
         assert trigger_source_prototype_model == trigger_source_prototype_model2
 
         # Convert model instance back to dict and verify no loss of data
         trigger_source_prototype_model_json2 = trigger_source_prototype_model.to_dict()
-        assert (
-            trigger_source_prototype_model_json2 == trigger_source_prototype_model_json
-        )
+        assert trigger_source_prototype_model_json2 == trigger_source_prototype_model_json
 
 
 class TestModel_TriggersCollection:
@@ -5799,18 +5491,12 @@ class TestModel_TriggersCollection:
         triggers_collection_model_json["triggers"] = [trigger_model]
 
         # Construct a model instance of TriggersCollection by calling from_dict on the json representation
-        triggers_collection_model = TriggersCollection.from_dict(
-            triggers_collection_model_json
-        )
+        triggers_collection_model = TriggersCollection.from_dict(triggers_collection_model_json)
         assert triggers_collection_model != False
 
         # Construct a model instance of TriggersCollection by calling from_dict on the json representation
-        triggers_collection_model_dict = TriggersCollection.from_dict(
-            triggers_collection_model_json
-        ).__dict__
-        triggers_collection_model2 = TriggersCollection(
-            **triggers_collection_model_dict
-        )
+        triggers_collection_model_dict = TriggersCollection.from_dict(triggers_collection_model_json).__dict__
+        triggers_collection_model2 = TriggersCollection(**triggers_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert triggers_collection_model == triggers_collection_model2
@@ -5902,9 +5588,7 @@ class TestModel_WorkerIdentity:
         assert worker_identity_model != False
 
         # Construct a model instance of WorkerIdentity by calling from_dict on the json representation
-        worker_identity_model_dict = WorkerIdentity.from_dict(
-            worker_identity_model_json
-        ).__dict__
+        worker_identity_model_dict = WorkerIdentity.from_dict(worker_identity_model_json).__dict__
         worker_identity_model2 = WorkerIdentity(**worker_identity_model_dict)
 
         # Verify the model instances are equivalent
@@ -5963,23 +5647,17 @@ class TestModel_TriggerGenericTrigger:
         trigger_generic_trigger_model_json["favorite"] = False
         trigger_generic_trigger_model_json["secret"] = generic_secret_model
         trigger_generic_trigger_model_json["webhook_url"] = "testString"
-        trigger_generic_trigger_model_json["filter"] = (
-            "event.type == 'message' && event.text.contains('urgent')"
-        )
+        trigger_generic_trigger_model_json["filter"] = "event.type == 'message' && event.text.contains('urgent')"
 
         # Construct a model instance of TriggerGenericTrigger by calling from_dict on the json representation
-        trigger_generic_trigger_model = TriggerGenericTrigger.from_dict(
-            trigger_generic_trigger_model_json
-        )
+        trigger_generic_trigger_model = TriggerGenericTrigger.from_dict(trigger_generic_trigger_model_json)
         assert trigger_generic_trigger_model != False
 
         # Construct a model instance of TriggerGenericTrigger by calling from_dict on the json representation
         trigger_generic_trigger_model_dict = TriggerGenericTrigger.from_dict(
             trigger_generic_trigger_model_json
         ).__dict__
-        trigger_generic_trigger_model2 = TriggerGenericTrigger(
-            **trigger_generic_trigger_model_dict
-        )
+        trigger_generic_trigger_model2 = TriggerGenericTrigger(**trigger_generic_trigger_model_dict)
 
         # Verify the model instances are equivalent
         assert trigger_generic_trigger_model == trigger_generic_trigger_model2
@@ -6030,18 +5708,12 @@ class TestModel_TriggerManualTrigger:
         trigger_manual_trigger_model_json["favorite"] = False
 
         # Construct a model instance of TriggerManualTrigger by calling from_dict on the json representation
-        trigger_manual_trigger_model = TriggerManualTrigger.from_dict(
-            trigger_manual_trigger_model_json
-        )
+        trigger_manual_trigger_model = TriggerManualTrigger.from_dict(trigger_manual_trigger_model_json)
         assert trigger_manual_trigger_model != False
 
         # Construct a model instance of TriggerManualTrigger by calling from_dict on the json representation
-        trigger_manual_trigger_model_dict = TriggerManualTrigger.from_dict(
-            trigger_manual_trigger_model_json
-        ).__dict__
-        trigger_manual_trigger_model2 = TriggerManualTrigger(
-            **trigger_manual_trigger_model_dict
-        )
+        trigger_manual_trigger_model_dict = TriggerManualTrigger.from_dict(trigger_manual_trigger_model_json).__dict__
+        trigger_manual_trigger_model2 = TriggerManualTrigger(**trigger_manual_trigger_model_dict)
 
         # Verify the model instances are equivalent
         assert trigger_manual_trigger_model == trigger_manual_trigger_model2
@@ -6107,20 +5779,14 @@ class TestModel_TriggerScmTrigger:
         trigger_scm_trigger_model_json["favorite"] = False
         trigger_scm_trigger_model_json["source"] = trigger_source_model
         trigger_scm_trigger_model_json["events"] = ["push", "pull_request"]
-        trigger_scm_trigger_model_json["filter"] = (
-            "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
-        )
+        trigger_scm_trigger_model_json["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
 
         # Construct a model instance of TriggerScmTrigger by calling from_dict on the json representation
-        trigger_scm_trigger_model = TriggerScmTrigger.from_dict(
-            trigger_scm_trigger_model_json
-        )
+        trigger_scm_trigger_model = TriggerScmTrigger.from_dict(trigger_scm_trigger_model_json)
         assert trigger_scm_trigger_model != False
 
         # Construct a model instance of TriggerScmTrigger by calling from_dict on the json representation
-        trigger_scm_trigger_model_dict = TriggerScmTrigger.from_dict(
-            trigger_scm_trigger_model_json
-        ).__dict__
+        trigger_scm_trigger_model_dict = TriggerScmTrigger.from_dict(trigger_scm_trigger_model_json).__dict__
         trigger_scm_trigger_model2 = TriggerScmTrigger(**trigger_scm_trigger_model_dict)
 
         # Verify the model instances are equivalent
@@ -6176,18 +5842,12 @@ class TestModel_TriggerTimerTrigger:
         )
 
         # Construct a model instance of TriggerTimerTrigger by calling from_dict on the json representation
-        trigger_timer_trigger_model = TriggerTimerTrigger.from_dict(
-            trigger_timer_trigger_model_json
-        )
+        trigger_timer_trigger_model = TriggerTimerTrigger.from_dict(trigger_timer_trigger_model_json)
         assert trigger_timer_trigger_model != False
 
         # Construct a model instance of TriggerTimerTrigger by calling from_dict on the json representation
-        trigger_timer_trigger_model_dict = TriggerTimerTrigger.from_dict(
-            trigger_timer_trigger_model_json
-        ).__dict__
-        trigger_timer_trigger_model2 = TriggerTimerTrigger(
-            **trigger_timer_trigger_model_dict
-        )
+        trigger_timer_trigger_model_dict = TriggerTimerTrigger.from_dict(trigger_timer_trigger_model_json).__dict__
+        trigger_timer_trigger_model2 = TriggerTimerTrigger(**trigger_timer_trigger_model_dict)
 
         # Verify the model instances are equivalent
         assert trigger_timer_trigger_model == trigger_timer_trigger_model2
