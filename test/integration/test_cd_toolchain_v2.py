@@ -13,12 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Required environment variables:
+# CD_TOOLCHAIN_APIKEY=<IAM apikey>
+# CD_TOOLCHAIN_AUTHTYPE=iam
+# CD_TOOLCHAIN_EVENT_NOTIFICATIONS_SERVICE_CRN=<event notifications service CRN>
+# CD_TOOLCHAIN_RESOURCE_GROUP_ID=<resource group where resources will be created>
+# CD_TOOLCHAIN_URL=<service base url>
+
 """
 Integration Tests for CdToolchainV2
 """
 
 from ibm_cloud_sdk_core import *
 import os
+from datetime import datetime
 import pytest
 from ibm_continuous_delivery.cd_toolchain_v2 import *
 
@@ -29,6 +37,8 @@ config_file = "cd_toolchain_v2.env"
 tool_id_link = None
 toolchain_id_link = None
 
+current_time = datetime.now()
+toolchain_name = 'TestPythonSdk_' + current_time.strftime("%Y_%m_%d_%H_%M_%S")
 
 
 class TestCdToolchainV2:
@@ -61,8 +71,8 @@ class TestCdToolchainV2:
         global toolchain_id_link
 
         response = self.cd_toolchain_service.create_toolchain(
-            name="TestToolchainV2",
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            name=toolchain_name,
+            resource_group_id=self.config['RESOURCE_GROUP_ID'],
             description="A sample toolchain to test the API",
         )
 
@@ -92,10 +102,9 @@ class TestCdToolchainV2:
     @needscredentials
     def test_list_toolchains(self):
         response = self.cd_toolchain_service.list_toolchains(
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            resource_group_id=self.config['RESOURCE_GROUP_ID'],
             limit=20,
-            start="testString",
-            name="TestToolchainV2",
+            name=toolchain_name,
         )
 
         assert response.get_status_code() == 200
@@ -104,32 +113,34 @@ class TestCdToolchainV2:
 
     @needscredentials
     def test_list_toolchains_with_pager(self):
-        all_results = []
+        filtered_results = []
 
         # Test get_next().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            resource_group_id=self.config['RESOURCE_GROUP_ID'],
             limit=10,
-            name="TestToolchainV2",
+            name=toolchain_name,
         )
         while pager.has_next():
             next_page = pager.get_next()
             assert next_page is not None
-            all_results.extend(next_page)
+            filtered_page = list(filter(lambda p: p['name'].startswith(toolchain_name), next_page))
+            filtered_results.extend(filtered_page)
 
         # Test get_all().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            resource_group_id=self.config['RESOURCE_GROUP_ID'],
             limit=10,
-            name="TestToolchainV2",
+            name=toolchain_name,
         )
         all_items = pager.get_all()
         assert all_items is not None
+        filtered_items = list(filter(lambda p: p['name'].startswith(toolchain_name), all_items))
 
-        assert len(all_results) == len(all_items)
-        print(f"\nlist_toolchains() returned a total of {len(all_results)} items(s) using ToolchainsPager.")
+        assert len(filtered_results) == len(filtered_items)
+        print(f"\nlist_toolchains() returned a total of {len(filtered_results)} items(s) using ToolchainsPager.")
 
     @needscredentials
     def test_get_toolchain_by_id(self):
@@ -159,6 +170,21 @@ class TestCdToolchainV2:
         assert toolchain_patch is not None
 
     @needscredentials
+    def test_create_event_notifications_tool(self):
+        response = self.cd_toolchain_service.create_tool(
+            toolchain_id=toolchain_id_link,
+            tool_type_id="eventnotifications",
+            parameters={
+                "name": "test-en-tool",
+                "instance-crn": self.config["EVENT_NOTIFICATIONS_SERVICE_CRN"],
+            },
+        )
+
+        assert response.get_status_code() == 201
+        toolchain_tool_post = response.get_result()
+        assert toolchain_tool_post is not None
+
+    @needscredentials
     def test_create_toolchain_event(self):
         # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
         toolchain_event_prototype_data_application_json_model = {
@@ -171,7 +197,6 @@ class TestCdToolchainV2:
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {
             "application_json": toolchain_event_prototype_data_application_json_model,
-            "text_plain": "This event is dispatched because the pipeline failed",
         }
 
         response = self.cd_toolchain_service.create_toolchain_event(
@@ -191,7 +216,6 @@ class TestCdToolchainV2:
         response = self.cd_toolchain_service.list_tools(
             toolchain_id=toolchain_id_link,
             limit=20,
-            start="testString",
         )
 
         assert response.get_status_code() == 200
