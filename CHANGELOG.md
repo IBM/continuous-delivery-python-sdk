@@ -1,3 +1,17 @@
+# [1.8.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.7.1...v1.8.0) (2024-09-04)
+
+
+### Bug Fixes
+
+* bump python core and update build files ([8a0b9cc](https://github.com/IBM/continuous-delivery-python-sdk/commit/8a0b9cc2f48fcdd275fa3959f8425d6d7295377a))
+* lint ([2654fb0](https://github.com/IBM/continuous-delivery-python-sdk/commit/2654fb0235204b2a6791ce80620c3bbc27ac50d6))
+* lint fixes ([7090a14](https://github.com/IBM/continuous-delivery-python-sdk/commit/7090a141632501c13f3622d98b136023292516ce))
+
+
+### Features
+
+* **toolchain:** add eu-es region ([a74d110](https://github.com/IBM/continuous-delivery-python-sdk/commit/a74d110594e0ab6962682f729abc74871778ca16))
+
 ## [1.7.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.7.0...v1.7.1) (2024-08-14)
 
 
