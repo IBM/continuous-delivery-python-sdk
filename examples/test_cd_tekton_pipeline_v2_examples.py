@@ -82,7 +82,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline() result:")
-
             # begin-create_tekton_pipeline
 
             worker_identity_model = {
@@ -109,7 +108,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline() result:")
-
             # begin-get_tekton_pipeline
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline(
@@ -131,7 +129,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nupdate_tekton_pipeline() result:")
-
             # begin-update_tekton_pipeline
 
             worker_identity_model = {
@@ -162,7 +159,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nlist_tekton_pipeline_runs() result:")
-
             # begin-list_tekton_pipeline_runs
 
             all_results = []
@@ -191,7 +187,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline_run() result:")
-
             # begin-create_tekton_pipeline_run
 
             pipeline_run_trigger_model = {
@@ -226,7 +221,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_run() result:")
-
             # begin-get_tekton_pipeline_run
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run(
@@ -250,7 +244,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncancel_tekton_pipeline_run() result:")
-
             # begin-cancel_tekton_pipeline_run
 
             response = cd_tekton_pipeline_service.cancel_tekton_pipeline_run(
@@ -274,7 +267,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nrerun_tekton_pipeline_run() result:")
-
             # begin-rerun_tekton_pipeline_run
 
             response = cd_tekton_pipeline_service.rerun_tekton_pipeline_run(
@@ -297,7 +289,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_run_logs() result:")
-
             # begin-get_tekton_pipeline_run_logs
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run_logs(
@@ -320,7 +311,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_run_log_content() result:")
-
             # begin-get_tekton_pipeline_run_log_content
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_run_log_content(
@@ -344,7 +334,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nlist_tekton_pipeline_definitions() result:")
-
             # begin-list_tekton_pipeline_definitions
 
             response = cd_tekton_pipeline_service.list_tekton_pipeline_definitions(
@@ -366,7 +355,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline_definition() result:")
-
             # begin-create_tekton_pipeline_definition
 
             definition_source_properties_model = {
@@ -400,7 +388,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_definition() result:")
-
             # begin-get_tekton_pipeline_definition
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_definition(
@@ -423,7 +410,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nreplace_tekton_pipeline_definition() result:")
-
             # begin-replace_tekton_pipeline_definition
 
             definition_source_properties_model = {
@@ -457,7 +443,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nlist_tekton_pipeline_properties() result:")
-
             # begin-list_tekton_pipeline_properties
 
             response = cd_tekton_pipeline_service.list_tekton_pipeline_properties(
@@ -482,7 +467,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline_properties() result:")
-
             # begin-create_tekton_pipeline_properties
 
             response = cd_tekton_pipeline_service.create_tekton_pipeline_properties(
@@ -507,7 +491,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_property() result:")
-
             # begin-get_tekton_pipeline_property
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_property(
@@ -530,7 +513,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nreplace_tekton_pipeline_property() result:")
-
             # begin-replace_tekton_pipeline_property
 
             response = cd_tekton_pipeline_service.replace_tekton_pipeline_property(
@@ -556,7 +538,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nlist_tekton_pipeline_triggers() result:")
-
             # begin-list_tekton_pipeline_triggers
 
             response = cd_tekton_pipeline_service.list_tekton_pipeline_triggers(
@@ -581,7 +562,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline_trigger() result:")
-
             # begin-create_tekton_pipeline_trigger
 
             worker_identity_model = {
@@ -613,7 +593,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_trigger() result:")
-
             # begin-get_tekton_pipeline_trigger
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_trigger(
@@ -636,7 +615,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nupdate_tekton_pipeline_trigger() result:")
-
             # begin-update_tekton_pipeline_trigger
 
             trigger_patch_model = {
@@ -664,7 +642,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nduplicate_tekton_pipeline_trigger() result:")
-
             # begin-duplicate_tekton_pipeline_trigger
 
             response = cd_tekton_pipeline_service.duplicate_tekton_pipeline_trigger(
@@ -688,7 +665,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nlist_tekton_pipeline_trigger_properties() result:")
-
             # begin-list_tekton_pipeline_trigger_properties
 
             response = cd_tekton_pipeline_service.list_tekton_pipeline_trigger_properties(
@@ -714,7 +690,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\ncreate_tekton_pipeline_trigger_properties() result:")
-
             # begin-create_tekton_pipeline_trigger_properties
 
             response = cd_tekton_pipeline_service.create_tekton_pipeline_trigger_properties(
@@ -740,7 +715,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nget_tekton_pipeline_trigger_property() result:")
-
             # begin-get_tekton_pipeline_trigger_property
 
             response = cd_tekton_pipeline_service.get_tekton_pipeline_trigger_property(
@@ -764,7 +738,6 @@ class TestCdTektonPipelineV2Examples:
         """
         try:
             print("\nreplace_tekton_pipeline_trigger_property() result:")
-
             # begin-replace_tekton_pipeline_trigger_property
 
             response = cd_tekton_pipeline_service.replace_tekton_pipeline_trigger_property(

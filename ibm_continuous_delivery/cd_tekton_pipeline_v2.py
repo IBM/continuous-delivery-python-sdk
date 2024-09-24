@@ -412,6 +412,7 @@ class CdTektonPipelineV2(BaseService):
         self,
         pipeline_id: str,
         *,
+        description: str = None,
         trigger_name: str = None,
         trigger_properties: dict = None,
         secure_trigger_properties: dict = None,
@@ -427,6 +428,8 @@ class CdTektonPipelineV2(BaseService):
         specifying the additional properties or overriding existing ones as needed.
 
         :param str pipeline_id: The Tekton pipeline ID.
+        :param str description: (optional) Optional description for the created
+               PipelineRun.
         :param str trigger_name: (optional) Trigger name.
         :param dict trigger_properties: (optional) An object containing string
                values only. It provides additional 'text' properties or overrides existing
@@ -464,6 +467,7 @@ class CdTektonPipelineV2(BaseService):
         headers.update(sdk_headers)
 
         data = {
+            "description": description,
             "trigger_name": trigger_name,
             "trigger_properties": trigger_properties,
             "secure_trigger_properties": secure_trigger_properties,
@@ -2870,6 +2874,7 @@ class PipelineRun:
     :attr str definition_id: The aggregated definition ID.
     :attr RunDefinition definition: (optional) Reference to the pipeline definition
           of a pipeline run.
+    :attr object description: (optional) A description of the PipelineRun.
     :attr PipelineRunWorker worker: Worker details used in this pipeline run.
     :attr str pipeline_id: The ID of the pipeline to which this pipeline run
           belongs.
@@ -2910,6 +2915,7 @@ class PipelineRun:
         href: str = None,
         user_info: "UserInfo" = None,
         definition: "RunDefinition" = None,
+        description: object = None,
         pipeline: "RunPipeline" = None,
         trigger_headers: str = None,
         properties: List["Property"] = None,
@@ -2940,6 +2946,7 @@ class PipelineRun:
                manually triggered.
         :param RunDefinition definition: (optional) Reference to the pipeline
                definition of a pipeline run.
+        :param object description: (optional) A description of the PipelineRun.
         :param RunPipeline pipeline: (optional) Reference to the pipeline to which
                a pipeline run belongs.
         :param str trigger_headers: (optional) Trigger headers object in String
@@ -2958,6 +2965,7 @@ class PipelineRun:
         self.status = status
         self.definition_id = definition_id
         self.definition = definition
+        self.description = description
         self.worker = worker
         self.pipeline_id = pipeline_id
         self.pipeline = pipeline
@@ -2993,6 +3001,8 @@ class PipelineRun:
             raise ValueError("Required property 'definition_id' not present in PipelineRun JSON")
         if "definition" in _dict:
             args["definition"] = RunDefinition.from_dict(_dict.get("definition"))
+        if "description" in _dict:
+            args["description"] = _dict.get("description")
         if "worker" in _dict:
             args["worker"] = PipelineRunWorker.from_dict(_dict.get("worker"))
         else:
@@ -3059,6 +3069,8 @@ class PipelineRun:
                 _dict["definition"] = self.definition
             else:
                 _dict["definition"] = self.definition.to_dict()
+        if hasattr(self, "description") and self.description is not None:
+            _dict["description"] = self.description
         if hasattr(self, "worker") and self.worker is not None:
             if isinstance(self.worker, dict):
                 _dict["worker"] = self.worker
