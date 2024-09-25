@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.8.0...v1.9.0) (2024-09-25)
+
+
+### Features
+
+* **tekton:** add run description for pipeline runs ([b40c2f6](https://github.com/IBM/continuous-delivery-python-sdk/commit/b40c2f686c7c83a66e3b0f414afe2ffe437c3d7a))
+
 # [1.8.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.7.1...v1.8.0) (2024-09-04)
 
 
