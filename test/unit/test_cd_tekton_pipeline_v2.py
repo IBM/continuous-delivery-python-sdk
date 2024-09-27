@@ -5783,6 +5783,7 @@ class TestModel_TriggerScmTrigger:
         trigger_scm_trigger_model_json["max_concurrent_runs"] = 4
         trigger_scm_trigger_model_json["enabled"] = True
         trigger_scm_trigger_model_json["favorite"] = False
+        trigger_scm_trigger_model_json["enable_events_from_forks"] = False
         trigger_scm_trigger_model_json["source"] = trigger_source_model
         trigger_scm_trigger_model_json["events"] = ["push", "pull_request"]
         trigger_scm_trigger_model_json["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
