@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.9.0...v1.10.0) (2024-09-30)
+
+
+### Features
+
+* **tekton:** Add fork events option ([b6e8a0c](https://github.com/IBM/continuous-delivery-python-sdk/commit/b6e8a0cb8af5bcb799d3707981dcf480d2ba1690))
+
 # [1.9.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.8.0...v1.9.0) (2024-09-25)
 
 
