@@ -6126,6 +6126,8 @@ class TriggerScmTrigger(Trigger):
           disabled for this trigger.
     :attr bool enabled: Flag to check if the trigger is enabled.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
+    :attr bool enable_events_from_forks: (optional) When enabled, pull request
+          events from forks of the selected repository will trigger a pipeline run.
     :attr TriggerSource source: (optional) Source repository for a Git trigger. Only
           required for Git triggers. The referenced repository URL must match the URL of a
           repository tool integration in the parent toolchain. Obtain the list of
@@ -6155,6 +6157,7 @@ class TriggerScmTrigger(Trigger):
         worker: "Worker" = None,
         max_concurrent_runs: int = None,
         favorite: bool = None,
+        enable_events_from_forks: bool = None,
         source: "TriggerSource" = None,
         events: List[str] = None,
         filter: str = None,
@@ -6181,6 +6184,8 @@ class TriggerScmTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool enable_events_from_forks: (optional) When enabled, pull request
+               events from forks of the selected repository will trigger a pipeline run.
         :param TriggerSource source: (optional) Source repository for a Git
                trigger. Only required for Git triggers. The referenced repository URL must
                match the URL of a repository tool integration in the parent toolchain.
@@ -6207,6 +6212,7 @@ class TriggerScmTrigger(Trigger):
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
         self.favorite = favorite
+        self.enable_events_from_forks = enable_events_from_forks
         self.source = source
         self.events = events
         self.filter = filter
@@ -6247,6 +6253,8 @@ class TriggerScmTrigger(Trigger):
             raise ValueError("Required property 'enabled' not present in TriggerScmTrigger JSON")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
+        if "enable_events_from_forks" in _dict:
+            args["enable_events_from_forks"] = _dict.get("enable_events_from_forks")
         if "source" in _dict:
             args["source"] = TriggerSource.from_dict(_dict.get("source"))
         if "events" in _dict:
@@ -6294,6 +6302,8 @@ class TriggerScmTrigger(Trigger):
             _dict["enabled"] = self.enabled
         if hasattr(self, "favorite") and self.favorite is not None:
             _dict["favorite"] = self.favorite
+        if hasattr(self, "enable_events_from_forks") and self.enable_events_from_forks is not None:
+            _dict["enable_events_from_forks"] = self.enable_events_from_forks
         if hasattr(self, "source") and self.source is not None:
             if isinstance(self.source, dict):
                 _dict["source"] = self.source
