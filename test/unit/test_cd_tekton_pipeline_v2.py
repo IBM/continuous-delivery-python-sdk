@@ -2879,6 +2879,7 @@ class TestCreateTektonPipelineTrigger:
         events = ["push"]
         filter = "testString"
         favorite = False
+        enable_events_from_forks = False
 
         # Invoke method
         response = _service.create_tekton_pipeline_trigger(
@@ -2897,6 +2898,7 @@ class TestCreateTektonPipelineTrigger:
             events=events,
             filter=filter,
             favorite=favorite,
+            enable_events_from_forks=enable_events_from_forks,
             headers={},
         )
 
@@ -2919,6 +2921,7 @@ class TestCreateTektonPipelineTrigger:
         assert req_body["events"] == ["push"]
         assert req_body["filter"] == "testString"
         assert req_body["favorite"] == False
+        assert req_body["enable_events_from_forks"] == False
 
     def test_create_tekton_pipeline_trigger_all_params_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_trigger_all_params.
@@ -2984,6 +2987,7 @@ class TestCreateTektonPipelineTrigger:
         events = ["push"]
         filter = "testString"
         favorite = False
+        enable_events_from_forks = False
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -3158,6 +3162,7 @@ class TestUpdateTektonPipelineTrigger:
         trigger_patch_model["events"] = ["push", "pull_request"]
         trigger_patch_model["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
         trigger_patch_model["favorite"] = False
+        trigger_patch_model["enable_events_from_forks"] = False
 
         # Set up parameter values
         pipeline_id = "94619026-912b-4d92-8f51-6c74f0692d90"
@@ -5191,6 +5196,7 @@ class TestModel_TriggerPatch:
         trigger_patch_model_json["events"] = ["push", "pull_request"]
         trigger_patch_model_json["filter"] = "header['x-github-event'] == 'push' && body.ref == 'refs/heads/main'"
         trigger_patch_model_json["favorite"] = False
+        trigger_patch_model_json["enable_events_from_forks"] = False
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
         trigger_patch_model = TriggerPatch.from_dict(trigger_patch_model_json)

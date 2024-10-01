@@ -1518,6 +1518,7 @@ class CdTektonPipelineV2(BaseService):
         events: List[str] = None,
         filter: str = None,
         favorite: bool = None,
+        enable_events_from_forks: bool = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -1567,6 +1568,9 @@ class CdTektonPipelineV2(BaseService):
                Stores the CEL (Common Expression Language) expression value which is used
                for event filtering against the Git webhook payloads.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool enable_events_from_forks: (optional) Only used for SCM
+               triggers. When enabled, pull request events from forks of the selected
+               repository will trigger a pipeline run.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
@@ -1609,6 +1613,7 @@ class CdTektonPipelineV2(BaseService):
             "events": events,
             "filter": filter,
             "favorite": favorite,
+            "enable_events_from_forks": enable_events_from_forks,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -4678,6 +4683,9 @@ class TriggerPatch:
           CEL (Common Expression Language) expression value which is used for event
           filtering against the Git webhook payloads.
     :attr bool favorite: (optional) Mark the trigger as a favorite.
+    :attr bool enable_events_from_forks: (optional) Only used for SCM triggers. When
+          enabled, pull request events from forks of the selected repository will trigger
+          a pipeline run.
     """
 
     def __init__(
@@ -4697,6 +4705,7 @@ class TriggerPatch:
         events: List[str] = None,
         filter: str = None,
         favorite: bool = None,
+        enable_events_from_forks: bool = None,
     ) -> None:
         """
         Initialize a TriggerPatch object.
@@ -4741,6 +4750,9 @@ class TriggerPatch:
                Stores the CEL (Common Expression Language) expression value which is used
                for event filtering against the Git webhook payloads.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool enable_events_from_forks: (optional) Only used for SCM
+               triggers. When enabled, pull request events from forks of the selected
+               repository will trigger a pipeline run.
         """
         self.type = type
         self.name = name
@@ -4756,6 +4768,7 @@ class TriggerPatch:
         self.events = events
         self.filter = filter
         self.favorite = favorite
+        self.enable_events_from_forks = enable_events_from_forks
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> "TriggerPatch":
@@ -4789,6 +4802,8 @@ class TriggerPatch:
             args["filter"] = _dict.get("filter")
         if "favorite" in _dict:
             args["favorite"] = _dict.get("favorite")
+        if "enable_events_from_forks" in _dict:
+            args["enable_events_from_forks"] = _dict.get("enable_events_from_forks")
         return cls(**args)
 
     @classmethod
@@ -4836,6 +4851,8 @@ class TriggerPatch:
             _dict["filter"] = self.filter
         if hasattr(self, "favorite") and self.favorite is not None:
             _dict["favorite"] = self.favorite
+        if hasattr(self, "enable_events_from_forks") and self.enable_events_from_forks is not None:
+            _dict["enable_events_from_forks"] = self.enable_events_from_forks
         return _dict
 
     def _to_dict(self):
