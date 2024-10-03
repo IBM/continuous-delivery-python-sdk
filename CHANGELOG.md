@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.10.0...v1.11.0) (2024-10-03)
+
+
+### Features
+
+* **tekton:** more fork property support ([dbe2210](https://github.com/IBM/continuous-delivery-python-sdk/commit/dbe2210300c02b56f38be8fdc00d2953f64b7ee9))
+
 # [1.10.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.9.0...v1.10.0) (2024-09-30)
 
 
