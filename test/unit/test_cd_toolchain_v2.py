@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ from ibm_continuous_delivery.cd_toolchain_v2 import *
 
 _service = CdToolchainV2(authenticator=NoAuthAuthenticator())
 
-_base_url = "https://api.us-south.devops.cloud.ibm.com/toolchain/v2"
+_base_url = 'https://api.us-south.devops.cloud.ibm.com/toolchain/v2'
 _service.set_service_url(_base_url)
 
 
@@ -44,44 +44,36 @@ def preprocess_url(operation_path: str):
     The returned request URL is used to register the mock response so it needs
     to match the request URL that is formed by the requests library.
     """
-    # First, unquote the path since it might have some quoted/escaped characters in it
-    # due to how the generator inserts the operation paths into the unit test code.
-    operation_path = urllib.parse.unquote(operation_path)
 
-    # Next, quote the path using urllib so that we approximate what will
-    # happen during request processing.
-    operation_path = urllib.parse.quote(operation_path, safe="/")
-
-    # Finally, form the request URL from the base URL and operation path.
+    # Form the request URL from the base URL and operation path.
     request_url = _base_url + operation_path
 
     # If the request url does NOT end with a /, then just return it as-is.
     # Otherwise, return a regular expression that matches one or more trailing /.
-    if not request_url.endswith("/"):
+    if not request_url.endswith('/'):
         return request_url
-    else:
-        return re.compile(request_url.rstrip("/") + "/+")
+    return re.compile(request_url.rstrip('/') + '/+')
 
 
 def test_get_service_url_for_region():
     """
     get_service_url_for_region()
     """
-    assert CdToolchainV2.get_service_url_for_region("INVALID_REGION") is None
+    assert CdToolchainV2.get_service_url_for_region('INVALID_REGION') is None
     assert (
-        CdToolchainV2.get_service_url_for_region("us-south") == "https://api.us-south.devops.cloud.ibm.com/toolchain/v2"
+        CdToolchainV2.get_service_url_for_region('us-south') == 'https://api.us-south.devops.cloud.ibm.com/toolchain/v2'
     )
     assert (
-        CdToolchainV2.get_service_url_for_region("us-east") == "https://api.us-east.devops.cloud.ibm.com/toolchain/v2"
+        CdToolchainV2.get_service_url_for_region('us-east') == 'https://api.us-east.devops.cloud.ibm.com/toolchain/v2'
     )
-    assert CdToolchainV2.get_service_url_for_region("eu-de") == "https://api.eu-de.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("eu-gb") == "https://api.eu-gb.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("jp-osa") == "https://api.jp-osa.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("jp-tok") == "https://api.jp-tok.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("au-syd") == "https://api.au-syd.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("ca-tor") == "https://api.ca-tor.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("br-sao") == "https://api.br-sao.devops.cloud.ibm.com/toolchain/v2"
-    assert CdToolchainV2.get_service_url_for_region("eu-es") == "https://api.eu-es.devops.cloud.ibm.com/toolchain/v2"
+    assert CdToolchainV2.get_service_url_for_region('eu-de') == 'https://api.eu-de.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('eu-gb') == 'https://api.eu-gb.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('jp-osa') == 'https://api.jp-osa.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('jp-tok') == 'https://api.jp-tok.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('au-syd') == 'https://api.au-syd.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('ca-tor') == 'https://api.ca-tor.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('br-sao') == 'https://api.br-sao.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('eu-es') == 'https://api.eu-es.devops.cloud.ibm.com/toolchain/v2'
 
 
 ##############################################################################
@@ -99,10 +91,10 @@ class TestNewInstance:
         """
         new_instance()
         """
-        os.environ["TEST_SERVICE_AUTH_TYPE"] = "noAuth"
+        os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
         service = CdToolchainV2.new_instance(
-            service_name="TEST_SERVICE",
+            service_name='TEST_SERVICE',
         )
 
         assert service is not None
@@ -112,9 +104,9 @@ class TestNewInstance:
         """
         new_instance_without_authenticator()
         """
-        with pytest.raises(ValueError, match="authenticator must be provided"):
+        with pytest.raises(ValueError, match='authenticator must be provided'):
             service = CdToolchainV2.new_instance(
-                service_name="TEST_SERVICE_NOT_FOUND",
+                service_name='TEST_SERVICE_NOT_FOUND',
             )
 
 
@@ -129,21 +121,21 @@ class TestListToolchains:
         list_toolchains()
         """
         # Set up mock
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
+        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
         limit = 20
-        start = "testString"
-        name = "TestToolchainV2"
+        start = 'testString'
+        name = 'TestToolchainV2'
 
         # Invoke method
         response = _service.list_toolchains(
@@ -158,12 +150,12 @@ class TestListToolchains:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split("?", 1)[1]
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert "resource_group_id={}".format(resource_group_id) in query_string
-        assert "limit={}".format(limit) in query_string
-        assert "start={}".format(start) in query_string
-        assert "name={}".format(name) in query_string
+        assert 'resource_group_id={}'.format(resource_group_id) in query_string
+        assert 'limit={}'.format(limit) in query_string
+        assert 'start={}'.format(start) in query_string
+        assert 'name={}'.format(name) in query_string
 
     def test_list_toolchains_all_params_with_retries(self):
         # Enable retries and run test_list_toolchains_all_params.
@@ -180,18 +172,18 @@ class TestListToolchains:
         test_list_toolchains_required_params()
         """
         # Set up mock
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
+        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
 
         # Invoke method
         response = _service.list_toolchains(
@@ -203,9 +195,9 @@ class TestListToolchains:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split("?", 1)[1]
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert "resource_group_id={}".format(resource_group_id) in query_string
+        assert 'resource_group_id={}'.format(resource_group_id) in query_string
 
     def test_list_toolchains_required_params_with_retries(self):
         # Enable retries and run test_list_toolchains_required_params.
@@ -222,18 +214,18 @@ class TestListToolchains:
         test_list_toolchains_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response = '{"total_count": 11, "limit": 5, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "toolchains": [{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
+        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -259,21 +251,21 @@ class TestListToolchains:
         test_list_toolchains_with_pager_get_next()
         """
         # Set up a two-page mock response
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         responses.add(
             responses.GET,
             url,
             body=mock_response1,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
@@ -281,9 +273,9 @@ class TestListToolchains:
         all_results = []
         pager = ToolchainsPager(
             client=_service,
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            resource_group_id='6a9a01f2cff54a7f966f803d92877123',
             limit=10,
-            name="TestToolchainV2",
+            name='TestToolchainV2',
         )
         while pager.has_next():
             next_page = pager.get_next()
@@ -297,30 +289,30 @@ class TestListToolchains:
         test_list_toolchains_with_pager_get_all()
         """
         # Set up a two-page mock response
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response1 = '{"next":{"start":"1"},"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         mock_response2 = '{"total_count":2,"toolchains":[{"id":"id","name":"TestToolchainV2","description":"A sample toolchain to test the API","account_id":"account_id","location":"location","resource_group_id":"6a9a01f2cff54a7f966f803d92877123","crn":"crn","href":"href","ui_href":"ui_href","created_at":"2019-01-01T12:00:00.000Z","updated_at":"2019-01-01T12:00:00.000Z","created_by":"created_by"}],"limit":1}'
         responses.add(
             responses.GET,
             url,
             body=mock_response1,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Exercise the pager class for this operation
         pager = ToolchainsPager(
             client=_service,
-            resource_group_id="6a9a01f2cff54a7f966f803d92877123",
+            resource_group_id='6a9a01f2cff54a7f966f803d92877123',
             limit=10,
-            name="TestToolchainV2",
+            name='TestToolchainV2',
         )
         all_results = pager.get_all()
         assert all_results is not None
@@ -338,20 +330,20 @@ class TestCreateToolchain:
         create_toolchain()
         """
         # Set up mock
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=201,
         )
 
         # Set up parameter values
-        name = "TestToolchainV2"
-        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
-        description = "A sample toolchain to test the API"
+        name = 'TestToolchainV2'
+        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
+        description = 'A sample toolchain to test the API'
 
         # Invoke method
         response = _service.create_toolchain(
@@ -365,10 +357,10 @@ class TestCreateToolchain:
         assert len(responses.calls) == 1
         assert response.status_code == 201
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
-        assert req_body["name"] == "TestToolchainV2"
-        assert req_body["resource_group_id"] == "6a9a01f2cff54a7f966f803d92877123"
-        assert req_body["description"] == "A sample toolchain to test the API"
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['name'] == 'TestToolchainV2'
+        assert req_body['resource_group_id'] == '6a9a01f2cff54a7f966f803d92877123'
+        assert req_body['description'] == 'A sample toolchain to test the API'
 
     def test_create_toolchain_all_params_with_retries(self):
         # Enable retries and run test_create_toolchain_all_params.
@@ -385,20 +377,20 @@ class TestCreateToolchain:
         test_create_toolchain_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains")
+        url = preprocess_url('/toolchains')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=201,
         )
 
         # Set up parameter values
-        name = "TestToolchainV2"
-        resource_group_id = "6a9a01f2cff54a7f966f803d92877123"
-        description = "A sample toolchain to test the API"
+        name = 'TestToolchainV2'
+        resource_group_id = '6a9a01f2cff54a7f966f803d92877123'
+        description = 'A sample toolchain to test the API'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -431,18 +423,18 @@ class TestGetToolchainById:
         get_toolchain_by_id()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Invoke method
         response = _service.get_toolchain_by_id(
@@ -469,18 +461,18 @@ class TestGetToolchainById:
         test_get_toolchain_by_id_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -512,7 +504,7 @@ class TestDeleteToolchain:
         delete_toolchain()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         responses.add(
             responses.DELETE,
             url,
@@ -520,7 +512,7 @@ class TestDeleteToolchain:
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Invoke method
         response = _service.delete_toolchain(
@@ -547,7 +539,7 @@ class TestDeleteToolchain:
         test_delete_toolchain_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         responses.add(
             responses.DELETE,
             url,
@@ -555,7 +547,7 @@ class TestDeleteToolchain:
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -587,23 +579,23 @@ class TestUpdateToolchain:
         update_toolchain()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.PATCH,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {}
-        toolchain_prototype_patch_model["name"] = "newToolchainName"
-        toolchain_prototype_patch_model["description"] = "New toolchain description"
+        toolchain_prototype_patch_model['name'] = 'newToolchainName'
+        toolchain_prototype_patch_model['description'] = 'New toolchain description'
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
         toolchain_prototype_patch = toolchain_prototype_patch_model
 
         # Invoke method
@@ -617,7 +609,7 @@ class TestUpdateToolchain:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body == toolchain_prototype_patch
 
     def test_update_toolchain_all_params_with_retries(self):
@@ -635,23 +627,23 @@ class TestUpdateToolchain:
         test_update_toolchain_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString")
+        url = preprocess_url('/toolchains/testString')
         mock_response = '{"id": "id", "name": "TestToolchainV2", "description": "A sample toolchain to test the API", "account_id": "account_id", "location": "location", "resource_group_id": "6a9a01f2cff54a7f966f803d92877123", "crn": "crn", "href": "href", "ui_href": "ui_href", "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "created_by": "created_by"}'
         responses.add(
             responses.PATCH,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {}
-        toolchain_prototype_patch_model["name"] = "newToolchainName"
-        toolchain_prototype_patch_model["description"] = "New toolchain description"
+        toolchain_prototype_patch_model['name'] = 'newToolchainName'
+        toolchain_prototype_patch_model['description'] = 'New toolchain description'
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
         toolchain_prototype_patch = toolchain_prototype_patch_model
 
         # Pass in all but one required param and check for a ValueError
@@ -685,30 +677,33 @@ class TestCreateToolchainEvent:
         create_toolchain_event()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/events")
+        url = preprocess_url('/toolchains/testString/events')
         mock_response = '{"id": "id"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
         toolchain_event_prototype_data_application_json_model = {}
-        toolchain_event_prototype_data_application_json_model["content"] = {"anyKey": "anyValue"}
+        toolchain_event_prototype_data_application_json_model['content'] = {
+            'customKey1': 'myCustomData',
+            'customKey2': 123,
+            'customKey3': {'nestedKey': 'moreData'},
+        }
 
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {}
-        toolchain_event_prototype_data_model["application_json"] = toolchain_event_prototype_data_application_json_model
-        toolchain_event_prototype_data_model["text_plain"] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model['application_json'] = toolchain_event_prototype_data_application_json_model
 
         # Set up parameter values
-        toolchain_id = "testString"
-        title = "My-custom-event"
-        description = "This is my custom event"
-        content_type = "application/json"
+        toolchain_id = 'testString'
+        title = 'My-custom-event'
+        description = 'This is my custom event'
+        content_type = 'application/json'
         data = toolchain_event_prototype_data_model
 
         # Invoke method
@@ -725,11 +720,11 @@ class TestCreateToolchainEvent:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
-        assert req_body["title"] == "My-custom-event"
-        assert req_body["description"] == "This is my custom event"
-        assert req_body["content_type"] == "application/json"
-        assert req_body["data"] == toolchain_event_prototype_data_model
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['title'] == 'My-custom-event'
+        assert req_body['description'] == 'This is my custom event'
+        assert req_body['content_type'] == 'application/json'
+        assert req_body['data'] == toolchain_event_prototype_data_model
 
     def test_create_toolchain_event_all_params_with_retries(self):
         # Enable retries and run test_create_toolchain_event_all_params.
@@ -746,30 +741,40 @@ class TestCreateToolchainEvent:
         test_create_toolchain_event_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/events")
+        url = preprocess_url('/toolchains/testString/events')
         mock_response = '{"id": "id"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
         toolchain_event_prototype_data_application_json_model = {}
-        toolchain_event_prototype_data_application_json_model["content"] = {"anyKey": "anyValue"}
+        toolchain_event_prototype_data_application_json_model['content'] = {
+            'customKey1': 'myCustomData',
+            'customKey2': 123,
+            'customKey3': {'nestedKey': 'moreData'},
+        }
+
+        # Construct a dict representation of a ToolchainEventPrototypeDataTextPlain model
+        toolchain_event_prototype_data_text_plain_model = {}
+        toolchain_event_prototype_data_text_plain_model['content'] = (
+            'This event is dispatched because the pipeline failed'
+        )
 
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {}
-        toolchain_event_prototype_data_model["application_json"] = toolchain_event_prototype_data_application_json_model
-        toolchain_event_prototype_data_model["text_plain"] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model['application_json'] = toolchain_event_prototype_data_application_json_model
+        toolchain_event_prototype_data_model['text_plain'] = toolchain_event_prototype_data_text_plain_model
 
         # Set up parameter values
-        toolchain_id = "testString"
-        title = "My-custom-event"
-        description = "This is my custom event"
-        content_type = "application/json"
+        toolchain_id = 'testString'
+        title = 'My-custom-event'
+        description = 'This is my custom event'
+        content_type = 'application/json'
         data = toolchain_event_prototype_data_model
 
         # Pass in all but one required param and check for a ValueError
@@ -814,10 +819,10 @@ class TestNewInstance:
         """
         new_instance()
         """
-        os.environ["TEST_SERVICE_AUTH_TYPE"] = "noAuth"
+        os.environ['TEST_SERVICE_AUTH_TYPE'] = 'noAuth'
 
         service = CdToolchainV2.new_instance(
-            service_name="TEST_SERVICE",
+            service_name='TEST_SERVICE',
         )
 
         assert service is not None
@@ -827,9 +832,9 @@ class TestNewInstance:
         """
         new_instance_without_authenticator()
         """
-        with pytest.raises(ValueError, match="authenticator must be provided"):
+        with pytest.raises(ValueError, match='authenticator must be provided'):
             service = CdToolchainV2.new_instance(
-                service_name="TEST_SERVICE_NOT_FOUND",
+                service_name='TEST_SERVICE_NOT_FOUND',
             )
 
 
@@ -844,20 +849,20 @@ class TestListTools:
         list_tools()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
         limit = 20
-        start = "testString"
+        start = 'testString'
 
         # Invoke method
         response = _service.list_tools(
@@ -871,10 +876,10 @@ class TestListTools:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate query params
-        query_string = responses.calls[0].request.url.split("?", 1)[1]
+        query_string = responses.calls[0].request.url.split('?', 1)[1]
         query_string = urllib.parse.unquote_plus(query_string)
-        assert "limit={}".format(limit) in query_string
-        assert "start={}".format(start) in query_string
+        assert 'limit={}'.format(limit) in query_string
+        assert 'start={}'.format(start) in query_string
 
     def test_list_tools_all_params_with_retries(self):
         # Enable retries and run test_list_tools_all_params.
@@ -891,18 +896,18 @@ class TestListTools:
         test_list_tools_required_params()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Invoke method
         response = _service.list_tools(
@@ -929,18 +934,18 @@ class TestListTools:
         test_list_tools_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response = '{"limit": 5, "total_count": 11, "first": {"href": "href"}, "previous": {"start": "start", "href": "href"}, "next": {"start": "start", "href": "href"}, "last": {"start": "start", "href": "href"}, "tools": [{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
+        toolchain_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -966,21 +971,21 @@ class TestListTools:
         test_list_tools_with_pager_get_next()
         """
         # Set up a two-page mock response
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response1,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
@@ -988,7 +993,7 @@ class TestListTools:
         all_results = []
         pager = ToolsPager(
             client=_service,
-            toolchain_id="testString",
+            toolchain_id='testString',
             limit=10,
         )
         while pager.has_next():
@@ -1003,28 +1008,28 @@ class TestListTools:
         test_list_tools_with_pager_get_all()
         """
         # Set up a two-page mock response
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response1 = '{"next":{"start":"1"},"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         mock_response2 = '{"total_count":2,"limit":1,"tools":[{"id":"id","resource_group_id":"resource_group_id","crn":"crn","tool_type_id":"tool_type_id","toolchain_id":"toolchain_id","toolchain_crn":"toolchain_crn","href":"href","referent":{"ui_href":"ui_href","api_href":"api_href"},"name":"MyTool","updated_at":"2019-01-01T12:00:00.000Z","parameters":{"anyKey":"anyValue"},"state":"configured"}]}'
         responses.add(
             responses.GET,
             url,
             body=mock_response1,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
         responses.add(
             responses.GET,
             url,
             body=mock_response2,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Exercise the pager class for this operation
         pager = ToolsPager(
             client=_service,
-            toolchain_id="testString",
+            toolchain_id='testString',
             limit=10,
         )
         all_results = pager.get_all()
@@ -1043,21 +1048,21 @@ class TestCreateTool:
         create_tool()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=201,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_type_id = "draservicebroker"
-        name = "testString"
-        parameters = {"anyKey": "anyValue"}
+        toolchain_id = 'testString'
+        tool_type_id = 'draservicebroker'
+        name = 'testString'
+        parameters = {'anyKey': 'anyValue'}
 
         # Invoke method
         response = _service.create_tool(
@@ -1072,10 +1077,10 @@ class TestCreateTool:
         assert len(responses.calls) == 1
         assert response.status_code == 201
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
-        assert req_body["tool_type_id"] == "draservicebroker"
-        assert req_body["name"] == "testString"
-        assert req_body["parameters"] == {"anyKey": "anyValue"}
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['tool_type_id'] == 'draservicebroker'
+        assert req_body['name'] == 'testString'
+        assert req_body['parameters'] == {'anyKey': 'anyValue'}
 
     def test_create_tool_all_params_with_retries(self):
         # Enable retries and run test_create_tool_all_params.
@@ -1092,21 +1097,21 @@ class TestCreateTool:
         test_create_tool_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools")
+        url = preprocess_url('/toolchains/testString/tools')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.POST,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=201,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_type_id = "draservicebroker"
-        name = "testString"
-        parameters = {"anyKey": "anyValue"}
+        toolchain_id = 'testString'
+        tool_type_id = 'draservicebroker'
+        name = 'testString'
+        parameters = {'anyKey': 'anyValue'}
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1139,19 +1144,19 @@ class TestGetToolById:
         get_tool_by_id()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
 
         # Invoke method
         response = _service.get_tool_by_id(
@@ -1179,19 +1184,19 @@ class TestGetToolById:
         test_get_tool_by_id_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.GET,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1224,7 +1229,7 @@ class TestDeleteTool:
         delete_tool()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         responses.add(
             responses.DELETE,
             url,
@@ -1232,8 +1237,8 @@ class TestDeleteTool:
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
 
         # Invoke method
         response = _service.delete_tool(
@@ -1261,7 +1266,7 @@ class TestDeleteTool:
         test_delete_tool_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         responses.add(
             responses.DELETE,
             url,
@@ -1269,8 +1274,8 @@ class TestDeleteTool:
         )
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1303,25 +1308,25 @@ class TestUpdateTool:
         update_tool()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.PATCH,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
-        toolchain_tool_prototype_patch_model["name"] = "MyTool"
-        toolchain_tool_prototype_patch_model["tool_type_id"] = "draservicebroker"
-        toolchain_tool_prototype_patch_model["parameters"] = {"anyKey": "anyValue"}
+        toolchain_tool_prototype_patch_model['name'] = 'MyTool'
+        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
+        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
         toolchain_tool_prototype_patch = toolchain_tool_prototype_patch_model
 
         # Invoke method
@@ -1336,7 +1341,7 @@ class TestUpdateTool:
         assert len(responses.calls) == 1
         assert response.status_code == 200
         # Validate body params
-        req_body = json.loads(str(responses.calls[0].request.body, "utf-8"))
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body == toolchain_tool_prototype_patch
 
     def test_update_tool_all_params_with_retries(self):
@@ -1354,25 +1359,25 @@ class TestUpdateTool:
         test_update_tool_value_error()
         """
         # Set up mock
-        url = preprocess_url("/toolchains/testString/tools/testString")
+        url = preprocess_url('/toolchains/testString/tools/testString')
         mock_response = '{"id": "id", "resource_group_id": "resource_group_id", "crn": "crn", "tool_type_id": "tool_type_id", "toolchain_id": "toolchain_id", "toolchain_crn": "toolchain_crn", "href": "href", "referent": {"ui_href": "ui_href", "api_href": "api_href"}, "name": "MyTool", "updated_at": "2019-01-01T12:00:00.000Z", "parameters": {"anyKey": "anyValue"}, "state": "configured"}'
         responses.add(
             responses.PATCH,
             url,
             body=mock_response,
-            content_type="application/json",
+            content_type='application/json',
             status=200,
         )
 
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
-        toolchain_tool_prototype_patch_model["name"] = "MyTool"
-        toolchain_tool_prototype_patch_model["tool_type_id"] = "draservicebroker"
-        toolchain_tool_prototype_patch_model["parameters"] = {"anyKey": "anyValue"}
+        toolchain_tool_prototype_patch_model['name'] = 'MyTool'
+        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
+        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
-        toolchain_id = "testString"
-        tool_id = "testString"
+        toolchain_id = 'testString'
+        tool_id = 'testString'
         toolchain_tool_prototype_patch = toolchain_tool_prototype_patch_model
 
         # Pass in all but one required param and check for a ValueError
@@ -1421,23 +1426,23 @@ class TestModel_ToolModel:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model["ui_href"] = "https://my-team.slack.com/messages/my-channel"
-        tool_model_referent_model["api_href"] = "testString"
+        tool_model_referent_model['ui_href'] = 'https://my-team.slack.com/messages/my-channel'
+        tool_model_referent_model['api_href'] = 'testString'
 
         # Construct a json representation of a ToolModel model
         tool_model_model_json = {}
-        tool_model_model_json["id"] = "testString"
-        tool_model_model_json["resource_group_id"] = "testString"
-        tool_model_model_json["crn"] = "testString"
-        tool_model_model_json["tool_type_id"] = "testString"
-        tool_model_model_json["toolchain_id"] = "testString"
-        tool_model_model_json["toolchain_crn"] = "testString"
-        tool_model_model_json["href"] = "testString"
-        tool_model_model_json["referent"] = tool_model_referent_model
-        tool_model_model_json["name"] = "MyTool"
-        tool_model_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        tool_model_model_json["parameters"] = {"anyKey": "anyValue"}
-        tool_model_model_json["state"] = "configured"
+        tool_model_model_json['id'] = 'testString'
+        tool_model_model_json['resource_group_id'] = 'testString'
+        tool_model_model_json['crn'] = 'testString'
+        tool_model_model_json['tool_type_id'] = 'testString'
+        tool_model_model_json['toolchain_id'] = 'testString'
+        tool_model_model_json['toolchain_crn'] = 'testString'
+        tool_model_model_json['href'] = 'testString'
+        tool_model_model_json['referent'] = tool_model_referent_model
+        tool_model_model_json['name'] = 'MyTool'
+        tool_model_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        tool_model_model_json['parameters'] = {'anyKey': 'anyValue'}
+        tool_model_model_json['state'] = 'configured'
 
         # Construct a model instance of ToolModel by calling from_dict on the json representation
         tool_model_model = ToolModel.from_dict(tool_model_model_json)
@@ -1467,8 +1472,8 @@ class TestModel_ToolModelReferent:
 
         # Construct a json representation of a ToolModelReferent model
         tool_model_referent_model_json = {}
-        tool_model_referent_model_json["ui_href"] = "testString"
-        tool_model_referent_model_json["api_href"] = "testString"
+        tool_model_referent_model_json['ui_href'] = 'testString'
+        tool_model_referent_model_json['api_href'] = 'testString'
 
         # Construct a model instance of ToolModelReferent by calling from_dict on the json representation
         tool_model_referent_model = ToolModelReferent.from_dict(tool_model_referent_model_json)
@@ -1498,18 +1503,18 @@ class TestModel_Toolchain:
 
         # Construct a json representation of a Toolchain model
         toolchain_model_json = {}
-        toolchain_model_json["id"] = "testString"
-        toolchain_model_json["name"] = "TestToolchainV2"
-        toolchain_model_json["description"] = "A sample toolchain to test the API"
-        toolchain_model_json["account_id"] = "testString"
-        toolchain_model_json["location"] = "testString"
-        toolchain_model_json["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_model_json["crn"] = "testString"
-        toolchain_model_json["href"] = "testString"
-        toolchain_model_json["ui_href"] = "testString"
-        toolchain_model_json["created_at"] = "2019-01-01T12:00:00Z"
-        toolchain_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_model_json["created_by"] = "testString"
+        toolchain_model_json['id'] = 'testString'
+        toolchain_model_json['name'] = 'TestToolchainV2'
+        toolchain_model_json['description'] = 'A sample toolchain to test the API'
+        toolchain_model_json['account_id'] = 'testString'
+        toolchain_model_json['location'] = 'testString'
+        toolchain_model_json['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        toolchain_model_json['crn'] = 'testString'
+        toolchain_model_json['href'] = 'testString'
+        toolchain_model_json['ui_href'] = 'testString'
+        toolchain_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        toolchain_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_model_json['created_by'] = 'testString'
 
         # Construct a model instance of Toolchain by calling from_dict on the json representation
         toolchain_model = Toolchain.from_dict(toolchain_model_json)
@@ -1540,61 +1545,61 @@ class TestModel_ToolchainCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         toolchain_collection_first_model = {}  # ToolchainCollectionFirst
-        toolchain_collection_first_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3"
+        toolchain_collection_first_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3'
         )
 
         toolchain_collection_previous_model = {}  # ToolchainCollectionPrevious
-        toolchain_collection_previous_model["start"] = (
-            "eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
+        toolchain_collection_previous_model['start'] = (
+            'eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9'
         )
-        toolchain_collection_previous_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9"
+        toolchain_collection_previous_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6IjA4NDFlYTMxLTEzMDMtNDJiZC1hYmMyLTQzMjYzZDg0YmU0OSJ9'
         )
 
         toolchain_collection_next_model = {}  # ToolchainCollectionNext
-        toolchain_collection_next_model["start"] = (
-            "eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
+        toolchain_collection_next_model['start'] = (
+            'eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9'
         )
-        toolchain_collection_next_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9"
+        toolchain_collection_next_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImVhZGVmNGYzLThlMzktNDY2OS04NmY0LWU1NTA1MWExMjMzOCJ9'
         )
 
         toolchain_collection_last_model = {}  # ToolchainCollectionLast
-        toolchain_collection_last_model["start"] = (
-            "eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
+        toolchain_collection_last_model['start'] = (
+            'eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9'
         )
-        toolchain_collection_last_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9"
+        toolchain_collection_last_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains?resource_group_id=6a9a01f2cff54a7f966f803d92877123&limit=3&start=eyJ0b29sY2hhaW5fZ3VpZCI6ImYxNTI3ZjkyLTQyOTAtNGUzZi1iMmIzLTc3ODg5YTE0NDkzOCJ9'
         )
 
         toolchain_model_model = {}  # ToolchainModel
-        toolchain_model_model["id"] = "62935028-0202-48fe-b877-7e99c817b856"
-        toolchain_model_model["name"] = "TestToolchainV2-2"
-        toolchain_model_model["description"] = "A second sample toolchain"
-        toolchain_model_model["account_id"] = "f2337426699b4041bc50f1d45042f777"
-        toolchain_model_model["location"] = "us-south"
-        toolchain_model_model["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_model_model["crn"] = (
-            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:62935028-0202-48fe-b877-7e99c817b856::"
+        toolchain_model_model['id'] = '62935028-0202-48fe-b877-7e99c817b856'
+        toolchain_model_model['name'] = 'TestToolchainV2-2'
+        toolchain_model_model['description'] = 'A second sample toolchain'
+        toolchain_model_model['account_id'] = 'f2337426699b4041bc50f1d45042f777'
+        toolchain_model_model['location'] = 'us-south'
+        toolchain_model_model['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        toolchain_model_model['crn'] = (
+            'crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:62935028-0202-48fe-b877-7e99c817b856::'
         )
-        toolchain_model_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/62935028-0202-48fe-b877-7e99c817b856"
+        toolchain_model_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/62935028-0202-48fe-b877-7e99c817b856'
         )
-        toolchain_model_model["ui_href"] = "testString"
-        toolchain_model_model["created_at"] = "2021-05-05T17:07:09.354000Z"
-        toolchain_model_model["updated_at"] = "2022-01-01T13:13:07.968000Z"
-        toolchain_model_model["created_by"] = "IBMid-123456AB7C"
+        toolchain_model_model['ui_href'] = 'testString'
+        toolchain_model_model['created_at'] = '2021-05-05T17:07:09.354000Z'
+        toolchain_model_model['updated_at'] = '2022-01-01T13:13:07.968000Z'
+        toolchain_model_model['created_by'] = 'IBMid-123456AB7C'
 
         # Construct a json representation of a ToolchainCollection model
         toolchain_collection_model_json = {}
-        toolchain_collection_model_json["total_count"] = 38
-        toolchain_collection_model_json["limit"] = 38
-        toolchain_collection_model_json["first"] = toolchain_collection_first_model
-        toolchain_collection_model_json["previous"] = toolchain_collection_previous_model
-        toolchain_collection_model_json["next"] = toolchain_collection_next_model
-        toolchain_collection_model_json["last"] = toolchain_collection_last_model
-        toolchain_collection_model_json["toolchains"] = [toolchain_model_model]
+        toolchain_collection_model_json['total_count'] = 38
+        toolchain_collection_model_json['limit'] = 38
+        toolchain_collection_model_json['first'] = toolchain_collection_first_model
+        toolchain_collection_model_json['previous'] = toolchain_collection_previous_model
+        toolchain_collection_model_json['next'] = toolchain_collection_next_model
+        toolchain_collection_model_json['last'] = toolchain_collection_last_model
+        toolchain_collection_model_json['toolchains'] = [toolchain_model_model]
 
         # Construct a model instance of ToolchainCollection by calling from_dict on the json representation
         toolchain_collection_model = ToolchainCollection.from_dict(toolchain_collection_model_json)
@@ -1624,7 +1629,7 @@ class TestModel_ToolchainCollectionFirst:
 
         # Construct a json representation of a ToolchainCollectionFirst model
         toolchain_collection_first_model_json = {}
-        toolchain_collection_first_model_json["href"] = "testString"
+        toolchain_collection_first_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainCollectionFirst by calling from_dict on the json representation
         toolchain_collection_first_model = ToolchainCollectionFirst.from_dict(toolchain_collection_first_model_json)
@@ -1656,8 +1661,8 @@ class TestModel_ToolchainCollectionLast:
 
         # Construct a json representation of a ToolchainCollectionLast model
         toolchain_collection_last_model_json = {}
-        toolchain_collection_last_model_json["start"] = "testString"
-        toolchain_collection_last_model_json["href"] = "testString"
+        toolchain_collection_last_model_json['start'] = 'testString'
+        toolchain_collection_last_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainCollectionLast by calling from_dict on the json representation
         toolchain_collection_last_model = ToolchainCollectionLast.from_dict(toolchain_collection_last_model_json)
@@ -1689,8 +1694,8 @@ class TestModel_ToolchainCollectionNext:
 
         # Construct a json representation of a ToolchainCollectionNext model
         toolchain_collection_next_model_json = {}
-        toolchain_collection_next_model_json["start"] = "testString"
-        toolchain_collection_next_model_json["href"] = "testString"
+        toolchain_collection_next_model_json['start'] = 'testString'
+        toolchain_collection_next_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainCollectionNext by calling from_dict on the json representation
         toolchain_collection_next_model = ToolchainCollectionNext.from_dict(toolchain_collection_next_model_json)
@@ -1722,8 +1727,8 @@ class TestModel_ToolchainCollectionPrevious:
 
         # Construct a json representation of a ToolchainCollectionPrevious model
         toolchain_collection_previous_model_json = {}
-        toolchain_collection_previous_model_json["start"] = "testString"
-        toolchain_collection_previous_model_json["href"] = "testString"
+        toolchain_collection_previous_model_json['start'] = 'testString'
+        toolchain_collection_previous_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainCollectionPrevious by calling from_dict on the json representation
         toolchain_collection_previous_model = ToolchainCollectionPrevious.from_dict(
@@ -1757,7 +1762,7 @@ class TestModel_ToolchainEventPost:
 
         # Construct a json representation of a ToolchainEventPost model
         toolchain_event_post_model_json = {}
-        toolchain_event_post_model_json["id"] = "testString"
+        toolchain_event_post_model_json['id'] = 'testString'
 
         # Construct a model instance of ToolchainEventPost by calling from_dict on the json representation
         toolchain_event_post_model = ToolchainEventPost.from_dict(toolchain_event_post_model_json)
@@ -1788,14 +1793,23 @@ class TestModel_ToolchainEventPrototypeData:
         # Construct dict forms of any model objects needed in order to build this model.
 
         toolchain_event_prototype_data_application_json_model = {}  # ToolchainEventPrototypeDataApplicationJson
-        toolchain_event_prototype_data_application_json_model["content"] = {"anyKey": "anyValue"}
+        toolchain_event_prototype_data_application_json_model['content'] = {
+            'customKey1': 'myCustomData',
+            'customKey2': 123,
+            'customKey3': {'nestedKey': 'moreData'},
+        }
+
+        toolchain_event_prototype_data_text_plain_model = {}  # ToolchainEventPrototypeDataTextPlain
+        toolchain_event_prototype_data_text_plain_model['content'] = (
+            'This event is dispatched because the pipeline failed'
+        )
 
         # Construct a json representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model_json = {}
-        toolchain_event_prototype_data_model_json["application_json"] = (
+        toolchain_event_prototype_data_model_json['application_json'] = (
             toolchain_event_prototype_data_application_json_model
         )
-        toolchain_event_prototype_data_model_json["text_plain"] = "This event is dispatched because the pipeline failed"
+        toolchain_event_prototype_data_model_json['text_plain'] = toolchain_event_prototype_data_text_plain_model
 
         # Construct a model instance of ToolchainEventPrototypeData by calling from_dict on the json representation
         toolchain_event_prototype_data_model = ToolchainEventPrototypeData.from_dict(
@@ -1829,7 +1843,11 @@ class TestModel_ToolchainEventPrototypeDataApplicationJson:
 
         # Construct a json representation of a ToolchainEventPrototypeDataApplicationJson model
         toolchain_event_prototype_data_application_json_model_json = {}
-        toolchain_event_prototype_data_application_json_model_json["content"] = {"anyKey": "anyValue"}
+        toolchain_event_prototype_data_application_json_model_json['content'] = {
+            'customKey1': 'myCustomData',
+            'customKey2': 123,
+            'customKey3': {'nestedKey': 'moreData'},
+        }
 
         # Construct a model instance of ToolchainEventPrototypeDataApplicationJson by calling from_dict on the json representation
         toolchain_event_prototype_data_application_json_model = ToolchainEventPrototypeDataApplicationJson.from_dict(
@@ -1863,6 +1881,49 @@ class TestModel_ToolchainEventPrototypeDataApplicationJson:
         )
 
 
+class TestModel_ToolchainEventPrototypeDataTextPlain:
+    """
+    Test Class for ToolchainEventPrototypeDataTextPlain
+    """
+
+    def test_toolchain_event_prototype_data_text_plain_serialization(self):
+        """
+        Test serialization/deserialization for ToolchainEventPrototypeDataTextPlain
+        """
+
+        # Construct a json representation of a ToolchainEventPrototypeDataTextPlain model
+        toolchain_event_prototype_data_text_plain_model_json = {}
+        toolchain_event_prototype_data_text_plain_model_json['content'] = (
+            'This event is dispatched because the pipeline failed'
+        )
+
+        # Construct a model instance of ToolchainEventPrototypeDataTextPlain by calling from_dict on the json representation
+        toolchain_event_prototype_data_text_plain_model = ToolchainEventPrototypeDataTextPlain.from_dict(
+            toolchain_event_prototype_data_text_plain_model_json
+        )
+        assert toolchain_event_prototype_data_text_plain_model != False
+
+        # Construct a model instance of ToolchainEventPrototypeDataTextPlain by calling from_dict on the json representation
+        toolchain_event_prototype_data_text_plain_model_dict = ToolchainEventPrototypeDataTextPlain.from_dict(
+            toolchain_event_prototype_data_text_plain_model_json
+        ).__dict__
+        toolchain_event_prototype_data_text_plain_model2 = ToolchainEventPrototypeDataTextPlain(
+            **toolchain_event_prototype_data_text_plain_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert toolchain_event_prototype_data_text_plain_model == toolchain_event_prototype_data_text_plain_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        toolchain_event_prototype_data_text_plain_model_json2 = (
+            toolchain_event_prototype_data_text_plain_model.to_dict()
+        )
+        assert (
+            toolchain_event_prototype_data_text_plain_model_json2
+            == toolchain_event_prototype_data_text_plain_model_json
+        )
+
+
 class TestModel_ToolchainModel:
     """
     Test Class for ToolchainModel
@@ -1875,18 +1936,18 @@ class TestModel_ToolchainModel:
 
         # Construct a json representation of a ToolchainModel model
         toolchain_model_model_json = {}
-        toolchain_model_model_json["id"] = "testString"
-        toolchain_model_model_json["name"] = "TestToolchainV2"
-        toolchain_model_model_json["description"] = "A sample toolchain to test the API"
-        toolchain_model_model_json["account_id"] = "testString"
-        toolchain_model_model_json["location"] = "testString"
-        toolchain_model_model_json["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_model_model_json["crn"] = "testString"
-        toolchain_model_model_json["href"] = "testString"
-        toolchain_model_model_json["ui_href"] = "testString"
-        toolchain_model_model_json["created_at"] = "2019-01-01T12:00:00Z"
-        toolchain_model_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_model_model_json["created_by"] = "testString"
+        toolchain_model_model_json['id'] = 'testString'
+        toolchain_model_model_json['name'] = 'TestToolchainV2'
+        toolchain_model_model_json['description'] = 'A sample toolchain to test the API'
+        toolchain_model_model_json['account_id'] = 'testString'
+        toolchain_model_model_json['location'] = 'testString'
+        toolchain_model_model_json['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        toolchain_model_model_json['crn'] = 'testString'
+        toolchain_model_model_json['href'] = 'testString'
+        toolchain_model_model_json['ui_href'] = 'testString'
+        toolchain_model_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        toolchain_model_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_model_model_json['created_by'] = 'testString'
 
         # Construct a model instance of ToolchainModel by calling from_dict on the json representation
         toolchain_model_model = ToolchainModel.from_dict(toolchain_model_model_json)
@@ -1916,18 +1977,18 @@ class TestModel_ToolchainPatch:
 
         # Construct a json representation of a ToolchainPatch model
         toolchain_patch_model_json = {}
-        toolchain_patch_model_json["id"] = "testString"
-        toolchain_patch_model_json["name"] = "TestToolchainV2"
-        toolchain_patch_model_json["description"] = "A sample toolchain to test the API"
-        toolchain_patch_model_json["account_id"] = "testString"
-        toolchain_patch_model_json["location"] = "testString"
-        toolchain_patch_model_json["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_patch_model_json["crn"] = "testString"
-        toolchain_patch_model_json["href"] = "testString"
-        toolchain_patch_model_json["ui_href"] = "testString"
-        toolchain_patch_model_json["created_at"] = "2019-01-01T12:00:00Z"
-        toolchain_patch_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_patch_model_json["created_by"] = "testString"
+        toolchain_patch_model_json['id'] = 'testString'
+        toolchain_patch_model_json['name'] = 'TestToolchainV2'
+        toolchain_patch_model_json['description'] = 'A sample toolchain to test the API'
+        toolchain_patch_model_json['account_id'] = 'testString'
+        toolchain_patch_model_json['location'] = 'testString'
+        toolchain_patch_model_json['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        toolchain_patch_model_json['crn'] = 'testString'
+        toolchain_patch_model_json['href'] = 'testString'
+        toolchain_patch_model_json['ui_href'] = 'testString'
+        toolchain_patch_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        toolchain_patch_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_patch_model_json['created_by'] = 'testString'
 
         # Construct a model instance of ToolchainPatch by calling from_dict on the json representation
         toolchain_patch_model = ToolchainPatch.from_dict(toolchain_patch_model_json)
@@ -1957,18 +2018,18 @@ class TestModel_ToolchainPost:
 
         # Construct a json representation of a ToolchainPost model
         toolchain_post_model_json = {}
-        toolchain_post_model_json["id"] = "testString"
-        toolchain_post_model_json["name"] = "TestToolchainV2"
-        toolchain_post_model_json["description"] = "A sample toolchain to test the API"
-        toolchain_post_model_json["account_id"] = "testString"
-        toolchain_post_model_json["location"] = "testString"
-        toolchain_post_model_json["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        toolchain_post_model_json["crn"] = "testString"
-        toolchain_post_model_json["href"] = "testString"
-        toolchain_post_model_json["ui_href"] = "testString"
-        toolchain_post_model_json["created_at"] = "2019-01-01T12:00:00Z"
-        toolchain_post_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_post_model_json["created_by"] = "testString"
+        toolchain_post_model_json['id'] = 'testString'
+        toolchain_post_model_json['name'] = 'TestToolchainV2'
+        toolchain_post_model_json['description'] = 'A sample toolchain to test the API'
+        toolchain_post_model_json['account_id'] = 'testString'
+        toolchain_post_model_json['location'] = 'testString'
+        toolchain_post_model_json['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        toolchain_post_model_json['crn'] = 'testString'
+        toolchain_post_model_json['href'] = 'testString'
+        toolchain_post_model_json['ui_href'] = 'testString'
+        toolchain_post_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        toolchain_post_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_post_model_json['created_by'] = 'testString'
 
         # Construct a model instance of ToolchainPost by calling from_dict on the json representation
         toolchain_post_model = ToolchainPost.from_dict(toolchain_post_model_json)
@@ -1998,8 +2059,8 @@ class TestModel_ToolchainPrototypePatch:
 
         # Construct a json representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model_json = {}
-        toolchain_prototype_patch_model_json["name"] = "newToolchainName"
-        toolchain_prototype_patch_model_json["description"] = "New toolchain description"
+        toolchain_prototype_patch_model_json['name'] = 'newToolchainName'
+        toolchain_prototype_patch_model_json['description'] = 'New toolchain description'
 
         # Construct a model instance of ToolchainPrototypePatch by calling from_dict on the json representation
         toolchain_prototype_patch_model = ToolchainPrototypePatch.from_dict(toolchain_prototype_patch_model_json)
@@ -2032,23 +2093,23 @@ class TestModel_ToolchainTool:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model["ui_href"] = "https://my-team.slack.com/messages/my-channel"
-        tool_model_referent_model["api_href"] = "testString"
+        tool_model_referent_model['ui_href'] = 'https://my-team.slack.com/messages/my-channel'
+        tool_model_referent_model['api_href'] = 'testString'
 
         # Construct a json representation of a ToolchainTool model
         toolchain_tool_model_json = {}
-        toolchain_tool_model_json["id"] = "testString"
-        toolchain_tool_model_json["resource_group_id"] = "testString"
-        toolchain_tool_model_json["crn"] = "testString"
-        toolchain_tool_model_json["tool_type_id"] = "testString"
-        toolchain_tool_model_json["toolchain_id"] = "testString"
-        toolchain_tool_model_json["toolchain_crn"] = "testString"
-        toolchain_tool_model_json["href"] = "testString"
-        toolchain_tool_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_model_json["name"] = "MyTool"
-        toolchain_tool_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_tool_model_json["parameters"] = {"anyKey": "anyValue"}
-        toolchain_tool_model_json["state"] = "configured"
+        toolchain_tool_model_json['id'] = 'testString'
+        toolchain_tool_model_json['resource_group_id'] = 'testString'
+        toolchain_tool_model_json['crn'] = 'testString'
+        toolchain_tool_model_json['tool_type_id'] = 'testString'
+        toolchain_tool_model_json['toolchain_id'] = 'testString'
+        toolchain_tool_model_json['toolchain_crn'] = 'testString'
+        toolchain_tool_model_json['href'] = 'testString'
+        toolchain_tool_model_json['referent'] = tool_model_referent_model
+        toolchain_tool_model_json['name'] = 'MyTool'
+        toolchain_tool_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_tool_model_json['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_model_json['state'] = 'configured'
 
         # Construct a model instance of ToolchainTool by calling from_dict on the json representation
         toolchain_tool_model = ToolchainTool.from_dict(toolchain_tool_model_json)
@@ -2079,67 +2140,72 @@ class TestModel_ToolchainToolCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         toolchain_tool_collection_first_model = {}  # ToolchainToolCollectionFirst
-        toolchain_tool_collection_first_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3"
+        toolchain_tool_collection_first_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3'
         )
 
         toolchain_tool_collection_previous_model = {}  # ToolchainToolCollectionPrevious
-        toolchain_tool_collection_previous_model["start"] = (
-            "eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
+        toolchain_tool_collection_previous_model['start'] = (
+            'eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9'
         )
-        toolchain_tool_collection_previous_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9"
+        toolchain_tool_collection_previous_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjEzODgxYTZkLWI1ZDktNDQwNi05MzFmLWM4NTc1NDc0MmQ1NSJ9'
         )
 
         toolchain_tool_collection_next_model = {}  # ToolchainToolCollectionNext
-        toolchain_tool_collection_next_model["start"] = (
-            "eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
+        toolchain_tool_collection_next_model['start'] = (
+            'eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9'
         )
-        toolchain_tool_collection_next_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9"
+        toolchain_tool_collection_next_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6IjlkZDBjNDc3LWYxNzMtNGMzZi1hN2NmLWQyNzAyNmFjZTM3OSJ9'
         )
 
         toolchain_tool_collection_last_model = {}  # ToolchainToolCollectionLast
-        toolchain_tool_collection_last_model["start"] = (
-            "eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
+        toolchain_tool_collection_last_model['start'] = (
+            'eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9'
         )
-        toolchain_tool_collection_last_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9"
+        toolchain_tool_collection_last_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools?limit=3&start=eyJpbnN0YW5jZV9pZCI6ImQzYzkxMDYwLTcwOWMtNGZmZi1hODUwLTllZDFkZWMwMGYxYiJ9'
         )
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model["ui_href"] = "https://team-one.slack.com/messages/channel-one"
-        tool_model_referent_model["api_href"] = "testString"
+        tool_model_referent_model['ui_href'] = 'https://team-one.slack.com/messages/channel-one'
+        tool_model_referent_model['api_href'] = 'testString'
 
         tool_model_model = {}  # ToolModel
-        tool_model_model["id"] = "2983b160-fc37-4c45-8a8f-e616ad7e470b"
-        tool_model_model["resource_group_id"] = "6a9a01f2cff54a7f966f803d92877123"
-        tool_model_model["crn"] = (
-            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e:tool:2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        tool_model_model['id'] = '2983b160-fc37-4c45-8a8f-e616ad7e470b'
+        tool_model_model['resource_group_id'] = '6a9a01f2cff54a7f966f803d92877123'
+        tool_model_model['crn'] = (
+            'crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e:tool:2983b160-fc37-4c45-8a8f-e616ad7e470b'
         )
-        tool_model_model["tool_type_id"] = "slack"
-        tool_model_model["toolchain_id"] = "d02d29f1-e7bb-4977-8a6f-26d7b7bb893e"
-        tool_model_model["toolchain_crn"] = (
-            "crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e::"
+        tool_model_model['tool_type_id'] = 'slack'
+        tool_model_model['toolchain_id'] = 'd02d29f1-e7bb-4977-8a6f-26d7b7bb893e'
+        tool_model_model['toolchain_crn'] = (
+            'crn:v1:staging:public:toolchain:us-south:a/f2337426699b4041bc50f1d45042f777:d02d29f1-e7bb-4977-8a6f-26d7b7bb893e::'
         )
-        tool_model_model["href"] = (
-            "https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools/2983b160-fc37-4c45-8a8f-e616ad7e470b"
+        tool_model_model['href'] = (
+            'https://api.us-south.devops.cloud.ibm.com/toolchain/v2/toolchains/d02d29f1-e7bb-4977-8a6f-26d7b7bb893e/tools/2983b160-fc37-4c45-8a8f-e616ad7e470b'
         )
-        tool_model_model["referent"] = tool_model_referent_model
-        tool_model_model["name"] = "MyTool-1"
-        tool_model_model["updated_at"] = "2022-01-01T13:13:07.968000Z"
-        tool_model_model["parameters"] = {"anyKey": "anyValue"}
-        tool_model_model["state"] = "configured"
+        tool_model_model['referent'] = tool_model_referent_model
+        tool_model_model['name'] = 'MyTool-1'
+        tool_model_model['updated_at'] = '2022-01-01T13:13:07.968000Z'
+        tool_model_model['parameters'] = {
+            'label': '#channel-one',
+            'channel_name': 'channel-one',
+            'team_url': 'team-one',
+            'apikey': 'hash:SHA3-512:5bad9f13ac3580162ddb2980909fe3375a64e61b5c3d78d819cc02e84f98810dc5f8b848e07babedeaaabf78cfcbb71fe6098ea294b702a9deff904836322bd2',
+        }
+        tool_model_model['state'] = 'configured'
 
         # Construct a json representation of a ToolchainToolCollection model
         toolchain_tool_collection_model_json = {}
-        toolchain_tool_collection_model_json["limit"] = 38
-        toolchain_tool_collection_model_json["total_count"] = 38
-        toolchain_tool_collection_model_json["first"] = toolchain_tool_collection_first_model
-        toolchain_tool_collection_model_json["previous"] = toolchain_tool_collection_previous_model
-        toolchain_tool_collection_model_json["next"] = toolchain_tool_collection_next_model
-        toolchain_tool_collection_model_json["last"] = toolchain_tool_collection_last_model
-        toolchain_tool_collection_model_json["tools"] = [tool_model_model]
+        toolchain_tool_collection_model_json['limit'] = 38
+        toolchain_tool_collection_model_json['total_count'] = 38
+        toolchain_tool_collection_model_json['first'] = toolchain_tool_collection_first_model
+        toolchain_tool_collection_model_json['previous'] = toolchain_tool_collection_previous_model
+        toolchain_tool_collection_model_json['next'] = toolchain_tool_collection_next_model
+        toolchain_tool_collection_model_json['last'] = toolchain_tool_collection_last_model
+        toolchain_tool_collection_model_json['tools'] = [tool_model_model]
 
         # Construct a model instance of ToolchainToolCollection by calling from_dict on the json representation
         toolchain_tool_collection_model = ToolchainToolCollection.from_dict(toolchain_tool_collection_model_json)
@@ -2171,7 +2237,7 @@ class TestModel_ToolchainToolCollectionFirst:
 
         # Construct a json representation of a ToolchainToolCollectionFirst model
         toolchain_tool_collection_first_model_json = {}
-        toolchain_tool_collection_first_model_json["href"] = "testString"
+        toolchain_tool_collection_first_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainToolCollectionFirst by calling from_dict on the json representation
         toolchain_tool_collection_first_model = ToolchainToolCollectionFirst.from_dict(
@@ -2207,8 +2273,8 @@ class TestModel_ToolchainToolCollectionLast:
 
         # Construct a json representation of a ToolchainToolCollectionLast model
         toolchain_tool_collection_last_model_json = {}
-        toolchain_tool_collection_last_model_json["start"] = "testString"
-        toolchain_tool_collection_last_model_json["href"] = "testString"
+        toolchain_tool_collection_last_model_json['start'] = 'testString'
+        toolchain_tool_collection_last_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainToolCollectionLast by calling from_dict on the json representation
         toolchain_tool_collection_last_model = ToolchainToolCollectionLast.from_dict(
@@ -2242,8 +2308,8 @@ class TestModel_ToolchainToolCollectionNext:
 
         # Construct a json representation of a ToolchainToolCollectionNext model
         toolchain_tool_collection_next_model_json = {}
-        toolchain_tool_collection_next_model_json["start"] = "testString"
-        toolchain_tool_collection_next_model_json["href"] = "testString"
+        toolchain_tool_collection_next_model_json['start'] = 'testString'
+        toolchain_tool_collection_next_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainToolCollectionNext by calling from_dict on the json representation
         toolchain_tool_collection_next_model = ToolchainToolCollectionNext.from_dict(
@@ -2277,8 +2343,8 @@ class TestModel_ToolchainToolCollectionPrevious:
 
         # Construct a json representation of a ToolchainToolCollectionPrevious model
         toolchain_tool_collection_previous_model_json = {}
-        toolchain_tool_collection_previous_model_json["start"] = "testString"
-        toolchain_tool_collection_previous_model_json["href"] = "testString"
+        toolchain_tool_collection_previous_model_json['start'] = 'testString'
+        toolchain_tool_collection_previous_model_json['href'] = 'testString'
 
         # Construct a model instance of ToolchainToolCollectionPrevious by calling from_dict on the json representation
         toolchain_tool_collection_previous_model = ToolchainToolCollectionPrevious.from_dict(
@@ -2315,23 +2381,23 @@ class TestModel_ToolchainToolPatch:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model["ui_href"] = "https://my-team.slack.com/messages/my-channel"
-        tool_model_referent_model["api_href"] = "testString"
+        tool_model_referent_model['ui_href'] = 'https://my-team.slack.com/messages/my-channel'
+        tool_model_referent_model['api_href'] = 'testString'
 
         # Construct a json representation of a ToolchainToolPatch model
         toolchain_tool_patch_model_json = {}
-        toolchain_tool_patch_model_json["id"] = "testString"
-        toolchain_tool_patch_model_json["resource_group_id"] = "testString"
-        toolchain_tool_patch_model_json["crn"] = "testString"
-        toolchain_tool_patch_model_json["tool_type_id"] = "testString"
-        toolchain_tool_patch_model_json["toolchain_id"] = "testString"
-        toolchain_tool_patch_model_json["toolchain_crn"] = "testString"
-        toolchain_tool_patch_model_json["href"] = "testString"
-        toolchain_tool_patch_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_patch_model_json["name"] = "MyTool"
-        toolchain_tool_patch_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_tool_patch_model_json["parameters"] = {"anyKey": "anyValue"}
-        toolchain_tool_patch_model_json["state"] = "configured"
+        toolchain_tool_patch_model_json['id'] = 'testString'
+        toolchain_tool_patch_model_json['resource_group_id'] = 'testString'
+        toolchain_tool_patch_model_json['crn'] = 'testString'
+        toolchain_tool_patch_model_json['tool_type_id'] = 'testString'
+        toolchain_tool_patch_model_json['toolchain_id'] = 'testString'
+        toolchain_tool_patch_model_json['toolchain_crn'] = 'testString'
+        toolchain_tool_patch_model_json['href'] = 'testString'
+        toolchain_tool_patch_model_json['referent'] = tool_model_referent_model
+        toolchain_tool_patch_model_json['name'] = 'MyTool'
+        toolchain_tool_patch_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_tool_patch_model_json['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_patch_model_json['state'] = 'configured'
 
         # Construct a model instance of ToolchainToolPatch by calling from_dict on the json representation
         toolchain_tool_patch_model = ToolchainToolPatch.from_dict(toolchain_tool_patch_model_json)
@@ -2362,23 +2428,23 @@ class TestModel_ToolchainToolPost:
         # Construct dict forms of any model objects needed in order to build this model.
 
         tool_model_referent_model = {}  # ToolModelReferent
-        tool_model_referent_model["ui_href"] = "https://my-team.slack.com/messages/my-channel"
-        tool_model_referent_model["api_href"] = "testString"
+        tool_model_referent_model['ui_href'] = 'https://my-team.slack.com/messages/my-channel'
+        tool_model_referent_model['api_href'] = 'testString'
 
         # Construct a json representation of a ToolchainToolPost model
         toolchain_tool_post_model_json = {}
-        toolchain_tool_post_model_json["id"] = "testString"
-        toolchain_tool_post_model_json["resource_group_id"] = "testString"
-        toolchain_tool_post_model_json["crn"] = "testString"
-        toolchain_tool_post_model_json["tool_type_id"] = "testString"
-        toolchain_tool_post_model_json["toolchain_id"] = "testString"
-        toolchain_tool_post_model_json["toolchain_crn"] = "testString"
-        toolchain_tool_post_model_json["href"] = "testString"
-        toolchain_tool_post_model_json["referent"] = tool_model_referent_model
-        toolchain_tool_post_model_json["name"] = "MyTool"
-        toolchain_tool_post_model_json["updated_at"] = "2019-01-01T12:00:00Z"
-        toolchain_tool_post_model_json["parameters"] = {"anyKey": "anyValue"}
-        toolchain_tool_post_model_json["state"] = "configured"
+        toolchain_tool_post_model_json['id'] = 'testString'
+        toolchain_tool_post_model_json['resource_group_id'] = 'testString'
+        toolchain_tool_post_model_json['crn'] = 'testString'
+        toolchain_tool_post_model_json['tool_type_id'] = 'testString'
+        toolchain_tool_post_model_json['toolchain_id'] = 'testString'
+        toolchain_tool_post_model_json['toolchain_crn'] = 'testString'
+        toolchain_tool_post_model_json['href'] = 'testString'
+        toolchain_tool_post_model_json['referent'] = tool_model_referent_model
+        toolchain_tool_post_model_json['name'] = 'MyTool'
+        toolchain_tool_post_model_json['updated_at'] = '2019-01-01T12:00:00Z'
+        toolchain_tool_post_model_json['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_post_model_json['state'] = 'configured'
 
         # Construct a model instance of ToolchainToolPost by calling from_dict on the json representation
         toolchain_tool_post_model = ToolchainToolPost.from_dict(toolchain_tool_post_model_json)
@@ -2408,9 +2474,9 @@ class TestModel_ToolchainToolPrototypePatch:
 
         # Construct a json representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model_json = {}
-        toolchain_tool_prototype_patch_model_json["name"] = "MyTool"
-        toolchain_tool_prototype_patch_model_json["tool_type_id"] = "draservicebroker"
-        toolchain_tool_prototype_patch_model_json["parameters"] = {"anyKey": "anyValue"}
+        toolchain_tool_prototype_patch_model_json['name'] = 'MyTool'
+        toolchain_tool_prototype_patch_model_json['tool_type_id'] = 'draservicebroker'
+        toolchain_tool_prototype_patch_model_json['parameters'] = {'anyKey': 'anyValue'}
 
         # Construct a model instance of ToolchainToolPrototypePatch by calling from_dict on the json representation
         toolchain_tool_prototype_patch_model = ToolchainToolPrototypePatch.from_dict(
