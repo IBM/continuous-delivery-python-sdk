@@ -1,3 +1,21 @@
+# [2.0.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.11.0...v2.0.0) (2024-10-16)
+
+
+### Features
+
+* **toolchain:** add text plain object property for create_toolchain_event function ([#50](https://github.com/IBM/continuous-delivery-python-sdk/issues/50)) ([4261f8d](https://github.com/IBM/continuous-delivery-python-sdk/commit/4261f8d614917f59681d079e6178e13c1fcaade6))
+
+
+### BREAKING CHANGES
+
+* **toolchain:** the text_plain string property is being replaced by a ToolchainEventPrototypeDataTextPlain object. String values must be provided using the ToolchainEventPrototypeDataTextPlain.content property
+
+Signed-off-by: Omar Al Bastami <omar.albastami@ibm.com>
+
+* update secrets baseline
+
+Signed-off-by: Omar Al Bastami <omar.albastami@ibm.com>
+
 # [1.11.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.10.0...v1.11.0) (2024-10-03)
 
 
