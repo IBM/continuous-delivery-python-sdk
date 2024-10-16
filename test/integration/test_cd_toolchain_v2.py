@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import pytest
 from ibm_continuous_delivery.cd_toolchain_v2 import *
 
 # Config file name
-config_file = "cd_toolchain_v2.env"
+config_file = 'cd_toolchain_v2.env'
 
 # Variables to hold link values
 tool_id_link = None
@@ -49,7 +49,7 @@ class TestCdToolchainV2:
     @classmethod
     def setup_class(cls):
         if os.path.exists(config_file):
-            os.environ["IBM_CREDENTIALS_FILE"] = config_file
+            os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
             cls.cd_toolchain_service = CdToolchainV2.new_instance()
             assert cls.cd_toolchain_service is not None
@@ -59,11 +59,10 @@ class TestCdToolchainV2:
 
             cls.cd_toolchain_service.enable_retries()
 
-        print("Setup complete.")
+        print('Setup complete.')
 
     needscredentials = pytest.mark.skipif(
-        not os.path.exists(config_file),
-        reason="External configuration not available, skipping...",
+        not os.path.exists(config_file), reason="External configuration not available, skipping..."
     )
 
     @needscredentials
@@ -80,7 +79,7 @@ class TestCdToolchainV2:
         toolchain_post = response.get_result()
         assert toolchain_post is not None
 
-        toolchain_id_link = toolchain_post["id"]
+        toolchain_id_link = toolchain_post['id']
 
     @needscredentials
     def test_create_tool(self):
@@ -88,16 +87,16 @@ class TestCdToolchainV2:
 
         response = self.cd_toolchain_service.create_tool(
             toolchain_id=toolchain_id_link,
-            tool_type_id="draservicebroker",
-            name="testString",
-            parameters={"anyKey": "anyValue"},
+            tool_type_id='draservicebroker',
+            name='testString',
+            parameters={'anyKey': 'anyValue'},
         )
 
         assert response.get_status_code() == 201
         toolchain_tool_post = response.get_result()
         assert toolchain_tool_post is not None
 
-        tool_id_link = toolchain_tool_post["id"]
+        tool_id_link = toolchain_tool_post['id']
 
     @needscredentials
     def test_list_toolchains(self):
@@ -156,8 +155,8 @@ class TestCdToolchainV2:
     def test_update_toolchain(self):
         # Construct a dict representation of a ToolchainPrototypePatch model
         toolchain_prototype_patch_model = {
-            "name": "newToolchainName",
-            "description": "New toolchain description",
+            'name': 'newToolchainName',
+            'description': 'New toolchain description',
         }
 
         response = self.cd_toolchain_service.update_toolchain(
@@ -185,25 +184,45 @@ class TestCdToolchainV2:
         assert toolchain_tool_post is not None
 
     @needscredentials
-    def test_create_toolchain_event(self):
+    def test_create_toolchain_event_application_json(self):
         # Construct a dict representation of a ToolchainEventPrototypeDataApplicationJson model
         toolchain_event_prototype_data_application_json_model = {
-            "content": {
-                "customKey1": "myCustomData",
-                "customKey2": 123,
-                "customKey3": {"nestedKey": "moreData"},
-            },
+            'content': {'customKey1': 'myCustomData', 'customKey2': 123, 'customKey3': {'nestedKey': 'moreData'}},
         }
+
         # Construct a dict representation of a ToolchainEventPrototypeData model
         toolchain_event_prototype_data_model = {
-            "application_json": toolchain_event_prototype_data_application_json_model,
+            'application_json': toolchain_event_prototype_data_application_json_model,
         }
 
         response = self.cd_toolchain_service.create_toolchain_event(
             toolchain_id=toolchain_id_link,
-            title="My-custom-event",
-            description="This is my custom event",
-            content_type="application/json",
+            title='My-custom-event',
+            description='This is my custom event',
+            content_type='application/json',
+            data=toolchain_event_prototype_data_model,
+        )
+
+        assert response.get_status_code() == 200
+        toolchain_event_post = response.get_result()
+        assert toolchain_event_post is not None
+
+    @needscredentials
+    def test_create_toolchain_event_text_plain(self):
+        # Construct a dict representation of a ToolchainEventPrototypeDataTextPlain model
+        toolchain_event_prototype_data_text_plain_model = {
+            'content': 'This event is dispatched because the pipeline failed',
+        }
+        # Construct a dict representation of a ToolchainEventPrototypeData model
+        toolchain_event_prototype_data_model = {
+            'text_plain': toolchain_event_prototype_data_text_plain_model,
+        }
+
+        response = self.cd_toolchain_service.create_toolchain_event(
+            toolchain_id=toolchain_id_link,
+            title='My-custom-event',
+            description='This is my custom event',
+            content_type='text/plain',
             data=toolchain_event_prototype_data_model,
         )
 
@@ -247,7 +266,7 @@ class TestCdToolchainV2:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(f"\nlist_tools() returned a total of {len(all_results)} items(s) using ToolsPager.")
+        print(f'\nlist_tools() returned a total of {len(all_results)} items(s) using ToolsPager.')
 
     @needscredentials
     def test_get_tool_by_id(self):
@@ -264,9 +283,9 @@ class TestCdToolchainV2:
     def test_update_tool(self):
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {
-            "name": "MyTool",
-            "tool_type_id": "draservicebroker",
-            "parameters": {"anyKey": "anyValue"},
+            'name': 'MyTool',
+            'tool_type_id': 'draservicebroker',
+            'parameters': {'anyKey': 'anyValue'},
         }
 
         response = self.cd_toolchain_service.update_tool(
