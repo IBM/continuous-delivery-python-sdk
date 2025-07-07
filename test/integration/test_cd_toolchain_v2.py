@@ -28,6 +28,7 @@ from ibm_cloud_sdk_core import *
 import os
 from datetime import datetime
 import pytest
+from environs import Env
 from ibm_continuous_delivery.cd_toolchain_v2 import *
 
 # Config file name
@@ -36,6 +37,7 @@ config_file = 'cd_toolchain_v2.env'
 # Variables to hold link values
 tool_id_link = None
 toolchain_id_link = None
+env = Env()
 
 current_time = datetime.now()
 toolchain_name = 'TestPythonSdk_' + current_time.strftime("%Y_%m_%d_%H_%M_%S")
@@ -49,6 +51,7 @@ class TestCdToolchainV2:
     @classmethod
     def setup_class(cls):
         if os.path.exists(config_file):
+            env.read_env(config_file, recurse=False)
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
             cls.cd_toolchain_service = CdToolchainV2.new_instance()
@@ -71,7 +74,7 @@ class TestCdToolchainV2:
 
         response = self.cd_toolchain_service.create_toolchain(
             name=toolchain_name,
-            resource_group_id=self.config['RESOURCE_GROUP_ID'],
+            resource_group_id=env("CD_TOOLCHAIN_RESOURCE_GROUP_ID"),
             description="A sample toolchain to test the API",
         )
 
@@ -101,7 +104,7 @@ class TestCdToolchainV2:
     @needscredentials
     def test_list_toolchains(self):
         response = self.cd_toolchain_service.list_toolchains(
-            resource_group_id=self.config['RESOURCE_GROUP_ID'],
+            resource_group_id=env("CD_TOOLCHAIN_RESOURCE_GROUP_ID"),
             limit=20,
             name=toolchain_name,
         )
@@ -117,7 +120,7 @@ class TestCdToolchainV2:
         # Test get_next().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id=self.config['RESOURCE_GROUP_ID'],
+            resource_group_id=env("CD_TOOLCHAIN_RESOURCE_GROUP_ID"),
             limit=10,
             name=toolchain_name,
         )
@@ -130,7 +133,7 @@ class TestCdToolchainV2:
         # Test get_all().
         pager = ToolchainsPager(
             client=self.cd_toolchain_service,
-            resource_group_id=self.config['RESOURCE_GROUP_ID'],
+            resource_group_id=env("CD_TOOLCHAIN_RESOURCE_GROUP_ID"),
             limit=10,
             name=toolchain_name,
         )
@@ -175,7 +178,7 @@ class TestCdToolchainV2:
             tool_type_id="eventnotifications",
             parameters={
                 "name": "test-en-tool",
-                "instance-crn": self.config["EVENT_NOTIFICATIONS_SERVICE_CRN"],
+                "instance-crn": env("CD_TOOLCHAIN_EVENT_NOTIFICATIONS_SERVICE_CRN"),
             },
         )
 
