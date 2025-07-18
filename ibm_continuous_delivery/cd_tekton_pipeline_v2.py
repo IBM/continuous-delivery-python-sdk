@@ -1536,9 +1536,9 @@ class CdTektonPipelineV2(BaseService):
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
-        :param bool limit_waiting_runs: (optional) Only used for SCM triggers. Flag
-               that will limit the trigger to a maximum of one waiting run. A newly
-               triggered run will cause waiting run(s) to be automatically cancelled.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         :param bool enabled: (optional) Flag to check if the trigger is enabled. If
                omitted the trigger is enabled by default.
         :param GenericSecret secret: (optional) Only needed for Generic Webhook
@@ -4653,9 +4653,9 @@ class TriggerPatch:
     :param int max_concurrent_runs: (optional) Defines the maximum number of
           concurrent runs for this trigger. If set to 0 then the custom concurrency limit
           is disabled for this trigger.
-    :param bool limit_waiting_runs: (optional) Only used for SCM triggers. Flag that
-          will limit the trigger to a maximum of one waiting run. A newly triggered run
-          will cause waiting run(s) to be automatically cancelled.
+    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
+          maximum of one waiting run. A newly triggered run will cause any other waiting
+          run(s) to be automatically cancelled.
     :param bool enabled: (optional) Defines if this trigger is enabled.
     :param GenericSecret secret: (optional) Only needed for Generic Webhook trigger
           type. The secret is used to start the Generic Webhook trigger.
@@ -4724,9 +4724,9 @@ class TriggerPatch:
         :param int max_concurrent_runs: (optional) Defines the maximum number of
                concurrent runs for this trigger. If set to 0 then the custom concurrency
                limit is disabled for this trigger.
-        :param bool limit_waiting_runs: (optional) Only used for SCM triggers. Flag
-               that will limit the trigger to a maximum of one waiting run. A newly
-               triggered run will cause waiting run(s) to be automatically cancelled.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         :param bool enabled: (optional) Defines if this trigger is enabled.
         :param GenericSecret secret: (optional) Only needed for Generic Webhook
                trigger type. The secret is used to start the Generic Webhook trigger.
@@ -5771,6 +5771,9 @@ class TriggerGenericTrigger(Trigger):
           disabled for this trigger.
     :param bool enabled: Flag to check if the trigger is enabled.
     :param bool favorite: (optional) Mark the trigger as a favorite.
+    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
+          maximum of one waiting run. A newly triggered run will cause any other waiting
+          run(s) to be automatically cancelled.
     :param GenericSecret secret: (optional) Only needed for Generic Webhook trigger
           type. The secret is used to start the Generic Webhook trigger.
     :param str webhook_url: (optional) Webhook URL that can be used to trigger
@@ -5793,6 +5796,7 @@ class TriggerGenericTrigger(Trigger):
         worker: Optional['Worker'] = None,
         max_concurrent_runs: Optional[int] = None,
         favorite: Optional[bool] = None,
+        limit_waiting_runs: Optional[bool] = None,
         secret: Optional['GenericSecret'] = None,
         webhook_url: Optional[str] = None,
         filter: Optional[str] = None,
@@ -5819,6 +5823,9 @@ class TriggerGenericTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         :param GenericSecret secret: (optional) Only needed for Generic Webhook
                trigger type. The secret is used to start the Generic Webhook trigger.
         :param str webhook_url: (optional) Webhook URL that can be used to trigger
@@ -5839,6 +5846,7 @@ class TriggerGenericTrigger(Trigger):
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
         self.favorite = favorite
+        self.limit_waiting_runs = limit_waiting_runs
         self.secret = secret
         self.webhook_url = webhook_url
         self.filter = filter
@@ -5879,6 +5887,8 @@ class TriggerGenericTrigger(Trigger):
             raise ValueError('Required property \'enabled\' not present in TriggerGenericTrigger JSON')
         if (favorite := _dict.get('favorite')) is not None:
             args['favorite'] = favorite
+        if (limit_waiting_runs := _dict.get('limit_waiting_runs')) is not None:
+            args['limit_waiting_runs'] = limit_waiting_runs
         if (secret := _dict.get('secret')) is not None:
             args['secret'] = GenericSecret.from_dict(secret)
         if (webhook_url := _dict.get('webhook_url')) is not None:
@@ -5926,6 +5936,8 @@ class TriggerGenericTrigger(Trigger):
             _dict['enabled'] = self.enabled
         if hasattr(self, 'favorite') and self.favorite is not None:
             _dict['favorite'] = self.favorite
+        if hasattr(self, 'limit_waiting_runs') and self.limit_waiting_runs is not None:
+            _dict['limit_waiting_runs'] = self.limit_waiting_runs
         if hasattr(self, 'secret') and self.secret is not None:
             if isinstance(self.secret, dict):
                 _dict['secret'] = self.secret
@@ -5978,6 +5990,9 @@ class TriggerManualTrigger(Trigger):
           disabled for this trigger.
     :param bool enabled: Flag to check if the trigger is enabled.
     :param bool favorite: (optional) Mark the trigger as a favorite.
+    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
+          maximum of one waiting run. A newly triggered run will cause any other waiting
+          run(s) to be automatically cancelled.
     """
 
     def __init__(
@@ -5994,6 +6009,7 @@ class TriggerManualTrigger(Trigger):
         worker: Optional['Worker'] = None,
         max_concurrent_runs: Optional[int] = None,
         favorite: Optional[bool] = None,
+        limit_waiting_runs: Optional[bool] = None,
     ) -> None:
         """
         Initialize a TriggerManualTrigger object.
@@ -6017,6 +6033,9 @@ class TriggerManualTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -6030,6 +6049,7 @@ class TriggerManualTrigger(Trigger):
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
         self.favorite = favorite
+        self.limit_waiting_runs = limit_waiting_runs
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerManualTrigger':
@@ -6067,6 +6087,8 @@ class TriggerManualTrigger(Trigger):
             raise ValueError('Required property \'enabled\' not present in TriggerManualTrigger JSON')
         if (favorite := _dict.get('favorite')) is not None:
             args['favorite'] = favorite
+        if (limit_waiting_runs := _dict.get('limit_waiting_runs')) is not None:
+            args['limit_waiting_runs'] = limit_waiting_runs
         return cls(**args)
 
     @classmethod
@@ -6108,6 +6130,8 @@ class TriggerManualTrigger(Trigger):
             _dict['enabled'] = self.enabled
         if hasattr(self, 'favorite') and self.favorite is not None:
             _dict['favorite'] = self.favorite
+        if hasattr(self, 'limit_waiting_runs') and self.limit_waiting_runs is not None:
+            _dict['limit_waiting_runs'] = self.limit_waiting_runs
         return _dict
 
     def _to_dict(self):
@@ -6152,6 +6176,9 @@ class TriggerScmTrigger(Trigger):
           disabled for this trigger.
     :param bool enabled: Flag to check if the trigger is enabled.
     :param bool favorite: (optional) Mark the trigger as a favorite.
+    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
+          maximum of one waiting run. A newly triggered run will cause any other waiting
+          run(s) to be automatically cancelled.
     :param bool enable_events_from_forks: (optional) When enabled, pull request
           events from forks of the selected repository will trigger a pipeline run.
     :param TriggerSource source: (optional) Source repository for a Git trigger.
@@ -6167,9 +6194,6 @@ class TriggerScmTrigger(Trigger):
     :param str filter: (optional) Either 'events' or 'filter' can be used. Stores
           the CEL (Common Expression Language) expression value which is used for event
           filtering against the Git webhook payloads.
-    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
-          maximum of one waiting run. A newly triggered run will cause waiting run(s) to
-          be automatically cancelled.
     """
 
     def __init__(
@@ -6186,11 +6210,11 @@ class TriggerScmTrigger(Trigger):
         worker: Optional['Worker'] = None,
         max_concurrent_runs: Optional[int] = None,
         favorite: Optional[bool] = None,
+        limit_waiting_runs: Optional[bool] = None,
         enable_events_from_forks: Optional[bool] = None,
         source: Optional['TriggerSource'] = None,
         events: Optional[List[str]] = None,
         filter: Optional[str] = None,
-        limit_waiting_runs: Optional[bool] = None,
     ) -> None:
         """
         Initialize a TriggerScmTrigger object.
@@ -6214,6 +6238,9 @@ class TriggerScmTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         :param bool enable_events_from_forks: (optional) When enabled, pull request
                events from forks of the selected repository will trigger a pipeline run.
         :param TriggerSource source: (optional) Source repository for a Git
@@ -6229,9 +6256,6 @@ class TriggerScmTrigger(Trigger):
         :param str filter: (optional) Either 'events' or 'filter' can be used.
                Stores the CEL (Common Expression Language) expression value which is used
                for event filtering against the Git webhook payloads.
-        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
-               to a maximum of one waiting run. A newly triggered run will cause waiting
-               run(s) to be automatically cancelled.
         """
         # pylint: disable=super-init-not-called
         self.type = type
@@ -6245,11 +6269,11 @@ class TriggerScmTrigger(Trigger):
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
         self.favorite = favorite
+        self.limit_waiting_runs = limit_waiting_runs
         self.enable_events_from_forks = enable_events_from_forks
         self.source = source
         self.events = events
         self.filter = filter
-        self.limit_waiting_runs = limit_waiting_runs
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerScmTrigger':
@@ -6287,6 +6311,8 @@ class TriggerScmTrigger(Trigger):
             raise ValueError('Required property \'enabled\' not present in TriggerScmTrigger JSON')
         if (favorite := _dict.get('favorite')) is not None:
             args['favorite'] = favorite
+        if (limit_waiting_runs := _dict.get('limit_waiting_runs')) is not None:
+            args['limit_waiting_runs'] = limit_waiting_runs
         if (enable_events_from_forks := _dict.get('enable_events_from_forks')) is not None:
             args['enable_events_from_forks'] = enable_events_from_forks
         if (source := _dict.get('source')) is not None:
@@ -6295,8 +6321,6 @@ class TriggerScmTrigger(Trigger):
             args['events'] = events
         if (filter := _dict.get('filter')) is not None:
             args['filter'] = filter
-        if (limit_waiting_runs := _dict.get('limit_waiting_runs')) is not None:
-            args['limit_waiting_runs'] = limit_waiting_runs
         return cls(**args)
 
     @classmethod
@@ -6338,6 +6362,8 @@ class TriggerScmTrigger(Trigger):
             _dict['enabled'] = self.enabled
         if hasattr(self, 'favorite') and self.favorite is not None:
             _dict['favorite'] = self.favorite
+        if hasattr(self, 'limit_waiting_runs') and self.limit_waiting_runs is not None:
+            _dict['limit_waiting_runs'] = self.limit_waiting_runs
         if hasattr(self, 'enable_events_from_forks') and self.enable_events_from_forks is not None:
             _dict['enable_events_from_forks'] = self.enable_events_from_forks
         if hasattr(self, 'source') and self.source is not None:
@@ -6349,8 +6375,6 @@ class TriggerScmTrigger(Trigger):
             _dict['events'] = self.events
         if hasattr(self, 'filter') and self.filter is not None:
             _dict['filter'] = self.filter
-        if hasattr(self, 'limit_waiting_runs') and self.limit_waiting_runs is not None:
-            _dict['limit_waiting_runs'] = self.limit_waiting_runs
         return _dict
 
     def _to_dict(self):
@@ -6406,6 +6430,9 @@ class TriggerTimerTrigger(Trigger):
           disabled for this trigger.
     :param bool enabled: Flag to check if the trigger is enabled.
     :param bool favorite: (optional) Mark the trigger as a favorite.
+    :param bool limit_waiting_runs: (optional) Flag that will limit the trigger to a
+          maximum of one waiting run. A newly triggered run will cause any other waiting
+          run(s) to be automatically cancelled.
     :param str cron: (optional) Only needed for timer triggers. CRON expression that
           indicates when this trigger will activate. Maximum frequency is every 5 minutes.
           The string is based on UNIX crontab syntax: minute, hour, day of month, month,
@@ -6432,6 +6459,7 @@ class TriggerTimerTrigger(Trigger):
         worker: Optional['Worker'] = None,
         max_concurrent_runs: Optional[int] = None,
         favorite: Optional[bool] = None,
+        limit_waiting_runs: Optional[bool] = None,
         cron: Optional[str] = None,
         timezone: Optional[str] = None,
     ) -> None:
@@ -6457,6 +6485,9 @@ class TriggerTimerTrigger(Trigger):
                concurrent runs for this trigger. If omitted then the concurrency limit is
                disabled for this trigger.
         :param bool favorite: (optional) Mark the trigger as a favorite.
+        :param bool limit_waiting_runs: (optional) Flag that will limit the trigger
+               to a maximum of one waiting run. A newly triggered run will cause any other
+               waiting run(s) to be automatically cancelled.
         :param str cron: (optional) Only needed for timer triggers. CRON expression
                that indicates when this trigger will activate. Maximum frequency is every
                5 minutes. The string is based on UNIX crontab syntax: minute, hour, day of
@@ -6480,6 +6511,7 @@ class TriggerTimerTrigger(Trigger):
         self.max_concurrent_runs = max_concurrent_runs
         self.enabled = enabled
         self.favorite = favorite
+        self.limit_waiting_runs = limit_waiting_runs
         self.cron = cron
         self.timezone = timezone
 
@@ -6519,6 +6551,8 @@ class TriggerTimerTrigger(Trigger):
             raise ValueError('Required property \'enabled\' not present in TriggerTimerTrigger JSON')
         if (favorite := _dict.get('favorite')) is not None:
             args['favorite'] = favorite
+        if (limit_waiting_runs := _dict.get('limit_waiting_runs')) is not None:
+            args['limit_waiting_runs'] = limit_waiting_runs
         if (cron := _dict.get('cron')) is not None:
             args['cron'] = cron
         if (timezone := _dict.get('timezone')) is not None:
@@ -6564,6 +6598,8 @@ class TriggerTimerTrigger(Trigger):
             _dict['enabled'] = self.enabled
         if hasattr(self, 'favorite') and self.favorite is not None:
             _dict['favorite'] = self.favorite
+        if hasattr(self, 'limit_waiting_runs') and self.limit_waiting_runs is not None:
+            _dict['limit_waiting_runs'] = self.limit_waiting_runs
         if hasattr(self, 'cron') and self.cron is not None:
             _dict['cron'] = self.cron
         if hasattr(self, 'timezone') and self.timezone is not None:
