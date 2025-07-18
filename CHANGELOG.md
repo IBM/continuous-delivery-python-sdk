@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.0...v2.0.1) (2025-07-18)
+
+
+### Bug Fixes
+
+* **tekton:** add support for waiting runs limit ([26af24c](https://github.com/IBM/continuous-delivery-python-sdk/commit/26af24cf290b95f1a3398935a8e68c09804d4ea4))
+* **tekton:** further limit_waiting_run updates ([43cf6c8](https://github.com/IBM/continuous-delivery-python-sdk/commit/43cf6c8fd9c157b9a4839095fbe011b4f2512fd5))
+
 # [2.0.0](https://github.com/IBM/continuous-delivery-python-sdk/compare/v1.11.0...v2.0.0) (2024-10-16)
 
 
