@@ -18,6 +18,7 @@ deps:
 
 dev-deps:
 	${PYTHON} -m pip install .[dev]
+	${PYTHON} -m pip install environs
 
 publish-deps:
 	${PYTHON} -m pip install .[publish]
