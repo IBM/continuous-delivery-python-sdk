@@ -8,7 +8,7 @@
 The Python client library to interact with the [IBM Cloud Continuous Delivery Toolchain and Tekton Pipeline APIs](https://cloud.ibm.com/docs?tab=api-docs&category=devops).
 
 # Python Version
-The current minimum Python version supported is 3.8.
+The current minimum Python version supported is 3.9.
 
 ## Table of Contents
 
