@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.2...v2.0.3) (2025-08-01)
+
+
+### Bug Fixes
+
+* add ca-mon support to pipeline ([3cad3f0](https://github.com/IBM/continuous-delivery-python-sdk/commit/3cad3f0dffa4bfbfc709c0ceb9734a4b533b4b0a))
+
 ## [2.0.2](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.1...v2.0.2) (2025-08-01)
 
 
