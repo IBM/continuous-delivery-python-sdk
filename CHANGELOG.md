@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.1...v2.0.2) (2025-08-01)
+
+
+### Bug Fixes
+
+* bump python and packages ([ed2e2e6](https://github.com/IBM/continuous-delivery-python-sdk/commit/ed2e2e6a006757a8a12ecc6d394decd3486e09ea))
+
 ## [2.0.1](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.0...v2.0.1) (2025-07-18)
 
 
