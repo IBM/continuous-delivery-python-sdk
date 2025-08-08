@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2024.
+# (C) Copyright IBM Corp. 2025.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,6 +72,7 @@ def test_get_service_url_for_region():
     assert CdToolchainV2.get_service_url_for_region('jp-tok') == 'https://api.jp-tok.devops.cloud.ibm.com/toolchain/v2'
     assert CdToolchainV2.get_service_url_for_region('au-syd') == 'https://api.au-syd.devops.cloud.ibm.com/toolchain/v2'
     assert CdToolchainV2.get_service_url_for_region('ca-tor') == 'https://api.ca-tor.devops.cloud.ibm.com/toolchain/v2'
+    assert CdToolchainV2.get_service_url_for_region('ca-mon') == 'https://api.ca-mon.devops.cloud.ibm.com/toolchain/v2'
     assert CdToolchainV2.get_service_url_for_region('br-sao') == 'https://api.br-sao.devops.cloud.ibm.com/toolchain/v2'
     assert CdToolchainV2.get_service_url_for_region('eu-es') == 'https://api.eu-es.devops.cloud.ibm.com/toolchain/v2'
 
