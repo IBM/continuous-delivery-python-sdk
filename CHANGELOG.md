@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.3...v2.0.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* add ca-mon support to toolchains ([#56](https://github.com/IBM/continuous-delivery-python-sdk/issues/56)) ([7198978](https://github.com/IBM/continuous-delivery-python-sdk/commit/719897865870dfdf1ca0287e50dad141dfec986b))
+
 ## [2.0.3](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.2...v2.0.3) (2025-08-01)
 
 
