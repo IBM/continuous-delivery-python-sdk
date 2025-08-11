@@ -1,6 +1,6 @@
 [project]
 name = "ibm_continuous_delivery"
-version = "2.0.3"
+version = "2.0.4"
 authors = [
     { name="Omar Al Bastami", email="omar.albastami@ibm.com" },
     { name="Brian Gleeson", email="brian.gleeson@ie.ibm.com" }
