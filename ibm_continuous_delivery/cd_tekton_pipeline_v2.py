@@ -59,7 +59,7 @@ class CdTektonPipelineV2(BaseService):
         'jp-tok': 'https://api.jp-tok.devops.cloud.ibm.com/pipeline/v2',  # The host URL for Tekton Pipeline Service in the jp-tok region.
         'au-syd': 'https://api.au-syd.devops.cloud.ibm.com/pipeline/v2',  # The host URL for Tekton Pipeline Service in the au-syd region.
         'ca-tor': 'https://api.ca-tor.devops.cloud.ibm.com/pipeline/v2',  # The host URL for Tekton Pipeline Service in the ca-tor region.
-        'ca-mon': 'https://api.ca-mon.devops.cloud.ibm.com/pipeline/v2',  # Montreal (ca-mon) is a limited-availability region and not generally available. The host URL for Tekton Pipeline Service in the ca-mon region.
+        'ca-mon': 'https://api.ca-mon.devops.cloud.ibm.com/pipeline/v2',  # Montreal (ca-mon) is a limited availability region and not generally available. The host URL for Tekton Pipeline Service in the ca-mon region.
         'br-sao': 'https://api.br-sao.devops.cloud.ibm.com/pipeline/v2',  # The host URL for Tekton Pipeline Service in the br-sao region.
     }
 
@@ -1516,6 +1516,7 @@ class CdTektonPipelineV2(BaseService):
         filter: Optional[str] = None,
         favorite: Optional[bool] = None,
         enable_events_from_forks: Optional[bool] = None,
+        disable_draft_events: Optional[bool] = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -1571,6 +1572,8 @@ class CdTektonPipelineV2(BaseService):
         :param bool enable_events_from_forks: (optional) Only used for SCM
                triggers. When enabled, pull request events from forks of the selected
                repository will trigger a pipeline run.
+        :param bool disable_draft_events: (optional) Prevent new pipeline runs from
+               being triggered by events from draft pull requests.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Trigger` object
@@ -1615,6 +1618,7 @@ class CdTektonPipelineV2(BaseService):
             'filter': filter,
             'favorite': favorite,
             'enable_events_from_forks': enable_events_from_forks,
+            'disable_draft_events': disable_draft_events,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -4687,6 +4691,8 @@ class TriggerPatch:
     :param bool enable_events_from_forks: (optional) Only used for SCM triggers.
           When enabled, pull request events from forks of the selected repository will
           trigger a pipeline run.
+    :param bool disable_draft_events: (optional) Prevent new pipeline runs from
+          being triggered by events from draft pull requests.
     """
 
     def __init__(
@@ -4708,6 +4714,7 @@ class TriggerPatch:
         filter: Optional[str] = None,
         favorite: Optional[bool] = None,
         enable_events_from_forks: Optional[bool] = None,
+        disable_draft_events: Optional[bool] = None,
     ) -> None:
         """
         Initialize a TriggerPatch object.
@@ -4758,6 +4765,8 @@ class TriggerPatch:
         :param bool enable_events_from_forks: (optional) Only used for SCM
                triggers. When enabled, pull request events from forks of the selected
                repository will trigger a pipeline run.
+        :param bool disable_draft_events: (optional) Prevent new pipeline runs from
+               being triggered by events from draft pull requests.
         """
         self.type = type
         self.name = name
@@ -4775,6 +4784,7 @@ class TriggerPatch:
         self.filter = filter
         self.favorite = favorite
         self.enable_events_from_forks = enable_events_from_forks
+        self.disable_draft_events = disable_draft_events
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'TriggerPatch':
@@ -4812,6 +4822,8 @@ class TriggerPatch:
             args['favorite'] = favorite
         if (enable_events_from_forks := _dict.get('enable_events_from_forks')) is not None:
             args['enable_events_from_forks'] = enable_events_from_forks
+        if (disable_draft_events := _dict.get('disable_draft_events')) is not None:
+            args['disable_draft_events'] = disable_draft_events
         return cls(**args)
 
     @classmethod
@@ -4863,6 +4875,8 @@ class TriggerPatch:
             _dict['favorite'] = self.favorite
         if hasattr(self, 'enable_events_from_forks') and self.enable_events_from_forks is not None:
             _dict['enable_events_from_forks'] = self.enable_events_from_forks
+        if hasattr(self, 'disable_draft_events') and self.disable_draft_events is not None:
+            _dict['disable_draft_events'] = self.disable_draft_events
         return _dict
 
     def _to_dict(self):
@@ -6182,6 +6196,8 @@ class TriggerScmTrigger(Trigger):
           run(s) to be automatically cancelled.
     :param bool enable_events_from_forks: (optional) When enabled, pull request
           events from forks of the selected repository will trigger a pipeline run.
+    :param bool disable_draft_events: (optional) Prevent new pipeline runs from
+          being triggered by events from draft pull requests.
     :param TriggerSource source: (optional) Source repository for a Git trigger.
           Only required for Git triggers. The referenced repository URL must match the URL
           of a repository tool integration in the parent toolchain. Obtain the list of
@@ -6213,6 +6229,7 @@ class TriggerScmTrigger(Trigger):
         favorite: Optional[bool] = None,
         limit_waiting_runs: Optional[bool] = None,
         enable_events_from_forks: Optional[bool] = None,
+        disable_draft_events: Optional[bool] = None,
         source: Optional['TriggerSource'] = None,
         events: Optional[List[str]] = None,
         filter: Optional[str] = None,
@@ -6244,6 +6261,8 @@ class TriggerScmTrigger(Trigger):
                waiting run(s) to be automatically cancelled.
         :param bool enable_events_from_forks: (optional) When enabled, pull request
                events from forks of the selected repository will trigger a pipeline run.
+        :param bool disable_draft_events: (optional) Prevent new pipeline runs from
+               being triggered by events from draft pull requests.
         :param TriggerSource source: (optional) Source repository for a Git
                trigger. Only required for Git triggers. The referenced repository URL must
                match the URL of a repository tool integration in the parent toolchain.
@@ -6272,6 +6291,7 @@ class TriggerScmTrigger(Trigger):
         self.favorite = favorite
         self.limit_waiting_runs = limit_waiting_runs
         self.enable_events_from_forks = enable_events_from_forks
+        self.disable_draft_events = disable_draft_events
         self.source = source
         self.events = events
         self.filter = filter
@@ -6316,6 +6336,8 @@ class TriggerScmTrigger(Trigger):
             args['limit_waiting_runs'] = limit_waiting_runs
         if (enable_events_from_forks := _dict.get('enable_events_from_forks')) is not None:
             args['enable_events_from_forks'] = enable_events_from_forks
+        if (disable_draft_events := _dict.get('disable_draft_events')) is not None:
+            args['disable_draft_events'] = disable_draft_events
         if (source := _dict.get('source')) is not None:
             args['source'] = TriggerSource.from_dict(source)
         if (events := _dict.get('events')) is not None:
@@ -6367,6 +6389,8 @@ class TriggerScmTrigger(Trigger):
             _dict['limit_waiting_runs'] = self.limit_waiting_runs
         if hasattr(self, 'enable_events_from_forks') and self.enable_events_from_forks is not None:
             _dict['enable_events_from_forks'] = self.enable_events_from_forks
+        if hasattr(self, 'disable_draft_events') and self.disable_draft_events is not None:
+            _dict['disable_draft_events'] = self.disable_draft_events
         if hasattr(self, 'source') and self.source is not None:
             if isinstance(self.source, dict):
                 _dict['source'] = self.source

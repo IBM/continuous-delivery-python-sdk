@@ -2876,6 +2876,7 @@ class TestCreateTektonPipelineTrigger:
         filter = 'testString'
         favorite = False
         enable_events_from_forks = False
+        disable_draft_events = False
 
         # Invoke method
         response = _service.create_tekton_pipeline_trigger(
@@ -2896,6 +2897,7 @@ class TestCreateTektonPipelineTrigger:
             filter=filter,
             favorite=favorite,
             enable_events_from_forks=enable_events_from_forks,
+            disable_draft_events=disable_draft_events,
             headers={},
         )
 
@@ -2920,6 +2922,7 @@ class TestCreateTektonPipelineTrigger:
         assert req_body['filter'] == 'testString'
         assert req_body['favorite'] == False
         assert req_body['enable_events_from_forks'] == False
+        assert req_body['disable_draft_events'] == False
 
     def test_create_tekton_pipeline_trigger_all_params_with_retries(self):
         # Enable retries and run test_create_tekton_pipeline_trigger_all_params.
@@ -2987,6 +2990,7 @@ class TestCreateTektonPipelineTrigger:
         filter = 'testString'
         favorite = False
         enable_events_from_forks = False
+        disable_draft_events = False
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -3163,6 +3167,7 @@ class TestUpdateTektonPipelineTrigger:
         trigger_patch_model['filter'] = 'header[\'x-github-event\'] == \'push\' && body.ref == \'refs/heads/main\''
         trigger_patch_model['favorite'] = False
         trigger_patch_model['enable_events_from_forks'] = False
+        trigger_patch_model['disable_draft_events'] = False
 
         # Set up parameter values
         pipeline_id = '94619026-912b-4d92-8f51-6c74f0692d90'
@@ -5201,6 +5206,7 @@ class TestModel_TriggerPatch:
         trigger_patch_model_json['filter'] = 'header[\'x-github-event\'] == \'push\' && body.ref == \'refs/heads/main\''
         trigger_patch_model_json['favorite'] = False
         trigger_patch_model_json['enable_events_from_forks'] = False
+        trigger_patch_model_json['disable_draft_events'] = False
 
         # Construct a model instance of TriggerPatch by calling from_dict on the json representation
         trigger_patch_model = TriggerPatch.from_dict(trigger_patch_model_json)
@@ -5798,6 +5804,7 @@ class TestModel_TriggerScmTrigger:
         trigger_scm_trigger_model_json['favorite'] = False
         trigger_scm_trigger_model_json['limit_waiting_runs'] = False
         trigger_scm_trigger_model_json['enable_events_from_forks'] = False
+        trigger_scm_trigger_model_json['disable_draft_events'] = False
         trigger_scm_trigger_model_json['source'] = trigger_source_model
         trigger_scm_trigger_model_json['events'] = ['push', 'pull_request']
         trigger_scm_trigger_model_json['filter'] = (
