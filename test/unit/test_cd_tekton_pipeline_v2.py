@@ -72,6 +72,9 @@ def test_get_service_url_for_region():
         CdTektonPipelineV2.get_service_url_for_region('eu-de') == 'https://api.eu-de.devops.cloud.ibm.com/pipeline/v2'
     )
     assert (
+        CdTektonPipelineV2.get_service_url_for_region('eu-fr2') == 'https://api.eu-fr2.devops.cloud.ibm.com/pipeline/v2'
+    )
+    assert (
         CdTektonPipelineV2.get_service_url_for_region('eu-gb') == 'https://api.eu-gb.devops.cloud.ibm.com/pipeline/v2'
     )
     assert (
