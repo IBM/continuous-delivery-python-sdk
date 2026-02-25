@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# (C) Copyright IBM Corp. 2025.
+# (C) Copyright IBM Corp. 2026.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.103.0-e8b84313-20250402-201816
+# IBM OpenAPI SDK Code Generator Version: 3.112.0-f88e9264-20260220-115155
 
 """
 Continuous Delivery Tekton pipeline API definition <br><br> Maximum request payload size
