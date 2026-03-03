@@ -34,13 +34,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-          cache: 'pip'
 
       - name: Install Node.js dependencies
         run: npm install
@@ -81,7 +79,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-          cache: 'pip'
 
       - name: Run CI build
         run: make ci
