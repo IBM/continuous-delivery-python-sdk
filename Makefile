@@ -1,4 +1,5 @@
-PYTHON=python3
+PYTHON=python
+PYTHON3=python3
 LINT=black
 LINT_DIRS=ibm_continuous_delivery test/unit test/integration examples
 
