@@ -17,4 +17,4 @@
 """
 Version of ibm_continuous_delivery
 """
-__version__ = '2.0.5'
+__version__ = '2.0.6'
