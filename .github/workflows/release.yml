@@ -4,17 +4,10 @@ on:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
   workflow_dispatch:
     inputs:
       dry_run:
         description: 'Run semantic-release in dry-run mode'
-        required: false
-        type: boolean
-        default: true
-      publish:
-        description: 'Publish to pypi.org'
         required: false
         type: boolean
         default: true
@@ -66,41 +59,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run semantic-release
-
-  publish:
-    name: Publish to PyPI
-    needs: semantic-release
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    # Only publish after semantic-release has created a new tag
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && !inputs.dry_run && inputs.publish)
-
-    permissions:
-      contents: read
-      id-token: write  # Required for trusted publishing
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-
-      - name: Run CI build
-        run: make ci
-
-      - name: Install publish dependencies
-        run: make publish-deps
-
-      - name: Build distribution
-        run: make build-dist
-
-      # Requires TWINE_TOKEN to be configured in repo secrets
-      # TODO remove "with: password" using TWINE_TOKEN once trusted publisher config is fixed
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TWINE_TOKEN }}
-          verbose: true
