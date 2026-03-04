@@ -89,8 +89,9 @@ jobs:
       - name: Build distribution
         run: make build-dist
 
-      # Requires TWINE_PASSWORD to be configured in secrets
+      # Requires TWINE_TOKEN to be configured in repo secrets
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          password: ${{ secrets.TWINE_TOKEN }}
           verbose: true

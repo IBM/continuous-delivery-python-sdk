@@ -49,6 +49,11 @@ build-dist:
 	rm -fr dist
 	${PYTHON} -m build
 
+local-build:
+	rm -fr dist
+	${PYTHON} -m pip install .[publish]
+	${PYTHON} -m build
+
 # This target requires the TWINE_PASSWORD env variable to be set to the user's pypi.org API token.
 publish-dist:
 	TWINE_USERNAME=__token__ ${PYTHON} -m twine upload --non-interactive --verbose dist/*
