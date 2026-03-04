@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.5...v2.0.6) (2026-03-04)
+
+
+### Bug Fixes
+
+* fix publish to pypi action ([9db7d47](https://github.com/IBM/continuous-delivery-python-sdk/commit/9db7d479ff1b93ceaf11848e83dd0afb1750269d))
+
 ## [2.0.5](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.4...v2.0.5) (2025-08-14)
 
 
