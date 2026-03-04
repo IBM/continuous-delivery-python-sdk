@@ -1,0 +1,55 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      publish_manually:
+        description: 'Publish to pypi.org'
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pypi-publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Only publish when semantic-release creates a release commit (starts with "chore(release):")
+    if: (github.event_name == 'push' && startsWith(github.event.head_commit.message, 'chore(release):')) || (github.event_name == 'workflow_dispatch' && inputs.publish_manually)
+
+    permissions:
+      contents: read
+      id-token: write  # Required for trusted publishing
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Run CI build
+        run: make ci
+
+      - name: Install publish dependencies
+        run: make publish-deps
+
+      - name: Build distribution
+        run: make build-dist
+
+      # Requires TWINE_TOKEN to be configured in repo secrets
+      # TODO remove "with: password" using TWINE_TOKEN once trusted publisher config is fixed
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TWINE_TOKEN }}
+          verbose: true
