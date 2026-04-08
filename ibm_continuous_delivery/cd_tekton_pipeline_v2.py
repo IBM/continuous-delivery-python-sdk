@@ -244,9 +244,9 @@ class CdTektonPipelineV2(BaseService):
         """
         Update Tekton pipeline data.
 
-        This request updates Tekton pipeline data, but you can only change worker ID in
-        this endpoint. Use other endpoints such as /definitions, /triggers, and
-        /properties for other configuration updates.
+        This request updates Tekton pipeline data, such as the worker ID or build number,
+        for example. Use other endpoints such as /definitions, /triggers, and /properties
+        for other configuration updates.
 
         :param str id: ID of current instance.
         :param TektonPipelinePatch tekton_pipeline_patch: (optional)
