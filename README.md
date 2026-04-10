@@ -10,7 +10,7 @@ The Python client library to interact with the [IBM Cloud Continuous Delivery To
 
 ## Version
 
-- The current version of this SDK: 2.0.6
+- The current version of this SDK: 2.0.7
 - The current minimum Python version supported: 3.10
 
 ## Table of Contents
