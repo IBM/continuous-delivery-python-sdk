@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.6...v2.0.7) (2026-04-10)
+
+
+### Bug Fixes
+
+* drop support for python 3.9 as it is EOL ([ae4c96f](https://github.com/IBM/continuous-delivery-python-sdk/commit/ae4c96f273120d21e9b726d4cba3b99a64805e62))
+
 ## [2.0.6](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.5...v2.0.6) (2026-03-04)
 
 
