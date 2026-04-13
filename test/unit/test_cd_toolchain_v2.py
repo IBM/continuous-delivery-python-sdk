@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2025.
+# (C) Copyright IBM Corp. 2026.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import requests
 import responses
 import urllib
 from ibm_continuous_delivery.cd_toolchain_v2 import *
-
 
 _service = CdToolchainV2(authenticator=NoAuthAuthenticator())
 

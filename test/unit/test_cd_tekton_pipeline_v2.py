@@ -30,7 +30,6 @@ import responses
 import urllib
 from ibm_continuous_delivery.cd_tekton_pipeline_v2 import *
 
-
 _service = CdTektonPipelineV2(authenticator=NoAuthAuthenticator())
 
 _base_url = 'https://api.us-south.devops.cloud.ibm.com/pipeline/v2'
