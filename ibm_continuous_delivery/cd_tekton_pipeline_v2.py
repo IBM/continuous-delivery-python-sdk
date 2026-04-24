@@ -295,10 +295,10 @@ class CdTektonPipelineV2(BaseService):
         **kwargs,
     ) -> DetailedResponse:
         """
-        Delete Tekton pipeline instance.
+        Delete a Tekton pipeline instance.
 
-        This request deletes Tekton pipeline instance that is associated with the pipeline
-        toolchain integration.
+        This request deletes the Tekton pipeline instance that is associated with the
+        pipeline toolchain integration.
 
         :param str id: ID of current instance.
         :param dict headers: A `dict` containing the request headers
@@ -350,7 +350,7 @@ class CdTektonPipelineV2(BaseService):
         """
         List pipeline run records.
 
-        This request lists pipeline run records, which has data about the runs, such as
+        This request lists pipeline run records, which have data about the runs, such as
         status, user_info, trigger and other information. Default limit is 50.
 
         :param str pipeline_id: The Tekton pipeline ID.
@@ -5205,7 +5205,7 @@ class TriggerSourceProperties:
           branch, pattern, or filter should be specified.
     :param str pattern: (optional) The pattern of Git branch or tag. You can specify
           a glob pattern such as '!test' or '*master' to match against multiple tags or
-          branches in the repository.The glob pattern used must conform to Bash 4.3
+          branches in the repository. The glob pattern used must conform to Bash 4.3
           specifications, see bash documentation for more info:
           https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only one of
           branch, pattern, or filter should be specified.
@@ -5239,7 +5239,7 @@ class TriggerSourceProperties:
                branch, pattern, or filter should be specified.
         :param str pattern: (optional) The pattern of Git branch or tag. You can
                specify a glob pattern such as '!test' or '*master' to match against
-               multiple tags or branches in the repository.The glob pattern used must
+               multiple tags or branches in the repository. The glob pattern used must
                conform to Bash 4.3 specifications, see bash documentation for more info:
                https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only
                one of branch, pattern, or filter should be specified.
@@ -5331,7 +5331,7 @@ class TriggerSourcePropertiesPrototype:
           branch, pattern, or filter should be specified.
     :param str pattern: (optional) The pattern of Git branch or tag. You can specify
           a glob pattern such as '!test' or '*master' to match against multiple tags or
-          branches in the repository.The glob pattern used must conform to Bash 4.3
+          branches in the repository. The glob pattern used must conform to Bash 4.3
           specifications, see bash documentation for more info:
           https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only one of
           branch, pattern, or filter should be specified.
@@ -5352,7 +5352,7 @@ class TriggerSourcePropertiesPrototype:
                branch, pattern, or filter should be specified.
         :param str pattern: (optional) The pattern of Git branch or tag. You can
                specify a glob pattern such as '!test' or '*master' to match against
-               multiple tags or branches in the repository.The glob pattern used must
+               multiple tags or branches in the repository. The glob pattern used must
                conform to Bash 4.3 specifications, see bash documentation for more info:
                https://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching. Only
                one of branch, pattern, or filter should be specified.
