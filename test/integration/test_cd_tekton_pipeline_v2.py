@@ -19,6 +19,7 @@ Integration Tests for CdTektonPipelineV2
 
 from ibm_cloud_sdk_core import *
 import os
+import time
 import pytest
 from environs import Env
 from ibm_continuous_delivery.cd_toolchain_v2 import *
@@ -37,6 +38,7 @@ trigger_id_link = None
 trigger_prop_name_link = None
 pipeline_run_id_link = None
 rerun_id_link = None
+run_log_id_link = None
 env = Env()
 
 
@@ -580,29 +582,49 @@ class TestCdTektonPipelineV2:
             f"\n list_tekton_pipeline_runs() returned a total of {len(all_results)} items(s) using TektonPipelineRunsPager."
         )
 
-    # @needscredentials
-    # def test_get_tekton_pipeline_run_logs(self):
-    #     global run_log_id_link
-    #     response = self.cd_pipeline_service.get_tekton_pipeline_run_logs(
-    #         pipeline_id=pipeline_tool_id_link,
-    #         id=pipeline_run_id_link
-    #     )
-    #     assert response.get_status_code() == 200
-    #     logs_collection = response.get_result()
-    #     assert logs_collection is not None
-    #     print(f'\n logs_collection: {logs_collection}')
-    #     print(f'\n len(logs_collection): {len(logs_collection)}')
+    @needscredentials
+    def test_get_tekton_pipeline_run_logs(self):
+        global run_log_id_link
+        response = self.cd_pipeline_service.get_tekton_pipeline_run_logs(
+            pipeline_id=pipeline_tool_id_link,
+            id=pipeline_run_id_link
+        )
+        assert response.get_status_code() == 200
+        logs_collection = response.get_result()
+        assert logs_collection is not None
+        
+        # Store the first log ID for use in test_get_tekton_pipeline_run_log_content
+        if logs_collection.get('logs') and len(logs_collection['logs']) > 0:
+            run_log_id_link = logs_collection['logs'][0]['id']
+            assert run_log_id_link is not None
 
-    # @needscredentials
-    # def test_get_tekton_pipeline_run_log_content(self):
-    #     response = self.cd_pipeline_service.get_tekton_pipeline_run_log_content(
-    #         pipeline_id=pipeline_tool_id_link,
-    #         pipeline_run_id='bf4b3abd-0c93-416b-911e-9cf42f1a1085',
-    #         id=pipeline_tool_id_link
-    #     )
-    #     assert response.get_status_code() == 200
-    #     step_log = response.get_result()
-    #     assert step_log is not None
+    @needscredentials
+    def test_get_tekton_pipeline_run_log_content(self):
+        # Retry logic with exponential backoff to wait for log content to be available
+        response = None
+        max_retries = 10
+        base_delay = 1
+        max_delay = 30
+
+        for i in range(max_retries):
+            try:
+                response = self.cd_pipeline_service.get_tekton_pipeline_run_log_content(
+                    pipeline_id=pipeline_tool_id_link,
+                    pipeline_run_id=pipeline_run_id_link,
+                    id=run_log_id_link
+                )
+                print(f"\nget_tekton_pipeline_run_log_content() was called successfully on attempt {i + 1}.")
+                break
+            except Exception as err:
+                if i == max_retries - 1:
+                    raise
+                retry_delay = min(base_delay * (2 ** i), max_delay)
+                print(f"\nAttempt {i + 1} calling get_tekton_pipeline_run_log_content() failed, retrying in {retry_delay}s... Error: {err}")
+                time.sleep(retry_delay)
+
+        assert response.get_status_code() == 200
+        step_log = response.get_result()
+        assert step_log is not None
 
     @needscredentials
     def test_delete_tekton_pipeline_run(self):

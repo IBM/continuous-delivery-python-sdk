@@ -27,6 +27,7 @@ Integration Tests for CdToolchainV2
 from ibm_cloud_sdk_core import *
 import os
 from datetime import datetime
+import time
 import pytest
 from environs import Env
 from ibm_continuous_delivery.cd_toolchain_v2 import *
@@ -198,13 +199,29 @@ class TestCdToolchainV2:
             'application_json': toolchain_event_prototype_data_application_json_model,
         }
 
-        response = self.cd_toolchain_service.create_toolchain_event(
-            toolchain_id=toolchain_id_link,
-            title='My-custom-event',
-            description='This is my custom event',
-            content_type='application/json',
-            data=toolchain_event_prototype_data_model,
-        )
+        # Retry logic with exponential backoff to wait for event creation to succeed
+        response = None
+        max_retries = 10
+        base_delay = 1
+        max_delay = 30
+
+        for i in range(max_retries):
+            try:
+                response = self.cd_toolchain_service.create_toolchain_event(
+                    toolchain_id=toolchain_id_link,
+                    title='My-custom-event',
+                    description='This is my custom event',
+                    content_type='application/json',
+                    data=toolchain_event_prototype_data_model,
+                )
+                print(f"\ncreate_toolchain_event() was called successfully on attempt {i + 1}.")
+                break
+            except Exception as err:
+                if i == max_retries - 1:
+                    raise
+                retry_delay = min(base_delay * (2 ** i), max_delay)
+                print(f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}")
+                time.sleep(retry_delay)
 
         assert response.get_status_code() == 200
         toolchain_event_post = response.get_result()
@@ -221,13 +238,29 @@ class TestCdToolchainV2:
             'text_plain': toolchain_event_prototype_data_text_plain_model,
         }
 
-        response = self.cd_toolchain_service.create_toolchain_event(
-            toolchain_id=toolchain_id_link,
-            title='My-custom-event',
-            description='This is my custom event',
-            content_type='text/plain',
-            data=toolchain_event_prototype_data_model,
-        )
+        # Retry logic with exponential backoff to wait for event creation to succeed
+        response = None
+        max_retries = 10
+        base_delay = 1
+        max_delay = 30
+
+        for i in range(max_retries):
+            try:
+                response = self.cd_toolchain_service.create_toolchain_event(
+                    toolchain_id=toolchain_id_link,
+                    title='My-custom-event',
+                    description='This is my custom event',
+                    content_type='text/plain',
+                    data=toolchain_event_prototype_data_model,
+                )
+                print(f"\ncreate_toolchain_event() was called successfully on attempt {i + 1}.")
+                break
+            except Exception as err:
+                if i == max_retries - 1:
+                    raise
+                retry_delay = min(base_delay * (2 ** i), max_delay)
+                print(f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}")
+                time.sleep(retry_delay)
 
         assert response.get_status_code() == 200
         toolchain_event_post = response.get_result()
