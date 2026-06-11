@@ -586,13 +586,12 @@ class TestCdTektonPipelineV2:
     def test_get_tekton_pipeline_run_logs(self):
         global run_log_id_link
         response = self.cd_pipeline_service.get_tekton_pipeline_run_logs(
-            pipeline_id=pipeline_tool_id_link,
-            id=pipeline_run_id_link
+            pipeline_id=pipeline_tool_id_link, id=pipeline_run_id_link
         )
         assert response.get_status_code() == 200
         logs_collection = response.get_result()
         assert logs_collection is not None
-        
+
         # Store the first log ID for use in test_get_tekton_pipeline_run_log_content
         if logs_collection.get('logs') and len(logs_collection['logs']) > 0:
             run_log_id_link = logs_collection['logs'][0]['id']
@@ -609,17 +608,17 @@ class TestCdTektonPipelineV2:
         for i in range(max_retries):
             try:
                 response = self.cd_pipeline_service.get_tekton_pipeline_run_log_content(
-                    pipeline_id=pipeline_tool_id_link,
-                    pipeline_run_id=pipeline_run_id_link,
-                    id=run_log_id_link
+                    pipeline_id=pipeline_tool_id_link, pipeline_run_id=pipeline_run_id_link, id=run_log_id_link
                 )
                 print(f"\nget_tekton_pipeline_run_log_content() was called successfully on attempt {i + 1}.")
                 break
             except Exception as err:
                 if i == max_retries - 1:
                     raise
-                retry_delay = min(base_delay * (2 ** i), max_delay)
-                print(f"\nAttempt {i + 1} calling get_tekton_pipeline_run_log_content() failed, retrying in {retry_delay}s... Error: {err}")
+                retry_delay = min(base_delay * (2**i), max_delay)
+                print(
+                    f"\nAttempt {i + 1} calling get_tekton_pipeline_run_log_content() failed, retrying in {retry_delay}s... Error: {err}"
+                )
                 time.sleep(retry_delay)
 
         assert response.get_status_code() == 200

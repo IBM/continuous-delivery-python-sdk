@@ -219,8 +219,10 @@ class TestCdToolchainV2:
             except Exception as err:
                 if i == max_retries - 1:
                     raise
-                retry_delay = min(base_delay * (2 ** i), max_delay)
-                print(f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}")
+                retry_delay = min(base_delay * (2**i), max_delay)
+                print(
+                    f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}"
+                )
                 time.sleep(retry_delay)
 
         assert response.get_status_code() == 200
@@ -258,8 +260,10 @@ class TestCdToolchainV2:
             except Exception as err:
                 if i == max_retries - 1:
                     raise
-                retry_delay = min(base_delay * (2 ** i), max_delay)
-                print(f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}")
+                retry_delay = min(base_delay * (2**i), max_delay)
+                print(
+                    f"\nAttempt {i + 1} calling create_toolchain_event() failed, retrying in {retry_delay}s... Error: {err}"
+                )
                 time.sleep(retry_delay)
 
         assert response.get_status_code() == 200
