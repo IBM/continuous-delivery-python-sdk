@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.8...v2.0.9) (2026-06-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pytest to >=9.1.0,<9.2.0 ([665debd](https://github.com/IBM/continuous-delivery-python-sdk/commit/665debd7db39c0f6967253c22663ce32ec98fd16))
+
 ## [2.0.8](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.7...v2.0.8) (2026-06-04)
 
 
