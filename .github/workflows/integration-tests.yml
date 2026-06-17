@@ -40,7 +40,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install -e .[dev]
 
       - name: Create .env files
         if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && !inputs.skip_integration_tests)
