@@ -1060,9 +1060,9 @@ class TestCreateTool:
 
         # Set up parameter values
         toolchain_id = 'testString'
-        tool_type_id = 'draservicebroker'
+        tool_type_id = 'pipeline'
         name = 'testString'
-        parameters = {'anyKey': 'anyValue'}
+        parameters = {'type': 'tekton'}
 
         # Invoke method
         response = _service.create_tool(
@@ -1078,9 +1078,9 @@ class TestCreateTool:
         assert response.status_code == 201
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['tool_type_id'] == 'draservicebroker'
+        assert req_body['tool_type_id'] == 'pipeline'
         assert req_body['name'] == 'testString'
-        assert req_body['parameters'] == {'anyKey': 'anyValue'}
+        assert req_body['parameters'] == {'type': 'tekton'}
 
     def test_create_tool_all_params_with_retries(self):
         # Enable retries and run test_create_tool_all_params.
@@ -1109,9 +1109,9 @@ class TestCreateTool:
 
         # Set up parameter values
         toolchain_id = 'testString'
-        tool_type_id = 'draservicebroker'
+        tool_type_id = 'pipeline'
         name = 'testString'
-        parameters = {'anyKey': 'anyValue'}
+        parameters = {'type': 'tekton'}
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1321,8 +1321,8 @@ class TestUpdateTool:
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
         toolchain_tool_prototype_patch_model['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model['tool_type_id'] = 'pipeline'
+        toolchain_tool_prototype_patch_model['parameters'] = {'type': 'tekton'}
 
         # Set up parameter values
         toolchain_id = 'testString'
@@ -1372,8 +1372,8 @@ class TestUpdateTool:
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {}
         toolchain_tool_prototype_patch_model['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model['tool_type_id'] = 'pipeline'
+        toolchain_tool_prototype_patch_model['parameters'] = {'type': 'tekton'}
 
         # Set up parameter values
         toolchain_id = 'testString'
@@ -2475,8 +2475,8 @@ class TestModel_ToolchainToolPrototypePatch:
         # Construct a json representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model_json = {}
         toolchain_tool_prototype_patch_model_json['name'] = 'MyTool'
-        toolchain_tool_prototype_patch_model_json['tool_type_id'] = 'draservicebroker'
-        toolchain_tool_prototype_patch_model_json['parameters'] = {'anyKey': 'anyValue'}
+        toolchain_tool_prototype_patch_model_json['tool_type_id'] = 'pipeline'
+        toolchain_tool_prototype_patch_model_json['parameters'] = {'type': 'tekton'}
 
         # Construct a model instance of ToolchainToolPrototypePatch by calling from_dict on the json representation
         toolchain_tool_prototype_patch_model = ToolchainToolPrototypePatch.from_dict(

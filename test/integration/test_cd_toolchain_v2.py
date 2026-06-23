@@ -91,9 +91,9 @@ class TestCdToolchainV2:
 
         response = self.cd_toolchain_service.create_tool(
             toolchain_id=toolchain_id_link,
-            tool_type_id='draservicebroker',
+            tool_type_id='pipeline',
             name='testString',
-            parameters={'anyKey': 'anyValue'},
+            parameters={'type': 'tekton'},
         )
 
         assert response.get_status_code() == 201
@@ -324,8 +324,8 @@ class TestCdToolchainV2:
         # Construct a dict representation of a ToolchainToolPrototypePatch model
         toolchain_tool_prototype_patch_model = {
             'name': 'MyTool',
-            'tool_type_id': 'draservicebroker',
-            'parameters': {'anyKey': 'anyValue'},
+            'tool_type_id': 'pipeline',
+            'parameters': {'type': 'tekton'},
         }
 
         response = self.cd_toolchain_service.update_tool(
