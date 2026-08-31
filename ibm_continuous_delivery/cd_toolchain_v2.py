@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# (C) Copyright IBM Corp. 2025.
+# (C) Copyright IBM Corp. 2025, 2026.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,13 +44,10 @@ class CdToolchainV2(BaseService):
         'us-east': 'https://api.us-east.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the us-east region
         'eu-de': 'https://api.eu-de.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the eu-de region
         'eu-gb': 'https://api.eu-gb.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the eu-gb region
-        'jp-osa': 'https://api.jp-osa.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the jp-osa region
         'jp-tok': 'https://api.jp-tok.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the jp-tok region
         'au-syd': 'https://api.au-syd.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the au-syd region
         'ca-tor': 'https://api.ca-tor.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the ca-tor region
-        'ca-mon': 'https://api.ca-mon.devops.cloud.ibm.com/toolchain/v2',  # Montreal (ca-mon) is a limited-availability region and not generally available. The toolchain API endpoint in the ca-mon region
         'br-sao': 'https://api.br-sao.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the br-sao region
-        'eu-es': 'https://api.eu-es.devops.cloud.ibm.com/toolchain/v2',  # The toolchain API endpoint in the eu-es region
     }
 
     @classmethod
