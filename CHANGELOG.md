@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.9...v2.0.10) (2026-09-29)
+
+
+### Bug Fixes
+
+* **ci:** define explicit GitHub Actions workflow permissions ([#89](https://github.com/IBM/continuous-delivery-python-sdk/issues/89)) ([e9610d9](https://github.com/IBM/continuous-delivery-python-sdk/commit/e9610d9b88dc01cda6e56fe8a8ca7529a097d47d))
+
 ## [2.0.9](https://github.com/IBM/continuous-delivery-python-sdk/compare/v2.0.8...v2.0.9) (2026-06-17)
 
 
